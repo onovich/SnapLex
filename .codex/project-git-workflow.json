@@ -1,0 +1,17 @@
+﻿{
+    "schemaVersion":  1,
+    "initializedMarker":  "codex-project-git-workflow: initialized",
+    "initializedAt":  "2026-06-21 19:24:29 +08:00",
+    "projectName":  "SnapLex",
+    "repoRoot":  "D:/ToolProjects/SnapLex",
+    "safeDirectory":  "D:/ToolProjects/SnapLex",
+    "statusCommand":  "git -c safe.directory=D:/ToolProjects/SnapLex status --short --branch",
+    "validationCommands":  [
+
+                           ],
+    "stagingPolicy":  "ask each time",
+    "commitCommand":  "",
+    "pushCommand":  "git -c safe.directory=D:/ToolProjects/SnapLex push -u origin HEAD",
+    "docsRequirement":  "",
+    "forbiddenCommands":  ""
+}
