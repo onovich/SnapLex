@@ -1,9 +1,11 @@
 # P4 to P5 Handoff
 
 Date: 2026-06-22
-Status: P4 provider hardening implementation complete; awaiting planner acceptance
+Status: P4 provider hardening accepted; P5 ready for execution planning
 
 Recommended next phase: P5 History, Persistence, and Settings UX
+
+Executable P5 guide: `docs/p5_history_persistence_settings_goal_guide.md`
 
 ## P5 Goal
 

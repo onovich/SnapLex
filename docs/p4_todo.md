@@ -2,7 +2,7 @@
 
 P4 goal: add real translation-provider hardening and fallback behavior while preserving the accepted clipboard and screen translation flows.
 
-Status: implementation complete, ready for planner recheck.
+Status: implementation complete, planner-accepted.
 
 Executable guide: `docs/p4_provider_hardening_goal_guide.md`
 

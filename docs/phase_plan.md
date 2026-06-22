@@ -229,6 +229,8 @@ Round split:
 
 Estimated rounds: 6
 
+Execution guide: `docs/p5_history_persistence_settings_goal_guide.md`
+
 Goal: persist user preferences and optional recent translations without making the app feel heavy.
 
 Scope:
@@ -337,12 +339,12 @@ Round split:
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P3 - Screen Capture and OCR MVP.
+Current accepted phase: P4 - Provider Hardening and Fallbacks.
 
-Recommended next phase: P4 - Provider Hardening and Fallbacks.
+Recommended next phase: P5 - History, Persistence, and Settings UX.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
-The latest completed phase report is `docs/p3_final_validation_report.md`.
-The next handoff is `docs/p3_to_p4_handoff.md`.
-The direct execution guide for the next phase is `docs/p4_provider_hardening_goal_guide.md`.
+The latest completed phase report is `docs/p4_final_validation_report.md`.
+The next handoff is `docs/p4_to_p5_handoff.md`.
+The direct execution guide for the next phase is `docs/p5_history_persistence_settings_goal_guide.md`.

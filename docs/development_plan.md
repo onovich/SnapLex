@@ -84,8 +84,7 @@ The P3 final report is `docs/p3_final_validation_report.md`; the P4 handoff is
 
 ## Implemented P4 Provider Hardening And Fallbacks
 
-The repository now has provider hardening complete and ready for planner
-acceptance:
+The repository now has accepted provider hardening:
 
 - `snaplex/providers/http.py` defines an injectable HTTP transport boundary using
   the Python standard library.
@@ -106,7 +105,8 @@ acceptance:
   exhaustion.
 
 The P4 final report is `docs/p4_final_validation_report.md`; the P5 handoff is
-`docs/p4_to_p5_handoff.md`.
+`docs/p4_to_p5_handoff.md`; the P5 execution guide is
+`docs/p5_history_persistence_settings_goal_guide.md`.
 
 ## MVP Goals
 
@@ -169,7 +169,8 @@ The P4 final report is `docs/p4_final_validation_report.md`; the P5 handoff is
 The concrete phase-by-phase execution plan is maintained in `docs/phase_plan.md`.
 The full P0-P7 delegated execution guide is maintained in `docs/p0_p7_goal_mode_execution_guide.md`.
 The first executable phase guide is maintained in `docs/p0_repository_baseline_goal_guide.md`.
-The next executable phase guide will be prepared for P5 after P4 is accepted.
+The next executable phase guide is maintained in
+`docs/p5_history_persistence_settings_goal_guide.md`.
 
 Summary:
 

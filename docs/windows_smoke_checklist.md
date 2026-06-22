@@ -5,6 +5,7 @@ Use this checklist after automated validation passes.
 Latest P2 smoke evidence is recorded in `docs/p2_windows_smoke_evidence.md`.
 Latest P3 smoke evidence is recorded in `docs/p3_windows_smoke_evidence.md`.
 P4 provider smoke planning is recorded in `docs/p4_provider_hardening_goal_guide.md`.
+P5 settings/history smoke planning is recorded in `docs/p5_history_persistence_settings_goal_guide.md`.
 
 ## Automated Precheck
 
@@ -153,9 +154,22 @@ Expected result:
 - A real-provider smoke is recorded only when local credentials or endpoints are
   already available.
 
+## P5 Settings And History Smoke
+
+After P5 is implemented, settings/history smoke should use a local test data
+directory or clearly documented app data path. Automated tests must use temp
+storage and must not write to real user data directories.
+
+Expected result:
+
+- Changing provider/language/history settings persists across app restart.
+- Recent translation history can be listed, copied, deleted, and cleared when
+  history is enabled.
+- Disabling history prevents future successful translations from being stored.
+- No actual provider API key values are persisted.
+
 ## Deferred To Later Phases
 
 - Global clipboard hotkey handling.
 - Windows packaging.
-- Persistent settings/history UI.
 - Browser extension and AI summary expansion.
