@@ -82,6 +82,32 @@ The P3 final report is `docs/p3_final_validation_report.md`; the P4 handoff is
 `docs/p3_to_p4_handoff.md`; the P4 execution guide is
 `docs/p4_provider_hardening_goal_guide.md`.
 
+## Implemented P4 Provider Hardening And Fallbacks
+
+The repository now has provider hardening complete and ready for planner
+acceptance:
+
+- `snaplex/providers/http.py` defines an injectable HTTP transport boundary using
+  the Python standard library.
+- `snaplex/providers/config.py` defines runtime provider config for base URLs,
+  API-key env var names, timeout, retry, and provider options.
+- `snaplex/providers/libretranslate.py`, `openai.py`, and `deepl.py` implement
+  real provider adapters behind the existing `TranslationProvider` contract.
+- `snaplex/providers/retry.py` retries provider failures before the pipeline
+  falls back to the next provider.
+- `snaplex/providers/registry.py` registers fake, LibreTranslate, OpenAI, and
+  DeepL providers while keeping fake as the selected default.
+- `snaplex/storage/config.py` can build local runtime config from environment
+  variables without storing API key values.
+- `.env.example` and `docs/p4_provider_configuration.md` document local provider
+  setup and optional real-provider smoke.
+- Tests cover mocked HTTP success, missing credentials, timeout, retry, HTTP
+  error, malformed response, unsupported language, fallback order, and fallback
+  exhaustion.
+
+The P4 final report is `docs/p4_final_validation_report.md`; the P5 handoff is
+`docs/p4_to_p5_handoff.md`.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.
@@ -143,7 +169,7 @@ The P3 final report is `docs/p3_final_validation_report.md`; the P4 handoff is
 The concrete phase-by-phase execution plan is maintained in `docs/phase_plan.md`.
 The full P0-P7 delegated execution guide is maintained in `docs/p0_p7_goal_mode_execution_guide.md`.
 The first executable phase guide is maintained in `docs/p0_repository_baseline_goal_guide.md`.
-The next executable phase guide is maintained in `docs/p4_provider_hardening_goal_guide.md`.
+The next executable phase guide will be prepared for P5 after P4 is accepted.
 
 Summary:
 

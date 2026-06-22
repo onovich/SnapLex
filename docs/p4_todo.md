@@ -2,20 +2,20 @@
 
 P4 goal: add real translation-provider hardening and fallback behavior while preserving the accepted clipboard and screen translation flows.
 
-Status: planned, ready for executor.
+Status: implementation complete, ready for planner recheck.
 
 Executable guide: `docs/p4_provider_hardening_goal_guide.md`
 
 ## Tasks
 
-- [ ] Add provider runtime config and a mocked HTTP transport boundary.
-- [ ] Add a LibreTranslate adapter behind `TranslationProvider`.
-- [ ] Add an OpenAI adapter behind explicit local credential configuration.
-- [ ] Add a DeepL adapter behind explicit local credential configuration.
-- [ ] Cover missing credential, timeout, retry, HTTP error, malformed response, unsupported language, fallback order, and fallback exhaustion states.
-- [ ] Keep fake provider as the deterministic default for automated validation.
-- [ ] Document provider environment variables, local secret handling, and optional real-provider smoke.
-- [ ] Create P4 final validation report and P4-to-P5 handoff.
+- [x] Add provider runtime config and a mocked HTTP transport boundary.
+- [x] Add a LibreTranslate adapter behind `TranslationProvider`.
+- [x] Add an OpenAI adapter behind explicit local credential configuration.
+- [x] Add a DeepL adapter behind explicit local credential configuration.
+- [x] Cover missing credential, timeout, retry, HTTP error, malformed response, unsupported language, fallback order, and fallback exhaustion states.
+- [x] Keep fake provider as the deterministic default for automated validation.
+- [x] Document provider environment variables, local secret handling, and optional real-provider smoke.
+- [x] Create P4 final validation report and P4-to-P5 handoff.
 
 ## Deferred Until Later Phases
 

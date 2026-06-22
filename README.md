@@ -25,6 +25,8 @@ The current project source of truth lives in:
 - `docs/p3_to_p4_handoff.md`
 - `docs/p4_provider_hardening_goal_guide.md`
 - `docs/p4_provider_configuration.md`
+- `docs/p4_final_validation_report.md`
+- `docs/p4_to_p5_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -55,9 +57,9 @@ an accepted P3 screen capture/OCR MVP. The screen path includes a manual
 offline capture/OCR flow, optional lazy `mss` and PaddleOCR adapters, shared
 result view, copy, retry, cancel, and user-friendly failure states.
 
-The next planned implementation phase is P4 provider hardening and fallbacks.
-Start from `docs/p4_provider_hardening_goal_guide.md` and
-`docs/p3_to_p4_handoff.md`.
+P4 provider hardening and fallbacks are implemented and ready for planner
+acceptance. After acceptance, the next planned implementation phase is P5
+history, persistence, and settings UX.
 
 ## Setup
 
