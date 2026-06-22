@@ -26,6 +26,20 @@ The repository now has a runnable Python package baseline:
 
 The P0 handoff is `docs/p0_to_p1_handoff.md`; the next implementation checklist is `docs/p1_todo.md`.
 
+## Implemented P1 Baseline
+
+The repository now has the core non-UI translation pipeline:
+
+- `snaplex/errors.py` defines stable pipeline/provider error types.
+- `snaplex/providers/registry.py` maps config provider names to runtime provider instances.
+- `snaplex/providers/fake.py` supports deterministic success, failure, timeout, unsupported-language, and stale-result scenarios.
+- `snaplex/services/translation_service.py` exposes `TranslationPipeline.translate_text(...)` and `translate_text_async(...)`.
+- `snaplex/services/translation_cache.py` provides in-memory cache keying and storage.
+- `snaplex/storage/config.py` defines translation defaults and provider fallback order.
+- Tests cover normalization, errors, registry lookup, fake scenarios, cache hits/misses, fallback, timeout, and async behavior.
+
+The P1 final report is `docs/p1_final_validation_report.md`; the P2 handoff is `docs/p1_to_p2_handoff.md`.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.

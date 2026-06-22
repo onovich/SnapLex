@@ -30,10 +30,10 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has an accepted P0 repository baseline: Python package metadata, a runnable
-bootstrap, service/provider/storage contracts, deterministic fakes, initial unit
-tests, and repeatable local validation. The next executable guide is
-`docs/p1_core_pipeline_goal_guide.md`.
+SnapLex has an accepted P0 repository baseline and a complete P1 non-UI
+translation pipeline foundation. The current pipeline works without UI, network,
+OCR models, or API credentials. The next recommended phase is P2 Clipboard
+Translation MVP after architect/PM acceptance.
 
 ## Setup
 
@@ -112,6 +112,27 @@ Current local fakes:
 - `FakeCaptureService`
 - `InMemoryClipboardService`
 - `InMemoryConfigStore`
+- `InMemoryTranslationCache`
+
+## Core Translation Pipeline
+
+P1 provides a reusable service boundary for later clipboard and OCR flows:
+
+```python
+from snaplex.services import create_default_translation_pipeline
+
+pipeline = create_default_translation_pipeline()
+result = pipeline.translate_text("hello", target_lang="es")
+```
+
+For UI callers, use the async-friendly boundary:
+
+```python
+result = await pipeline.translate_text_async("hello", target_lang="es")
+```
+
+Pipeline behavior includes normalization, config-driven provider selection,
+fallback order, in-memory cache lookup/write, and expected error mapping.
 
 ## P0 Boundaries
 
