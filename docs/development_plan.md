@@ -40,6 +40,25 @@ The repository now has the core non-UI translation pipeline:
 
 The P1 final report is `docs/p1_final_validation_report.md`; the P2 handoff is `docs/p1_to_p2_handoff.md`.
 
+## Implemented P2 Clipboard MVP
+
+The repository now has the first user-facing clipboard translation vertical slice:
+
+- `snaplex/ui/clipboard_presenter.py` owns loading, success, empty clipboard, error,
+  retry, copy, and close presentation states.
+- `snaplex/ui/app_shell.py` provides a small always-on-top PySide6 shell with the
+  `Translate Clipboard`, `Copy Result`, `Retry`, and `Close Result` actions.
+- `snaplex/services/clipboard_service.py` provides `InMemoryClipboardService` for
+  deterministic tests and `QtClipboardService` for the desktop clipboard.
+- Clipboard text flows through `TranslationPipeline.translate_text_async(...)`.
+- UI error states cover empty clipboard, unknown provider, timeout, provider
+  failure, fallback exhaustion, unsupported language, stale result, clipboard read
+  failure, and unexpected pipeline failure.
+- P2 smoke evidence is recorded in `docs/p2_windows_smoke_evidence.md`.
+
+The P2 final report is `docs/p2_final_validation_report.md`; the P3 handoff is
+`docs/p2_to_p3_handoff.md`.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.
@@ -70,9 +89,10 @@ The P1 final report is `docs/p1_final_validation_report.md`; the P2 handoff is `
    - Add basic unit tests for normalization, provider dispatch, timeout behavior, and cache keys.
 
 2. Clipboard translation MVP
-   - Build the PySide6 floating widget and result popup.
-   - Add global hotkey flow where practical on Windows.
-   - Implement clipboard read, text normalization, translation, popup rendering, copy result, retry, and error messages.
+   - Build the PySide6 floating widget and result view.
+   - Keep global hotkey support deferred until it can be implemented and smoked safely.
+   - Implement clipboard read, text normalization through the P1 pipeline,
+     translation, result rendering, copy result, retry, and error messages.
 
 3. Screen capture and OCR MVP
    - Build transparent region selection overlay.
@@ -118,12 +138,16 @@ Estimated total through the Windows MVP release candidate is 48 rounds. Includin
 
 - Unit tests for service boundaries, provider selection, text normalization, cache behavior, and error mapping.
 - Integration tests with fake OCR and fake translation providers for both runtime flows.
-- Manual smoke checklist for Windows desktop behavior: always-on-top widget, region overlay, clipboard hotkey, popup focus behavior, and network timeout fallback.
+- Manual smoke checklist for Windows desktop behavior: always-on-top widget, clipboard
+  action, region overlay, future hotkey behavior, popup focus behavior, and network
+  timeout fallback.
 - Packaging smoke test after PyInstaller is introduced.
 
 ## Key Risks
 
 - OCR model size and startup time may hurt perceived speed; mitigate with lazy loading and progress states.
-- Global hotkeys and clipboard access vary by OS and security settings; keep the first target explicit: Windows MVP.
+- Global hotkeys and clipboard access vary by OS and security settings; keep the
+  first target explicit: Windows MVP. P2 defers global hotkeys and accepts the
+  manual clipboard action.
 - Translation APIs require credentials and network reliability; include a development provider and fallback behavior early.
 - Region selection overlays can conflict with DPI scaling and multi-monitor setups; test these before polishing UI details.

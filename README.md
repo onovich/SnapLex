@@ -17,6 +17,11 @@ The current project source of truth lives in:
 - `docs/p1_core_pipeline_goal_guide.md`
 - `docs/p2_clipboard_translation_goal_guide.md`
 - `docs/p0_to_p1_handoff.md`
+- `docs/p1_to_p2_handoff.md`
+- `docs/p2_final_validation_report.md`
+- `docs/p2_to_p3_handoff.md`
+- `docs/p2_hotkey_decision.md`
+- `docs/p2_windows_smoke_evidence.md`
 - `docs/p1_todo.md`
 - `docs/p2_todo.md`
 - `docs/windows_smoke_checklist.md`
@@ -32,10 +37,14 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has an accepted P0 repository baseline and an accepted P1 non-UI
-translation pipeline foundation. The current pipeline works without UI, network,
-OCR models, or API credentials. The next executable guide is
-`docs/p2_clipboard_translation_goal_guide.md`.
+SnapLex has an accepted P0 repository baseline, an accepted P1 non-UI
+translation pipeline foundation, and a completed P2 clipboard translation MVP
+ready for architect/PM validation. The clipboard path works with a PySide6 shell,
+Qt clipboard adapter, P1 pipeline call, result view, copy, retry, and
+user-friendly error states without network access or API credentials.
+
+The next planned implementation phase is P3 screen capture and OCR. Start from
+`docs/p2_to_p3_handoff.md` after P2 is accepted.
 
 ## Setup
 
@@ -65,6 +74,14 @@ Launch the desktop shell after installing the GUI extra:
 ```powershell
 python -m snaplex
 ```
+
+Clipboard MVP flow:
+
+1. Copy text into the Windows clipboard.
+2. Run `python -m snaplex`.
+3. Select `Translate Clipboard`.
+4. Review the source, translated text, provider, or error state.
+5. Use `Copy Result`, `Retry`, or `Close Result`.
 
 The same entry point is exposed as a console script after editable install:
 
@@ -136,8 +153,23 @@ result = await pipeline.translate_text_async("hello", target_lang="es")
 Pipeline behavior includes normalization, config-driven provider selection,
 fallback order, in-memory cache lookup/write, and expected error mapping.
 
-## P0 Boundaries
+## Clipboard Translation MVP
 
-P0 intentionally does not include real OCR, screen capture, global hotkeys, network
-translation providers, persistent history, or Windows packaging. Those are staged
-for later phases in `docs/phase_plan.md`.
+P2 adds the first user-facing vertical slice:
+
+- `snaplex/ui/clipboard_presenter.py` owns clipboard translation presentation state.
+- `snaplex/ui/app_shell.py` exposes the always-on-top PySide6 shell and result view.
+- `snaplex/services/clipboard_service.py` contains the in-memory and Qt clipboard adapters.
+- UI calls `TranslationPipeline.translate_text_async(...)`; it does not call providers directly.
+- Tests cover clipboard service behavior, presenter states, pipeline integration, retry, copy,
+  empty clipboard, timeout, provider failure, fallback exhaustion, unknown provider,
+  unsupported language, stale result, and unexpected failure states.
+
+Global Windows hotkey support is deferred for a later phase. P2 accepts the
+manual `Translate Clipboard` button as the stable trigger path.
+
+## Current Boundaries
+
+The current implementation intentionally does not include real OCR, screen
+capture, global hotkeys, network translation providers, persistent history, or
+Windows packaging. Those remain staged for later phases in `docs/phase_plan.md`.

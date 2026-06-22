@@ -2,6 +2,8 @@
 
 Use this checklist after automated validation passes.
 
+Latest P2 smoke evidence is recorded in `docs/p2_windows_smoke_evidence.md`.
+
 ## Automated Precheck
 
 ```powershell
