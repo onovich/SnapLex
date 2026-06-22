@@ -11,6 +11,7 @@ from snaplex.providers.config import (
     default_provider_runtime_configs,
     resolve_api_key,
 )
+from snaplex.providers.deepl import DeepLTranslationProvider
 from snaplex.providers.fake import FakeTranslationProvider, FakeTranslationScenario
 from snaplex.providers.http import (
     HttpRequest,
@@ -44,6 +45,7 @@ __all__ = [
     "OpenAITranslationProvider",
     "ProviderRegistry",
     "ProviderRuntimeConfig",
+    "DeepLTranslationProvider",
     "StaleTranslationResultError",
     "TranslationProvider",
     "TranslationProviderError",
