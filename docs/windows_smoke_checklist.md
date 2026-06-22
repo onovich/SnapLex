@@ -3,6 +3,7 @@
 Use this checklist after automated validation passes.
 
 Latest P2 smoke evidence is recorded in `docs/p2_windows_smoke_evidence.md`.
+Latest P3 smoke evidence is recorded in `docs/p3_windows_smoke_evidence.md`.
 
 ## Automated Precheck
 
@@ -79,6 +80,50 @@ Expected result:
 
 - P2 smoke uses the manual `Translate Clipboard` button.
 - No global hotkey is required for P2 acceptance.
+
+## P3 Screen Translation Smoke
+
+Install optional GUI and capture dependencies when exercising the visible real
+capture path:
+
+```powershell
+python -m pip install -e ".[gui]"
+python -m pip install -e ".[capture]"
+python -m snaplex
+```
+
+Single-monitor visible path:
+
+1. Select `Translate Screen`.
+2. Drag a non-empty screen region in the overlay.
+3. Release the mouse to confirm the region.
+4. Confirm the result view shows OCR source text and translated text.
+5. Select `Copy Result` and verify the clipboard receives the translated text.
+6. Select `Retry` and confirm the same selected region is reused.
+7. Select `Close Result` and confirm the shell returns to `Ready`.
+
+Cancel path:
+
+1. Select `Translate Screen`.
+2. Press `Esc` in the overlay.
+
+Expected result:
+
+- Status shows `Screen selection cancelled`.
+- No capture, OCR, or translation result is copied.
+
+Failure paths to smoke with fake/injected services:
+
+- Empty OCR result shows `No screen text found`.
+- OCR failure shows a user-friendly error.
+- Capture failure shows a user-friendly error.
+- Translation provider failure shows a user-friendly error.
+
+Current limitation:
+
+- P3 records single-monitor as the first accepted real-capture smoke path.
+- DPI scaling and multi-monitor coordinate conversion need visible Windows smoke
+  before packaging.
 
 ## No-GUI Dependency Fallback
 
