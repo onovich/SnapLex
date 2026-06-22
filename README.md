@@ -36,6 +36,7 @@ The current project source of truth lives in:
 - `docs/p6_to_p7_handoff.md`
 - `docs/p6_packaging_smoke_evidence.md`
 - `docs/p6_release_checklist.md`
+- `docs/p7_expansion_track_goal_guide.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -50,6 +51,7 @@ The current project source of truth lives in:
 - `docs/p4_todo.md`
 - `docs/p5_todo.md`
 - `docs/p6_todo.md`
+- `docs/p7_todo.md`
 
 ## Planned Stack
 
@@ -61,17 +63,16 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P5 and P6 is ready for planner acceptance. The app now has manual clipboard and screen
+SnapLex has accepted P0 through P6 and P7 is ready for expansion-track execution. The app now has manual clipboard and screen
 translation actions, capture/OCR service boundaries, optional lazy real
 capture/OCR adapters, real provider adapters for LibreTranslate/OpenAI/DeepL,
 mocked HTTP tests, fake offline defaults, persisted settings, optional recent
 translation history, shared result states, a PyInstaller spec, and packaged
 release smoke commands.
 
-The current implementation phase is P6 packaging and release readiness. Start
-from `docs/p6_packaging_release_goal_guide.md`,
-`docs/p6_final_validation_report.md`, `docs/p6_packaging_smoke_evidence.md`,
-and `docs/p6_release_checklist.md`.
+The current implementation phase is P7 expansion track. Start from
+`docs/p7_expansion_track_goal_guide.md`, `docs/p7_todo.md`,
+`docs/p6_final_validation_report.md`, and `docs/p6_to_p7_handoff.md`.
 
 ## Setup
 

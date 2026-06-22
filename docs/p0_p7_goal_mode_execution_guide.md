@@ -313,6 +313,8 @@ PASS:
 
 Budget: 5 rounds.
 
+Dedicated guide: `docs/p7_expansion_track_goal_guide.md`
+
 Deliver:
 
 - Multilingual UX improvement plan.
@@ -416,4 +418,3 @@ The P0-P7 goal is done when:
 - All relevant validation passes.
 - The final state is committed and pushed to `origin/main`.
 - README and docs describe how to install, run, test, package, troubleshoot, and continue development.
-

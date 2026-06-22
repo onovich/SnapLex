@@ -8,6 +8,7 @@ P4 provider smoke planning is recorded in `docs/p4_provider_hardening_goal_guide
 P5 settings/history behavior is recorded in `docs/p5_final_validation_report.md`
 and `docs/p5_privacy_and_storage.md`.
 P6 packaging smoke evidence is recorded in `docs/p6_packaging_smoke_evidence.md`.
+P7 expansion planning is recorded in `docs/p7_expansion_track_goal_guide.md`.
 
 ## Automated Precheck
 
@@ -237,4 +238,26 @@ Expected result:
 ## Deferred To Later Phases
 
 - Global clipboard hotkey handling.
-- Browser extension and AI summary expansion.
+- Production browser extension implementation.
+- Real AI summary service integration.
+
+## P7 Expansion Planning Validation
+
+P7 is design-first from the accepted P6 release baseline. If no runtime code is
+introduced, validation remains documentation, link, boundary, and no-regression
+focused:
+
+```powershell
+C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\Validate.cmd
+git diff --check
+python -m snaplex --version
+python -m snaplex --no-gui
+```
+
+Expected result:
+
+- Existing MVP validation remains green.
+- P7 docs clearly separate multilingual UX, AI summary, and browser extension
+  bridge work from the released MVP runtime.
+- No generated packages, screenshots, local data, provider secrets, or new
+  network-dependent validation are committed.

@@ -2,13 +2,23 @@
 
 Date: 2026-06-22
 Phase: P6 Packaging and Release Readiness
-Status: PASS, ready for planner validation
+Status: PASS, planner-accepted
 
 ## Rounds Used
 
 - Planned rounds: 7
 - Used rounds: 7
 - Buffer rounds consumed: 0
+
+## Planner Acceptance
+
+- Rechecked by planner on 2026-06-22.
+- Acceptance result: PASS.
+- Recheck validation: `Validate.cmd` PASS with 190 tests, `git diff --check`
+  PASS, CLI bootstrap PASS, package dry-run PASS, `Package.cmd` PASS,
+  `ReleaseDryRun.cmd` PASS, packaged executable smoke PASS, artifact/secret
+  boundary scan PASS.
+- Accepted commit: `d297e26e78e732431b2be1d2149c8118841eb23a`.
 
 ## Main Deliverables
 
@@ -132,20 +142,18 @@ SnapLex packaged workflow smoke PASS
 - `a832792` - packaged launch smoke and bootstrap packaging fix
 - `0ad2a3c` - packaged workflow smoke
 - `57766d8` - release docs, troubleshooting, and ops wrapper commands
-- Final report/handoff commit: this document commit; exact hash is reported in
-  the executor completion message.
+- Final report/handoff commit: `d297e26`.
 
 ## Push Result
 
-All P6 implementation and documentation commits through Round 6 were pushed to
-`origin/main`. The final report/handoff commit is this document commit and will
-be pushed before planner notification.
+All P6 implementation and documentation commits through
+`d297e26e78e732431b2be1d2149c8118841eb23a` were pushed to `origin/main`.
 
-## Request For Architect/PM Acceptance
+## Architect/PM Acceptance
 
-Please validate P6 against `docs/p6_packaging_release_goal_guide.md`. If PASS,
-proceed to P7 Expansion Track planning.
+P6 is accepted against `docs/p6_packaging_release_goal_guide.md`.
 
 ## Recommended Next Phase
 
-P7 Expansion Track using the accepted P6 package/release baseline.
+P7 Expansion Track using `docs/p7_expansion_track_goal_guide.md` and the
+accepted P6 package/release baseline.

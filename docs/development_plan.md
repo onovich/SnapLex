@@ -110,8 +110,7 @@ The P4 final report is `docs/p4_final_validation_report.md`; the P5 handoff is
 
 ## Implemented P5 History, Persistence, And Settings UX
 
-The repository now has local settings and optional translation history complete
-and ready for planner acceptance:
+The repository now has accepted local settings and optional translation history:
 
 - `snaplex/storage/config.py` includes `JsonFileConfigStore`, config
   serialization, defaults, malformed-file fallback, and migration hooks.
@@ -131,6 +130,29 @@ and ready for planner acceptance:
 The P5 final report is `docs/p5_final_validation_report.md`; the P6 handoff is
 `docs/p5_to_p6_handoff.md`; the P6 execution guide is
 `docs/p6_packaging_release_goal_guide.md`.
+
+## Implemented P6 Packaging And Release Readiness
+
+The repository now has accepted Windows packaging and release validation:
+
+- `pyproject.toml` includes the optional `package` extra for PyInstaller.
+- `scripts/package_windows.py` provides a repeatable Windows build wrapper.
+- `packaging/snaplex.spec` is the tracked PyInstaller packaging entry.
+- `.gitignore` keeps generated specs, `build/`, `dist/`, local smoke data,
+  screenshots, OCR model caches, and packaged binaries out of git while allowing
+  the chosen tracked spec.
+- `snaplex/app.py` exposes `--smoke-package` and
+  `snaplex/release_smoke.py` provides deterministic packaged workflow smoke.
+- The base package smoke covers settings persistence, fake-provider clipboard
+  translation, fake capture/OCR screen translation, and history
+  record/list/delete/clear.
+- `packaging/README.md`, `docs/p6_packaging_smoke_evidence.md`, and
+  `docs/p6_release_checklist.md` document build, smoke, troubleshooting, local
+  data, provider secret, and cleanup behavior.
+
+The P6 final report is `docs/p6_final_validation_report.md`; the P7 handoff is
+`docs/p6_to_p7_handoff.md`; the P7 execution guide is
+`docs/p7_expansion_track_goal_guide.md`.
 
 ## MVP Goals
 
@@ -194,7 +216,7 @@ The concrete phase-by-phase execution plan is maintained in `docs/phase_plan.md`
 The full P0-P7 delegated execution guide is maintained in `docs/p0_p7_goal_mode_execution_guide.md`.
 The first executable phase guide is maintained in `docs/p0_repository_baseline_goal_guide.md`.
 The next executable phase guide is maintained in
-`docs/p6_packaging_release_goal_guide.md`.
+`docs/p7_expansion_track_goal_guide.md`.
 
 Summary:
 

@@ -307,6 +307,8 @@ Round split:
 
 Estimated rounds: 5
 
+Execution guide: `docs/p7_expansion_track_goal_guide.md`
+
 Goal: prepare post-MVP expansion without destabilizing the MVP.
 
 Scope:
@@ -341,12 +343,12 @@ Round split:
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P5 - History, Persistence, and Settings UX.
+Current accepted phase: P6 - Packaging and Release Readiness.
 
-Recommended next phase: P6 - Packaging and Release Readiness.
+Recommended next phase: P7 - Expansion Track.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
-The latest completed phase report is `docs/p5_final_validation_report.md`.
-The next handoff is `docs/p5_to_p6_handoff.md`.
-The direct execution guide for the next phase is `docs/p6_packaging_release_goal_guide.md`.
+The latest completed phase report is `docs/p6_final_validation_report.md`.
+The next handoff is `docs/p6_to_p7_handoff.md`.
+The direct execution guide for the next phase is `docs/p7_expansion_track_goal_guide.md`.

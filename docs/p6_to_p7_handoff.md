@@ -1,9 +1,11 @@
 # P6 to P7 Handoff
 
 Date: 2026-06-22
-Status: P6 complete locally; ready for planner validation
+Status: P6 accepted by planner; P7 ready for execution planning
 
 Recommended next phase: P7 Expansion Track
+
+Executable P7 guide: `docs/p7_expansion_track_goal_guide.md`
 
 ## P6 Deliverables Available To P7
 
@@ -41,8 +43,9 @@ Recommended next phase: P7 Expansion Track
 
 ## P7 Starting Point
 
-P7 may plan or prototype post-MVP expansion only after P6 is accepted. Likely
-workstreams:
+P7 may plan post-MVP expansion from the accepted P6 release baseline. The
+planner-selected default is documentation/design-first with no production
+browser extension or real AI service integration in P7. Workstreams:
 
 - Browser extension bridge planning.
 - AI summary design as an optional provider-style capability.
@@ -63,7 +66,7 @@ workstreams:
 
 ## Recommended P7 First Steps
 
-1. Revalidate P6 with `docs/p6_final_validation_report.md`.
-2. Decide whether P7 is docs-only or includes one narrow prototype.
+1. Read `docs/p7_expansion_track_goal_guide.md`.
+2. Revalidate P6 with `docs/p6_final_validation_report.md`.
 3. Define expansion boundaries before touching MVP runtime code.
 4. Preserve the `base` package as the deterministic release-smoke path.

@@ -2,7 +2,7 @@
 
 P6 goal: package the Windows MVP and make release validation repeatable.
 
-Status: complete, ready for planner validation.
+Status: complete, planner-accepted.
 
 Executable guide: `docs/p6_packaging_release_goal_guide.md`
 
