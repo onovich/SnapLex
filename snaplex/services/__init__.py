@@ -27,6 +27,7 @@ from snaplex.services.screen_translation_service import (
     ScreenTranslationResponse,
     ScreenTranslationService,
 )
+from snaplex.services.history_service import HistoryService
 from snaplex.services.settings_service import SettingsService
 from snaplex.services.text import normalize_text
 from snaplex.services.translation_cache import (
@@ -49,6 +50,7 @@ __all__ = [
     "FakeCaptureService",
     "FakeOcrScenario",
     "FakeOcrService",
+    "HistoryService",
     "InMemoryClipboardService",
     "InMemoryTranslationCache",
     "MssCaptureService",
