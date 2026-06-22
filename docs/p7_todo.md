@@ -11,7 +11,7 @@ Executable guide: `docs/p7_expansion_track_goal_guide.md`
 
 - [x] Revalidate the accepted P6 package/release baseline.
 - [x] Produce expansion requirements and MVP freeze notes.
-- [ ] Produce multilingual UX and localization boundary notes.
+- [x] Produce multilingual UX and localization boundary notes.
 - [ ] Produce AI summary design as an optional provider-style capability.
 - [ ] Produce browser extension bridge design with security/privacy boundaries.
 - [ ] Produce expansion roadmap with accepted, deferred, and rejected ideas.
