@@ -58,6 +58,9 @@ class HistoryService:
     def list_recent(self) -> tuple[TranslationHistoryEntry, ...]:
         return self._history_store.list_entries()
 
+    def is_enabled(self) -> bool:
+        return self._config_store.load().history_enabled
+
     def get(self, entry_id: str) -> TranslationHistoryEntry | None:
         for entry in self._history_store.list_entries():
             if entry.id == entry_id:

@@ -12,6 +12,7 @@ from snaplex.services import (
     CaptureService,
     FakeCaptureService,
     FakeOcrService,
+    HistoryService,
     OcrService,
     QtClipboardService,
     ScreenRegion,
@@ -19,12 +20,17 @@ from snaplex.services import (
     create_default_translation_pipeline,
 )
 from snaplex.services.translation_service import TranslationPipeline
-from snaplex.storage import JsonFileConfigStore, load_app_config_from_environment
+from snaplex.storage import (
+    JsonFileConfigStore,
+    JsonFileHistoryStore,
+    load_app_config_from_environment,
+)
 from snaplex.ui.clipboard_presenter import (
     ClipboardTranslationPresenter,
 )
 from snaplex.ui.region_selector import FixedRegionSelector, QtRegionSelector, RegionSelector
 from snaplex.ui.screen_presenter import ScreenTranslationPresenter
+from snaplex.ui.history_presenter import HistoryPresenter
 from snaplex.ui.settings_presenter import SettingsFormState, SettingsPresenter
 from snaplex.ui.translation_result import TranslationResultPresenter, TranslationResultStatus
 
@@ -48,6 +54,7 @@ def launch_gui(
     screen_region: ScreenRegion | None = None,
     region_selector: RegionSelector | None = None,
     settings_service: SettingsService | None = None,
+    history_service: HistoryService | None = None,
 ) -> int:
     try:
         from PySide6.QtCore import QObject, Qt, Signal
@@ -58,8 +65,10 @@ def launch_gui(
             QDialogButtonBox,
             QDoubleSpinBox,
             QFormLayout,
+            QHBoxLayout,
             QLabel,
             QLineEdit,
+            QListWidget,
             QMainWindow,
             QPushButton,
             QSpinBox,
@@ -81,14 +90,24 @@ def launch_gui(
     config_store = JsonFileConfigStore(default_config=load_app_config_from_environment())
     settings_service = settings_service or SettingsService(config_store)
     settings_presenter = SettingsPresenter(settings_service)
+    history_service = history_service or HistoryService(
+        config_store=config_store,
+        history_store=JsonFileHistoryStore(),
+    )
+    history_presenter = HistoryPresenter(
+        history_service,
+        on_copy_result=clipboard_service.set_text,
+    )
     pipeline = pipeline or create_default_translation_pipeline(
         config_store=config_store,
     )
     presenter = presenter or ClipboardTranslationPresenter(
-        on_copy_result=clipboard_service.set_text
+        on_copy_result=clipboard_service.set_text,
+        history_service=history_service,
     )
     screen_presenter = screen_presenter or ScreenTranslationPresenter(
-        on_copy_result=clipboard_service.set_text
+        on_copy_result=clipboard_service.set_text,
+        history_service=history_service,
     )
     region_selector = region_selector or (
         FixedRegionSelector(screen_region) if screen_region is not None else QtRegionSelector()
@@ -114,6 +133,7 @@ def launch_gui(
     translate_button = QPushButton("Translate Clipboard")
     translate_screen_button = QPushButton("Translate Screen")
     settings_button = QPushButton("Settings")
+    history_button = QPushButton("History")
     copy_button = QPushButton("Copy Result")
     retry_button = QPushButton("Retry")
     close_button = QPushButton("Close Result")
@@ -285,16 +305,79 @@ def launch_gui(
         buttons.rejected.connect(dialog.reject)
         dialog.exec()
 
+    def handle_history() -> None:
+        dialog = QDialog(window)
+        dialog.setWindowTitle("SnapLex History")
+        layout = QVBoxLayout(dialog)
+        status = QLabel("")
+        history_list = QListWidget()
+        copy_history_button = QPushButton("Copy")
+        delete_history_button = QPushButton("Delete")
+        clear_history_button = QPushButton("Clear")
+        close_history_button = QPushButton("Close")
+        button_row = QHBoxLayout()
+        button_row.addWidget(copy_history_button)
+        button_row.addWidget(delete_history_button)
+        button_row.addWidget(clear_history_button)
+        button_row.addWidget(close_history_button)
+        layout.addWidget(status)
+        layout.addWidget(history_list)
+        layout.addLayout(button_row)
+        entry_ids: list[str] = []
+
+        def refresh_history() -> None:
+            state = history_presenter.load_state()
+            status.setText(state.status_text)
+            history_list.clear()
+            entry_ids.clear()
+            for entry in state.entries:
+                entry_ids.append(entry.id)
+                history_list.addItem(
+                    f"{entry.created_at} | {entry.flow} | "
+                    f"{entry.source_text} -> {entry.translated_text}"
+                )
+
+        def selected_entry_id() -> str | None:
+            row = history_list.currentRow()
+            if row < 0 or row >= len(entry_ids):
+                return None
+            return entry_ids[row]
+
+        def copy_selected_history() -> None:
+            entry_id = selected_entry_id()
+            if entry_id is not None:
+                history_presenter.copy_entry(entry_id)
+
+        def delete_selected_history() -> None:
+            entry_id = selected_entry_id()
+            if entry_id is not None:
+                history_presenter.delete_entry(entry_id)
+                refresh_history()
+
+        def clear_history() -> None:
+            history_presenter.clear_history()
+            refresh_history()
+
+        copy_history_button.clicked.connect(copy_selected_history)
+        delete_history_button.clicked.connect(delete_selected_history)
+        clear_history_button.clicked.connect(clear_history)
+        close_history_button.clicked.connect(dialog.accept)
+        refresh_history()
+        dialog.resize(520, 280)
+        dialog.exec()
+
     ui_signals.refresh_requested.connect(refresh_view)
     translate_button.clicked.connect(handle_translate)
     translate_screen_button.clicked.connect(handle_screen_translate)
     settings_button.clicked.connect(handle_settings)
+    history_button.clicked.connect(handle_history)
     retry_button.clicked.connect(handle_retry)
     copy_button.clicked.connect(handle_copy)
     close_button.clicked.connect(handle_close)
     layout.addWidget(translate_button)
     layout.addWidget(translate_screen_button)
     layout.addWidget(settings_button)
+    layout.addWidget(history_button)
     layout.addWidget(source_label)
     layout.addWidget(result_label)
     layout.addWidget(provider_label)

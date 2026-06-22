@@ -15,6 +15,7 @@ from snaplex.services import (
     ScreenTranslationService,
 )
 from snaplex.ui.translation_result import (
+    TranslationHistoryRecorderLike,
     TranslationPipelineLike,
     TranslationResultPresenter,
     TranslationResultState,
@@ -31,11 +32,13 @@ class ScreenTranslationPresenter(TranslationResultPresenter):
         self,
         on_translate_requested: Callable[[], None] | None = None,
         on_copy_result: Callable[[str], None] | None = None,
+        history_service: TranslationHistoryRecorderLike | None = None,
     ) -> None:
         super().__init__(
             loading_status_text="Translating screen...",
             on_translate_requested=on_translate_requested,
             on_copy_result=on_copy_result,
+            history_service=history_service,
         )
         self._last_region: ScreenRegion | None = None
 
@@ -92,6 +95,14 @@ class ScreenTranslationPresenter(TranslationResultPresenter):
         if not response.source_text.strip():
             return self.show_empty_ocr_result()
 
+        self._record_history(
+            source_text=response.source_text,
+            translated_text=response.translated_text,
+            provider_name=response.provider_name,
+            source_lang=response.source_lang,
+            target_lang=response.target_lang,
+            flow="screen",
+        )
         return self.show_success(
             source_text=response.source_text,
             translated_text=response.translated_text,

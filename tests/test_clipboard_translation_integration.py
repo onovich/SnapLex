@@ -44,6 +44,15 @@ class FailingClipboard:
         raise AssertionError(f"Unexpected clipboard write: {text}")
 
 
+class RecordingHistoryService:
+    def __init__(self) -> None:
+        self.calls: list[dict[str, str]] = []
+
+    def add_translation(self, **kwargs: str) -> object:
+        self.calls.append(kwargs)
+        return object()
+
+
 def test_presenter_translates_clipboard_text_through_pipeline() -> None:
     clipboard = InMemoryClipboardService("hello")
     pipeline = FakePipeline(TranslationResponse("hola", "fake", "auto", "es"))
@@ -62,6 +71,31 @@ def test_presenter_translates_clipboard_text_through_pipeline() -> None:
     assert state.translated_text == "hola"
     assert state.provider_name == "fake"
     assert state.can_copy is True
+
+
+def test_presenter_records_successful_clipboard_translation_history() -> None:
+    clipboard = InMemoryClipboardService("hello")
+    pipeline = FakePipeline(TranslationResponse("hola", "fake", "en", "es"))
+    history_service = RecordingHistoryService()
+    presenter = ClipboardTranslationPresenter(history_service=history_service)
+
+    asyncio.run(
+        presenter.translate_clipboard(
+            clipboard_service=clipboard,
+            pipeline=pipeline,
+        )
+    )
+
+    assert history_service.calls == [
+        {
+            "source_text": "hello",
+            "translated_text": "hola",
+            "provider_name": "fake",
+            "source_lang": "en",
+            "target_lang": "es",
+            "flow": "clipboard",
+        }
+    ]
 
 
 def test_presenter_maps_empty_clipboard_without_calling_pipeline() -> None:

@@ -48,6 +48,15 @@ class UnavailableOcrService:
         raise OcrUnavailableError("missing model")
 
 
+class RecordingHistoryService:
+    def __init__(self) -> None:
+        self.calls: list[dict[str, str]] = []
+
+    def add_translation(self, **kwargs: str) -> object:
+        self.calls.append(kwargs)
+        return object()
+
+
 def test_screen_presenter_starts_idle() -> None:
     presenter = ScreenTranslationPresenter()
 
@@ -94,6 +103,35 @@ def test_screen_presenter_translates_region_through_capture_ocr_and_pipeline() -
     assert state.provider_name == "fake"
     assert state.can_copy is True
     assert state.can_retry is True
+
+
+def test_screen_presenter_records_successful_translation_history() -> None:
+    region = ScreenRegion(left=10, top=20, width=120, height=80)
+    capture_service = FakeCaptureService()
+    ocr_service = FakeOcrService(text="screen text")
+    pipeline = FakePipeline(TranslationResponse("translated screen", "fake", "en", "es"))
+    history_service = RecordingHistoryService()
+    presenter = ScreenTranslationPresenter(history_service=history_service)
+
+    asyncio.run(
+        presenter.translate_region(
+            region=region,
+            capture_service=capture_service,
+            ocr_service=ocr_service,
+            pipeline=pipeline,
+        )
+    )
+
+    assert history_service.calls == [
+        {
+            "source_text": "screen text",
+            "translated_text": "translated screen",
+            "provider_name": "fake",
+            "source_lang": "en",
+            "target_lang": "es",
+            "flow": "screen",
+        }
+    ]
 
 
 def test_screen_presenter_maps_invalid_region_points_without_capture() -> None:

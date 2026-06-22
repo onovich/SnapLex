@@ -22,6 +22,8 @@ class ScreenTranslationResponse:
     source_text: str
     translated_text: str
     provider_name: str
+    source_lang: str
+    target_lang: str
     ocr_confidence: float | None = None
 
 
@@ -46,5 +48,7 @@ class ScreenTranslationService:
             source_text=ocr_result.text,
             translated_text=translation_response.translated_text,
             provider_name=translation_response.provider_name,
+            source_lang=translation_response.source_lang,
+            target_lang=translation_response.target_lang,
             ocr_confidence=ocr_result.confidence,
         )

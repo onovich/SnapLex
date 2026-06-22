@@ -46,6 +46,21 @@ class TranslationPipelineLike(Protocol):
         ...
 
 
+class TranslationHistoryRecorderLike(Protocol):
+    def add_translation(
+        self,
+        *,
+        source_text: str,
+        translated_text: str,
+        provider_name: str,
+        source_lang: str,
+        target_lang: str,
+        flow: str,
+    ) -> object | None:
+        """Record one successful translation if history is enabled."""
+        ...
+
+
 class TranslationResultPresenter:
     def __init__(
         self,
@@ -53,10 +68,12 @@ class TranslationResultPresenter:
         loading_status_text: str,
         on_translate_requested: Callable[[], None] | None = None,
         on_copy_result: Callable[[str], None] | None = None,
+        history_service: TranslationHistoryRecorderLike | None = None,
     ) -> None:
         self._loading_status_text = loading_status_text
         self._on_translate_requested = on_translate_requested
         self._on_copy_result = on_copy_result
+        self._history_service = history_service
         self._state = TranslationResultState()
 
     @property
@@ -133,6 +150,7 @@ class TranslationResultPresenter:
         *,
         source_text: str,
         pipeline: TranslationPipelineLike,
+        history_flow: str = "",
     ) -> TranslationResultState:
         self.request_translation(source_text=source_text)
         try:
@@ -142,11 +160,43 @@ class TranslationResultPresenter:
         except Exception as exc:
             return self.show_error(friendly_translation_error_message(exc), source_text=source_text)
 
+        self._record_history(
+            source_text=source_text,
+            translated_text=response.translated_text,
+            provider_name=response.provider_name,
+            source_lang=response.source_lang,
+            target_lang=response.target_lang,
+            flow=history_flow,
+        )
         return self.show_success(
             source_text=source_text,
             translated_text=response.translated_text,
             provider_name=response.provider_name,
         )
+
+    def _record_history(
+        self,
+        *,
+        source_text: str,
+        translated_text: str,
+        provider_name: str,
+        source_lang: str,
+        target_lang: str,
+        flow: str,
+    ) -> None:
+        if self._history_service is None or not flow:
+            return
+        try:
+            self._history_service.add_translation(
+                source_text=source_text,
+                translated_text=translated_text,
+                provider_name=provider_name,
+                source_lang=source_lang,
+                target_lang=target_lang,
+                flow=flow,
+            )
+        except Exception:
+            return
 
 
 def friendly_translation_error_message(error: Exception) -> str:

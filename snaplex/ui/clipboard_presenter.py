@@ -6,6 +6,7 @@ from collections.abc import Callable
 
 from snaplex.services import ClipboardError, ClipboardService
 from snaplex.ui.translation_result import (
+    TranslationHistoryRecorderLike,
     TranslationPipelineLike,
     TranslationResultPresenter,
     TranslationResultState,
@@ -22,11 +23,13 @@ class ClipboardTranslationPresenter(TranslationResultPresenter):
         self,
         on_translate_requested: Callable[[], None] | None = None,
         on_copy_result: Callable[[str], None] | None = None,
+        history_service: TranslationHistoryRecorderLike | None = None,
     ) -> None:
         super().__init__(
             loading_status_text="Translating clipboard...",
             on_translate_requested=on_translate_requested,
             on_copy_result=on_copy_result,
+            history_service=history_service,
         )
 
     def request_clipboard_translation(
@@ -56,7 +59,11 @@ class ClipboardTranslationPresenter(TranslationResultPresenter):
         if not source_text.strip():
             return self.show_empty_clipboard()
 
-        return await self.translate_source_text(source_text=source_text, pipeline=pipeline)
+        return await self.translate_source_text(
+            source_text=source_text,
+            pipeline=pipeline,
+            history_flow="clipboard",
+        )
 
     async def retry_translation(
         self,
@@ -69,6 +76,7 @@ class ClipboardTranslationPresenter(TranslationResultPresenter):
             return await self.translate_source_text(
                 source_text=source_text,
                 pipeline=pipeline,
+                history_flow="clipboard",
             )
 
         return await self.translate_clipboard(
