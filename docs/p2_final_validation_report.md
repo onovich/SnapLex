@@ -2,7 +2,7 @@
 
 Date: 2026-06-22
 Phase: P2 Clipboard Translation MVP
-Status: READY_FOR_CHECK
+Status: PASS
 
 ## Rounds Used
 
@@ -99,19 +99,20 @@ PySide6 version used for smoke: `6.11.1`.
 - `c55a640` - clipboard translation error hardening
 - `813d520` - P2 global hotkey deferral
 - `4fffa8b` - GUI polish and smoke evidence
-- Round 8 final documentation commit: recorded in the executor planner notification after push
+- Round 8 final documentation commit: `94d7183`
+- Planner routing/status commit: `989190f`
 
 ## Push Result
 
-All completed P2 implementation commits were pushed to `origin/main`. The final
-Round 8 documentation commit must be pushed before planner validation.
+All completed P2 implementation commits and planner routing/status updates were
+pushed to `origin/main`.
 
-## Request For Architect/PM Acceptance
+## Architect/PM Acceptance
 
-Please validate P2 against `docs/p2_clipboard_translation_goal_guide.md`.
+Accepted after planner validation against
+`docs/p2_clipboard_translation_goal_guide.md`.
 
 ## Recommended Next Phase
 
 After P2 is accepted, proceed to P3 Screen Capture and OCR MVP using
 `docs/p2_to_p3_handoff.md`.
-

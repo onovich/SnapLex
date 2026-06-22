@@ -20,10 +20,12 @@ The current project source of truth lives in:
 - `docs/p1_to_p2_handoff.md`
 - `docs/p2_final_validation_report.md`
 - `docs/p2_to_p3_handoff.md`
+- `docs/p3_screen_capture_ocr_goal_guide.md`
 - `docs/p2_hotkey_decision.md`
 - `docs/p2_windows_smoke_evidence.md`
 - `docs/p1_todo.md`
 - `docs/p2_todo.md`
+- `docs/p3_todo.md`
 - `docs/windows_smoke_checklist.md`
 - `docs/p0_final_validation_report.md`
 
@@ -38,13 +40,13 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has an accepted P0 repository baseline, an accepted P1 non-UI
-translation pipeline foundation, and a completed P2 clipboard translation MVP
-ready for architect/PM validation. The clipboard path works with a PySide6 shell,
-Qt clipboard adapter, P1 pipeline call, result view, copy, retry, and
-user-friendly error states without network access or API credentials.
+translation pipeline foundation, and an accepted P2 clipboard translation MVP.
+The clipboard path works with a PySide6 shell, Qt clipboard adapter, P1 pipeline
+call, result view, copy, retry, and user-friendly error states without network
+access or API credentials.
 
 The next planned implementation phase is P3 screen capture and OCR. Start from
-`docs/p2_to_p3_handoff.md` after P2 is accepted.
+`docs/p3_screen_capture_ocr_goal_guide.md`.
 
 ## Setup
 

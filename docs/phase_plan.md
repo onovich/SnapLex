@@ -145,6 +145,8 @@ Round split:
 
 Estimated rounds: 10
 
+Execution guide: `docs/p3_screen_capture_ocr_goal_guide.md`
+
 Goal: support screen-region translation using capture, OCR, translation, and the same popup result UI.
 
 Scope:
@@ -333,12 +335,12 @@ Round split:
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P1 - Core Pipeline Foundation.
+Current accepted phase: P2 - Clipboard Translation MVP.
 
-Recommended next phase: P2 - Clipboard Translation MVP.
+Recommended next phase: P3 - Screen Capture and OCR MVP.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
-The latest completed phase report is `docs/p1_final_validation_report.md`.
-The next handoff is `docs/p1_to_p2_handoff.md`.
-The direct execution guide for the next phase is `docs/p2_clipboard_translation_goal_guide.md`.
+The latest completed phase report is `docs/p2_final_validation_report.md`.
+The next handoff is `docs/p2_to_p3_handoff.md`.
+The direct execution guide for the next phase is `docs/p3_screen_capture_ocr_goal_guide.md`.

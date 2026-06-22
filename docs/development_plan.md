@@ -57,7 +57,8 @@ The repository now has the first user-facing clipboard translation vertical slic
 - P2 smoke evidence is recorded in `docs/p2_windows_smoke_evidence.md`.
 
 The P2 final report is `docs/p2_final_validation_report.md`; the P3 handoff is
-`docs/p2_to_p3_handoff.md`.
+`docs/p2_to_p3_handoff.md`; the P3 execution guide is
+`docs/p3_screen_capture_ocr_goal_guide.md`.
 
 ## MVP Goals
 

@@ -8,6 +8,8 @@ Status: P2 clipboard MVP ready for validation
 Build the screen capture and OCR MVP on top of the accepted P1 translation
 pipeline and the P2 result-flow patterns.
 
+Use `docs/p3_screen_capture_ocr_goal_guide.md` as the executable P3 goal-mode guide.
+
 P3 should let a user trigger screen translation, select or provide a screen
 region, extract text through an OCR service boundary, translate the extracted
 text through `TranslationPipeline`, and render the result in the existing desktop
@@ -91,4 +93,3 @@ call translation providers directly.
 Add the screen translation action shell and a presenter/service skeleton that can
 accept injected fake OCR text, call the P1 pipeline, and render through the same
 result-state surface as P2. Do not start with real capture or OCR dependencies.
-
