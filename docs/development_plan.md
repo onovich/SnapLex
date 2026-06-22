@@ -66,6 +66,25 @@ The architecture from the current PDF docs separates the app into UI, capture, O
    - Smoke test launch, capture, clipboard, provider config, and popup behavior on Windows.
    - Document setup, development, packaging, and troubleshooting steps.
 
+## Detailed Phase Plan
+
+The concrete phase-by-phase execution plan is maintained in `docs/phase_plan.md`.
+The full P0-P7 delegated execution guide is maintained in `docs/p0_p7_goal_mode_execution_guide.md`.
+The first executable phase guide is maintained in `docs/p0_repository_baseline_goal_guide.md`.
+
+Summary:
+
+- P0 Repository and Product Baseline: 4 conversation rounds.
+- P1 Core Pipeline Foundation: 6 conversation rounds.
+- P2 Clipboard Translation MVP: 8 conversation rounds.
+- P3 Screen Capture and OCR MVP: 10 conversation rounds.
+- P4 Provider Hardening and Fallbacks: 7 conversation rounds.
+- P5 History, Persistence, and Settings UX: 6 conversation rounds.
+- P6 Packaging and Release Readiness: 7 conversation rounds.
+- P7 Expansion Track: 5 conversation rounds.
+
+Estimated total through the Windows MVP release candidate is 48 rounds. Including the post-MVP expansion track, the plan is 53 rounds.
+
 ## Validation Plan
 
 - Unit tests for service boundaries, provider selection, text normalization, cache behavior, and error mapping.
@@ -79,4 +98,3 @@ The architecture from the current PDF docs separates the app into UI, capture, O
 - Global hotkeys and clipboard access vary by OS and security settings; keep the first target explicit: Windows MVP.
 - Translation APIs require credentials and network reliability; include a development provider and fallback behavior early.
 - Region selection overlays can conflict with DPI scaling and multi-monitor setups; test these before polishing UI details.
-

@@ -11,6 +11,9 @@ The current project source of truth lives in:
 - `docs/SnapLex_Product_Design.pdf`
 - `docs/SnapLex_Technical_Architecture.pdf`
 - `docs/development_plan.md`
+- `docs/phase_plan.md`
+- `docs/p0_p7_goal_mode_execution_guide.md`
+- `docs/p0_repository_baseline_goal_guide.md`
 
 ## Planned Stack
 
@@ -19,4 +22,3 @@ The current project source of truth lives in:
 - PaddleOCR first, with a Tesseract-compatible service boundary.
 - Pluggable translation providers for LibreTranslate, OpenAI, DeepL, or local fallback providers.
 - PyInstaller for Windows packaging.
-
