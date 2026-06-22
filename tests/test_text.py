@@ -6,6 +6,14 @@ def test_normalize_text_trims_lines_and_preserves_line_breaks() -> None:
     assert normalize_text("  Hello\r\n world \rsecond line  ") == "Hello\nworld\nsecond line"
 
 
+def test_normalize_text_collapses_repeated_inline_whitespace() -> None:
+    assert normalize_text("Hello    world\tfrom   SnapLex") == "Hello world from SnapLex"
+
+
+def test_normalize_text_drops_empty_lines_without_joining_languages() -> None:
+    assert normalize_text("  こんにちは  \n\n  世界  ") == "こんにちは\n世界"
+
+
 def test_normalize_text_collapses_whitespace_only_input_to_empty() -> None:
     assert normalize_text(" \r\n\t ") == ""
 

@@ -5,9 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
 
-
-class TranslationProviderError(RuntimeError):
-    """Raised when a translation provider cannot produce a result."""
+from snaplex.errors import TranslationProviderError as TranslationProviderError
 
 
 @dataclass(frozen=True)
