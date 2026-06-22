@@ -9,14 +9,20 @@ from typing import Any
 
 from snaplex.services import (
     ClipboardService,
+    CaptureService,
+    FakeCaptureService,
+    FakeOcrService,
+    OcrService,
     QtClipboardService,
+    ScreenRegion,
     create_default_translation_pipeline,
 )
 from snaplex.services.translation_service import TranslationPipeline
 from snaplex.ui.clipboard_presenter import (
     ClipboardTranslationPresenter,
-    ClipboardTranslationStatus,
 )
+from snaplex.ui.screen_presenter import ScreenTranslationPresenter
+from snaplex.ui.translation_result import TranslationResultPresenter, TranslationResultStatus
 
 
 def is_pyside_available() -> bool:
@@ -30,8 +36,12 @@ def is_pyside_available() -> bool:
 
 def launch_gui(
     presenter: ClipboardTranslationPresenter | None = None,
+    screen_presenter: ScreenTranslationPresenter | None = None,
     clipboard_service: ClipboardService | None = None,
+    capture_service: CaptureService | None = None,
+    ocr_service: OcrService | None = None,
     pipeline: TranslationPipeline | None = None,
+    screen_region: ScreenRegion | None = None,
 ) -> int:
     try:
         from PySide6.QtCore import QObject, Qt, Signal
@@ -53,10 +63,17 @@ def launch_gui(
 
     app = QApplication.instance() or QApplication([])
     clipboard_service = clipboard_service or QtClipboardService.from_application()
+    capture_service = capture_service or FakeCaptureService()
+    ocr_service = ocr_service or FakeOcrService()
     pipeline = pipeline or create_default_translation_pipeline()
     presenter = presenter or ClipboardTranslationPresenter(
         on_copy_result=clipboard_service.set_text
     )
+    screen_presenter = screen_presenter or ScreenTranslationPresenter(
+        on_copy_result=clipboard_service.set_text
+    )
+    screen_region = screen_region or ScreenRegion(left=0, top=0, width=240, height=120)
+    active_presenter: dict[str, TranslationResultPresenter] = {"value": presenter}
 
     class UiSignals(QObject):
         refresh_requested = Signal()
@@ -75,6 +92,7 @@ def launch_gui(
     provider_label = QLabel("")
     error_label = QLabel("")
     translate_button = QPushButton("Translate Clipboard")
+    translate_screen_button = QPushButton("Translate Screen")
     copy_button = QPushButton("Copy Result")
     retry_button = QPushButton("Retry")
     close_button = QPushButton("Close Result")
@@ -82,17 +100,18 @@ def launch_gui(
         label.setWordWrap(True)
 
     def refresh_view() -> None:
-        state = presenter.state
-        is_loading = state.status == ClipboardTranslationStatus.LOADING
+        state = active_presenter["value"].state
+        is_loading = state.status == TranslationResultStatus.LOADING
         status_label.setText(state.status_text)
         source_label.setText(state.source_text)
         result_label.setText(state.translated_text)
         provider_label.setText(f"Provider: {state.provider_name}" if state.provider_name else "")
         error_label.setText(state.error_message)
         translate_button.setEnabled(not is_loading)
+        translate_screen_button.setEnabled(not is_loading)
         copy_button.setEnabled(state.can_copy)
         retry_button.setEnabled(state.can_retry and not is_loading)
-        close_button.setEnabled(state.status != ClipboardTranslationStatus.IDLE and not is_loading)
+        close_button.setEnabled(state.status != TranslationResultStatus.IDLE and not is_loading)
 
     def run_in_background(operation: Callable[[], Coroutine[Any, Any, object]]) -> None:
         def run_translation() -> None:
@@ -102,6 +121,7 @@ def launch_gui(
         Thread(target=run_translation, daemon=True).start()
 
     def handle_translate() -> None:
+        active_presenter["value"] = presenter
         presenter.request_clipboard_translation()
         refresh_view()
         run_in_background(
@@ -111,9 +131,33 @@ def launch_gui(
             )
         )
 
-    def handle_retry() -> None:
-        presenter.request_clipboard_translation(source_text=presenter.state.source_text)
+    def handle_screen_translate() -> None:
+        active_presenter["value"] = screen_presenter
+        screen_presenter.request_screen_translation()
         refresh_view()
+        run_in_background(
+            lambda: screen_presenter.translate_region(
+                region=screen_region,
+                capture_service=capture_service,
+                ocr_service=ocr_service,
+                pipeline=pipeline,
+            )
+        )
+
+    def handle_retry() -> None:
+        active = active_presenter["value"]
+        active.request_translation(source_text=active.state.source_text)
+        refresh_view()
+        if active is screen_presenter:
+            run_in_background(
+                lambda: screen_presenter.retry_translation(
+                    capture_service=capture_service,
+                    ocr_service=ocr_service,
+                    pipeline=pipeline,
+                )
+            )
+            return
+
         run_in_background(
             lambda: presenter.retry_translation(
                 clipboard_service=clipboard_service,
@@ -122,18 +166,20 @@ def launch_gui(
         )
 
     def handle_copy() -> None:
-        presenter.copy_result()
+        active_presenter["value"].copy_result()
 
     def handle_close() -> None:
-        presenter.close_result()
+        active_presenter["value"].close_result()
         refresh_view()
 
     ui_signals.refresh_requested.connect(refresh_view)
     translate_button.clicked.connect(handle_translate)
+    translate_screen_button.clicked.connect(handle_screen_translate)
     retry_button.clicked.connect(handle_retry)
     copy_button.clicked.connect(handle_copy)
     close_button.clicked.connect(handle_close)
     layout.addWidget(translate_button)
+    layout.addWidget(translate_screen_button)
     layout.addWidget(source_label)
     layout.addWidget(result_label)
     layout.addWidget(provider_label)
