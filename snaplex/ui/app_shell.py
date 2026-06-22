@@ -2,7 +2,15 @@
 
 from __future__ import annotations
 
-from snaplex.services import QtClipboardService
+import asyncio
+from threading import Thread
+
+from snaplex.services import (
+    ClipboardService,
+    QtClipboardService,
+    create_default_translation_pipeline,
+)
+from snaplex.services.translation_service import TranslationPipeline
 from snaplex.ui.clipboard_presenter import ClipboardTranslationPresenter
 
 
@@ -15,9 +23,13 @@ def is_pyside_available() -> bool:
     return True
 
 
-def launch_gui(presenter: ClipboardTranslationPresenter | None = None) -> int:
+def launch_gui(
+    presenter: ClipboardTranslationPresenter | None = None,
+    clipboard_service: ClipboardService | None = None,
+    pipeline: TranslationPipeline | None = None,
+) -> int:
     try:
-        from PySide6.QtCore import Qt
+        from PySide6.QtCore import Qt, QTimer
         from PySide6.QtWidgets import (
             QApplication,
             QLabel,
@@ -35,7 +47,8 @@ def launch_gui(presenter: ClipboardTranslationPresenter | None = None) -> int:
         return 0
 
     app = QApplication.instance() or QApplication([])
-    clipboard_service = QtClipboardService.from_application()
+    clipboard_service = clipboard_service or QtClipboardService.from_application()
+    pipeline = pipeline or create_default_translation_pipeline()
     presenter = presenter or ClipboardTranslationPresenter(
         on_copy_result=clipboard_service.set_text
     )
@@ -67,6 +80,17 @@ def launch_gui(presenter: ClipboardTranslationPresenter | None = None) -> int:
     def handle_translate() -> None:
         presenter.request_clipboard_translation()
         refresh_view()
+
+        def run_translation() -> None:
+            asyncio.run(
+                presenter.translate_clipboard(
+                    clipboard_service=clipboard_service,
+                    pipeline=pipeline,
+                )
+            )
+            QTimer.singleShot(0, refresh_view)
+
+        Thread(target=run_translation, daemon=True).start()
 
     def handle_copy() -> None:
         presenter.copy_result()

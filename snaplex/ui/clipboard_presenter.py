@@ -5,6 +5,10 @@ from __future__ import annotations
 from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
+from typing import Protocol
+
+from snaplex.providers import TranslationResponse
+from snaplex.services import ClipboardService
 
 
 class ClipboardTranslationStatus(str, Enum):
@@ -25,6 +29,12 @@ class ClipboardTranslationState:
     error_message: str = ""
     can_copy: bool = False
     can_retry: bool = False
+
+
+class TranslationPipelineLike(Protocol):
+    async def translate_text_async(self, text: str) -> TranslationResponse:
+        """Translate text using the P1 pipeline async boundary."""
+        ...
 
 
 class ClipboardTranslationPresenter:
@@ -100,3 +110,21 @@ class ClipboardTranslationPresenter:
 
     def close_result(self) -> ClipboardTranslationState:
         return self.reset()
+
+    async def translate_clipboard(
+        self,
+        *,
+        clipboard_service: ClipboardService,
+        pipeline: TranslationPipelineLike,
+    ) -> ClipboardTranslationState:
+        source_text = clipboard_service.get_text()
+        if not source_text.strip():
+            return self.show_empty_clipboard()
+
+        self.request_clipboard_translation()
+        response = await pipeline.translate_text_async(source_text)
+        return self.show_success(
+            source_text=source_text,
+            translated_text=response.translated_text,
+            provider_name=response.provider_name,
+        )
