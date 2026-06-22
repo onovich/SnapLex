@@ -40,3 +40,41 @@ The `base` variant is the deterministic release-smoke path. It does not package
 PaddleOCR model caches and does not require real provider credentials. Generated
 output stays under `build\` and `dist\`. Do not commit those folders, packaged
 executables, local smoke data, provider secrets, OCR model caches, or screenshots.
+
+## Smoke
+
+Run packaged smoke with an explicit local app data directory:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexPackageSmoke"
+.\dist\SnapLex\SnapLex.exe --version
+.\dist\SnapLex\SnapLex.exe --no-gui
+.\dist\SnapLex\SnapLex.exe --smoke-package
+```
+
+`--smoke-package` runs inside the packaged executable and checks settings
+persistence, fake-provider clipboard translation, fake capture/OCR screen
+translation, history record/list/delete/clear, and local data path containment.
+
+## Troubleshooting
+
+- `No module named PyInstaller`: run `python -m pip install -e ".[package]"`.
+- PySide6 import or Qt plugin failures: rebuild after installing
+  `python -m pip install -e ".[gui,package]"`.
+- Missing `mss` or PaddleOCR in optional variants: install `.[capture]`,
+  `.[ocr]`, or both before using `--variant capture`, `--variant ocr`, or
+  `--variant full`.
+- Provider credential errors: use fake provider smoke first. Real provider
+  smoke depends on local environment variables and must not put key values into
+  config files, docs, logs, or package resources.
+- History/config smoke writes to `SNAPLEX_APP_DATA_DIR`. Set it to a temporary
+  directory before running package smoke.
+
+## Cleanup
+
+```powershell
+Remove-Item -Recurse -Force build,dist
+Remove-Item -Recurse -Force D:\Temp\SnapLexPackageSmoke
+```
+
+Only delete directories you explicitly created for local smoke.

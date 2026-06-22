@@ -79,12 +79,13 @@
                                  },
                        "package":  {
                                        "commands":  [
-
+                                                        "python scripts/package_windows.py --variant base"
                                                     ]
                                    },
                        "releaseDryRun":  {
                                              "commands":  [
-
+                                                              "python scripts/package_windows.py --variant base",
+                                                              "powershell -NoProfile -Command \"$env:SNAPLEX_APP_DATA_DIR='D:\\ToolProjects\\SnapLex\\snaplex-smoke-data\\release-dry-run'; .\\dist\\SnapLex\\SnapLex.exe --version; .\\dist\\SnapLex\\SnapLex.exe --no-gui; .\\dist\\SnapLex\\SnapLex.exe --smoke-package\""
                                                           ]
                                          }
                    },

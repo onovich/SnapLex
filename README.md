@@ -32,6 +32,8 @@ The current project source of truth lives in:
 - `docs/p5_final_validation_report.md`
 - `docs/p5_to_p6_handoff.md`
 - `docs/p6_packaging_release_goal_guide.md`
+- `docs/p6_packaging_smoke_evidence.md`
+- `docs/p6_release_checklist.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -57,15 +59,16 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P5. The app now has manual clipboard and screen
+SnapLex has accepted P0 through P5 and has P6 packaging work in progress. The app now has manual clipboard and screen
 translation actions, capture/OCR service boundaries, optional lazy real
 capture/OCR adapters, real provider adapters for LibreTranslate/OpenAI/DeepL,
 mocked HTTP tests, fake offline defaults, persisted settings, optional recent
-translation history, and shared result states.
+translation history, shared result states, a PyInstaller spec, and packaged
+release smoke commands.
 
-The next planned implementation phase is P6 packaging and release readiness.
-Start from `docs/p6_packaging_release_goal_guide.md` and
-`docs/p5_to_p6_handoff.md`.
+The current implementation phase is P6 packaging and release readiness. Start
+from `docs/p6_packaging_release_goal_guide.md`,
+`docs/p6_packaging_smoke_evidence.md`, and `docs/p6_release_checklist.md`.
 
 ## Setup
 
@@ -88,6 +91,12 @@ those backends:
 ```powershell
 python -m pip install -e ".[capture]"
 python -m pip install -e ".[ocr]"
+```
+
+Install the optional packaging toolchain when building a local Windows package:
+
+```powershell
+python -m pip install -e ".[gui,package]"
 ```
 
 ## Run
@@ -149,6 +158,45 @@ The configured validation sequence is:
 - `python -m mypy snaplex`
 - `python -m compileall snaplex`
 - `python -m pytest`
+
+## Packaging
+
+Build the deterministic Windows smoke package:
+
+```powershell
+python scripts\package_windows.py --variant base
+```
+
+Preview the PyInstaller command without building:
+
+```powershell
+python scripts\package_windows.py --dry-run --variant base
+```
+
+Smoke the packaged executable with fake provider defaults and a local test data
+directory:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexPackageSmoke"
+.\dist\SnapLex\SnapLex.exe --version
+.\dist\SnapLex\SnapLex.exe --no-gui
+.\dist\SnapLex\SnapLex.exe --smoke-package
+```
+
+The default `base` package includes the GUI runtime and deterministic fake
+capture/OCR smoke path. Optional variants can include `mss` and/or PaddleOCR
+modules when those dependencies are installed:
+
+```powershell
+python scripts\package_windows.py --variant capture
+python scripts\package_windows.py --variant ocr
+python scripts\package_windows.py --variant full
+```
+
+Generated `build\`, `dist\`, local smoke data, OCR model caches, screenshots,
+`.env`, provider secrets, and packaged binaries must remain uncommitted. See
+`packaging\README.md`, `docs\p6_packaging_smoke_evidence.md`, and
+`docs\p6_release_checklist.md`.
 
 ## Package Layout
 
@@ -263,7 +311,7 @@ and clear entries. See `docs/p5_privacy_and_storage.md`.
 ## Current Boundaries
 
 The current implementation intentionally does not include global hotkeys,
-Windows packaging, browser extension, AI summary, cloud sync, accounts, or
-keychain integration. Real capture/OCR adapters and real translation providers
-are present but optional; fake mode remains the deterministic default for
-automated tests. Later phases are staged in `docs/phase_plan.md`.
+browser extension, AI summary, cloud sync, accounts, or keychain integration.
+Real capture/OCR adapters and real translation providers are present but
+optional; fake mode remains the deterministic default for automated tests and
+packaged release smoke. Later phases are staged in `docs/phase_plan.md`.

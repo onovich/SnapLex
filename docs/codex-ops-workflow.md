@@ -49,6 +49,8 @@ lint, format, typecheck, build, test, structureCheck, docsCheck
 - Test: `python -m pytest`
 - Structure check: verify `snaplex/app.py`, `snaplex/services`, `snaplex/providers`, `snaplex/storage`, and `tests` exist.
 - Docs check: verify README contains setup, run, development checks, and package layout sections.
+- Package: `python scripts/package_windows.py --variant base`
+- Release dry-run: build the base package, then run packaged version/no-GUI/workflow smoke with `SNAPLEX_APP_DATA_DIR` set to `D:\ToolProjects\SnapLex\snaplex-smoke-data\release-dry-run`.
 
 ## Dev Server
 

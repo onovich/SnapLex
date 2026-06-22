@@ -7,7 +7,7 @@ Latest P3 smoke evidence is recorded in `docs/p3_windows_smoke_evidence.md`.
 P4 provider smoke planning is recorded in `docs/p4_provider_hardening_goal_guide.md`.
 P5 settings/history behavior is recorded in `docs/p5_final_validation_report.md`
 and `docs/p5_privacy_and_storage.md`.
-P6 packaging smoke planning is recorded in `docs/p6_packaging_release_goal_guide.md`.
+P6 packaging smoke evidence is recorded in `docs/p6_packaging_smoke_evidence.md`.
 
 ## Automated Precheck
 
@@ -193,16 +193,46 @@ Expected result:
 
 ## P6 Packaging Smoke
 
-After P6 is implemented, run the documented packaging command and smoke the
-generated artifact with fake provider defaults and a test app data directory.
+Install packaging dependencies:
+
+```powershell
+python -m pip install -e ".[gui,package]"
+```
+
+Build the deterministic base package:
+
+```powershell
+python scripts\package_windows.py --variant base
+```
+
+Run packaged bootstrap and workflow smoke with a local test app data directory:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexPackageSmoke"
+.\dist\SnapLex\SnapLex.exe --version
+.\dist\SnapLex\SnapLex.exe --no-gui
+.\dist\SnapLex\SnapLex.exe --smoke-package
+```
+
+Optional capture/OCR variants are explicit:
+
+```powershell
+python scripts\package_windows.py --variant capture
+python scripts\package_windows.py --variant ocr
+python scripts\package_windows.py --variant full
+```
 
 Expected result:
 
-- The package builds or records a narrow, reproducible blocker.
+- The package builds under `dist\SnapLex`.
+- Packaged version/no-GUI smoke exits with code 0.
+- Packaged workflow smoke reports fake-provider settings, clipboard
+  translation, fake screen capture/OCR translation, and history clear PASS.
 - Generated `build/`, `dist/`, binaries, screenshots, OCR model caches, and
   local config/history files remain uncommitted.
-- Packaged launch, clipboard translation, settings persistence, history clear,
-  and available screen/capture paths are smoked or explicitly documented.
+- Real `mss` and PaddleOCR smoke is manual and variant-dependent. The default
+  base package intentionally avoids bundling OCR model caches or requiring
+  provider credentials, network, model downloads, or screen permissions.
 
 ## Deferred To Later Phases
 
