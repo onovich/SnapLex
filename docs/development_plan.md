@@ -154,6 +154,28 @@ The P6 final report is `docs/p6_final_validation_report.md`; the P7 handoff is
 `docs/p6_to_p7_handoff.md`; the P7 execution guide is
 `docs/p7_expansion_track_goal_guide.md`.
 
+## P7 Expansion Track Completion
+
+The repository now has executor-complete post-MVP expansion planning:
+
+- `docs/p7_expansion_requirements.md` defines MVP freeze notes and expansion
+  principles from the accepted P6 baseline.
+- `docs/p7_multilingual_ux_plan.md` separates UI locale, translation language
+  defaults, OCR hints, provider support messaging, and storage impact.
+- `docs/p7_ai_summary_design.md` defines future `SummaryService` /
+  `SummaryProvider` boundaries, privacy rules, settings needs, history
+  interaction, and no-network test strategy.
+- `docs/p7_browser_extension_bridge.md` defines future browser selection
+  intents, trust boundaries, permission model, handoff options, privacy rules,
+  and rejection criteria.
+- `docs/p7_expansion_roadmap.md` separates accepted, deferred, and rejected
+  post-MVP ideas.
+- `docs/p7_final_validation_report.md` and `docs/p0_p7_final_report.md`
+  provide the P7 and whole-track closure package for planner validation.
+
+P7 introduced no runtime code or prototype. The accepted P6 package/release
+baseline remains stable.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.
@@ -215,8 +237,8 @@ The P6 final report is `docs/p6_final_validation_report.md`; the P7 handoff is
 The concrete phase-by-phase execution plan is maintained in `docs/phase_plan.md`.
 The full P0-P7 delegated execution guide is maintained in `docs/p0_p7_goal_mode_execution_guide.md`.
 The first executable phase guide is maintained in `docs/p0_repository_baseline_goal_guide.md`.
-The next executable phase guide is maintained in
-`docs/p7_expansion_track_goal_guide.md`.
+The P7 closure package is maintained in `docs/p7_final_validation_report.md`
+and `docs/p0_p7_final_report.md`.
 
 Summary:
 

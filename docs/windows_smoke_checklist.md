@@ -8,7 +8,8 @@ P4 provider smoke planning is recorded in `docs/p4_provider_hardening_goal_guide
 P5 settings/history behavior is recorded in `docs/p5_final_validation_report.md`
 and `docs/p5_privacy_and_storage.md`.
 P6 packaging smoke evidence is recorded in `docs/p6_packaging_smoke_evidence.md`.
-P7 expansion planning is recorded in `docs/p7_expansion_track_goal_guide.md`.
+P7 expansion planning is recorded in `docs/p7_expansion_track_goal_guide.md`,
+`docs/p7_final_validation_report.md`, and `docs/p0_p7_final_report.md`.
 
 ## Automated Precheck
 
@@ -252,6 +253,7 @@ C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\Validate.c
 git diff --check
 python -m snaplex --version
 python -m snaplex --no-gui
+python scripts\package_windows.py --dry-run --variant base
 ```
 
 Expected result:
@@ -259,5 +261,7 @@ Expected result:
 - Existing MVP validation remains green.
 - P7 docs clearly separate multilingual UX, AI summary, and browser extension
   bridge work from the released MVP runtime.
+- P7 docs link/index checks cover requirements, multilingual UX, AI summary,
+  browser bridge, roadmap, P7 final validation, and P0-P7 final report.
 - No generated packages, screenshots, local data, provider secrets, or new
   network-dependent validation are committed.

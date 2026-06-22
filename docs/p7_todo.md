@@ -3,7 +3,7 @@
 P7 goal: prepare the post-MVP expansion track without destabilizing the accepted
 P6 release baseline.
 
-Status: ready for executor.
+Status: executor complete, pending planner validation.
 
 Executable guide: `docs/p7_expansion_track_goal_guide.md`
 
@@ -14,10 +14,10 @@ Executable guide: `docs/p7_expansion_track_goal_guide.md`
 - [x] Produce multilingual UX and localization boundary notes.
 - [x] Produce AI summary design as an optional provider-style capability.
 - [x] Produce browser extension bridge design with security/privacy boundaries.
-- [ ] Produce expansion roadmap with accepted, deferred, and rejected ideas.
-- [ ] Produce P7 final validation report.
-- [ ] Produce P0-P7 overall final report.
-- [ ] Verify no MVP regression, generated artifacts, local data, `.env`, or
+- [x] Produce expansion roadmap with accepted, deferred, and rejected ideas.
+- [x] Produce P7 final validation report.
+- [x] Produce P0-P7 overall final report.
+- [x] Verify no MVP regression, generated artifacts, local data, `.env`, or
   provider secrets are committed.
 
 ## Deferred Outside P7

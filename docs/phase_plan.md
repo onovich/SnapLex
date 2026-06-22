@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: executable planning document
+Status: P7 executor-complete planning document
 
 ## 0. Round Estimate Rules
 
@@ -339,16 +339,32 @@ Round split:
 - Round 4: optional narrow prototype.
 - Round 5: roadmap update and validation.
 
+Executor completion artifacts:
+
+- `docs/p7_expansion_requirements.md`
+- `docs/p7_multilingual_ux_plan.md`
+- `docs/p7_ai_summary_design.md`
+- `docs/p7_browser_extension_bridge.md`
+- `docs/p7_expansion_roadmap.md`
+- `docs/p7_final_validation_report.md`
+- `docs/p0_p7_final_report.md`
+
+P7 stayed documentation/design-first. No optional prototype was introduced.
+
 ## 10. Recommended Execution Order
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
 Current accepted phase: P6 - Packaging and Release Readiness.
 
-Recommended next phase: P7 - Expansion Track.
+Current executor-completed phase: P7 - Expansion Track, pending planner
+acceptance.
+
+Recommended next step: validate P7, then close P0-P7 or create a post-MVP goal
+from `docs/p7_expansion_roadmap.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
-The latest completed phase report is `docs/p6_final_validation_report.md`.
-The next handoff is `docs/p6_to_p7_handoff.md`.
-The direct execution guide for the next phase is `docs/p7_expansion_track_goal_guide.md`.
+The latest accepted phase report is `docs/p6_final_validation_report.md`.
+The latest executor-complete phase report is `docs/p7_final_validation_report.md`.
+The whole-track closure report is `docs/p0_p7_final_report.md`.

@@ -37,6 +37,13 @@ The current project source of truth lives in:
 - `docs/p6_packaging_smoke_evidence.md`
 - `docs/p6_release_checklist.md`
 - `docs/p7_expansion_track_goal_guide.md`
+- `docs/p7_expansion_requirements.md`
+- `docs/p7_multilingual_ux_plan.md`
+- `docs/p7_ai_summary_design.md`
+- `docs/p7_browser_extension_bridge.md`
+- `docs/p7_expansion_roadmap.md`
+- `docs/p7_final_validation_report.md`
+- `docs/p0_p7_final_report.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -63,16 +70,16 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P6 and P7 is ready for expansion-track execution. The app now has manual clipboard and screen
-translation actions, capture/OCR service boundaries, optional lazy real
+SnapLex has accepted P0 through P6. P7 expansion-track executor work is
+complete and ready for planner validation. The app now has manual clipboard and
+screen translation actions, capture/OCR service boundaries, optional lazy real
 capture/OCR adapters, real provider adapters for LibreTranslate/OpenAI/DeepL,
 mocked HTTP tests, fake offline defaults, persisted settings, optional recent
-translation history, shared result states, a PyInstaller spec, and packaged
-release smoke commands.
+translation history, shared result states, a PyInstaller spec, packaged release
+smoke commands, and post-MVP expansion plans.
 
-The current implementation phase is P7 expansion track. Start from
-`docs/p7_expansion_track_goal_guide.md`, `docs/p7_todo.md`,
-`docs/p6_final_validation_report.md`, and `docs/p6_to_p7_handoff.md`.
+Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
+`docs/p7_expansion_roadmap.md` for the P7 closure package.
 
 ## Setup
 
@@ -311,6 +318,20 @@ History is disabled by default. When enabled in `Settings`, successful clipboard
 and screen translations store source text, translated text, provider/language
 metadata, flow, timestamp, and entry id. The `History` dialog can copy, delete,
 and clear entries. See `docs/p5_privacy_and_storage.md`.
+
+## P7 Expansion Track
+
+P7 is documentation/design-first and does not add runtime product features. It
+keeps the accepted P6 package baseline stable while defining post-MVP paths for:
+
+- multilingual UX and localization boundaries,
+- optional AI summary as a future `SummaryService` / `SummaryProvider`
+  capability,
+- browser selection bridge design with explicit trust and privacy boundaries,
+- roadmap triage for accepted, deferred, and rejected ideas.
+
+Recommended first post-MVP implementation goal: localization foundation. See
+`docs/p7_expansion_roadmap.md`.
 
 ## Current Boundaries
 
