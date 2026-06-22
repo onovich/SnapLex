@@ -4,10 +4,13 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
+from snaplex.errors import TranslationError
 from snaplex.services import (
     CaptureError,
     CaptureService,
+    OcrError,
     OcrService,
+    OcrUnavailableError,
     ScreenRegion,
     ScreenTranslationService,
 )
@@ -16,6 +19,7 @@ from snaplex.ui.translation_result import (
     TranslationResultPresenter,
     TranslationResultState,
     TranslationResultStatus,
+    friendly_translation_error_message,
 )
 
 ScreenTranslationStatus = TranslationResultStatus
@@ -51,6 +55,12 @@ class ScreenTranslationPresenter(TranslationResultPresenter):
         )
         return self._state
 
+    def show_empty_ocr_result(self) -> ScreenTranslationState:
+        return self.show_empty(
+            status_text="No screen text found",
+            message="No text was detected in the selected region.",
+        )
+
     async def translate_region(
         self,
         *,
@@ -70,6 +80,17 @@ class ScreenTranslationPresenter(TranslationResultPresenter):
             response = await screen_translation_service.translate_region(region)
         except CaptureError:
             return self.show_error("Could not capture the selected screen region. Try again.")
+        except OcrUnavailableError:
+            return self.show_error("OCR is unavailable. Install OCR support or use fake OCR mode.")
+        except OcrError:
+            return self.show_error("OCR failed to read text from the selected region. Try again.")
+        except TranslationError as exc:
+            return self.show_error(friendly_translation_error_message(exc))
+        except Exception:
+            return self.show_error("Screen translation failed unexpectedly. Try again.")
+
+        if not response.source_text.strip():
+            return self.show_empty_ocr_result()
 
         return self.show_success(
             source_text=response.source_text,

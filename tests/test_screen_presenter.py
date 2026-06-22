@@ -1,17 +1,35 @@
 import asyncio
 
+from snaplex.errors import TranslationProviderError
 from snaplex.providers import TranslationResponse
-from snaplex.services import FakeCaptureService, FakeOcrService, OcrResult, ScreenRegion
+from snaplex.services import (
+    FakeCaptureService,
+    FakeOcrScenario,
+    FakeOcrService,
+    OcrResult,
+    OcrUnavailableError,
+    ScreenRegion,
+)
 from snaplex.ui.screen_presenter import ScreenTranslationPresenter, ScreenTranslationStatus
 
 
 class FakePipeline:
-    def __init__(self, response: TranslationResponse) -> None:
+    def __init__(
+        self,
+        response: TranslationResponse | None = None,
+        *,
+        error: Exception | None = None,
+    ) -> None:
         self.response = response
+        self.error = error
         self.requests: list[str] = []
 
     async def translate_text_async(self, text: str) -> TranslationResponse:
         self.requests.append(text)
+        if self.error is not None:
+            raise self.error
+        if self.response is None:
+            raise AssertionError("FakePipeline requires a response or error.")
         return self.response
 
 
@@ -23,6 +41,11 @@ class RecordingOcrService:
     def extract_text(self, image) -> OcrResult:
         self.calls += 1
         return OcrResult(text=self.text)
+
+
+class UnavailableOcrService:
+    def extract_text(self, image) -> OcrResult:
+        raise OcrUnavailableError("missing model")
 
 
 def test_screen_presenter_starts_idle() -> None:
@@ -110,6 +133,30 @@ def test_screen_presenter_can_show_selection_cancelled() -> None:
     assert state.can_retry is True
 
 
+def test_screen_presenter_maps_empty_ocr_result() -> None:
+    region = ScreenRegion(left=10, top=20, width=120, height=80)
+    capture_service = FakeCaptureService()
+    ocr_service = FakeOcrService(scenario=FakeOcrScenario.EMPTY)
+    pipeline = FakePipeline(TranslationResponse("", "fake", "auto", "en"))
+    presenter = ScreenTranslationPresenter()
+
+    state = asyncio.run(
+        presenter.translate_region(
+            region=region,
+            capture_service=capture_service,
+            ocr_service=ocr_service,
+            pipeline=pipeline,
+        )
+    )
+
+    assert pipeline.requests == [""]
+    assert state.status == ScreenTranslationStatus.EMPTY
+    assert state.status_text == "No screen text found"
+    assert state.error_message == "No text was detected in the selected region."
+    assert state.can_copy is False
+    assert state.can_retry is True
+
+
 def test_screen_presenter_maps_capture_failure_without_ocr_or_pipeline() -> None:
     region = ScreenRegion(left=10, top=20, width=120, height=80)
     capture_service = FakeCaptureService()
@@ -134,6 +181,98 @@ def test_screen_presenter_maps_capture_failure_without_ocr_or_pipeline() -> None
     assert state.error_message == "Could not capture the selected screen region. Try again."
     assert state.can_copy is False
     assert state.can_retry is True
+
+
+def test_screen_presenter_maps_ocr_failure_without_pipeline() -> None:
+    region = ScreenRegion(left=10, top=20, width=120, height=80)
+    capture_service = FakeCaptureService()
+    ocr_service = FakeOcrService(scenario=FakeOcrScenario.FAILURE)
+    pipeline = FakePipeline(TranslationResponse("unused", "fake", "auto", "en"))
+    presenter = ScreenTranslationPresenter()
+
+    state = asyncio.run(
+        presenter.translate_region(
+            region=region,
+            capture_service=capture_service,
+            ocr_service=ocr_service,
+            pipeline=pipeline,
+        )
+    )
+
+    assert pipeline.requests == []
+    assert state.status == ScreenTranslationStatus.ERROR
+    assert state.error_message == "OCR failed to read text from the selected region. Try again."
+    assert presenter.copy_result() is False
+
+
+def test_screen_presenter_maps_unavailable_ocr_without_pipeline() -> None:
+    region = ScreenRegion(left=10, top=20, width=120, height=80)
+    capture_service = FakeCaptureService()
+    pipeline = FakePipeline(TranslationResponse("unused", "fake", "auto", "en"))
+    presenter = ScreenTranslationPresenter()
+
+    state = asyncio.run(
+        presenter.translate_region(
+            region=region,
+            capture_service=capture_service,
+            ocr_service=UnavailableOcrService(),
+            pipeline=pipeline,
+        )
+    )
+
+    assert pipeline.requests == []
+    assert state.status == ScreenTranslationStatus.ERROR
+    assert state.error_message == "OCR is unavailable. Install OCR support or use fake OCR mode."
+
+
+def test_screen_presenter_maps_translation_failure() -> None:
+    region = ScreenRegion(left=10, top=20, width=120, height=80)
+    capture_service = FakeCaptureService()
+    ocr_service = FakeOcrService(text="screen text")
+    pipeline = FakePipeline(error=TranslationProviderError(provider_name="fake"))
+    presenter = ScreenTranslationPresenter()
+
+    state = asyncio.run(
+        presenter.translate_region(
+            region=region,
+            capture_service=capture_service,
+            ocr_service=ocr_service,
+            pipeline=pipeline,
+        )
+    )
+
+    assert pipeline.requests == ["screen text"]
+    assert state.status == ScreenTranslationStatus.ERROR
+    assert state.error_message == "Translation provider failed. Try again."
+    assert presenter.copy_result() is False
+
+
+def test_screen_presenter_retries_last_region() -> None:
+    region = ScreenRegion(left=10, top=20, width=120, height=80)
+    capture_service = FakeCaptureService()
+    ocr_service = FakeOcrService(text="screen text")
+    pipeline = FakePipeline(TranslationResponse("translated screen", "fake", "auto", "en"))
+    presenter = ScreenTranslationPresenter()
+
+    asyncio.run(
+        presenter.translate_region(
+            region=region,
+            capture_service=capture_service,
+            ocr_service=ocr_service,
+            pipeline=pipeline,
+        )
+    )
+    state = asyncio.run(
+        presenter.retry_translation(
+            capture_service=capture_service,
+            ocr_service=ocr_service,
+            pipeline=pipeline,
+        )
+    )
+
+    assert capture_service.regions == [region, region]
+    assert pipeline.requests == ["screen text", "screen text"]
+    assert state.status == ScreenTranslationStatus.SUCCESS
 
 
 def test_screen_presenter_close_result_resets_state() -> None:
