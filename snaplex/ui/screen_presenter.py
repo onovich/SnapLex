@@ -36,6 +36,15 @@ class ScreenTranslationPresenter(TranslationResultPresenter):
     ) -> ScreenTranslationState:
         return self.request_translation(source_text=source_text)
 
+    def show_selection_cancelled(self) -> ScreenTranslationState:
+        self._state = ScreenTranslationState(
+            status=ScreenTranslationStatus.CANCELLED,
+            status_text="Screen selection cancelled",
+            error_message="Select a region to translate.",
+            can_retry=True,
+        )
+        return self._state
+
     async def translate_region(
         self,
         *,

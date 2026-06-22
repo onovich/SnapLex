@@ -21,6 +21,7 @@ from snaplex.services.translation_service import TranslationPipeline
 from snaplex.ui.clipboard_presenter import (
     ClipboardTranslationPresenter,
 )
+from snaplex.ui.region_selector import FixedRegionSelector, QtRegionSelector, RegionSelector
 from snaplex.ui.screen_presenter import ScreenTranslationPresenter
 from snaplex.ui.translation_result import TranslationResultPresenter, TranslationResultStatus
 
@@ -42,6 +43,7 @@ def launch_gui(
     ocr_service: OcrService | None = None,
     pipeline: TranslationPipeline | None = None,
     screen_region: ScreenRegion | None = None,
+    region_selector: RegionSelector | None = None,
 ) -> int:
     try:
         from PySide6.QtCore import QObject, Qt, Signal
@@ -72,7 +74,9 @@ def launch_gui(
     screen_presenter = screen_presenter or ScreenTranslationPresenter(
         on_copy_result=clipboard_service.set_text
     )
-    screen_region = screen_region or ScreenRegion(left=0, top=0, width=240, height=120)
+    region_selector = region_selector or (
+        FixedRegionSelector(screen_region) if screen_region is not None else QtRegionSelector()
+    )
     active_presenter: dict[str, TranslationResultPresenter] = {"value": presenter}
 
     class UiSignals(QObject):
@@ -135,9 +139,15 @@ def launch_gui(
         active_presenter["value"] = screen_presenter
         screen_presenter.request_screen_translation()
         refresh_view()
+        selected_region = region_selector.select_region()
+        if selected_region is None:
+            screen_presenter.show_selection_cancelled()
+            refresh_view()
+            return
+
         run_in_background(
             lambda: screen_presenter.translate_region(
-                region=screen_region,
+                region=selected_region,
                 capture_service=capture_service,
                 ocr_service=ocr_service,
                 pipeline=pipeline,

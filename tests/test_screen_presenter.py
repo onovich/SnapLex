@@ -98,6 +98,18 @@ def test_screen_presenter_maps_invalid_region_points_without_capture() -> None:
     assert state.error_message == "Select a non-empty screen region."
 
 
+def test_screen_presenter_can_show_selection_cancelled() -> None:
+    presenter = ScreenTranslationPresenter()
+
+    state = presenter.show_selection_cancelled()
+
+    assert state.status == ScreenTranslationStatus.CANCELLED
+    assert state.status_text == "Screen selection cancelled"
+    assert state.error_message == "Select a region to translate."
+    assert state.can_copy is False
+    assert state.can_retry is True
+
+
 def test_screen_presenter_maps_capture_failure_without_ocr_or_pipeline() -> None:
     region = ScreenRegion(left=10, top=20, width=120, height=80)
     capture_service = FakeCaptureService()

@@ -25,6 +25,7 @@ class TranslationResultStatus(str, Enum):
     SUCCESS = "success"
     EMPTY = "empty"
     ERROR = "error"
+    CANCELLED = "cancelled"
 
 
 @dataclass(frozen=True)
