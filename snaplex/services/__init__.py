@@ -14,7 +14,15 @@ from snaplex.services.clipboard_service import (
     InMemoryClipboardService,
     QtClipboardService,
 )
-from snaplex.services.ocr_service import FakeOcrService, OcrError, OcrResult, OcrService
+from snaplex.services.ocr_service import (
+    FakeOcrScenario,
+    FakeOcrService,
+    OcrError,
+    OcrResult,
+    OcrService,
+    OcrUnavailableError,
+    PaddleOcrService,
+)
 from snaplex.services.text import normalize_text
 from snaplex.services.translation_cache import (
     InMemoryTranslationCache,
@@ -34,6 +42,7 @@ __all__ = [
     "ClipboardError",
     "ClipboardService",
     "FakeCaptureService",
+    "FakeOcrScenario",
     "FakeOcrService",
     "InMemoryClipboardService",
     "InMemoryTranslationCache",
@@ -41,6 +50,8 @@ __all__ = [
     "OcrError",
     "OcrResult",
     "OcrService",
+    "OcrUnavailableError",
+    "PaddleOcrService",
     "QtClipboardService",
     "ScreenRegion",
     "TranslationCache",
