@@ -7,8 +7,17 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Protocol
 
+from snaplex.errors import (
+    FallbackExhaustedError,
+    StaleTranslationResultError,
+    TranslationError,
+    TranslationProviderError,
+    TranslationProviderTimeoutError,
+    UnknownTranslationProviderError,
+    UnsupportedLanguageError,
+)
 from snaplex.providers import TranslationResponse
-from snaplex.services import ClipboardService
+from snaplex.services import ClipboardError, ClipboardService
 
 
 class ClipboardTranslationStatus(str, Enum):
@@ -51,10 +60,15 @@ class ClipboardTranslationPresenter:
     def state(self) -> ClipboardTranslationState:
         return self._state
 
-    def request_clipboard_translation(self) -> ClipboardTranslationState:
+    def request_clipboard_translation(
+        self,
+        *,
+        source_text: str = "",
+    ) -> ClipboardTranslationState:
         self._state = ClipboardTranslationState(
             status=ClipboardTranslationStatus.LOADING,
             status_text="Translating clipboard...",
+            source_text=source_text,
         )
         if self._on_translate_requested is not None:
             self._on_translate_requested()
@@ -117,14 +131,76 @@ class ClipboardTranslationPresenter:
         clipboard_service: ClipboardService,
         pipeline: TranslationPipelineLike,
     ) -> ClipboardTranslationState:
-        source_text = clipboard_service.get_text()
+        try:
+            source_text = clipboard_service.get_text()
+        except ClipboardError as exc:
+            return self.show_error(_friendly_error_message(exc))
+
         if not source_text.strip():
             return self.show_empty_clipboard()
 
-        self.request_clipboard_translation()
-        response = await pipeline.translate_text_async(source_text)
+        return await self.translate_source_text(source_text=source_text, pipeline=pipeline)
+
+    async def translate_source_text(
+        self,
+        *,
+        source_text: str,
+        pipeline: TranslationPipelineLike,
+    ) -> ClipboardTranslationState:
+        self.request_clipboard_translation(source_text=source_text)
+        try:
+            response = await pipeline.translate_text_async(source_text)
+        except TranslationError as exc:
+            return self.show_error(_friendly_error_message(exc), source_text=source_text)
+
         return self.show_success(
             source_text=source_text,
             translated_text=response.translated_text,
             provider_name=response.provider_name,
         )
+
+    async def retry_translation(
+        self,
+        *,
+        clipboard_service: ClipboardService,
+        pipeline: TranslationPipelineLike,
+    ) -> ClipboardTranslationState:
+        source_text = self._state.source_text
+        if source_text.strip():
+            return await self.translate_source_text(
+                source_text=source_text,
+                pipeline=pipeline,
+            )
+
+        return await self.translate_clipboard(
+            clipboard_service=clipboard_service,
+            pipeline=pipeline,
+        )
+
+
+def _friendly_error_message(error: Exception) -> str:
+    if isinstance(error, ClipboardError):
+        return "Could not read the clipboard. Copy the text again."
+
+    if isinstance(error, FallbackExhaustedError):
+        return "All configured translation providers failed. Try again."
+
+    if isinstance(error, TranslationProviderTimeoutError):
+        return "Translation timed out. Try again."
+
+    if isinstance(error, UnsupportedLanguageError):
+        return f"Language pair {error.source_lang} -> {error.target_lang} is not supported."
+
+    if isinstance(error, StaleTranslationResultError):
+        return "Translation result was stale. Try again."
+
+    if isinstance(error, UnknownTranslationProviderError):
+        return "Configured translation provider is not available."
+
+    if isinstance(error, TranslationProviderError):
+        return "Translation provider failed. Try again."
+
+    if isinstance(error, TranslationError):
+        return "Translation failed. Try again."
+
+    return "Translation failed unexpectedly. Try again."

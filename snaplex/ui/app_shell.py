@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import asyncio
+from collections.abc import Callable, Coroutine
 from threading import Thread
+from typing import Any
 
 from snaplex.services import (
     ClipboardService,
@@ -66,6 +68,7 @@ def launch_gui(
     error_label = QLabel("")
     translate_button = QPushButton("Translate Clipboard")
     copy_button = QPushButton("Copy Result")
+    retry_button = QPushButton("Retry")
     close_button = QPushButton("Close Result")
 
     def refresh_view() -> None:
@@ -75,22 +78,35 @@ def launch_gui(
         result_label.setText(state.translated_text)
         error_label.setText(state.error_message)
         copy_button.setEnabled(state.can_copy)
+        retry_button.setEnabled(state.can_retry)
         close_button.setEnabled(state.status.value != "idle")
+
+    def run_in_background(operation: Callable[[], Coroutine[Any, Any, object]]) -> None:
+        def run_translation() -> None:
+            asyncio.run(operation())
+            QTimer.singleShot(0, refresh_view)
+
+        Thread(target=run_translation, daemon=True).start()
 
     def handle_translate() -> None:
         presenter.request_clipboard_translation()
         refresh_view()
-
-        def run_translation() -> None:
-            asyncio.run(
-                presenter.translate_clipboard(
-                    clipboard_service=clipboard_service,
-                    pipeline=pipeline,
-                )
+        run_in_background(
+            lambda: presenter.translate_clipboard(
+                clipboard_service=clipboard_service,
+                pipeline=pipeline,
             )
-            QTimer.singleShot(0, refresh_view)
+        )
 
-        Thread(target=run_translation, daemon=True).start()
+    def handle_retry() -> None:
+        presenter.request_clipboard_translation(source_text=presenter.state.source_text)
+        refresh_view()
+        run_in_background(
+            lambda: presenter.retry_translation(
+                clipboard_service=clipboard_service,
+                pipeline=pipeline,
+            )
+        )
 
     def handle_copy() -> None:
         presenter.copy_result()
@@ -100,6 +116,7 @@ def launch_gui(
         refresh_view()
 
     translate_button.clicked.connect(handle_translate)
+    retry_button.clicked.connect(handle_retry)
     copy_button.clicked.connect(handle_copy)
     close_button.clicked.connect(handle_close)
     layout.addWidget(translate_button)
@@ -107,6 +124,7 @@ def launch_gui(
     layout.addWidget(result_label)
     layout.addWidget(error_label)
     layout.addWidget(copy_button)
+    layout.addWidget(retry_button)
     layout.addWidget(close_button)
     layout.addWidget(status_label)
     refresh_view()
