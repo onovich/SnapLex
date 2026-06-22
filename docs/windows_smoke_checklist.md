@@ -7,6 +7,7 @@ Latest P3 smoke evidence is recorded in `docs/p3_windows_smoke_evidence.md`.
 P4 provider smoke planning is recorded in `docs/p4_provider_hardening_goal_guide.md`.
 P5 settings/history behavior is recorded in `docs/p5_final_validation_report.md`
 and `docs/p5_privacy_and_storage.md`.
+P6 packaging smoke planning is recorded in `docs/p6_packaging_release_goal_guide.md`.
 
 ## Automated Precheck
 
@@ -190,8 +191,20 @@ Expected result:
 - Disabling history prevents future successful translations from being stored.
 - No actual provider API key values are persisted.
 
+## P6 Packaging Smoke
+
+After P6 is implemented, run the documented packaging command and smoke the
+generated artifact with fake provider defaults and a test app data directory.
+
+Expected result:
+
+- The package builds or records a narrow, reproducible blocker.
+- Generated `build/`, `dist/`, binaries, screenshots, OCR model caches, and
+  local config/history files remain uncommitted.
+- Packaged launch, clipboard translation, settings persistence, history clear,
+  and available screen/capture paths are smoked or explicitly documented.
+
 ## Deferred To Later Phases
 
 - Global clipboard hotkey handling.
-- Windows packaging.
 - Browser extension and AI summary expansion.

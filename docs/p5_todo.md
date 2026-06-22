@@ -2,7 +2,7 @@
 
 P5 goal: persist local settings and optional recent translation history while preserving the accepted clipboard, screen, and provider flows.
 
-Status: implementation complete, ready for planner recheck.
+Status: implementation complete, planner-accepted.
 
 Executable guide: `docs/p5_history_persistence_settings_goal_guide.md`
 

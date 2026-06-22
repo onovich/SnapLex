@@ -31,6 +31,7 @@ The current project source of truth lives in:
 - `docs/p5_privacy_and_storage.md`
 - `docs/p5_final_validation_report.md`
 - `docs/p5_to_p6_handoff.md`
+- `docs/p6_packaging_release_goal_guide.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -44,6 +45,7 @@ The current project source of truth lives in:
 - `docs/p0_final_validation_report.md`
 - `docs/p4_todo.md`
 - `docs/p5_todo.md`
+- `docs/p6_todo.md`
 
 ## Planned Stack
 
@@ -55,15 +57,15 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P4 and has P5 implemented for planner
-acceptance. The app now has manual clipboard and screen translation actions,
-capture/OCR service boundaries, optional lazy real capture/OCR adapters, real
-provider adapters for LibreTranslate/OpenAI/DeepL, mocked HTTP tests, fake
-offline defaults, persisted settings, optional recent translation history, and
-shared result states.
+SnapLex has accepted P0 through P5. The app now has manual clipboard and screen
+translation actions, capture/OCR service boundaries, optional lazy real
+capture/OCR adapters, real provider adapters for LibreTranslate/OpenAI/DeepL,
+mocked HTTP tests, fake offline defaults, persisted settings, optional recent
+translation history, and shared result states.
 
-After P5 acceptance, the next planned implementation phase is P6 packaging and
-release readiness.
+The next planned implementation phase is P6 packaging and release readiness.
+Start from `docs/p6_packaging_release_goal_guide.md` and
+`docs/p5_to_p6_handoff.md`.
 
 ## Setup
 

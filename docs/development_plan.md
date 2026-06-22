@@ -129,7 +129,8 @@ and ready for planner acceptance:
 - `docs/p5_privacy_and_storage.md` documents local data and privacy behavior.
 
 The P5 final report is `docs/p5_final_validation_report.md`; the P6 handoff is
-`docs/p5_to_p6_handoff.md`.
+`docs/p5_to_p6_handoff.md`; the P6 execution guide is
+`docs/p6_packaging_release_goal_guide.md`.
 
 ## MVP Goals
 
@@ -192,7 +193,8 @@ The P5 final report is `docs/p5_final_validation_report.md`; the P6 handoff is
 The concrete phase-by-phase execution plan is maintained in `docs/phase_plan.md`.
 The full P0-P7 delegated execution guide is maintained in `docs/p0_p7_goal_mode_execution_guide.md`.
 The first executable phase guide is maintained in `docs/p0_repository_baseline_goal_guide.md`.
-The next executable phase guide will be prepared for P6 after P5 is accepted.
+The next executable phase guide is maintained in
+`docs/p6_packaging_release_goal_guide.md`.
 
 Summary:
 

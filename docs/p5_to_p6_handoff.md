@@ -1,9 +1,11 @@
 # P5 to P6 Handoff
 
 Date: 2026-06-22
-Status: P5 settings/history implementation complete; awaiting planner acceptance
+Status: P5 settings/history accepted; P6 ready for execution
 
 Recommended next phase: P6 Packaging and Release Readiness
+
+Executable P6 guide: `docs/p6_packaging_release_goal_guide.md`
 
 ## P6 Goal
 

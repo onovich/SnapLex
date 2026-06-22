@@ -2,13 +2,14 @@
 
 Date: 2026-06-22
 Phase: P5 History, Persistence, and Settings UX
-Status: PASS, awaiting planner acceptance
+Status: PASS
 
 ## Rounds Used
 
 - Planned rounds: 6
 - Used rounds: 6
 - Buffer rounds consumed: 0
+- Planner acceptance: PASS after recheck on 2026-06-22.
 
 ## Main Deliverables
 
@@ -127,20 +128,20 @@ library JSON and pathlib.
 - `34e77fb` - translation history storage
 - `387b97e` - lightweight settings UI
 - `9431225` - translation history UI and recording
-- Round 6 final documentation/reporting commit: see final executor report
+- Round 6 final documentation/reporting commit: `d57d37c`
 
 ## Push Result
 
-All P5 implementation commits through `9431225` were pushed to `origin/main`.
-The final report and P5-to-P6 handoff are intended to be pushed with the Round 6
-documentation commit.
+All P5 implementation and documentation commits through Round 6 were pushed to
+`origin/main`; planner recheck confirmed `HEAD` and `origin/main` at
+`d57d37c1292964f8cfd69b8e9423d1fc7ccaf715`.
 
 ## Request For Architect/PM Acceptance
 
-P5 has been validated against `docs/p5_history_persistence_settings_goal_guide.md`
-and is ready for planner/checker recheck.
+P5 was validated against `docs/p5_history_persistence_settings_goal_guide.md`
+and accepted.
 
 ## Recommended Next Phase
 
-After P5 is accepted, proceed to P6 Packaging and Release Readiness using
-`docs/p5_to_p6_handoff.md`.
+Proceed to P6 Packaging and Release Readiness using
+`docs/p5_to_p6_handoff.md` and `docs/p6_packaging_release_goal_guide.md`.
