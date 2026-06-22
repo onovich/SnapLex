@@ -21,6 +21,12 @@ The current project source of truth lives in:
 - `docs/p2_final_validation_report.md`
 - `docs/p2_to_p3_handoff.md`
 - `docs/p3_screen_capture_ocr_goal_guide.md`
+- `docs/p3_final_validation_report.md`
+- `docs/p3_to_p4_handoff.md`
+- `docs/p3_windows_smoke_evidence.md`
+- `docs/p3_capture_notes.md`
+- `docs/p3_ocr_notes.md`
+- `docs/p3_lazy_loading_notes.md`
 - `docs/p2_hotkey_decision.md`
 - `docs/p2_windows_smoke_evidence.md`
 - `docs/p1_todo.md`
@@ -40,13 +46,15 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has an accepted P0 repository baseline, an accepted P1 non-UI
-translation pipeline foundation, and an accepted P2 clipboard translation MVP.
-The clipboard path works with a PySide6 shell, Qt clipboard adapter, P1 pipeline
-call, result view, copy, retry, and user-friendly error states without network
-access or API credentials.
+translation pipeline foundation, an accepted P2 clipboard translation MVP, and a
+completed P3 screen capture/OCR MVP ready for architect/PM validation. The
+screen path includes a manual `Translate Screen` action, region selector,
+capture/OCR service boundaries, fake offline capture/OCR flow, optional lazy
+`mss` and PaddleOCR adapters, shared result view, copy, retry, cancel, and
+user-friendly failure states.
 
-The next planned implementation phase is P3 screen capture and OCR. Start from
-`docs/p3_screen_capture_ocr_goal_guide.md`.
+The next planned implementation phase after P3 acceptance is P4 provider
+hardening and fallbacks. Start from `docs/p3_to_p4_handoff.md`.
 
 ## Setup
 
@@ -61,6 +69,14 @@ Install the optional desktop dependency when you want to launch the PySide6 shel
 
 ```powershell
 python -m pip install -e ".[gui]"
+```
+
+Install optional real capture/OCR dependencies only when you want to exercise
+those backends:
+
+```powershell
+python -m pip install -e ".[capture]"
+python -m pip install -e ".[ocr]"
 ```
 
 ## Run
@@ -83,6 +99,14 @@ Clipboard MVP flow:
 2. Run `python -m snaplex`.
 3. Select `Translate Clipboard`.
 4. Review the source, translated text, provider, or error state.
+5. Use `Copy Result`, `Retry`, or `Close Result`.
+
+Screen MVP flow:
+
+1. Run `python -m snaplex`.
+2. Select `Translate Screen`.
+3. Drag a non-empty screen region in the overlay, or press `Esc` to cancel.
+4. Review the OCR source, translated text, provider, or error state.
 5. Use `Copy Result`, `Retry`, or `Close Result`.
 
 The same entry point is exposed as a console script after editable install:
@@ -170,8 +194,27 @@ P2 adds the first user-facing vertical slice:
 Global Windows hotkey support is deferred for a later phase. P2 accepts the
 manual `Translate Clipboard` button as the stable trigger path.
 
+## Screen Capture And OCR MVP
+
+P3 adds the first screen-translation vertical slice:
+
+- `snaplex/ui/region_selector.py` provides a minimal Qt region selector plus
+  testable selection presenter.
+- `snaplex/services/capture_service.py` contains fake capture and lazy optional
+  `MssCaptureService`.
+- `snaplex/services/ocr_service.py` contains fake OCR scenarios and lazy optional
+  `PaddleOcrService`.
+- `snaplex/services/screen_translation_service.py` orchestrates
+  capture -> OCR -> `TranslationPipeline`.
+- `snaplex/ui/screen_presenter.py` maps screen translation results and failures
+  into the shared result view.
+- Tests cover fake capture/OCR integration, cancel, invalid region, capture
+  failure, OCR unavailable/failure, empty OCR result, translation failure, retry,
+  copy, close, and optional dependency lazy-loading.
+
 ## Current Boundaries
 
-The current implementation intentionally does not include real OCR, screen
-capture, global hotkeys, network translation providers, persistent history, or
-Windows packaging. Those remain staged for later phases in `docs/phase_plan.md`.
+The current implementation intentionally does not include global hotkeys, network
+translation providers, persistent history, or Windows packaging. Real capture/OCR
+adapters are present but optional and lazy; fake mode remains the deterministic
+default for automated tests. Later phases are staged in `docs/phase_plan.md`.

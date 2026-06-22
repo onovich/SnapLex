@@ -60,6 +60,27 @@ The P2 final report is `docs/p2_final_validation_report.md`; the P3 handoff is
 `docs/p2_to_p3_handoff.md`; the P3 execution guide is
 `docs/p3_screen_capture_ocr_goal_guide.md`.
 
+## Implemented P3 Screen Capture And OCR MVP
+
+The repository now has the screen translation vertical slice ready for validation:
+
+- `snaplex/ui/region_selector.py` provides a minimal Qt region selection overlay
+  and a pure selection presenter for tests.
+- `snaplex/services/capture_service.py` provides capture geometry, deterministic
+  fake capture, and lazy optional `MssCaptureService`.
+- `snaplex/services/ocr_service.py` provides deterministic fake OCR scenarios and
+  lazy optional `PaddleOcrService`.
+- `snaplex/services/screen_translation_service.py` orchestrates capture -> OCR ->
+  `TranslationPipeline`.
+- `snaplex/ui/screen_presenter.py` maps success, cancel, invalid region, capture
+  failure, OCR unavailable/failure, empty OCR result, translation failure, retry,
+  copy, and close states into the shared result view.
+- Optional `mss` and `paddleocr` dependencies are not imported during app shell
+  import or no-GUI bootstrap.
+
+The P3 final report is `docs/p3_final_validation_report.md`; the P4 handoff is
+`docs/p3_to_p4_handoff.md`.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.
