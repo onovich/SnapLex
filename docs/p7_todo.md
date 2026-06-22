@@ -13,7 +13,7 @@ Executable guide: `docs/p7_expansion_track_goal_guide.md`
 - [x] Produce expansion requirements and MVP freeze notes.
 - [x] Produce multilingual UX and localization boundary notes.
 - [x] Produce AI summary design as an optional provider-style capability.
-- [ ] Produce browser extension bridge design with security/privacy boundaries.
+- [x] Produce browser extension bridge design with security/privacy boundaries.
 - [ ] Produce expansion roadmap with accepted, deferred, and rejected ideas.
 - [ ] Produce P7 final validation report.
 - [ ] Produce P0-P7 overall final report.
