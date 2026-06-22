@@ -339,12 +339,12 @@ Round split:
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P4 - Provider Hardening and Fallbacks.
+Current completed phase pending planner acceptance: P5 - History, Persistence, and Settings UX.
 
-Recommended next phase: P5 - History, Persistence, and Settings UX.
+Recommended next phase after acceptance: P6 - Packaging and Release Readiness.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
-The latest completed phase report is `docs/p4_final_validation_report.md`.
-The next handoff is `docs/p4_to_p5_handoff.md`.
-The direct execution guide for the next phase is `docs/p5_history_persistence_settings_goal_guide.md`.
+The latest completed phase report is `docs/p5_final_validation_report.md`.
+The next handoff is `docs/p5_to_p6_handoff.md`.
+The direct execution guide for the next phase will be created by the planner after P5 acceptance.

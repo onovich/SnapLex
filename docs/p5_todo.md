@@ -2,21 +2,21 @@
 
 P5 goal: persist local settings and optional recent translation history while preserving the accepted clipboard, screen, and provider flows.
 
-Status: planned, ready for executor.
+Status: implementation complete, ready for planner recheck.
 
 Executable guide: `docs/p5_history_persistence_settings_goal_guide.md`
 
 ## Tasks
 
-- [ ] Add file-backed config storage with defaults, malformed-file fallback, and migration hooks.
-- [ ] Add settings service behavior for provider, language, provider runtime options, UI preferences, and history preferences.
-- [ ] Ensure actual provider API key values are never persisted.
-- [ ] Add history storage for recent translation entries with add/list/delete/clear and retention behavior.
-- [ ] Add privacy-first history controls, including enabled/disabled state and clear all.
-- [ ] Integrate lightweight settings controls into the PySide6 shell.
-- [ ] Integrate lightweight history controls into the PySide6 shell.
-- [ ] Document local data paths, stored fields, history clearing, and secret handling.
-- [ ] Create P5 final validation report and P5-to-P6 handoff.
+- [x] Add file-backed config storage with defaults, malformed-file fallback, and migration hooks.
+- [x] Add settings service behavior for provider, language, provider runtime options, UI preferences, and history preferences.
+- [x] Ensure actual provider API key values are never persisted.
+- [x] Add history storage for recent translation entries with add/list/delete/clear and retention behavior.
+- [x] Add privacy-first history controls, including enabled/disabled state and clear all.
+- [x] Integrate lightweight settings controls into the PySide6 shell.
+- [x] Integrate lightweight history controls into the PySide6 shell.
+- [x] Document local data paths, stored fields, history clearing, and secret handling.
+- [x] Create P5 final validation report and P5-to-P6 handoff.
 
 ## Deferred Until Later Phases
 

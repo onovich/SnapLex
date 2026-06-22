@@ -108,6 +108,29 @@ The P4 final report is `docs/p4_final_validation_report.md`; the P5 handoff is
 `docs/p4_to_p5_handoff.md`; the P5 execution guide is
 `docs/p5_history_persistence_settings_goal_guide.md`.
 
+## Implemented P5 History, Persistence, And Settings UX
+
+The repository now has local settings and optional translation history complete
+and ready for planner acceptance:
+
+- `snaplex/storage/config.py` includes `JsonFileConfigStore`, config
+  serialization, defaults, malformed-file fallback, and migration hooks.
+- `snaplex/storage/paths.py` resolves `%APPDATA%\SnapLex`,
+  `SNAPLEX_APP_DATA_DIR`, and a home-directory fallback.
+- `snaplex/services/settings_service.py` provides a testable settings boundary.
+- `snaplex/services/translation_service.py` refreshes provider registry from the
+  current config store for future translations.
+- `snaplex/storage/history.py` and `snaplex/services/history_service.py` provide
+  text-only recent translation history with retention, delete, and clear.
+- `snaplex/ui/settings_presenter.py` and `snaplex/ui/history_presenter.py`
+  provide testable UI presentation boundaries.
+- `snaplex/ui/app_shell.py` exposes compact settings and history dialogs.
+- Clipboard and screen successful translations can record history when enabled.
+- `docs/p5_privacy_and_storage.md` documents local data and privacy behavior.
+
+The P5 final report is `docs/p5_final_validation_report.md`; the P6 handoff is
+`docs/p5_to_p6_handoff.md`.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.
@@ -169,8 +192,7 @@ The P4 final report is `docs/p4_final_validation_report.md`; the P5 handoff is
 The concrete phase-by-phase execution plan is maintained in `docs/phase_plan.md`.
 The full P0-P7 delegated execution guide is maintained in `docs/p0_p7_goal_mode_execution_guide.md`.
 The first executable phase guide is maintained in `docs/p0_repository_baseline_goal_guide.md`.
-The next executable phase guide is maintained in
-`docs/p5_history_persistence_settings_goal_guide.md`.
+The next executable phase guide will be prepared for P6 after P5 is accepted.
 
 Summary:
 

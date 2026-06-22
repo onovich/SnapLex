@@ -5,7 +5,8 @@ Use this checklist after automated validation passes.
 Latest P2 smoke evidence is recorded in `docs/p2_windows_smoke_evidence.md`.
 Latest P3 smoke evidence is recorded in `docs/p3_windows_smoke_evidence.md`.
 P4 provider smoke planning is recorded in `docs/p4_provider_hardening_goal_guide.md`.
-P5 settings/history smoke planning is recorded in `docs/p5_history_persistence_settings_goal_guide.md`.
+P5 settings/history behavior is recorded in `docs/p5_final_validation_report.md`
+and `docs/p5_privacy_and_storage.md`.
 
 ## Automated Precheck
 
@@ -156,9 +157,30 @@ Expected result:
 
 ## P5 Settings And History Smoke
 
-After P5 is implemented, settings/history smoke should use a local test data
-directory or clearly documented app data path. Automated tests must use temp
-storage and must not write to real user data directories.
+Use a local test data directory when exercising settings/history manually:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexSmoke"
+python -m snaplex
+```
+
+Settings path:
+
+1. Select `Settings`.
+2. Change source/target language or provider order.
+3. Toggle `History` and set `History Max`.
+4. Save, close the app, relaunch, and reopen `Settings`.
+
+History path:
+
+1. Enable history in `Settings`.
+2. Translate clipboard text.
+3. Select `History`.
+4. Confirm the recent translation is listed.
+5. Select the entry and use `Copy`.
+6. Paste into a scratch editor and confirm the copied text matches the result.
+7. Delete the entry.
+8. Translate another item, reopen `History`, and use `Clear`.
 
 Expected result:
 

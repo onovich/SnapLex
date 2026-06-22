@@ -28,6 +28,9 @@ The current project source of truth lives in:
 - `docs/p4_final_validation_report.md`
 - `docs/p4_to_p5_handoff.md`
 - `docs/p5_history_persistence_settings_goal_guide.md`
+- `docs/p5_privacy_and_storage.md`
+- `docs/p5_final_validation_report.md`
+- `docs/p5_to_p6_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -52,16 +55,15 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P4: repository baseline, non-UI translation
-pipeline, clipboard translation MVP, screen capture/OCR MVP, and provider
-hardening/fallbacks. The app now has manual clipboard and screen translation
-actions, capture/OCR service boundaries, optional lazy real capture/OCR
-adapters, real provider adapters for LibreTranslate/OpenAI/DeepL, mocked HTTP
-tests, fake offline defaults, and shared result states.
+SnapLex has accepted P0 through P4 and has P5 implemented for planner
+acceptance. The app now has manual clipboard and screen translation actions,
+capture/OCR service boundaries, optional lazy real capture/OCR adapters, real
+provider adapters for LibreTranslate/OpenAI/DeepL, mocked HTTP tests, fake
+offline defaults, persisted settings, optional recent translation history, and
+shared result states.
 
-The next planned implementation phase is P5 history, persistence, and settings
-UX. Start from `docs/p5_history_persistence_settings_goal_guide.md` and
-`docs/p4_to_p5_handoff.md`.
+After P5 acceptance, the next planned implementation phase is P6 packaging and
+release readiness.
 
 ## Setup
 
@@ -235,10 +237,31 @@ Use `.env.example` and `docs/p4_provider_configuration.md` for provider-specific
 base URLs, API-key env var names, timeout, retry, OpenAI model, and DeepL model
 type settings. Do not commit real API keys or local `.env` files.
 
+## Settings And History
+
+P5 adds local JSON settings and optional recent translation history. By default,
+SnapLex uses `%APPDATA%\SnapLex` on Windows, or a home-directory fallback. For
+tests and local smoke, override the data path:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexSmoke"
+python -m snaplex
+```
+
+The app stores provider selection/order, language defaults, provider endpoints,
+API-key environment variable names, timeout/retry settings, model options,
+history preferences, and UI preferences. It does not store actual provider API
+key values.
+
+History is disabled by default. When enabled in `Settings`, successful clipboard
+and screen translations store source text, translated text, provider/language
+metadata, flow, timestamp, and entry id. The `History` dialog can copy, delete,
+and clear entries. See `docs/p5_privacy_and_storage.md`.
+
 ## Current Boundaries
 
 The current implementation intentionally does not include global hotkeys,
-persistent history, settings UI, or Windows packaging. Real capture/OCR adapters
-and real translation providers are present but optional; fake mode remains the
-deterministic default for automated tests. Later phases are staged in
-`docs/phase_plan.md`.
+Windows packaging, browser extension, AI summary, cloud sync, accounts, or
+keychain integration. Real capture/OCR adapters and real translation providers
+are present but optional; fake mode remains the deterministic default for
+automated tests. Later phases are staged in `docs/phase_plan.md`.
