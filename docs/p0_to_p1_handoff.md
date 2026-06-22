@@ -41,6 +41,8 @@ P1 can start from the existing boundaries:
 - `FakeTranslationProvider` for deterministic tests
 - `AppConfig` and `InMemoryConfigStore` for config defaults
 
+Use `docs/p1_core_pipeline_goal_guide.md` as the executable P1 goal-mode guide.
+
 ## Guardrails
 
 - Keep provider behavior outside UI.

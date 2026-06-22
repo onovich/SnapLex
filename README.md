@@ -14,6 +14,7 @@ The current project source of truth lives in:
 - `docs/phase_plan.md`
 - `docs/p0_p7_goal_mode_execution_guide.md`
 - `docs/p0_repository_baseline_goal_guide.md`
+- `docs/p1_core_pipeline_goal_guide.md`
 - `docs/p0_to_p1_handoff.md`
 - `docs/p1_todo.md`
 - `docs/windows_smoke_checklist.md`
@@ -29,9 +30,10 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has a P0 repository baseline: Python package metadata, a runnable bootstrap,
-service/provider/storage contracts, deterministic fakes, initial unit tests, and
-repeatable local validation.
+SnapLex has an accepted P0 repository baseline: Python package metadata, a runnable
+bootstrap, service/provider/storage contracts, deterministic fakes, initial unit
+tests, and repeatable local validation. The next executable guide is
+`docs/p1_core_pipeline_goal_guide.md`.
 
 ## Setup
 

@@ -2,6 +2,8 @@
 
 P1 goal: build the core non-UI translation pipeline that clipboard and OCR flows will reuse.
 
+Executable guide: `docs/p1_core_pipeline_goal_guide.md`
+
 ## Tasks
 
 1. Expand text normalization for repeated whitespace, empty input, and language-safe line handling.

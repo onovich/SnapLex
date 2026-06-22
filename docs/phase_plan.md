@@ -65,6 +65,8 @@ Round split:
 
 Estimated rounds: 6
 
+Execution guide: `docs/p1_core_pipeline_goal_guide.md`
+
 Goal: implement the non-UI translation pipeline that both clipboard and OCR flows will reuse.
 
 Scope:
@@ -329,7 +331,10 @@ Round split:
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Recommended first next phase: P0 - Repository and Product Baseline.
+Current accepted phase: P0 - Repository and Product Baseline.
+
+Recommended next phase: P1 - Core Pipeline Foundation.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
+The direct execution guide for the next phase is `docs/p1_core_pipeline_goal_guide.md`.
