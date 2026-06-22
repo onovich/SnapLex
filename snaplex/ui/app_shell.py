@@ -15,6 +15,7 @@ from snaplex.services import (
     OcrService,
     QtClipboardService,
     ScreenRegion,
+    SettingsService,
     create_default_translation_pipeline,
 )
 from snaplex.services.translation_service import TranslationPipeline
@@ -24,6 +25,7 @@ from snaplex.ui.clipboard_presenter import (
 )
 from snaplex.ui.region_selector import FixedRegionSelector, QtRegionSelector, RegionSelector
 from snaplex.ui.screen_presenter import ScreenTranslationPresenter
+from snaplex.ui.settings_presenter import SettingsFormState, SettingsPresenter
 from snaplex.ui.translation_result import TranslationResultPresenter, TranslationResultStatus
 
 
@@ -45,14 +47,22 @@ def launch_gui(
     pipeline: TranslationPipeline | None = None,
     screen_region: ScreenRegion | None = None,
     region_selector: RegionSelector | None = None,
+    settings_service: SettingsService | None = None,
 ) -> int:
     try:
         from PySide6.QtCore import QObject, Qt, Signal
         from PySide6.QtWidgets import (
             QApplication,
+            QCheckBox,
+            QDialog,
+            QDialogButtonBox,
+            QDoubleSpinBox,
+            QFormLayout,
             QLabel,
+            QLineEdit,
             QMainWindow,
             QPushButton,
+            QSpinBox,
             QVBoxLayout,
             QWidget,
         )
@@ -69,6 +79,8 @@ def launch_gui(
     capture_service = capture_service or FakeCaptureService()
     ocr_service = ocr_service or FakeOcrService()
     config_store = JsonFileConfigStore(default_config=load_app_config_from_environment())
+    settings_service = settings_service or SettingsService(config_store)
+    settings_presenter = SettingsPresenter(settings_service)
     pipeline = pipeline or create_default_translation_pipeline(
         config_store=config_store,
     )
@@ -101,6 +113,7 @@ def launch_gui(
     error_label = QLabel("")
     translate_button = QPushButton("Translate Clipboard")
     translate_screen_button = QPushButton("Translate Screen")
+    settings_button = QPushButton("Settings")
     copy_button = QPushButton("Copy Result")
     retry_button = QPushButton("Retry")
     close_button = QPushButton("Close Result")
@@ -186,14 +199,102 @@ def launch_gui(
         active_presenter["value"].close_result()
         refresh_view()
 
+    def handle_settings() -> None:
+        state = settings_presenter.load_state()
+        dialog = QDialog(window)
+        dialog.setWindowTitle("SnapLex Settings")
+        form = QFormLayout(dialog)
+        source_lang_edit = QLineEdit(state.source_lang)
+        target_lang_edit = QLineEdit(state.target_lang)
+        provider_name_edit = QLineEdit(state.provider_name)
+        provider_order_edit = QLineEdit(state.provider_order)
+        libretranslate_base_url_edit = QLineEdit(state.libretranslate_base_url)
+        libretranslate_api_key_env_var_edit = QLineEdit(state.libretranslate_api_key_env_var)
+        libretranslate_timeout_spin = _double_spin_box(
+            state.libretranslate_timeout_seconds,
+            QDoubleSpinBox,
+        )
+        libretranslate_retry_spin = _int_spin_box(state.libretranslate_retry_count, QSpinBox)
+        openai_base_url_edit = QLineEdit(state.openai_base_url)
+        openai_api_key_env_var_edit = QLineEdit(state.openai_api_key_env_var)
+        openai_timeout_spin = _double_spin_box(state.openai_timeout_seconds, QDoubleSpinBox)
+        openai_retry_spin = _int_spin_box(state.openai_retry_count, QSpinBox)
+        openai_model_edit = QLineEdit(state.openai_model)
+        deepl_base_url_edit = QLineEdit(state.deepl_base_url)
+        deepl_api_key_env_var_edit = QLineEdit(state.deepl_api_key_env_var)
+        deepl_timeout_spin = _double_spin_box(state.deepl_timeout_seconds, QDoubleSpinBox)
+        deepl_retry_spin = _int_spin_box(state.deepl_retry_count, QSpinBox)
+        deepl_model_type_edit = QLineEdit(state.deepl_model_type)
+        history_enabled_checkbox = QCheckBox()
+        history_enabled_checkbox.setChecked(state.history_enabled)
+        history_max_entries_spin = _int_spin_box(state.history_max_entries, QSpinBox)
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Save | QDialogButtonBox.StandardButton.Cancel
+        )
+
+        form.addRow("Source", source_lang_edit)
+        form.addRow("Target", target_lang_edit)
+        form.addRow("Provider", provider_name_edit)
+        form.addRow("Fallback Order", provider_order_edit)
+        form.addRow("Libre URL", libretranslate_base_url_edit)
+        form.addRow("Libre Key Env", libretranslate_api_key_env_var_edit)
+        form.addRow("Libre Timeout", libretranslate_timeout_spin)
+        form.addRow("Libre Retry", libretranslate_retry_spin)
+        form.addRow("OpenAI URL", openai_base_url_edit)
+        form.addRow("OpenAI Key Env", openai_api_key_env_var_edit)
+        form.addRow("OpenAI Timeout", openai_timeout_spin)
+        form.addRow("OpenAI Retry", openai_retry_spin)
+        form.addRow("OpenAI Model", openai_model_edit)
+        form.addRow("DeepL URL", deepl_base_url_edit)
+        form.addRow("DeepL Key Env", deepl_api_key_env_var_edit)
+        form.addRow("DeepL Timeout", deepl_timeout_spin)
+        form.addRow("DeepL Retry", deepl_retry_spin)
+        form.addRow("DeepL Model Type", deepl_model_type_edit)
+        form.addRow("History", history_enabled_checkbox)
+        form.addRow("History Max", history_max_entries_spin)
+        form.addRow(buttons)
+
+        def apply_settings() -> None:
+            settings_presenter.apply_state(
+                SettingsFormState(
+                    source_lang=source_lang_edit.text(),
+                    target_lang=target_lang_edit.text(),
+                    provider_name=provider_name_edit.text(),
+                    provider_order=provider_order_edit.text(),
+                    libretranslate_base_url=libretranslate_base_url_edit.text(),
+                    libretranslate_api_key_env_var=libretranslate_api_key_env_var_edit.text(),
+                    libretranslate_timeout_seconds=libretranslate_timeout_spin.value(),
+                    libretranslate_retry_count=libretranslate_retry_spin.value(),
+                    openai_base_url=openai_base_url_edit.text(),
+                    openai_api_key_env_var=openai_api_key_env_var_edit.text(),
+                    openai_timeout_seconds=openai_timeout_spin.value(),
+                    openai_retry_count=openai_retry_spin.value(),
+                    openai_model=openai_model_edit.text(),
+                    deepl_base_url=deepl_base_url_edit.text(),
+                    deepl_api_key_env_var=deepl_api_key_env_var_edit.text(),
+                    deepl_timeout_seconds=deepl_timeout_spin.value(),
+                    deepl_retry_count=deepl_retry_spin.value(),
+                    deepl_model_type=deepl_model_type_edit.text(),
+                    history_enabled=history_enabled_checkbox.isChecked(),
+                    history_max_entries=history_max_entries_spin.value(),
+                )
+            )
+            dialog.accept()
+
+        buttons.accepted.connect(apply_settings)
+        buttons.rejected.connect(dialog.reject)
+        dialog.exec()
+
     ui_signals.refresh_requested.connect(refresh_view)
     translate_button.clicked.connect(handle_translate)
     translate_screen_button.clicked.connect(handle_screen_translate)
+    settings_button.clicked.connect(handle_settings)
     retry_button.clicked.connect(handle_retry)
     copy_button.clicked.connect(handle_copy)
     close_button.clicked.connect(handle_close)
     layout.addWidget(translate_button)
     layout.addWidget(translate_screen_button)
+    layout.addWidget(settings_button)
     layout.addWidget(source_label)
     layout.addWidget(result_label)
     layout.addWidget(provider_label)
@@ -209,3 +310,18 @@ def launch_gui(
     window.show()
 
     return app.exec()
+
+
+def _double_spin_box(value: float, spin_box_type: type[Any]) -> Any:
+    spin_box = spin_box_type()
+    spin_box.setRange(0.1, 120.0)
+    spin_box.setDecimals(1)
+    spin_box.setValue(value)
+    return spin_box
+
+
+def _int_spin_box(value: int, spin_box_type: type[Any]) -> Any:
+    spin_box = spin_box_type()
+    spin_box.setRange(0, 1000)
+    spin_box.setValue(value)
+    return spin_box
