@@ -44,18 +44,47 @@ def launch_gui(presenter: ClipboardTranslationPresenter | None = None) -> int:
     layout = QVBoxLayout(central)
     layout.addWidget(QLabel("SnapLex"))
     status_label = QLabel(presenter.state.status_text)
+    source_label = QLabel("")
+    result_label = QLabel("")
+    error_label = QLabel("")
     translate_button = QPushButton("Translate Clipboard")
+    copy_button = QPushButton("Copy Result")
+    close_button = QPushButton("Close Result")
+
+    def refresh_view() -> None:
+        state = presenter.state
+        status_label.setText(state.status_text)
+        source_label.setText(state.source_text)
+        result_label.setText(state.translated_text)
+        error_label.setText(state.error_message)
+        copy_button.setEnabled(state.can_copy)
+        close_button.setEnabled(state.status.value != "idle")
 
     def handle_translate() -> None:
         presenter.request_clipboard_translation()
-        status_label.setText(presenter.state.status_text)
+        refresh_view()
+
+    def handle_copy() -> None:
+        presenter.copy_result()
+
+    def handle_close() -> None:
+        presenter.close_result()
+        refresh_view()
 
     translate_button.clicked.connect(handle_translate)
+    copy_button.clicked.connect(handle_copy)
+    close_button.clicked.connect(handle_close)
     layout.addWidget(translate_button)
+    layout.addWidget(source_label)
+    layout.addWidget(result_label)
+    layout.addWidget(error_label)
+    layout.addWidget(copy_button)
+    layout.addWidget(close_button)
     layout.addWidget(status_label)
+    refresh_view()
 
     window.setCentralWidget(central)
-    window.resize(320, 160)
+    window.resize(360, 240)
     window.show()
 
     return app.exec()
