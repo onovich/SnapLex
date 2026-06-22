@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from snaplex.ui.clipboard_presenter import ClipboardTranslationPresenter
+
 
 def is_pyside_available() -> bool:
     try:
@@ -12,10 +14,17 @@ def is_pyside_available() -> bool:
     return True
 
 
-def launch_gui() -> int:
+def launch_gui(presenter: ClipboardTranslationPresenter | None = None) -> int:
     try:
         from PySide6.QtCore import Qt
-        from PySide6.QtWidgets import QApplication, QLabel, QMainWindow, QVBoxLayout, QWidget
+        from PySide6.QtWidgets import (
+            QApplication,
+            QLabel,
+            QMainWindow,
+            QPushButton,
+            QVBoxLayout,
+            QWidget,
+        )
     except ModuleNotFoundError:
         print(
             "PySide6 is not installed. Run `python -m pip install -e .[gui]` "
@@ -25,6 +34,7 @@ def launch_gui() -> int:
         return 0
 
     app = QApplication.instance() or QApplication([])
+    presenter = presenter or ClipboardTranslationPresenter()
 
     window = QMainWindow()
     window.setWindowTitle("SnapLex")
@@ -33,7 +43,16 @@ def launch_gui() -> int:
     central = QWidget()
     layout = QVBoxLayout(central)
     layout.addWidget(QLabel("SnapLex"))
-    layout.addWidget(QLabel("Ready"))
+    status_label = QLabel(presenter.state.status_text)
+    translate_button = QPushButton("Translate Clipboard")
+
+    def handle_translate() -> None:
+        presenter.request_clipboard_translation()
+        status_label.setText(presenter.state.status_text)
+
+    translate_button.clicked.connect(handle_translate)
+    layout.addWidget(translate_button)
+    layout.addWidget(status_label)
 
     window.setCentralWidget(central)
     window.resize(320, 160)
