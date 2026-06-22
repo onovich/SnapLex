@@ -305,3 +305,26 @@ def test_default_pipeline_preserves_missing_credential_on_exhaustion() -> None:
         pipeline.translate_text("hello")
 
     assert isinstance(exc_info.value.provider_errors[0], MissingProviderCredentialError)
+
+
+def test_default_pipeline_uses_updated_config_store_provider_settings() -> None:
+    transport = SequenceTransport([HttpResponse(200, b'{"translatedText":"hola"}')])
+    store = InMemoryConfigStore()
+    pipeline = create_default_translation_pipeline(
+        config_store=store,
+        http_transport=transport,
+    )
+    store.save(
+        AppConfig(
+            provider_name="libretranslate",
+            provider_order=("libretranslate",),
+            provider_configs={
+                "libretranslate": ProviderRuntimeConfig(base_url="https://libre.example"),
+            },
+        )
+    )
+
+    result = pipeline.translate_text("hello", source_lang="en", target_lang="es")
+
+    assert result.translated_text == "hola"
+    assert result.provider_name == "libretranslate"

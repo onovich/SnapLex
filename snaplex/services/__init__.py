@@ -27,6 +27,7 @@ from snaplex.services.screen_translation_service import (
     ScreenTranslationResponse,
     ScreenTranslationService,
 )
+from snaplex.services.settings_service import SettingsService
 from snaplex.services.text import normalize_text
 from snaplex.services.translation_cache import (
     InMemoryTranslationCache,
@@ -60,6 +61,7 @@ __all__ = [
     "ScreenRegion",
     "ScreenTranslationResponse",
     "ScreenTranslationService",
+    "SettingsService",
     "TranslationCache",
     "TranslationCacheKey",
     "TranslationPipeline",

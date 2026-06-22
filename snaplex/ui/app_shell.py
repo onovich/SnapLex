@@ -18,7 +18,7 @@ from snaplex.services import (
     create_default_translation_pipeline,
 )
 from snaplex.services.translation_service import TranslationPipeline
-from snaplex.storage import InMemoryConfigStore, load_app_config_from_environment
+from snaplex.storage import JsonFileConfigStore, load_app_config_from_environment
 from snaplex.ui.clipboard_presenter import (
     ClipboardTranslationPresenter,
 )
@@ -68,8 +68,9 @@ def launch_gui(
     clipboard_service = clipboard_service or QtClipboardService.from_application()
     capture_service = capture_service or FakeCaptureService()
     ocr_service = ocr_service or FakeOcrService()
+    config_store = JsonFileConfigStore(default_config=load_app_config_from_environment())
     pipeline = pipeline or create_default_translation_pipeline(
-        config_store=InMemoryConfigStore(load_app_config_from_environment()),
+        config_store=config_store,
     )
     presenter = presenter or ClipboardTranslationPresenter(
         on_copy_result=clipboard_service.set_text

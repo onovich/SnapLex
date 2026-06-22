@@ -71,8 +71,14 @@ class InMemoryConfigStore:
 class JsonFileConfigStore:
     """JSON file-backed config storage with default fallback and migration hooks."""
 
-    def __init__(self, config_path: Path | None = None) -> None:
+    def __init__(
+        self,
+        config_path: Path | None = None,
+        *,
+        default_config: AppConfig | None = None,
+    ) -> None:
         self._config_path = config_path or default_app_data_dir() / CONFIG_FILE_NAME
+        self._default_config = default_config or AppConfig()
 
     @property
     def config_path(self) -> Path:
@@ -80,15 +86,15 @@ class JsonFileConfigStore:
 
     def load(self) -> AppConfig:
         if not self._config_path.exists():
-            return AppConfig()
+            return _copy_app_config(self._default_config)
 
         try:
             payload = json.loads(self._config_path.read_text(encoding="utf-8"))
         except (OSError, UnicodeDecodeError, json.JSONDecodeError):
-            return AppConfig()
+            return _copy_app_config(self._default_config)
 
         if not isinstance(payload, dict):
-            return AppConfig()
+            return _copy_app_config(self._default_config)
         return app_config_from_dict(payload)
 
     def save(self, config: AppConfig) -> None:
@@ -137,6 +143,16 @@ def app_config_to_dict(config: AppConfig) -> dict[str, object]:
         "history_max_entries": max(0, config.history_max_entries),
         "ui_preferences": dict(config.ui_preferences),
     }
+
+
+def _copy_app_config(config: AppConfig) -> AppConfig:
+    return replace(
+        config,
+        provider_order=tuple(config.provider_order),
+        provider_configs=copy_provider_runtime_configs(config.provider_configs),
+        history_max_entries=max(0, config.history_max_entries),
+        ui_preferences=dict(config.ui_preferences),
+    )
 
 
 def app_config_from_dict(payload: Mapping[str, object]) -> AppConfig:

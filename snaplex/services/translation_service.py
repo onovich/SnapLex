@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+from collections.abc import Callable
 
 from snaplex.errors import FallbackExhaustedError, TranslationError
 from snaplex.providers.base import TranslationProvider, TranslationRequest, TranslationResponse
@@ -51,10 +52,12 @@ class TranslationPipeline:
         config_store: ConfigStore,
         provider_registry: ProviderRegistry,
         cache: TranslationCache | None = None,
+        provider_registry_factory: Callable[[AppConfig], ProviderRegistry] | None = None,
     ) -> None:
         self._config_store = config_store
         self._provider_registry = provider_registry
         self._cache = cache
+        self._provider_registry_factory = provider_registry_factory
 
     def translate_text(
         self,
@@ -78,9 +81,10 @@ class TranslationPipeline:
                 target_lang=request.target_lang,
             )
 
+        provider_registry = self._resolve_provider_registry(config)
         provider_errors: list[TranslationError] = []
         for provider_name in self._provider_names(config):
-            provider = self._provider_registry.get(provider_name)
+            provider = provider_registry.get(provider_name)
             cache_key = TranslationCacheKey.from_request(request, provider_name=provider.name)
             cached_response = self._cache.get(cache_key) if self._cache is not None else None
             if cached_response is not None:
@@ -131,6 +135,11 @@ class TranslationPipeline:
             return (config.provider_name,)
         return config.provider_order or (config.provider_name,)
 
+    def _resolve_provider_registry(self, config: AppConfig) -> ProviderRegistry:
+        if self._provider_registry_factory is None:
+            return self._provider_registry
+        return self._provider_registry_factory(config)
+
 
 def create_default_translation_pipeline(
     config_store: ConfigStore | None = None,
@@ -143,4 +152,8 @@ def create_default_translation_pipeline(
         config_store=config_store,
         provider_registry=create_default_provider_registry(config, http_transport=http_transport),
         cache=InMemoryTranslationCache(),
+        provider_registry_factory=lambda current_config: create_default_provider_registry(
+            current_config,
+            http_transport=http_transport,
+        ),
     )
