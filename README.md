@@ -14,6 +14,10 @@ The current project source of truth lives in:
 - `docs/phase_plan.md`
 - `docs/p0_p7_goal_mode_execution_guide.md`
 - `docs/p0_repository_baseline_goal_guide.md`
+- `docs/p0_to_p1_handoff.md`
+- `docs/p1_todo.md`
+- `docs/windows_smoke_checklist.md`
+- `docs/p0_final_validation_report.md`
 
 ## Planned Stack
 
@@ -25,9 +29,9 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex is in P0 repository baseline work. The repository now has a Python package
-skeleton, project metadata, and a bootstrap command that can be checked before GUI
-dependencies are installed.
+SnapLex has a P0 repository baseline: Python package metadata, a runnable bootstrap,
+service/provider/storage contracts, deterministic fakes, initial unit tests, and
+repeatable local validation.
 
 ## Setup
 
@@ -106,3 +110,9 @@ Current local fakes:
 - `FakeCaptureService`
 - `InMemoryClipboardService`
 - `InMemoryConfigStore`
+
+## P0 Boundaries
+
+P0 intentionally does not include real OCR, screen capture, global hotkeys, network
+translation providers, persistent history, or Windows packaging. Those are staged
+for later phases in `docs/phase_plan.md`.

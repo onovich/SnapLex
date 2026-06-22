@@ -11,6 +11,21 @@ The product has two core flows:
 
 The architecture from the current PDF docs separates the app into UI, capture, OCR, clipboard, translation, and storage layers. That separation should be kept from the start so OCR engines and translation providers can be swapped without rewriting UI code.
 
+## Implemented P0 Baseline
+
+The repository now has a runnable Python package baseline:
+
+- `pyproject.toml` defines package metadata, optional GUI/capture/OCR/dev extras, and the `snaplex` console entry point.
+- `snaplex/app.py` provides the CLI/bootstrap boundary.
+- `snaplex/ui/app_shell.py` lazy-loads PySide6 and falls back cleanly when GUI dependencies are absent.
+- `snaplex/services/` defines capture, OCR, clipboard, text normalization, and translation service boundaries.
+- `snaplex/providers/` defines translation provider contracts and a deterministic fake provider.
+- `snaplex/storage/` defines config storage contracts and an in-memory config store.
+- `tests/` covers normalization, fake provider behavior, fake OCR/capture behavior, and config defaults.
+- `.codex/project-ops-workflow.json` and `.codex/project-git-workflow.json` run repeatable validation before commits.
+
+The P0 handoff is `docs/p0_to_p1_handoff.md`; the next implementation checklist is `docs/p1_todo.md`.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.
