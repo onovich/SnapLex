@@ -10,18 +10,23 @@ from snaplex.providers import (
     FakeTranslationProvider,
     FakeTranslationScenario,
     ProviderRegistry,
+    TranslationRequest,
+    TranslationResponse,
 )
 from snaplex.services import TranslationPipeline, create_default_translation_pipeline
+from snaplex.services.translation_cache import InMemoryTranslationCache, TranslationCacheKey
 from snaplex.storage import AppConfig, InMemoryConfigStore
 
 
 def make_pipeline(
     config: AppConfig,
     *providers: FakeTranslationProvider,
+    cache: InMemoryTranslationCache | None = None,
 ) -> TranslationPipeline:
     return TranslationPipeline(
         config_store=InMemoryConfigStore(config),
         provider_registry=ProviderRegistry(providers),
+        cache=cache,
     )
 
 
@@ -111,3 +116,63 @@ def test_default_pipeline_uses_fake_provider() -> None:
 
     assert result.translated_text == "hello [en]"
     assert result.provider_name == "fake"
+
+
+def test_pipeline_returns_cached_response_before_provider_call() -> None:
+    cache = InMemoryTranslationCache()
+    cache_key = TranslationCacheKey("hello", "auto", "en", "fake")
+    cache.set(cache_key, TranslationResponse("cached", "fake", "auto", "en"))
+    assert cache_key == TranslationCacheKey.from_request(
+        TranslationRequest("hello"),
+        provider_name="fake",
+    )
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake"),
+        FakeTranslationProvider(name="fake", scenario=FakeTranslationScenario.FAILURE),
+        cache=cache,
+    )
+
+    result = pipeline.translate_text("hello")
+
+    assert result.translated_text == "cached"
+
+
+def test_pipeline_writes_successful_response_to_cache() -> None:
+    cache = InMemoryTranslationCache()
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake"),
+        FakeTranslationProvider(name="fake", translations={"hello": "hola"}),
+        cache=cache,
+    )
+
+    result = pipeline.translate_text("hello")
+
+    cache_key = TranslationCacheKey("hello", "auto", "en", "fake")
+    assert cache.get(cache_key) == result
+
+
+def test_pipeline_uses_provider_order_for_fallback_success() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="primary", provider_order=("primary", "backup")),
+        FakeTranslationProvider(name="primary", scenario=FakeTranslationScenario.FAILURE),
+        FakeTranslationProvider(name="backup", translations={"hello": "backup result"}),
+    )
+
+    result = pipeline.translate_text("hello")
+
+    assert result.translated_text == "backup result"
+    assert result.provider_name == "backup"
+
+
+def test_pipeline_does_not_cache_failed_response() -> None:
+    cache = InMemoryTranslationCache()
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake"),
+        FakeTranslationProvider(name="fake", scenario=FakeTranslationScenario.FAILURE),
+        cache=cache,
+    )
+
+    with pytest.raises(FallbackExhaustedError):
+        pipeline.translate_text("hello")
+
+    assert len(cache) == 0
