@@ -87,6 +87,41 @@ Packaged GUI launch smoke PASS
 
 Status: PASS
 
+## Packaged Workflow Smoke
+
+Command:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR='D:\ToolProjects\SnapLex\snaplex-smoke-data\round5-packaged'
+.\dist\SnapLex\SnapLex.exe --smoke-package
+```
+
+Result:
+
+```text
+SnapLex packaged workflow smoke PASS
+- app data: D:\ToolProjects\SnapLex\snaplex-smoke-data\round5-packaged
+- settings persistence: fake provider, history enabled
+- clipboard translation: hello -> hello [en]
+- screen fake capture/OCR translation: screen hello -> screen hello [en]
+- history record/list/delete/clear: PASS
+```
+
+Status: PASS
+
+This smoke runs inside the packaged executable and exercises existing service
+boundaries:
+
+- `SettingsService -> JsonFileConfigStore`
+- `InMemoryClipboardService -> TranslationPipeline`
+- `HistoryService -> JsonFileHistoryStore`
+- `FakeCaptureService -> FakeOcrService -> TranslationPipeline`
+
+Real `mss` capture and PaddleOCR packaging remain optional variant/manual smoke
+paths. The default `base` package intentionally avoids bundling OCR model caches
+or requiring screen permissions, model downloads, provider network calls, or API
+keys.
+
 ## Cleanup
 
 Smoke data and package artifacts are local generated outputs. They are ignored

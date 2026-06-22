@@ -17,6 +17,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Validate the bootstrap without starting the desktop shell.",
     )
+    parser.add_argument(
+        "--smoke-package",
+        action="store_true",
+        help="Run deterministic packaged workflow smoke using SNAPLEX_APP_DATA_DIR.",
+    )
     return parser
 
 
@@ -31,6 +36,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.no_gui:
         gui_state = "available" if is_pyside_available() else "not installed"
         print(f"SnapLex bootstrap OK (PySide6 {gui_state}).")
+        return 0
+
+    if args.smoke_package:
+        from snaplex.release_smoke import PackagedSmokeError, run_packaged_workflow_smoke
+
+        try:
+            smoke_lines = run_packaged_workflow_smoke()
+        except PackagedSmokeError as exc:
+            print(f"SnapLex packaged workflow smoke FAIL: {exc}")
+            return 1
+
+        print("SnapLex packaged workflow smoke PASS")
+        for line in smoke_lines:
+            print(f"- {line}")
         return 0
 
     return launch_gui()

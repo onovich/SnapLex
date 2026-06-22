@@ -15,6 +15,7 @@ hidden_imports = [
     "snaplex.providers.fake",
     "snaplex.providers.libretranslate",
     "snaplex.providers.openai",
+    "snaplex.release_smoke",
     "snaplex.services.capture_service",
     "snaplex.services.ocr_service",
     "snaplex.storage.config",
