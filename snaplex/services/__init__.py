@@ -14,7 +14,11 @@ from snaplex.services.clipboard_service import (
 )
 from snaplex.services.ocr_service import FakeOcrService, OcrError, OcrResult, OcrService
 from snaplex.services.text import normalize_text
-from snaplex.services.translation_service import TranslationService
+from snaplex.services.translation_service import (
+    TranslationPipeline,
+    TranslationService,
+    create_default_translation_pipeline,
+)
 
 __all__ = [
     "CapturedImage",
@@ -29,6 +33,8 @@ __all__ = [
     "OcrResult",
     "OcrService",
     "ScreenRegion",
+    "TranslationPipeline",
     "TranslationService",
+    "create_default_translation_pipeline",
     "normalize_text",
 ]

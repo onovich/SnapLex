@@ -1,0 +1,113 @@
+import pytest
+
+from snaplex.errors import (
+    FallbackExhaustedError,
+    TranslationProviderError,
+    UnknownTranslationProviderError,
+    UnsupportedLanguageError,
+)
+from snaplex.providers import (
+    FakeTranslationProvider,
+    FakeTranslationScenario,
+    ProviderRegistry,
+)
+from snaplex.services import TranslationPipeline, create_default_translation_pipeline
+from snaplex.storage import AppConfig, InMemoryConfigStore
+
+
+def make_pipeline(
+    config: AppConfig,
+    *providers: FakeTranslationProvider,
+) -> TranslationPipeline:
+    return TranslationPipeline(
+        config_store=InMemoryConfigStore(config),
+        provider_registry=ProviderRegistry(providers),
+    )
+
+
+def test_pipeline_translates_with_configured_provider() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="local", target_lang="es"),
+        FakeTranslationProvider(name="local", translations={"Hello world": "Hola mundo"}),
+    )
+
+    result = pipeline.translate_text("  Hello    world  ")
+
+    assert result.translated_text == "Hola mundo"
+    assert result.provider_name == "local"
+    assert result.source_lang == "auto"
+    assert result.target_lang == "es"
+
+
+def test_pipeline_allows_language_overrides() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake", source_lang="auto", target_lang="en"),
+        FakeTranslationProvider(name="fake"),
+    )
+
+    result = pipeline.translate_text("hello", source_lang="fr", target_lang="de")
+
+    assert result.source_lang == "fr"
+    assert result.target_lang == "de"
+
+
+def test_pipeline_returns_empty_result_without_provider_call() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake"),
+        FakeTranslationProvider(name="fake", scenario=FakeTranslationScenario.FAILURE),
+    )
+
+    result = pipeline.translate_text("   ")
+
+    assert result.translated_text == ""
+    assert result.provider_name == "fake"
+
+
+def test_pipeline_raises_for_unknown_provider() -> None:
+    pipeline = make_pipeline(AppConfig(provider_name="missing"))
+
+    with pytest.raises(UnknownTranslationProviderError) as exc_info:
+        pipeline.translate_text("hello")
+
+    assert exc_info.value.provider_name == "missing"
+
+
+def test_pipeline_maps_provider_failure_to_fallback_exhaustion() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake"),
+        FakeTranslationProvider(name="fake", scenario=FakeTranslationScenario.FAILURE),
+    )
+
+    with pytest.raises(FallbackExhaustedError) as exc_info:
+        pipeline.translate_text("hello")
+
+    assert len(exc_info.value.provider_errors) == 1
+    assert isinstance(exc_info.value.provider_errors[0], TranslationProviderError)
+    assert exc_info.value.provider_errors[0].provider_name == "fake"
+
+
+def test_pipeline_maps_unsupported_language_to_fallback_exhaustion() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake"),
+        FakeTranslationProvider(
+            name="fake",
+            scenario=FakeTranslationScenario.UNSUPPORTED_LANGUAGE,
+        ),
+    )
+
+    with pytest.raises(FallbackExhaustedError) as exc_info:
+        pipeline.translate_text("hello", source_lang="en", target_lang="xx")
+
+    error = exc_info.value.provider_errors[0]
+    assert isinstance(error, UnsupportedLanguageError)
+    assert error.source_lang == "en"
+    assert error.target_lang == "xx"
+
+
+def test_default_pipeline_uses_fake_provider() -> None:
+    pipeline = create_default_translation_pipeline()
+
+    result = pipeline.translate_text("hello")
+
+    assert result.translated_text == "hello [en]"
+    assert result.provider_name == "fake"
