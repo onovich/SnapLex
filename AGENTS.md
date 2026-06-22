@@ -43,7 +43,6 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Overall delegated implementation guide: `docs/p0_p7_goal_mode_execution_guide.md`.
 - Phase plan and round estimates: `docs/phase_plan.md`.
 - First phase execution guide: `docs/p0_repository_baseline_goal_guide.md`.
-- Latest accepted phase report: `docs/p6_final_validation_report.md`.
-- Latest executor-complete phase report: `docs/p7_final_validation_report.md`.
+- Latest accepted phase report: `docs/p7_final_validation_report.md`.
 - Whole-track closure report: `docs/p0_p7_final_report.md`.
 - Post-MVP expansion roadmap: `docs/p7_expansion_roadmap.md`.

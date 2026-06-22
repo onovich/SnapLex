@@ -2,7 +2,7 @@
 
 Date: 2026-06-22
 Phase: P7 Expansion Track
-Status: executor-complete roadmap, pending planner acceptance
+Status: accepted roadmap
 
 P7 closes the P0-P7 execution track with a design-first expansion roadmap. The
 accepted P6 Windows MVP package remains the product baseline. Expansion work
@@ -151,4 +151,3 @@ Every post-P7 implementation goal should prove:
   committed.
 - Any new runtime capability is optional, disabled by default when appropriate,
   and covered by deterministic tests.
-

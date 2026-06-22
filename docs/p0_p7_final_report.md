@@ -1,13 +1,12 @@
 # SnapLex P0-P7 Final Report
 
 Date: 2026-06-22
-Status: P0-P7 executor work complete, P7 pending planner acceptance
+Status: P0-P7 planner-accepted complete
 
 ## Overall Status
 
 SnapLex now has a Windows MVP release baseline plus a documented post-MVP
-expansion track. P0 through P6 are accepted. P7 is executor-complete and ready
-for planner validation.
+expansion track. P0 through P7 are accepted.
 
 ## Accepted Phases
 
@@ -19,7 +18,8 @@ for planner validation.
 - P5 History, Persistence, and Settings UX: accepted.
 - P6 Packaging and Release Readiness: accepted at
   `d297e26e78e732431b2be1d2149c8118841eb23a`.
-- P7 Expansion Track: executor-complete, pending planner acceptance.
+- P7 Expansion Track: accepted at
+  `b6f1c1347b9b4cd71773ddb746893ba10d0c886a`.
 
 ## Release Baseline
 
@@ -123,14 +123,23 @@ Final executor validation:
 No P7 runtime code or prototype was introduced, so no additional runtime test
 surface was added.
 
+Planner recheck on 2026-06-22:
+
+- `Validate.cmd`: PASS with 190 tests.
+- `git diff --check`: PASS.
+- `python -m snaplex --version`: PASS.
+- `python -m snaplex --no-gui`: PASS.
+- `python scripts\package_windows.py --dry-run --variant base`: PASS.
+- P7 docs link/index check: PASS.
+- Artifact and secret boundary scan: PASS.
+
 ## Final Pushed Commit
 
-The final P7 closure commit is recorded in the executor planner-routing
-message after commit and push.
+The final P7 closure commit is
+`b6f1c1347b9b4cd71773ddb746893ba10d0c886a`.
 
 ## Recommended Next Goal
 
 After P7 planner acceptance, close the P0-P7 execution track. If continuing
 directly into post-MVP work, create a new goal from the localization foundation
 recommendation in `docs/p7_expansion_roadmap.md`.
-

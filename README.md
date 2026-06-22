@@ -70,13 +70,14 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P6. P7 expansion-track executor work is
-complete and ready for planner validation. The app now has manual clipboard and
-screen translation actions, capture/OCR service boundaries, optional lazy real
-capture/OCR adapters, real provider adapters for LibreTranslate/OpenAI/DeepL,
-mocked HTTP tests, fake offline defaults, persisted settings, optional recent
-translation history, shared result states, a PyInstaller spec, packaged release
-smoke commands, and post-MVP expansion plans.
+SnapLex has accepted P0 through P7. The P0-P7 track is complete with a Windows
+MVP release baseline and a post-MVP expansion roadmap. The app now has manual
+clipboard and screen translation actions, capture/OCR service boundaries,
+optional lazy real capture/OCR adapters, real provider adapters for
+LibreTranslate/OpenAI/DeepL, mocked HTTP tests, fake offline defaults, persisted
+settings, optional recent translation history, shared result states, a
+PyInstaller spec, packaged release smoke commands, and post-MVP expansion
+plans.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package.

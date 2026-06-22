@@ -156,7 +156,7 @@ The P6 final report is `docs/p6_final_validation_report.md`; the P7 handoff is
 
 ## P7 Expansion Track Completion
 
-The repository now has executor-complete post-MVP expansion planning:
+The repository now has accepted post-MVP expansion planning:
 
 - `docs/p7_expansion_requirements.md` defines MVP freeze notes and expansion
   principles from the accepted P6 baseline.

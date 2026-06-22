@@ -3,7 +3,7 @@
 P7 goal: prepare the post-MVP expansion track without destabilizing the accepted
 P6 release baseline.
 
-Status: executor complete, pending planner validation.
+Status: complete, planner-accepted.
 
 Executable guide: `docs/p7_expansion_track_goal_guide.md`
 

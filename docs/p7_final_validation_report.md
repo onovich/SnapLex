@@ -2,13 +2,22 @@
 
 Date: 2026-06-22
 Phase: P7 Expansion Track
-Status: PASS from executor validation, pending planner acceptance
+Status: PASS, planner-accepted
 
 ## Rounds Used
 
 - Planned rounds: 5
 - Used rounds: 5
 - Buffer rounds consumed: 0
+
+## Planner Acceptance
+
+- Rechecked by planner on 2026-06-22.
+- Acceptance result: PASS.
+- Recheck validation: `Validate.cmd` PASS with 190 tests, `git diff --check`
+  PASS, CLI bootstrap PASS, package dry-run PASS, P7 docs link/index check
+  PASS, artifact/secret boundary scan PASS.
+- Accepted commit: `b6f1c1347b9b4cd71773ddb746893ba10d0c886a`.
 
 ## Main Deliverables
 
@@ -120,20 +129,18 @@ commands, but they remain untracked.
 - `a96ef9f` - P7 multilingual UX plan.
 - `dbcabf1` - P7 AI summary capability design.
 - `692b010` - P7 browser extension bridge design.
-- Final P7 closure commit: recorded in the executor planner-routing message.
+- Final P7 closure commit: `b6f1c13`.
 
 ## Push Result
 
 All P7 commits through the final closure commit were pushed to `origin/main`.
 
-## Request For Architect/PM Acceptance
+## Architect/PM Acceptance
 
-P7 is ready for planner validation against
-`docs/p7_expansion_track_goal_guide.md`.
+P7 is accepted against `docs/p7_expansion_track_goal_guide.md`.
 
 ## Recommended Next Goal
 
-After planner acceptance, close P0-P7 as complete or create a new post-MVP goal
-from `docs/p7_expansion_roadmap.md`. The recommended first post-MVP
-implementation goal is localization foundation.
-
+P0-P7 is complete. If continuing into post-MVP work, create a new goal from
+`docs/p7_expansion_roadmap.md`. The recommended first post-MVP implementation
+goal is localization foundation.
