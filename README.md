@@ -76,3 +76,22 @@ python -m snaplex --no-gui
 
 Unit tests and stricter lint/typecheck commands are planned for later P0 rounds,
 after service contracts and fake implementations exist.
+
+## Package Layout
+
+```text
+snaplex/
+  app.py                 # application bootstrap
+  ui/                    # PySide6 shell and future widgets
+  services/              # capture, OCR, clipboard, and translation boundaries
+  providers/             # translation provider contracts and adapters
+  storage/               # configuration and future persistence boundaries
+```
+
+Current local fakes:
+
+- `FakeTranslationProvider`
+- `FakeOcrService`
+- `FakeCaptureService`
+- `InMemoryClipboardService`
+- `InMemoryConfigStore`
