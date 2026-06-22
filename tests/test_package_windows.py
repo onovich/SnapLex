@@ -2,6 +2,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import scripts.package_windows as package_windows
 from scripts.package_windows import (
     DEFAULT_APP_NAME,
     DEFAULT_DIST_DIR,
@@ -26,6 +27,7 @@ def test_build_pyinstaller_command_uses_tracked_spec_by_default() -> None:
             spec_dir=DEFAULT_SPEC_DIR,
             spec_path=TRACKED_SPEC_PATH,
             use_spec=True,
+            variant="base",
             clean=True,
             noconfirm=True,
             dry_run=False,
@@ -51,6 +53,7 @@ def test_build_pyinstaller_command_supports_generated_entrypoint_mode(tmp_path: 
             spec_dir=tmp_path / "spec",
             spec_path=TRACKED_SPEC_PATH,
             use_spec=False,
+            variant="base",
             clean=False,
             noconfirm=False,
             dry_run=False,
@@ -72,5 +75,29 @@ def test_package_windows_dry_run_prints_command(capsys) -> None:
 
     output = capsys.readouterr().out
     assert exit_code == 0
+    assert "SNAPLEX_PACKAGE_VARIANT=base" in output
     assert "PyInstaller" in output
     assert subprocess.list2cmdline([str(TRACKED_SPEC_PATH)]) in output
+
+
+def test_package_windows_passes_variant_to_pyinstaller(monkeypatch) -> None:
+    calls = []
+
+    def fake_run(command, cwd, check, env):
+        calls.append((command, cwd, check, env))
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr(package_windows.subprocess, "run", fake_run)
+
+    exit_code = package_windows.main(["--variant", "capture"])
+
+    assert exit_code == 0
+    assert calls[0][3]["SNAPLEX_PACKAGE_VARIANT"] == "capture"
+
+
+def test_tracked_spec_documents_optional_dependency_variants() -> None:
+    spec_text = TRACKED_SPEC_PATH.read_text(encoding="utf-8")
+
+    assert "SNAPLEX_PACKAGE_VARIANT" in spec_text
+    assert "mss.tools" in spec_text
+    assert "paddleocr" in spec_text

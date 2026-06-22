@@ -12,6 +12,14 @@ build/
 dist/
 *.spec
 !packaging/snaplex.spec
+snaplex-smoke-data/
+SnapLexSmoke/
+screenshots/
+.paddleocr/
+ocr_models/
+*.pdmodel
+*.pdiparams
+*.pdiparams.info
 
 .env
 .env.*

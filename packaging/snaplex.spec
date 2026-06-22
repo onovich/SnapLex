@@ -1,9 +1,37 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+import os
 from pathlib import Path
 
 
 project_root = Path(SPECPATH).parent.parent
+package_variant = os.environ.get("SNAPLEX_PACKAGE_VARIANT", "base").strip().lower() or "base"
+
+hidden_imports = [
+    "PySide6.QtCore",
+    "PySide6.QtGui",
+    "PySide6.QtWidgets",
+    "snaplex.providers.deepl",
+    "snaplex.providers.fake",
+    "snaplex.providers.libretranslate",
+    "snaplex.providers.openai",
+    "snaplex.services.capture_service",
+    "snaplex.services.ocr_service",
+    "snaplex.storage.config",
+    "snaplex.storage.history",
+    "snaplex.ui.app_shell",
+]
+
+excluded_modules = []
+if package_variant in {"capture", "full"}:
+    hidden_imports.extend(["mss", "mss.tools"])
+else:
+    excluded_modules.extend(["mss", "mss.tools"])
+
+if package_variant in {"ocr", "full"}:
+    hidden_imports.append("paddleocr")
+else:
+    excluded_modules.extend(["paddle", "paddleocr"])
 
 block_cipher = None
 
@@ -12,24 +40,11 @@ a = Analysis(
     pathex=[str(project_root)],
     binaries=[],
     datas=[],
-    hiddenimports=[
-        "PySide6.QtCore",
-        "PySide6.QtGui",
-        "PySide6.QtWidgets",
-        "snaplex.providers.deepl",
-        "snaplex.providers.fake",
-        "snaplex.providers.libretranslate",
-        "snaplex.providers.openai",
-        "snaplex.services.capture_service",
-        "snaplex.services.ocr_service",
-        "snaplex.storage.config",
-        "snaplex.storage.history",
-        "snaplex.ui.app_shell",
-    ],
+    hiddenimports=hidden_imports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[],
+    excludes=excluded_modules,
     win_no_prefer_redirects=False,
     win_private_assemblies=False,
     cipher=block_cipher,

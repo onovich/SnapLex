@@ -8,6 +8,7 @@ SnapLex package.
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 from collections.abc import Sequence
@@ -33,6 +34,7 @@ class PackageWindowsOptions:
     spec_dir: Path
     spec_path: Path
     use_spec: bool
+    variant: str
     clean: bool
     noconfirm: bool
     dry_run: bool
@@ -113,6 +115,12 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Generate a temporary spec from command-line options instead of using packaging/snaplex.spec.",
     )
+    parser.add_argument(
+        "--variant",
+        choices=("base", "capture", "ocr", "full"),
+        default="base",
+        help="Optional dependency inclusion strategy for the tracked spec.",
+    )
     parser.add_argument("--no-clean", action="store_true", help="Skip PyInstaller --clean.")
     parser.add_argument(
         "--no-confirm",
@@ -136,6 +144,7 @@ def options_from_args(args: argparse.Namespace) -> PackageWindowsOptions:
         spec_dir=args.spec_dir,
         spec_path=args.spec_path,
         use_spec=not args.no_spec,
+        variant=args.variant,
         clean=not args.no_clean,
         noconfirm=not args.no_confirm,
         dry_run=args.dry_run,
@@ -150,12 +159,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 1
 
     command = build_pyinstaller_command(options)
+    build_env = os.environ.copy()
+    build_env["SNAPLEX_PACKAGE_VARIANT"] = options.variant
+    print(f"SNAPLEX_PACKAGE_VARIANT={options.variant}")
     print(subprocess.list2cmdline(command))
     if options.dry_run:
         return 0
 
     try:
-        result = subprocess.run(command, cwd=PROJECT_ROOT, check=False)
+        result = subprocess.run(command, cwd=PROJECT_ROOT, check=False, env=build_env)
     except FileNotFoundError:
         print(
             'PyInstaller is not installed. Run: python -m pip install -e ".[package]"',
