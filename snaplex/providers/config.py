@@ -36,7 +36,7 @@ def default_provider_runtime_configs() -> dict[str, ProviderRuntimeConfig]:
             base_url="https://api.openai.com/v1",
             api_key_env_var="SNAPLEX_OPENAI_API_KEY",
             timeout_seconds=20.0,
-            options={"model": "gpt-4o-mini"},
+            options={"model": "gpt-5.5"},
         ),
         "deepl": ProviderRuntimeConfig(
             base_url="https://api-free.deepl.com/v2",

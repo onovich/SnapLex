@@ -21,6 +21,7 @@ from snaplex.providers.http import (
     UrllibHttpTransport,
 )
 from snaplex.providers.libretranslate import LibreTranslateProvider
+from snaplex.providers.openai import OpenAITranslationProvider
 from snaplex.providers.registry import ProviderRegistry, create_default_provider_registry
 from snaplex.errors import (
     MissingProviderCredentialError,
@@ -40,6 +41,7 @@ __all__ = [
     "HttpTransportTimeout",
     "LibreTranslateProvider",
     "MissingProviderCredentialError",
+    "OpenAITranslationProvider",
     "ProviderRegistry",
     "ProviderRuntimeConfig",
     "StaleTranslationResultError",

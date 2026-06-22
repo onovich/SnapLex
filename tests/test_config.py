@@ -11,6 +11,7 @@ def test_config_defaults_use_fake_provider() -> None:
     assert config.provider_configs["fake"].base_url == ""
     assert config.provider_configs["libretranslate"].base_url == "http://localhost:5000"
     assert config.provider_configs["openai"].api_key_env_var == "SNAPLEX_OPENAI_API_KEY"
+    assert config.provider_configs["openai"].options["model"] == "gpt-5.5"
     assert config.provider_configs["deepl"].api_key_env_var == "SNAPLEX_DEEPL_API_KEY"
     assert config.ui_preferences == {}
 
@@ -25,5 +26,5 @@ def test_in_memory_config_store_copies_nested_config() -> None:
     loaded.ui_preferences["theme"] = "changed"
 
     assert store.load().ui_preferences == {"theme": "compact"}
-    assert store.load().provider_configs["openai"].options["model"] == "gpt-4o-mini"
+    assert store.load().provider_configs["openai"].options["model"] == "gpt-5.5"
     assert store.load().provider_order == ("fake", "backup")

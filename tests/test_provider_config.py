@@ -15,6 +15,7 @@ def test_default_provider_runtime_configs_do_not_store_secrets() -> None:
     assert configs["fake"].api_key_env_var == ""
     assert configs["libretranslate"].base_url == "http://localhost:5000"
     assert configs["openai"].api_key_env_var == "SNAPLEX_OPENAI_API_KEY"
+    assert configs["openai"].options["model"] == "gpt-5.5"
     assert configs["deepl"].api_key_env_var == "SNAPLEX_DEEPL_API_KEY"
 
 
