@@ -11,6 +11,7 @@ from snaplex.services.clipboard_service import (
     ClipboardError,
     ClipboardService,
     InMemoryClipboardService,
+    QtClipboardService,
 )
 from snaplex.services.ocr_service import FakeOcrService, OcrError, OcrResult, OcrService
 from snaplex.services.text import normalize_text
@@ -38,6 +39,7 @@ __all__ = [
     "OcrError",
     "OcrResult",
     "OcrService",
+    "QtClipboardService",
     "ScreenRegion",
     "TranslationCache",
     "TranslationCacheKey",

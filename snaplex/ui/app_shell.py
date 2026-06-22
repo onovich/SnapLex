@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from snaplex.services import QtClipboardService
 from snaplex.ui.clipboard_presenter import ClipboardTranslationPresenter
 
 
@@ -34,7 +35,10 @@ def launch_gui(presenter: ClipboardTranslationPresenter | None = None) -> int:
         return 0
 
     app = QApplication.instance() or QApplication([])
-    presenter = presenter or ClipboardTranslationPresenter()
+    clipboard_service = QtClipboardService.from_application()
+    presenter = presenter or ClipboardTranslationPresenter(
+        on_copy_result=clipboard_service.set_text
+    )
 
     window = QMainWindow()
     window.setWindowTitle("SnapLex")
