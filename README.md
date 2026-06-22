@@ -32,6 +32,8 @@ The current project source of truth lives in:
 - `docs/p5_final_validation_report.md`
 - `docs/p5_to_p6_handoff.md`
 - `docs/p6_packaging_release_goal_guide.md`
+- `docs/p6_final_validation_report.md`
+- `docs/p6_to_p7_handoff.md`
 - `docs/p6_packaging_smoke_evidence.md`
 - `docs/p6_release_checklist.md`
 - `docs/p3_windows_smoke_evidence.md`
@@ -59,7 +61,7 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P5 and has P6 packaging work in progress. The app now has manual clipboard and screen
+SnapLex has accepted P0 through P5 and P6 is ready for planner acceptance. The app now has manual clipboard and screen
 translation actions, capture/OCR service boundaries, optional lazy real
 capture/OCR adapters, real provider adapters for LibreTranslate/OpenAI/DeepL,
 mocked HTTP tests, fake offline defaults, persisted settings, optional recent
@@ -68,7 +70,8 @@ release smoke commands.
 
 The current implementation phase is P6 packaging and release readiness. Start
 from `docs/p6_packaging_release_goal_guide.md`,
-`docs/p6_packaging_smoke_evidence.md`, and `docs/p6_release_checklist.md`.
+`docs/p6_final_validation_report.md`, `docs/p6_packaging_smoke_evidence.md`,
+and `docs/p6_release_checklist.md`.
 
 ## Setup
 
