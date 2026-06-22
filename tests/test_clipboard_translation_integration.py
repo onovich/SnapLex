@@ -2,13 +2,14 @@ import asyncio
 
 from snaplex.errors import (
     FallbackExhaustedError,
+    StaleTranslationResultError,
     TranslationProviderError,
     TranslationProviderTimeoutError,
     UnknownTranslationProviderError,
     UnsupportedLanguageError,
 )
 from snaplex.providers import TranslationResponse
-from snaplex.services import InMemoryClipboardService
+from snaplex.services import ClipboardError, InMemoryClipboardService
 from snaplex.ui.clipboard_presenter import (
     ClipboardTranslationPresenter,
     ClipboardTranslationStatus,
@@ -33,6 +34,14 @@ class FakePipeline:
         if self.response is None:
             raise AssertionError("FakePipeline requires a response or error.")
         return self.response
+
+
+class FailingClipboard:
+    def get_text(self) -> str:
+        raise ClipboardError("denied")
+
+    def set_text(self, text: str) -> None:
+        raise AssertionError(f"Unexpected clipboard write: {text}")
 
 
 def test_presenter_translates_clipboard_text_through_pipeline() -> None:
@@ -70,6 +79,22 @@ def test_presenter_maps_empty_clipboard_without_calling_pipeline() -> None:
     assert pipeline.requests == []
     assert state.status == ClipboardTranslationStatus.EMPTY
     assert state.error_message == "Copy text before translating."
+
+
+def test_presenter_maps_clipboard_read_error_without_calling_pipeline() -> None:
+    pipeline = FakePipeline(TranslationResponse("unused", "fake", "auto", "es"))
+    presenter = ClipboardTranslationPresenter()
+
+    state = asyncio.run(
+        presenter.translate_clipboard(
+            clipboard_service=FailingClipboard(),
+            pipeline=pipeline,
+        )
+    )
+
+    assert pipeline.requests == []
+    assert state.status == ClipboardTranslationStatus.ERROR
+    assert state.error_message == "Could not read the clipboard. Copy the text again."
 
 
 def test_presenter_maps_timeout_error_and_disables_copy() -> None:
@@ -168,6 +193,38 @@ def test_presenter_maps_unsupported_language_error() -> None:
 
     assert state.status == ClipboardTranslationStatus.ERROR
     assert state.error_message == "Language pair ja -> xx is not supported."
+
+
+def test_presenter_maps_stale_result_error() -> None:
+    clipboard = InMemoryClipboardService("hello")
+    pipeline = FakePipeline(error=StaleTranslationResultError(provider_name="fake"))
+    presenter = ClipboardTranslationPresenter()
+
+    state = asyncio.run(
+        presenter.translate_clipboard(
+            clipboard_service=clipboard,
+            pipeline=pipeline,
+        )
+    )
+
+    assert state.status == ClipboardTranslationStatus.ERROR
+    assert state.error_message == "Translation result was stale. Try again."
+
+
+def test_presenter_maps_unexpected_pipeline_error() -> None:
+    clipboard = InMemoryClipboardService("hello")
+    pipeline = FakePipeline(error=RuntimeError("boom"))
+    presenter = ClipboardTranslationPresenter()
+
+    state = asyncio.run(
+        presenter.translate_clipboard(
+            clipboard_service=clipboard,
+            pipeline=pipeline,
+        )
+    )
+
+    assert state.status == ClipboardTranslationStatus.ERROR
+    assert state.error_message == "Translation failed unexpectedly. Try again."
 
 
 def test_presenter_retries_last_source_text() -> None:

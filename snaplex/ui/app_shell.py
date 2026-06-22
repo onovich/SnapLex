@@ -13,7 +13,10 @@ from snaplex.services import (
     create_default_translation_pipeline,
 )
 from snaplex.services.translation_service import TranslationPipeline
-from snaplex.ui.clipboard_presenter import ClipboardTranslationPresenter
+from snaplex.ui.clipboard_presenter import (
+    ClipboardTranslationPresenter,
+    ClipboardTranslationStatus,
+)
 
 
 def is_pyside_available() -> bool:
@@ -31,7 +34,7 @@ def launch_gui(
     pipeline: TranslationPipeline | None = None,
 ) -> int:
     try:
-        from PySide6.QtCore import Qt, QTimer
+        from PySide6.QtCore import QObject, Qt, Signal
         from PySide6.QtWidgets import (
             QApplication,
             QLabel,
@@ -55,6 +58,10 @@ def launch_gui(
         on_copy_result=clipboard_service.set_text
     )
 
+    class UiSignals(QObject):
+        refresh_requested = Signal()
+
+    ui_signals = UiSignals()
     window = QMainWindow()
     window.setWindowTitle("SnapLex")
     window.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint, True)
@@ -65,26 +72,32 @@ def launch_gui(
     status_label = QLabel(presenter.state.status_text)
     source_label = QLabel("")
     result_label = QLabel("")
+    provider_label = QLabel("")
     error_label = QLabel("")
     translate_button = QPushButton("Translate Clipboard")
     copy_button = QPushButton("Copy Result")
     retry_button = QPushButton("Retry")
     close_button = QPushButton("Close Result")
+    for label in (status_label, source_label, result_label, provider_label, error_label):
+        label.setWordWrap(True)
 
     def refresh_view() -> None:
         state = presenter.state
+        is_loading = state.status == ClipboardTranslationStatus.LOADING
         status_label.setText(state.status_text)
         source_label.setText(state.source_text)
         result_label.setText(state.translated_text)
+        provider_label.setText(f"Provider: {state.provider_name}" if state.provider_name else "")
         error_label.setText(state.error_message)
+        translate_button.setEnabled(not is_loading)
         copy_button.setEnabled(state.can_copy)
-        retry_button.setEnabled(state.can_retry)
-        close_button.setEnabled(state.status.value != "idle")
+        retry_button.setEnabled(state.can_retry and not is_loading)
+        close_button.setEnabled(state.status != ClipboardTranslationStatus.IDLE and not is_loading)
 
     def run_in_background(operation: Callable[[], Coroutine[Any, Any, object]]) -> None:
         def run_translation() -> None:
             asyncio.run(operation())
-            QTimer.singleShot(0, refresh_view)
+            ui_signals.refresh_requested.emit()
 
         Thread(target=run_translation, daemon=True).start()
 
@@ -115,6 +128,7 @@ def launch_gui(
         presenter.close_result()
         refresh_view()
 
+    ui_signals.refresh_requested.connect(refresh_view)
     translate_button.clicked.connect(handle_translate)
     retry_button.clicked.connect(handle_retry)
     copy_button.clicked.connect(handle_copy)
@@ -122,6 +136,7 @@ def launch_gui(
     layout.addWidget(translate_button)
     layout.addWidget(source_label)
     layout.addWidget(result_label)
+    layout.addWidget(provider_label)
     layout.addWidget(error_label)
     layout.addWidget(copy_button)
     layout.addWidget(retry_button)

@@ -152,6 +152,8 @@ class ClipboardTranslationPresenter:
             response = await pipeline.translate_text_async(source_text)
         except TranslationError as exc:
             return self.show_error(_friendly_error_message(exc), source_text=source_text)
+        except Exception as exc:
+            return self.show_error(_friendly_error_message(exc), source_text=source_text)
 
         return self.show_success(
             source_text=source_text,

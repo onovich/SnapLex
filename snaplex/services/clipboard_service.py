@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Protocol
+from typing import Protocol, cast
 
 
 class ClipboardError(RuntimeError):
@@ -55,7 +55,7 @@ class QtClipboardService:
         if app is None:
             raise ClipboardError("QApplication is not running.")
 
-        return cls(app.clipboard())
+        return cls(cast(QApplication, app).clipboard())
 
     def get_text(self) -> str:
         try:
