@@ -104,6 +104,8 @@ Round split:
 
 Estimated rounds: 8
 
+Execution guide: `docs/p2_clipboard_translation_goal_guide.md`
+
 Goal: make SnapLex useful for selected-text translation through clipboard and a desktop popup.
 
 Scope:
@@ -339,3 +341,4 @@ For a dedicated implementation programmer taking P0-P7 as one continuous goal, u
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
 The latest completed phase report is `docs/p1_final_validation_report.md`.
 The next handoff is `docs/p1_to_p2_handoff.md`.
+The direct execution guide for the next phase is `docs/p2_clipboard_translation_goal_guide.md`.

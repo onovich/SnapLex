@@ -7,6 +7,8 @@ Status: P1 pipeline complete
 
 Build the clipboard translation MVP on top of the P1 pipeline. P2 should add UI and clipboard workflow behavior without duplicating translation, provider selection, fallback, cache, normalization, timeout, or error-mapping rules.
 
+Use `docs/p2_clipboard_translation_goal_guide.md` as the executable P2 goal-mode guide.
+
 ## Entry Points For P2
 
 - Use `create_default_translation_pipeline(...)` from `snaplex.services` for default wiring.

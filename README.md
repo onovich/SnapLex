@@ -15,8 +15,10 @@ The current project source of truth lives in:
 - `docs/p0_p7_goal_mode_execution_guide.md`
 - `docs/p0_repository_baseline_goal_guide.md`
 - `docs/p1_core_pipeline_goal_guide.md`
+- `docs/p2_clipboard_translation_goal_guide.md`
 - `docs/p0_to_p1_handoff.md`
 - `docs/p1_todo.md`
+- `docs/p2_todo.md`
 - `docs/windows_smoke_checklist.md`
 - `docs/p0_final_validation_report.md`
 
@@ -30,10 +32,10 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has an accepted P0 repository baseline and a complete P1 non-UI
+SnapLex has an accepted P0 repository baseline and an accepted P1 non-UI
 translation pipeline foundation. The current pipeline works without UI, network,
-OCR models, or API credentials. The next recommended phase is P2 Clipboard
-Translation MVP after architect/PM acceptance.
+OCR models, or API credentials. The next executable guide is
+`docs/p2_clipboard_translation_goal_guide.md`.
 
 ## Setup
 
