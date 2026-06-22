@@ -11,6 +11,7 @@ class AppConfig:
     source_lang: str = "auto"
     target_lang: str = "en"
     provider_name: str = "fake"
+    provider_order: tuple[str, ...] = ("fake",)
     ui_preferences: dict[str, str] = field(default_factory=dict)
 
 
@@ -29,7 +30,15 @@ class InMemoryConfigStore:
         self._config = config or AppConfig()
 
     def load(self) -> AppConfig:
-        return replace(self._config, ui_preferences=dict(self._config.ui_preferences))
+        return replace(
+            self._config,
+            provider_order=tuple(self._config.provider_order),
+            ui_preferences=dict(self._config.ui_preferences),
+        )
 
     def save(self, config: AppConfig) -> None:
-        self._config = replace(config, ui_preferences=dict(config.ui_preferences))
+        self._config = replace(
+            config,
+            provider_order=tuple(config.provider_order),
+            ui_preferences=dict(config.ui_preferences),
+        )

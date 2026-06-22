@@ -5,7 +5,8 @@ from snaplex.providers.base import (
     TranslationRequest,
     TranslationResponse,
 )
-from snaplex.providers.fake import FakeTranslationProvider
+from snaplex.providers.fake import FakeTranslationProvider, FakeTranslationScenario
+from snaplex.providers.registry import ProviderRegistry, create_default_provider_registry
 from snaplex.errors import (
     StaleTranslationResultError,
     TranslationProviderError,
@@ -15,6 +16,8 @@ from snaplex.errors import (
 
 __all__ = [
     "FakeTranslationProvider",
+    "FakeTranslationScenario",
+    "ProviderRegistry",
     "StaleTranslationResultError",
     "TranslationProvider",
     "TranslationProviderError",
@@ -22,4 +25,5 @@ __all__ = [
     "TranslationRequest",
     "TranslationResponse",
     "UnsupportedLanguageError",
+    "create_default_provider_registry",
 ]
