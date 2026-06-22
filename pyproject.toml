@@ -26,6 +26,9 @@ dev = [
   "ruff>=0.5",
   "mypy>=1.10",
 ]
+package = [
+  "pyinstaller>=6.0",
+]
 
 [project.scripts]
 snaplex = "snaplex.__main__:main"
