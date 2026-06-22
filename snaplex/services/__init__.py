@@ -5,6 +5,7 @@ from snaplex.services.capture_service import (
     CaptureError,
     CaptureService,
     FakeCaptureService,
+    MssCaptureService,
     ScreenRegion,
 )
 from snaplex.services.clipboard_service import (
@@ -36,6 +37,7 @@ __all__ = [
     "FakeOcrService",
     "InMemoryClipboardService",
     "InMemoryTranslationCache",
+    "MssCaptureService",
     "OcrError",
     "OcrResult",
     "OcrService",

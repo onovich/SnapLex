@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+import importlib
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Any, Protocol
 
 
 class CaptureError(RuntimeError):
@@ -80,3 +81,42 @@ class FakeCaptureService:
             raise CaptureError("Fake capture service was configured to fail.")
 
         return CapturedImage(region=region, data=self._image_data, image_format=self._image_format)
+
+
+class MssCaptureService:
+    def __init__(self, mss_factory: Any, png_encoder: Any) -> None:
+        self._mss_factory = mss_factory
+        self._png_encoder = png_encoder
+
+    @classmethod
+    def from_optional_dependency(cls) -> "MssCaptureService":
+        mss_factory, png_encoder = _load_mss_dependencies()
+        return cls(mss_factory=mss_factory, png_encoder=png_encoder)
+
+    def capture_region(self, region: ScreenRegion) -> CapturedImage:
+        monitor = {
+            "left": region.left,
+            "top": region.top,
+            "width": region.width,
+            "height": region.height,
+        }
+        try:
+            with self._mss_factory() as screen_capture:
+                screenshot = screen_capture.grab(monitor)
+            image_data = self._png_encoder(screenshot.rgb, screenshot.size)
+        except Exception as exc:
+            raise CaptureError("Failed to capture the selected screen region.") from exc
+
+        return CapturedImage(region=region, data=image_data, image_format="png")
+
+
+def _load_mss_dependencies(import_module: Any = importlib.import_module) -> tuple[Any, Any]:
+    try:
+        mss_module = import_module("mss")
+        tools_module = import_module("mss.tools")
+    except ModuleNotFoundError as exc:
+        raise CaptureError(
+            "mss is required for screen capture. Install with `python -m pip install -e .[capture]`."
+        ) from exc
+
+    return mss_module.mss, tools_module.to_png
