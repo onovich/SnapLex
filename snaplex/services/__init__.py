@@ -23,6 +23,10 @@ from snaplex.services.ocr_service import (
     OcrUnavailableError,
     PaddleOcrService,
 )
+from snaplex.services.screen_translation_service import (
+    ScreenTranslationResponse,
+    ScreenTranslationService,
+)
 from snaplex.services.text import normalize_text
 from snaplex.services.translation_cache import (
     InMemoryTranslationCache,
@@ -54,6 +58,8 @@ __all__ = [
     "PaddleOcrService",
     "QtClipboardService",
     "ScreenRegion",
+    "ScreenTranslationResponse",
+    "ScreenTranslationService",
     "TranslationCache",
     "TranslationCacheKey",
     "TranslationPipeline",
