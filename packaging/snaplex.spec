@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 
-project_root = Path(SPECPATH).parent.parent
+project_root = Path(SPECPATH).parent
 package_variant = os.environ.get("SNAPLEX_PACKAGE_VARIANT", "base").strip().lower() or "base"
 
 hidden_imports = [
