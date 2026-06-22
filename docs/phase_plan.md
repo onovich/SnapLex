@@ -17,7 +17,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P1 | Core Pipeline Foundation | Build text normalization, provider abstraction, fake providers, cache, and config boundaries. | 6 rounds |
 | P2 | Clipboard Translation MVP | Deliver a usable clipboard-to-popup desktop flow. | 8 rounds |
 | P3 | Screen Capture and OCR MVP | Deliver region capture, OCR extraction, and shared translate/render flow. | 10 rounds |
-| P4 | Provider Hardening and Fallbacks | Add real provider integrations, timeout handling, fallback order, and settings. | 7 rounds |
+| P4 | Provider Hardening and Fallbacks | Add real provider integrations, timeout handling, fallback order, and safe provider configuration. | 7 rounds |
 | P5 | History, Persistence, and Settings UX | Add local settings and optional recent translation history. | 6 rounds |
 | P6 | Packaging and Release Readiness | Produce and smoke-test a Windows distributable. | 7 rounds |
 | P7 | Expansion Track | Prepare optional AI summary, multilingual polish, and browser-extension bridge planning. | 5 rounds |
@@ -189,6 +189,8 @@ Round split:
 
 Estimated rounds: 7
 
+Execution guide: `docs/p4_provider_hardening_goal_guide.md`
+
 Goal: make real translation providers usable while keeping development and failure behavior predictable.
 
 Scope:
@@ -220,7 +222,7 @@ Round split:
 - Round 3: OpenAI adapter.
 - Round 4: DeepL adapter.
 - Round 5: fallback order, retry, timeout behavior.
-- Round 6: provider settings UI/docs.
+- Round 6: provider configuration docs and optional real-provider smoke.
 - Round 7: validation and hardening.
 
 ## 7. P5 - History, Persistence, and Settings UX
@@ -335,12 +337,12 @@ Round split:
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P2 - Clipboard Translation MVP.
+Current accepted phase: P3 - Screen Capture and OCR MVP.
 
-Recommended next phase: P3 - Screen Capture and OCR MVP.
+Recommended next phase: P4 - Provider Hardening and Fallbacks.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
-The latest completed phase report is `docs/p2_final_validation_report.md`.
-The next handoff is `docs/p2_to_p3_handoff.md`.
-The direct execution guide for the next phase is `docs/p3_screen_capture_ocr_goal_guide.md`.
+The latest completed phase report is `docs/p3_final_validation_report.md`.
+The next handoff is `docs/p3_to_p4_handoff.md`.
+The direct execution guide for the next phase is `docs/p4_provider_hardening_goal_guide.md`.

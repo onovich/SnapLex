@@ -2,7 +2,7 @@
 
 P3 goal: build the screen capture and OCR MVP on top of the accepted P1 translation pipeline and P2 result-flow pattern.
 
-Status: implementation complete, ready for validation.
+Status: implementation complete, planner-accepted.
 
 Executable guide: `docs/p3_screen_capture_ocr_goal_guide.md`
 

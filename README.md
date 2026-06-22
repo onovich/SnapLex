@@ -23,6 +23,7 @@ The current project source of truth lives in:
 - `docs/p3_screen_capture_ocr_goal_guide.md`
 - `docs/p3_final_validation_report.md`
 - `docs/p3_to_p4_handoff.md`
+- `docs/p4_provider_hardening_goal_guide.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -34,6 +35,7 @@ The current project source of truth lives in:
 - `docs/p3_todo.md`
 - `docs/windows_smoke_checklist.md`
 - `docs/p0_final_validation_report.md`
+- `docs/p4_todo.md`
 
 ## Planned Stack
 
@@ -46,15 +48,15 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has an accepted P0 repository baseline, an accepted P1 non-UI
-translation pipeline foundation, an accepted P2 clipboard translation MVP, and a
-completed P3 screen capture/OCR MVP ready for architect/PM validation. The
-screen path includes a manual `Translate Screen` action, region selector,
-capture/OCR service boundaries, fake offline capture/OCR flow, optional lazy
-`mss` and PaddleOCR adapters, shared result view, copy, retry, cancel, and
-user-friendly failure states.
+translation pipeline foundation, an accepted P2 clipboard translation MVP, and
+an accepted P3 screen capture/OCR MVP. The screen path includes a manual
+`Translate Screen` action, region selector, capture/OCR service boundaries, fake
+offline capture/OCR flow, optional lazy `mss` and PaddleOCR adapters, shared
+result view, copy, retry, cancel, and user-friendly failure states.
 
-The next planned implementation phase after P3 acceptance is P4 provider
-hardening and fallbacks. Start from `docs/p3_to_p4_handoff.md`.
+The next planned implementation phase is P4 provider hardening and fallbacks.
+Start from `docs/p4_provider_hardening_goal_guide.md` and
+`docs/p3_to_p4_handoff.md`.
 
 ## Setup
 

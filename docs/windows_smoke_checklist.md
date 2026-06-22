@@ -4,6 +4,7 @@ Use this checklist after automated validation passes.
 
 Latest P2 smoke evidence is recorded in `docs/p2_windows_smoke_evidence.md`.
 Latest P3 smoke evidence is recorded in `docs/p3_windows_smoke_evidence.md`.
+P4 provider smoke planning is recorded in `docs/p4_provider_hardening_goal_guide.md`.
 
 ## Automated Precheck
 
@@ -138,10 +139,23 @@ Expected result:
 - The command prints the PySide6 install hint.
 - The command exits with code 0.
 
-## Not Expected In P2
+## P4 Provider Configuration Smoke
 
-- Real screen-region capture.
-- Real OCR extraction.
+After P4 is implemented, provider smoke should use local environment variables
+or ignored local configuration only. Automated P4 tests must still use mocked
+HTTP and must not call external services.
+
+Expected result:
+
+- Fake provider remains the default no-credential path.
+- Missing LibreTranslate/OpenAI/DeepL credentials produce controlled provider
+  errors or provider omission, not app bootstrap crashes.
+- A real-provider smoke is recorded only when local credentials or endpoints are
+  already available.
+
+## Deferred To Later Phases
+
 - Global clipboard hotkey handling.
-- Network translation providers.
 - Windows packaging.
+- Persistent settings/history UI.
+- Browser extension and AI summary expansion.

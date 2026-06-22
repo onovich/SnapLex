@@ -62,7 +62,7 @@ The P2 final report is `docs/p2_final_validation_report.md`; the P3 handoff is
 
 ## Implemented P3 Screen Capture And OCR MVP
 
-The repository now has the screen translation vertical slice ready for validation:
+The repository now has an accepted screen translation vertical slice:
 
 - `snaplex/ui/region_selector.py` provides a minimal Qt region selection overlay
   and a pure selection presenter for tests.
@@ -79,7 +79,8 @@ The repository now has the screen translation vertical slice ready for validatio
   import or no-GUI bootstrap.
 
 The P3 final report is `docs/p3_final_validation_report.md`; the P4 handoff is
-`docs/p3_to_p4_handoff.md`.
+`docs/p3_to_p4_handoff.md`; the P4 execution guide is
+`docs/p4_provider_hardening_goal_guide.md`.
 
 ## MVP Goals
 
@@ -142,6 +143,7 @@ The P3 final report is `docs/p3_final_validation_report.md`; the P4 handoff is
 The concrete phase-by-phase execution plan is maintained in `docs/phase_plan.md`.
 The full P0-P7 delegated execution guide is maintained in `docs/p0_p7_goal_mode_execution_guide.md`.
 The first executable phase guide is maintained in `docs/p0_repository_baseline_goal_guide.md`.
+The next executable phase guide is maintained in `docs/p4_provider_hardening_goal_guide.md`.
 
 Summary:
 

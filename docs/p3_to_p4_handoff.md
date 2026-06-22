@@ -1,7 +1,9 @@
 # P3 to P4 Handoff
 
 Date: 2026-06-22
-Status: P3 screen capture/OCR MVP ready for validation
+Status: P3 screen capture/OCR MVP accepted; P4 ready for execution
+
+Executable P4 guide: `docs/p4_provider_hardening_goal_guide.md`
 
 ## P4 Goal
 
@@ -92,4 +94,3 @@ clipboard or screen widgets to know which provider is active.
 Add the first real provider adapter behind the existing `TranslationProvider`
 protocol with mocked HTTP tests and no UI changes. Keep the default provider
 registry fake-first until configuration and credentials are explicitly wired.
-
