@@ -5,9 +5,24 @@ from snaplex.providers.base import (
     TranslationRequest,
     TranslationResponse,
 )
+from snaplex.providers.config import (
+    ProviderRuntimeConfig,
+    copy_provider_runtime_configs,
+    default_provider_runtime_configs,
+    resolve_api_key,
+)
 from snaplex.providers.fake import FakeTranslationProvider, FakeTranslationScenario
+from snaplex.providers.http import (
+    HttpRequest,
+    HttpResponse,
+    HttpTransport,
+    HttpTransportError,
+    HttpTransportTimeout,
+    UrllibHttpTransport,
+)
 from snaplex.providers.registry import ProviderRegistry, create_default_provider_registry
 from snaplex.errors import (
+    MissingProviderCredentialError,
     StaleTranslationResultError,
     TranslationProviderError,
     TranslationProviderTimeoutError,
@@ -17,7 +32,14 @@ from snaplex.errors import (
 __all__ = [
     "FakeTranslationProvider",
     "FakeTranslationScenario",
+    "HttpRequest",
+    "HttpResponse",
+    "HttpTransport",
+    "HttpTransportError",
+    "HttpTransportTimeout",
+    "MissingProviderCredentialError",
     "ProviderRegistry",
+    "ProviderRuntimeConfig",
     "StaleTranslationResultError",
     "TranslationProvider",
     "TranslationProviderError",
@@ -25,5 +47,9 @@ __all__ = [
     "TranslationRequest",
     "TranslationResponse",
     "UnsupportedLanguageError",
+    "UrllibHttpTransport",
+    "copy_provider_runtime_configs",
     "create_default_provider_registry",
+    "default_provider_runtime_configs",
+    "resolve_api_key",
 ]

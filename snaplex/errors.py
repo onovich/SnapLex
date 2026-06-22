@@ -36,6 +36,23 @@ class TranslationProviderTimeoutError(TranslationProviderError):
     default_message = "Translation provider timed out."
 
 
+class MissingProviderCredentialError(TranslationProviderError):
+    """Raised when a configured provider requires a missing local credential."""
+
+    code = "missing_provider_credential"
+    default_message = "Translation provider credential is missing."
+
+    def __init__(
+        self,
+        message: str | None = None,
+        *,
+        env_var: str,
+        provider_name: str | None = None,
+    ) -> None:
+        self.env_var = env_var
+        super().__init__(message, provider_name=provider_name)
+
+
 class UnsupportedLanguageError(TranslationProviderError):
     """Raised when a provider does not support the requested language pair."""
 

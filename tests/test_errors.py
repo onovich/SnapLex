@@ -1,6 +1,7 @@
 from snaplex.errors import (
     EmptyTranslationInputError,
     FallbackExhaustedError,
+    MissingProviderCredentialError,
     StaleTranslationResultError,
     TranslationProviderError,
     TranslationProviderTimeoutError,
@@ -14,6 +15,7 @@ def test_translation_errors_have_stable_codes_and_messages() -> None:
         EmptyTranslationInputError(),
         TranslationProviderError(provider_name="fake"),
         TranslationProviderTimeoutError(provider_name="slow"),
+        MissingProviderCredentialError(env_var="SNAPLEX_EXAMPLE_API_KEY", provider_name="api"),
         StaleTranslationResultError(provider_name="stale"),
         UnknownTranslationProviderError(provider_name="missing"),
     ]
@@ -22,11 +24,13 @@ def test_translation_errors_have_stable_codes_and_messages() -> None:
         "empty_input",
         "provider_failure",
         "provider_timeout",
+        "missing_provider_credential",
         "stale_result",
         "unknown_provider",
     ]
     assert str(errors[1]) == "Translation provider failed."
     assert errors[1].provider_name == "fake"
+    assert errors[3].env_var == "SNAPLEX_EXAMPLE_API_KEY"
 
 
 def test_unsupported_language_error_keeps_language_pair() -> None:
