@@ -1,7 +1,10 @@
+import asyncio
+
 import pytest
 
 from snaplex.errors import (
     FallbackExhaustedError,
+    TranslationProviderTimeoutError,
     TranslationProviderError,
     UnknownTranslationProviderError,
     UnsupportedLanguageError,
@@ -164,6 +167,19 @@ def test_pipeline_uses_provider_order_for_fallback_success() -> None:
     assert result.provider_name == "backup"
 
 
+def test_pipeline_can_fallback_after_provider_timeout() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="primary", provider_order=("primary", "backup")),
+        FakeTranslationProvider(name="primary", scenario=FakeTranslationScenario.TIMEOUT),
+        FakeTranslationProvider(name="backup", translations={"hello": "after timeout"}),
+    )
+
+    result = pipeline.translate_text("hello")
+
+    assert result.translated_text == "after timeout"
+    assert result.provider_name == "backup"
+
+
 def test_pipeline_does_not_cache_failed_response() -> None:
     cache = InMemoryTranslationCache()
     pipeline = make_pipeline(
@@ -176,3 +192,37 @@ def test_pipeline_does_not_cache_failed_response() -> None:
         pipeline.translate_text("hello")
 
     assert len(cache) == 0
+
+
+def test_pipeline_timeout_exhaustion_preserves_timeout_error() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake"),
+        FakeTranslationProvider(name="fake", scenario=FakeTranslationScenario.TIMEOUT),
+    )
+
+    with pytest.raises(FallbackExhaustedError) as exc_info:
+        pipeline.translate_text("hello")
+
+    assert isinstance(exc_info.value.provider_errors[0], TranslationProviderTimeoutError)
+
+
+def test_pipeline_async_boundary_returns_translation() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake"),
+        FakeTranslationProvider(name="fake", translations={"hello": "async hello"}),
+    )
+
+    result = asyncio.run(pipeline.translate_text_async("hello"))
+
+    assert result.translated_text == "async hello"
+    assert result.provider_name == "fake"
+
+
+def test_pipeline_async_boundary_propagates_errors() -> None:
+    pipeline = make_pipeline(
+        AppConfig(provider_name="fake"),
+        FakeTranslationProvider(name="fake", scenario=FakeTranslationScenario.TIMEOUT),
+    )
+
+    with pytest.raises(FallbackExhaustedError):
+        asyncio.run(pipeline.translate_text_async("hello"))

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import asyncio
+
 from snaplex.errors import FallbackExhaustedError, TranslationError
 from snaplex.providers.base import TranslationProvider, TranslationRequest, TranslationResponse
 from snaplex.providers.registry import ProviderRegistry, create_default_provider_registry
@@ -94,6 +96,20 @@ class TranslationPipeline:
             return response
 
         raise FallbackExhaustedError(provider_errors=tuple(provider_errors))
+
+    async def translate_text_async(
+        self,
+        text: str,
+        *,
+        source_lang: str | None = None,
+        target_lang: str | None = None,
+    ) -> TranslationResponse:
+        return await asyncio.to_thread(
+            self.translate_text,
+            text,
+            source_lang=source_lang,
+            target_lang=target_lang,
+        )
 
     def _build_request(
         self,
