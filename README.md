@@ -22,3 +22,57 @@ The current project source of truth lives in:
 - PaddleOCR first, with a Tesseract-compatible service boundary.
 - Pluggable translation providers for LibreTranslate, OpenAI, DeepL, or local fallback providers.
 - PyInstaller for Windows packaging.
+
+## Current Status
+
+SnapLex is in P0 repository baseline work. The repository now has a Python package
+skeleton, project metadata, and a bootstrap command that can be checked before GUI
+dependencies are installed.
+
+## Setup
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e .
+```
+
+Install the optional desktop dependency when you want to launch the PySide6 shell:
+
+```powershell
+python -m pip install -e ".[gui]"
+```
+
+## Run
+
+Bootstrap check without starting the desktop shell:
+
+```powershell
+python -m snaplex --no-gui
+```
+
+Launch the desktop shell after installing the GUI extra:
+
+```powershell
+python -m snaplex
+```
+
+The same entry point is exposed as a console script after editable install:
+
+```powershell
+snaplex --no-gui
+```
+
+## Development Checks
+
+Round 1 validation uses import and bootstrap checks:
+
+```powershell
+python -m compileall snaplex
+python -m snaplex --version
+python -m snaplex --no-gui
+```
+
+Unit tests and stricter lint/typecheck commands are planned for later P0 rounds,
+after service contracts and fake implementations exist.
