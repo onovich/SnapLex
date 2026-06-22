@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-from snaplex.services import CaptureService, OcrService, ScreenRegion
+from snaplex.services import CaptureError, CaptureService, OcrService, ScreenRegion
 from snaplex.ui.translation_result import (
     TranslationPipelineLike,
     TranslationResultPresenter,
@@ -46,9 +46,36 @@ class ScreenTranslationPresenter(TranslationResultPresenter):
     ) -> ScreenTranslationState:
         self._last_region = region
         self.request_screen_translation()
-        captured_image = capture_service.capture_region(region)
+        try:
+            captured_image = capture_service.capture_region(region)
+        except CaptureError:
+            return self.show_error("Could not capture the selected screen region. Try again.")
+
         ocr_result = ocr_service.extract_text(captured_image)
         return await self.translate_source_text(source_text=ocr_result.text, pipeline=pipeline)
+
+    async def translate_region_from_points(
+        self,
+        *,
+        start_x: int,
+        start_y: int,
+        end_x: int,
+        end_y: int,
+        capture_service: CaptureService,
+        ocr_service: OcrService,
+        pipeline: TranslationPipelineLike,
+    ) -> ScreenTranslationState:
+        try:
+            region = ScreenRegion.from_points(start_x, start_y, end_x, end_y)
+        except ValueError:
+            return self.show_error("Select a non-empty screen region.")
+
+        return await self.translate_region(
+            region=region,
+            capture_service=capture_service,
+            ocr_service=ocr_service,
+            pipeline=pipeline,
+        )
 
     async def retry_translation(
         self,
