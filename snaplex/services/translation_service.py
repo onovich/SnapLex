@@ -14,6 +14,7 @@ from snaplex.services.translation_cache import (
 )
 from snaplex.services.text import normalize_text
 from snaplex.storage import AppConfig, ConfigStore, InMemoryConfigStore
+from snaplex.providers.http import HttpTransport
 
 
 class TranslationService:
@@ -133,9 +134,13 @@ class TranslationPipeline:
 
 def create_default_translation_pipeline(
     config_store: ConfigStore | None = None,
+    *,
+    http_transport: HttpTransport | None = None,
 ) -> TranslationPipeline:
+    config_store = config_store or InMemoryConfigStore()
+    config = config_store.load()
     return TranslationPipeline(
-        config_store=config_store or InMemoryConfigStore(),
-        provider_registry=create_default_provider_registry(),
+        config_store=config_store,
+        provider_registry=create_default_provider_registry(config, http_transport=http_transport),
         cache=InMemoryTranslationCache(),
     )

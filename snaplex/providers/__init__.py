@@ -24,6 +24,7 @@ from snaplex.providers.http import (
 from snaplex.providers.libretranslate import LibreTranslateProvider
 from snaplex.providers.openai import OpenAITranslationProvider
 from snaplex.providers.registry import ProviderRegistry, create_default_provider_registry
+from snaplex.providers.retry import RetryingTranslationProvider
 from snaplex.errors import (
     MissingProviderCredentialError,
     StaleTranslationResultError,
@@ -46,6 +47,7 @@ __all__ = [
     "ProviderRegistry",
     "ProviderRuntimeConfig",
     "DeepLTranslationProvider",
+    "RetryingTranslationProvider",
     "StaleTranslationResultError",
     "TranslationProvider",
     "TranslationProviderError",

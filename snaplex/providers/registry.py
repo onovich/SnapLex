@@ -2,11 +2,18 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 
 from snaplex.errors import UnknownTranslationProviderError
 from snaplex.providers.base import TranslationProvider
+from snaplex.providers.config import ProviderRuntimeConfig, default_provider_runtime_configs
+from snaplex.providers.deepl import DeepLTranslationProvider
 from snaplex.providers.fake import FakeTranslationProvider
+from snaplex.providers.http import HttpTransport
+from snaplex.providers.libretranslate import LibreTranslateProvider
+from snaplex.providers.openai import OpenAITranslationProvider
+from snaplex.providers.retry import RetryingTranslationProvider
+from snaplex.storage.config import AppConfig
 
 
 class ProviderRegistry:
@@ -34,5 +41,61 @@ class ProviderRegistry:
         return tuple(self._providers.keys())
 
 
-def create_default_provider_registry() -> ProviderRegistry:
-    return ProviderRegistry([FakeTranslationProvider()])
+def create_default_provider_registry(
+    config: AppConfig | None = None,
+    *,
+    http_transport: HttpTransport | None = None,
+    environ: Mapping[str, str] | None = None,
+) -> ProviderRegistry:
+    provider_configs = _merged_provider_configs(config)
+    providers: list[TranslationProvider] = [
+        FakeTranslationProvider(),
+        _with_retry(
+            LibreTranslateProvider(
+                config=provider_configs["libretranslate"],
+                transport=http_transport,
+                environ=environ,
+            ),
+            provider_configs["libretranslate"],
+        ),
+        _with_retry(
+            OpenAITranslationProvider(
+                config=provider_configs["openai"],
+                transport=http_transport,
+                environ=environ,
+            ),
+            provider_configs["openai"],
+        ),
+        _with_retry(
+            DeepLTranslationProvider(
+                config=provider_configs["deepl"],
+                transport=http_transport,
+                environ=environ,
+            ),
+            provider_configs["deepl"],
+        ),
+    ]
+    return ProviderRegistry(providers)
+
+
+def _with_retry(
+    provider: TranslationProvider,
+    config: ProviderRuntimeConfig,
+) -> TranslationProvider:
+    if config.retry_count <= 0:
+        return provider
+    return RetryingTranslationProvider(provider, retry_count=config.retry_count)
+
+
+def _merged_provider_configs(
+    config: AppConfig | None,
+) -> dict[str, ProviderRuntimeConfig]:
+    provider_configs = default_provider_runtime_configs()
+    if config is None:
+        return provider_configs
+
+    provider_configs.update(config.provider_configs)
+    return {
+        name: provider_config.with_copied_options()
+        for name, provider_config in provider_configs.items()
+    }

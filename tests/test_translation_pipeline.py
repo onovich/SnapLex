@@ -4,6 +4,7 @@ import pytest
 
 from snaplex.errors import (
     FallbackExhaustedError,
+    MissingProviderCredentialError,
     TranslationProviderTimeoutError,
     TranslationProviderError,
     UnknownTranslationProviderError,
@@ -19,6 +20,8 @@ from snaplex.providers import (
 from snaplex.services import TranslationPipeline, create_default_translation_pipeline
 from snaplex.services.translation_cache import InMemoryTranslationCache, TranslationCacheKey
 from snaplex.storage import AppConfig, InMemoryConfigStore
+from snaplex.providers.config import ProviderRuntimeConfig
+from snaplex.providers.http import HttpRequest, HttpResponse, HttpTransportTimeout
 
 
 def make_pipeline(
@@ -226,3 +229,79 @@ def test_pipeline_async_boundary_propagates_errors() -> None:
 
     with pytest.raises(FallbackExhaustedError):
         asyncio.run(pipeline.translate_text_async("hello"))
+
+
+class SequenceTransport:
+    def __init__(self, responses: list[HttpResponse | Exception]) -> None:
+        self.responses = responses
+        self.requests: list[HttpRequest] = []
+
+    def send(self, request: HttpRequest) -> HttpResponse:
+        self.requests.append(request)
+        response = self.responses.pop(0)
+        if isinstance(response, Exception):
+            raise response
+        return response
+
+
+def test_default_pipeline_can_use_configured_libretranslate_provider() -> None:
+    transport = SequenceTransport([HttpResponse(200, b'{"translatedText":"hola"}')])
+    config = AppConfig(
+        provider_name="libretranslate",
+        provider_order=("libretranslate",),
+        provider_configs={
+            "libretranslate": ProviderRuntimeConfig(base_url="https://libre.example"),
+        },
+    )
+    pipeline = create_default_translation_pipeline(
+        config_store=InMemoryConfigStore(config),
+        http_transport=transport,
+    )
+
+    result = pipeline.translate_text("hello", source_lang="en", target_lang="es")
+
+    assert result.translated_text == "hola"
+    assert result.provider_name == "libretranslate"
+    assert transport.requests[0].url == "https://libre.example/translate"
+
+
+def test_default_pipeline_retries_then_falls_back_to_fake_provider() -> None:
+    transport = SequenceTransport([HttpTransportTimeout("timed out")])
+    config = AppConfig(
+        provider_name="libretranslate",
+        provider_order=("libretranslate", "fake"),
+        provider_configs={
+            "libretranslate": ProviderRuntimeConfig(
+                base_url="https://libre.example",
+                retry_count=0,
+            ),
+        },
+    )
+    pipeline = create_default_translation_pipeline(
+        config_store=InMemoryConfigStore(config),
+        http_transport=transport,
+    )
+
+    result = pipeline.translate_text("hello")
+
+    assert result.provider_name == "fake"
+    assert result.translated_text == "hello [en]"
+
+
+def test_default_pipeline_preserves_missing_credential_on_exhaustion() -> None:
+    config = AppConfig(
+        provider_name="openai",
+        provider_order=("openai",),
+        provider_configs={
+            "openai": ProviderRuntimeConfig(
+                base_url="https://api.openai.example/v1",
+                api_key_env_var="SNAPLEX_OPENAI_API_KEY",
+            ),
+        },
+    )
+    pipeline = create_default_translation_pipeline(config_store=InMemoryConfigStore(config))
+
+    with pytest.raises(FallbackExhaustedError) as exc_info:
+        pipeline.translate_text("hello")
+
+    assert isinstance(exc_info.value.provider_errors[0], MissingProviderCredentialError)
