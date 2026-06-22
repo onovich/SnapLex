@@ -36,7 +36,19 @@ C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\ReleaseDry
 
 ## Validate Sequence
 
-lint, typecheck, build, test, structureCheck, docsCheck
+lint, format, typecheck, build, test, structureCheck, docsCheck
+
+## Configured Commands
+
+- Env check: `python --version`
+- Install deps: `python -m pip install -e ".[dev]"`
+- Lint: `python -m ruff check .`
+- Format check: `python -m ruff format --check .`
+- Typecheck: `python -m mypy snaplex`
+- Build/import check: `python -m compileall snaplex`
+- Test: `python -m pytest`
+- Structure check: verify `snaplex/app.py`, `snaplex/services`, `snaplex/providers`, `snaplex/storage`, and `tests` exist.
+- Docs check: verify README contains setup, run, development checks, and package layout sections.
 
 ## Dev Server
 

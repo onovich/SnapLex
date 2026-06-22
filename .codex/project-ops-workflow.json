@@ -6,6 +6,7 @@
     "repoRoot":  "D:/ToolProjects/SnapLex",
     "validateSequence":  [
                              "lint",
+                             "format",
                              "typecheck",
                              "build",
                              "test",
@@ -15,7 +16,7 @@
     "operations":  {
                        "envCheck":  {
                                         "commands":  [
-
+                                                         "python --version"
                                                      ]
                                     },
                        "restoreDeps":  {
@@ -25,37 +26,37 @@
                                        },
                        "installDeps":  {
                                            "commands":  [
-
+                                                            "python -m pip install -e \".[dev]\""
                                                         ]
                                        },
                        "build":  {
                                      "commands":  [
-
+                                                      "python -m compileall snaplex"
                                                   ]
                                  },
                        "test":  {
                                     "commands":  [
-
+                                                     "python -m pytest"
                                                  ]
                                 },
                        "lint":  {
                                     "commands":  [
-
+                                                     "python -m ruff check ."
                                                  ]
                                 },
                        "format":  {
                                       "commands":  [
-
+                                                       "python -m ruff format --check ."
                                                    ]
                                   },
                        "typecheck":  {
                                          "commands":  [
-
+                                                          "python -m mypy snaplex"
                                                       ]
                                      },
                        "structureCheck":  {
                                               "commands":  [
-
+                                                               "python -c \"from pathlib import Path; required=['snaplex/app.py','snaplex/services','snaplex/providers','snaplex/storage','tests']; missing=[p for p in required if not Path(p).exists()]; assert not missing, missing\""
                                                            ]
                                           },
                        "codegen":  {
@@ -65,7 +66,7 @@
                                    },
                        "docsCheck":  {
                                          "commands":  [
-
+                                                          "python -c \"from pathlib import Path; text=Path('README.md').read_text(encoding='utf-8'); required=['## Setup','## Run','## Development Checks','## Package Layout']; missing=[s for s in required if s not in text]; assert not missing, missing\""
                                                       ]
                                      },
                        "smoke":  {

@@ -43,3 +43,7 @@ testpaths = ["tests"]
 [tool.mypy]
 python_version = "3.11"
 packages = ["snaplex"]
+
+[[tool.mypy.overrides]]
+module = ["PySide6.*"]
+ignore_missing_imports = true

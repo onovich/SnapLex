@@ -36,7 +36,9 @@ class CaptureService(Protocol):
 
 
 class FakeCaptureService:
-    def __init__(self, image_data: bytes = b"snaplex-fake-image", image_format: str = "png") -> None:
+    def __init__(
+        self, image_data: bytes = b"snaplex-fake-image", image_format: str = "png"
+    ) -> None:
         self._image_data = image_data
         self._image_format = image_format
 

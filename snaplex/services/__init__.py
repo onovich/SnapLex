@@ -7,7 +7,11 @@ from snaplex.services.capture_service import (
     FakeCaptureService,
     ScreenRegion,
 )
-from snaplex.services.clipboard_service import ClipboardError, ClipboardService, InMemoryClipboardService
+from snaplex.services.clipboard_service import (
+    ClipboardError,
+    ClipboardService,
+    InMemoryClipboardService,
+)
 from snaplex.services.ocr_service import FakeOcrService, OcrError, OcrResult, OcrService
 from snaplex.services.text import normalize_text
 from snaplex.services.translation_service import TranslationService

@@ -66,7 +66,7 @@ snaplex --no-gui
 
 ## Development Checks
 
-Round 1 validation uses import and bootstrap checks:
+Quick bootstrap checks:
 
 ```powershell
 python -m compileall snaplex
@@ -74,8 +74,19 @@ python -m snaplex --version
 python -m snaplex --no-gui
 ```
 
-Unit tests and stricter lint/typecheck commands are planned for later P0 rounds,
-after service contracts and fake implementations exist.
+Full local validation now runs through the project ops wrapper:
+
+```powershell
+C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\Validate.cmd
+```
+
+The configured validation sequence is:
+
+- `python -m ruff check .`
+- `python -m ruff format --check .`
+- `python -m mypy snaplex`
+- `python -m compileall snaplex`
+- `python -m pytest`
 
 ## Package Layout
 
