@@ -13,6 +13,9 @@ Build a console-mode package for repeatable launch smoke:
 python scripts\package_windows.py
 ```
 
+The default command uses the tracked spec at `packaging\snaplex.spec`. Use
+`--no-spec` only when diagnosing PyInstaller option changes locally.
+
 Preview the exact PyInstaller command without building:
 
 ```powershell

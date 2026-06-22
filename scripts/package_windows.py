@@ -20,6 +20,7 @@ DEFAULT_APP_NAME = "SnapLex"
 DEFAULT_DIST_DIR = PROJECT_ROOT / "dist"
 DEFAULT_WORK_DIR = PROJECT_ROOT / "build" / "pyinstaller"
 DEFAULT_SPEC_DIR = PROJECT_ROOT / "build" / "pyinstaller" / "spec"
+TRACKED_SPEC_PATH = PROJECT_ROOT / "packaging" / "snaplex.spec"
 ENTRY_SCRIPT = PROJECT_ROOT / "snaplex" / "__main__.py"
 
 
@@ -30,6 +31,8 @@ class PackageWindowsOptions:
     dist_dir: Path
     work_dir: Path
     spec_dir: Path
+    spec_path: Path
+    use_spec: bool
     clean: bool
     noconfirm: bool
     dry_run: bool
@@ -42,22 +45,30 @@ def build_pyinstaller_command(options: PackageWindowsOptions) -> list[str]:
         sys.executable,
         "-m",
         "PyInstaller",
-        "--name",
-        options.app_name,
         "--distpath",
         str(options.dist_dir),
         "--workpath",
         str(options.work_dir),
-        "--specpath",
-        str(options.spec_dir),
-        "--paths",
-        str(PROJECT_ROOT),
     ]
-    command.append("--windowed" if options.mode == "windowed" else "--console")
     if options.clean:
         command.append("--clean")
     if options.noconfirm:
         command.append("--noconfirm")
+    if options.use_spec:
+        command.append(str(options.spec_path))
+        return command
+
+    command.extend(
+        [
+            "--name",
+            options.app_name,
+            "--specpath",
+            str(options.spec_dir),
+            "--paths",
+            str(PROJECT_ROOT),
+        ]
+    )
+    command.append("--windowed" if options.mode == "windowed" else "--console")
     command.append(str(ENTRY_SCRIPT))
     return command
 
@@ -91,6 +102,17 @@ def build_parser() -> argparse.ArgumentParser:
         default=DEFAULT_SPEC_DIR,
         help="Directory for generated throwaway PyInstaller spec files.",
     )
+    parser.add_argument(
+        "--spec-path",
+        type=Path,
+        default=TRACKED_SPEC_PATH,
+        help="Tracked PyInstaller spec path used by default.",
+    )
+    parser.add_argument(
+        "--no-spec",
+        action="store_true",
+        help="Generate a temporary spec from command-line options instead of using packaging/snaplex.spec.",
+    )
     parser.add_argument("--no-clean", action="store_true", help="Skip PyInstaller --clean.")
     parser.add_argument(
         "--no-confirm",
@@ -112,6 +134,8 @@ def options_from_args(args: argparse.Namespace) -> PackageWindowsOptions:
         dist_dir=args.dist_dir,
         work_dir=args.work_dir,
         spec_dir=args.spec_dir,
+        spec_path=args.spec_path,
+        use_spec=not args.no_spec,
         clean=not args.no_clean,
         noconfirm=not args.no_confirm,
         dry_run=args.dry_run,
@@ -121,6 +145,10 @@ def options_from_args(args: argparse.Namespace) -> PackageWindowsOptions:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     options = options_from_args(parser.parse_args(argv))
+    if options.use_spec and not options.spec_path.exists():
+        print(f"PyInstaller spec not found: {options.spec_path}", file=sys.stderr)
+        return 1
+
     command = build_pyinstaller_command(options)
     print(subprocess.list2cmdline(command))
     if options.dry_run:
