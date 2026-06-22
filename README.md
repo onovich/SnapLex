@@ -24,6 +24,7 @@ The current project source of truth lives in:
 - `docs/p3_final_validation_report.md`
 - `docs/p3_to_p4_handoff.md`
 - `docs/p4_provider_hardening_goal_guide.md`
+- `docs/p4_provider_configuration.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -214,9 +215,26 @@ P3 adds the first screen-translation vertical slice:
   failure, OCR unavailable/failure, empty OCR result, translation failure, retry,
   copy, close, and optional dependency lazy-loading.
 
+## Provider Configuration
+
+P4 adds real provider adapters for LibreTranslate, OpenAI, and DeepL behind the
+existing `TranslationPipeline`. Fake provider mode remains the default. To select
+a real provider locally, set environment variables before launching the GUI:
+
+```powershell
+$env:SNAPLEX_PROVIDER = "libretranslate"
+$env:SNAPLEX_PROVIDER_ORDER = "libretranslate,fake"
+python -m snaplex
+```
+
+Use `.env.example` and `docs/p4_provider_configuration.md` for provider-specific
+base URLs, API-key env var names, timeout, retry, OpenAI model, and DeepL model
+type settings. Do not commit real API keys or local `.env` files.
+
 ## Current Boundaries
 
-The current implementation intentionally does not include global hotkeys, network
-translation providers, persistent history, or Windows packaging. Real capture/OCR
-adapters are present but optional and lazy; fake mode remains the deterministic
-default for automated tests. Later phases are staged in `docs/phase_plan.md`.
+The current implementation intentionally does not include global hotkeys,
+persistent history, settings UI, or Windows packaging. Real capture/OCR adapters
+and real translation providers are present but optional; fake mode remains the
+deterministic default for automated tests. Later phases are staged in
+`docs/phase_plan.md`.

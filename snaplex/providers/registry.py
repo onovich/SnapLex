@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
+from typing import TYPE_CHECKING
 
 from snaplex.errors import UnknownTranslationProviderError
 from snaplex.providers.base import TranslationProvider
@@ -13,7 +14,9 @@ from snaplex.providers.http import HttpTransport
 from snaplex.providers.libretranslate import LibreTranslateProvider
 from snaplex.providers.openai import OpenAITranslationProvider
 from snaplex.providers.retry import RetryingTranslationProvider
-from snaplex.storage.config import AppConfig
+
+if TYPE_CHECKING:
+    from snaplex.storage.config import AppConfig
 
 
 class ProviderRegistry:
