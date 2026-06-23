@@ -16,5 +16,6 @@ if errorlevel 1 (
 echo.
 echo Setup complete.
 echo Next:
-echo   StartTrial.cmd
 echo   BuildTrial.cmd
+echo   StartTrial.cmd          ^(requires a real provider env var^)
+echo   StartFakeTrial.cmd      ^(UI smoke only; not real translation^)

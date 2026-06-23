@@ -15,5 +15,6 @@ echo Build complete:
 echo   %CD%\dist\SnapLex\SnapLex.exe
 echo.
 echo Next:
-echo   StartPackagedTrial.cmd
+echo   StartPackagedTrial.cmd      ^(requires a real provider env var^)
+echo   StartPackagedFakeTrial.cmd  ^(UI smoke only; not real translation^)
 echo   SmokeTrial.cmd
