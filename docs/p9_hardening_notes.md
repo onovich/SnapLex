@@ -38,3 +38,16 @@ smoke scripts, and docs. Provider setup stays behind
 `SettingsService` / `SettingsPresenter`; translation execution stays behind
 `TranslationPipeline`; capture/OCR behavior stays behind existing service
 boundaries.
+
+## Round 14 Package Preservation Checks
+
+P9 support scripts and UI polish preserved the P6/P8 package and trial smoke
+baseline:
+
+- `python scripts\package_windows.py --dry-run --variant base`: PASS.
+- `cmd /c SmokeTrial.cmd`: PASS.
+- `cmd /c StartPackagedFakeTrial.cmd --no-gui`: PASS.
+
+`SmokeTrial.cmd` covered source version/no-GUI bootstrap, package dry-run, and
+existing packaged executable fake workflow smoke when the local packaged
+executable was present. Generated package and smoke outputs remain ignored.
