@@ -249,8 +249,7 @@ The closure package is `docs/p10_final_validation_report.md` and
 
 ## P11 Trial Release Hardening Completion
 
-P11 executor work is complete and ready for planner/checker review. It is
-release hardening, not feature expansion:
+P11 planner-accepted work is release hardening, not feature expansion:
 
 - visible Windows smoke for shell, Settings, History, focus, long text, fake
   warnings, and real/fake trial launch behavior;
@@ -270,6 +269,26 @@ boundaries.
 
 The closure package is `docs/p11_final_validation_report.md` and
 `docs/p11_to_p12_handoff.md`.
+
+## Selected P12 Private Trial Pilot And Feedback Triage
+
+P12 is the selected next post-MVP implementation goal. It prepares the first
+controlled private-trial pilot without adding runtime product scope:
+
+- tester-facing release notes;
+- feedback intake template and triage taxonomy;
+- first private-trial pass/fail criteria;
+- manual environment checks for assistive technology, DPI scaling,
+  multi-monitor behavior, visible GUI, packaged fake smoke, and trial scripts;
+- optional real-provider smoke policy that requires existing local credentials
+  and intentional network approval;
+- credential-capable package variant decision for a later phase;
+- preservation of deterministic validation, no-secret boundaries, and P10/P11
+  credential/release-hardening constraints.
+
+The executable guide is
+`docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`; the TODO is
+`docs/p12_todo.md`.
 
 ## MVP Goals
 
@@ -349,6 +368,7 @@ Summary:
 - P9 Apple-Inspired UI/UX Polish: 16 conversation rounds.
 - P10 Secure Credential And Account Strategy: 16 conversation rounds.
 - P11 Trial Release Hardening: 12 conversation rounds.
+- P12 Private Trial Pilot And Feedback Triage: 12 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -356,7 +376,8 @@ Including the selected P8 implementation goal, the post-MVP plan became 61
 rounds. Including the accepted P9 implementation goal, the post-MVP plan became
 77 rounds. Including accepted P10 credential/account strategy, the post-MVP
 plan became 93 rounds. Including executor-complete P11 trial release hardening,
-the current post-MVP plan is 105 rounds.
+the post-MVP plan became 105 rounds. Including selected P12 private trial pilot
+and feedback triage, the current post-MVP plan is 117 rounds.
 
 ## Validation Plan
 

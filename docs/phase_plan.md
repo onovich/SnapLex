@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P11 executor-complete planning document; pending planner/checker acceptance
+Status: P11 planner-accepted planning document with selected P12 execution goal
 
 ## 0. Round Estimate Rules
 
@@ -25,6 +25,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P9 | Apple-Inspired UI/UX Polish | Make the PySide6 desktop shell trial-ready with visual hierarchy, accessibility, keyboard flow, long-text handling, and screenshot-backed GUI smoke. | 16 rounds |
 | P10 | Secure Credential And Account Strategy | Add credential service boundaries, preserve env-var users, evaluate optional OS keyring storage, and document account/cloud strategy without production OAuth. | 16 rounds |
 | P11 | Trial Release Hardening | Validate visible Windows behavior, manual keyring smoke, packaged credential behavior, onboarding copy, and release notes before broader private trial. | 12 rounds |
+| P12 | Private Trial Pilot And Feedback Triage | Prepare tester-facing release notes, feedback intake, pass/fail criteria, manual environment checks, optional real-provider smoke policy, and triage rules. | 12 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -32,6 +33,7 @@ Total including selected P8 post-MVP implementation: 61 rounds.
 Total including selected P9 post-MVP implementation: 77 rounds.
 Total including selected P10 post-MVP implementation: 93 rounds.
 Total including selected P11 post-MVP implementation: 105 rounds.
+Total including selected P12 post-MVP implementation: 117 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -363,13 +365,13 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P10 - Secure Credential And Account Strategy.
-Latest executor-complete phase pending check: P11 - Trial Release Hardening.
+Current accepted phase: P11 - Trial Release Hardening.
 
 P0-P7 status: complete.
 
-Selected next step: review P11 using `docs/p11_final_validation_report.md` and
-`docs/p11_to_p12_handoff.md`.
+Selected next step: execute P12 using
+`docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
+`docs/p12_todo.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -652,6 +654,64 @@ Executor completion artifacts:
 - `docs/p11_final_validation_report.md`
 - `docs/p11_to_p12_handoff.md`
 
-Executor status:
+Planner acceptance:
 
-- P11 executor-complete on 2026-07-16; pending planner/checker acceptance.
+- P11 accepted on 2026-07-16 at
+  `66d3cef11db492b6c6170c26b69e483528186767`.
+- Selected next phase: P12 Private Trial Pilot And Feedback Triage.
+
+## 15. P12 - Private Trial Pilot And Feedback Triage
+
+Estimated rounds: 12
+
+Execution guide: `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`
+
+Goal: prepare the first controlled private-trial pilot with tester-facing
+materials, feedback triage rules, pass/fail criteria, manual environment
+checks, optional real-provider smoke policy, and credential package variant
+decision notes.
+
+Scope:
+
+- Revalidate the accepted P11 baseline.
+- Private-trial release notes for testers.
+- Feedback intake template and triage taxonomy.
+- First private-trial pass/fail criteria.
+- Manual environment checks for assistive technology, DPI scaling,
+  multi-monitor behavior, visible GUI, packaged fake smoke, and trial scripts.
+- Optional real-provider smoke run/skip policy.
+- Credential-capable package variant build/defer/reject decision.
+- Private-trial checklist and onboarding doc updates.
+
+Deliverables:
+
+- `docs/p12_private_trial_release_notes.md`
+- `docs/p12_feedback_intake_template.md`
+- `docs/p12_trial_pass_fail_criteria.md`
+- `docs/p12_manual_environment_checks.md`
+- `docs/p12_real_provider_smoke_decision.md`
+- `docs/p12_credential_package_variant_decision.md`
+- P12 final validation report and P12 to P13 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Package dry-run remains green.
+- Fake/real trial command smoke remains green.
+- P9 and P11 GUI smoke remain green.
+- Docs link/index and artifact/secret scans remain green.
+
+Round split:
+
+- Round 1: rebaseline and pilot scope.
+- Round 2: tester-facing release notes.
+- Round 3: feedback intake template.
+- Round 4: pass/fail criteria.
+- Round 5: manual environment checks.
+- Round 6: optional real-provider smoke decision.
+- Round 7: credential package variant decision.
+- Round 8: trial triage workflow.
+- Rounds 9-11: buffer hardening.
+- Round 12: final validation, report, and P13 handoff.

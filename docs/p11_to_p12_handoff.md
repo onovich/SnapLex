@@ -1,20 +1,22 @@
 # P11 To P12 Handoff
 
 Date: 2026-07-16
-Status: P11 executor-complete; ready for planner/checker acceptance
+Status: P11 planner-accepted; P12 ready for execution planning
 
 Recommended next phase: P12 Private Trial Pilot And Feedback Triage.
 
 P11 final validation report: `docs/p11_final_validation_report.md`
 P11 private trial checklist: `docs/p11_private_trial_release_checklist.md`
+Executable P12 guide: `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`
+P12 TODO: `docs/p12_todo.md`
 
 ## Accepted Input And Executor Baseline
 
 P11 started from planner-accepted P10 at
 `5a37564993c67dcf9c5bfe5da2ed06a44327874c`.
 
-The final P11 baseline is the pushed closure commit containing this handoff and
-`docs/p11_final_validation_report.md`.
+The final P11 baseline is the pushed closure commit
+`66d3cef11db492b6c6170c26b69e483528186767`.
 
 ## What P11 Leaves Stable
 
@@ -76,9 +78,10 @@ The final P11 baseline is the pushed closure commit containing this handoff and
   browser extension runtime, AI summary runtime, global hotkeys, provider
   rewrites, OCR/capture rewrites, or full localization has been implemented.
 
-## Recommended P12 Scope
+## Selected P12 Scope
 
-P12 should move from release hardening to controlled private-trial operation:
+P12 is selected to move from release hardening to controlled private-trial
+operation:
 
 - create tester-facing release notes and a feedback intake template;
 - define pass/fail criteria for first private trial builds;

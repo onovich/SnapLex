@@ -78,6 +78,8 @@ The current project source of truth lives in:
 - `docs/p11_boundary_scan_evidence.md`
 - `docs/p11_final_validation_report.md`
 - `docs/p11_to_p12_handoff.md`
+- `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`
+- `docs/p12_todo.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -104,16 +106,15 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P10. The P0-P7 track is complete with a Windows
+SnapLex has accepted P0 through P11. The P0-P7 track is complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
 optional lazy real capture/OCR adapters, real provider adapters for
 LibreTranslate/OpenAI/DeepL, mocked HTTP tests, fake offline defaults, persisted
 settings, optional recent translation history, shared result states, a
 PyInstaller spec, packaged release smoke commands, post-MVP expansion plans,
-provider setup UX, Apple-inspired UI polish, and accepted P10
-credential/account work. P11 Trial Release Hardening is executor-complete and
-ready for planner/checker review.
+provider setup UX, Apple-inspired UI polish, accepted P10 credential/account
+work, and accepted P11 trial release hardening.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -123,8 +124,11 @@ closure package. P9 Apple-Inspired UI/UX Polish is planner-accepted; use
 `docs/p9_final_validation_report.md` and `docs/p9_to_p10_handoff.md` for the
 P9 closure package. P10 Secure Credential And Account Strategy is
 planner-accepted; use `docs/p10_final_validation_report.md` and
-`docs/p10_to_p11_handoff.md`. P11 Trial Release Hardening is ready for check;
+`docs/p10_to_p11_handoff.md`. P11 Trial Release Hardening is planner-accepted;
 use `docs/p11_final_validation_report.md` and `docs/p11_to_p12_handoff.md`.
+The selected next goal is P12 Private Trial Pilot And Feedback Triage; use
+`docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
+`docs/p12_todo.md`.
 
 ## Setup
 
@@ -446,7 +450,7 @@ See `docs/p10_secure_credential_account_strategy_goal_guide.md`,
 
 ## P11 Trial Release Hardening
 
-P11 executor work hardens SnapLex for private Windows trial release by
+P11 planner-accepted work hardens SnapLex for private Windows trial release by
 validating visible desktop behavior, manual Windows Credential Locker/keyring
 behavior, packaged trial behavior, provider onboarding copy, key
 rotation/least-privilege notes, and the private-trial release checklist.
@@ -466,6 +470,22 @@ See `docs/p11_trial_release_hardening_goal_guide.md`,
 `docs/p11_boundary_scan_evidence.md`,
 `docs/p11_final_validation_report.md`,
 `docs/p11_to_p12_handoff.md`, and `docs/p11_todo.md`.
+
+## P12 Private Trial Pilot And Feedback Triage
+
+P12 is the selected next post-MVP implementation goal. It should prepare the
+first controlled private-trial pilot by producing tester-facing release notes,
+feedback intake templates, pass/fail criteria, manual environment-check
+instructions, optional real-provider smoke policy, and credential package
+variant decision notes.
+
+P12 must preserve P11/P10 boundaries: deterministic fake smoke, no-network
+automated tests, no-secret repository hygiene, credential service boundaries,
+and fail-closed real trial paths. It is private-trial operations and feedback
+triage, not feature expansion.
+
+See `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
+`docs/p12_todo.md`.
 
 ## Current Boundaries
 

@@ -1,0 +1,45 @@
+# P12 TODO
+
+P12 goal: prepare the first controlled private-trial pilot by producing
+tester-facing release notes, feedback intake templates, pass/fail criteria,
+manual environment checks, optional real-provider smoke policy, and credential
+package variant decision notes while preserving P11/P10 boundaries.
+
+Status: ready for execution.
+
+Executable guide: `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`
+
+Estimated budget: 12 conversation rounds.
+
+## Tasks
+
+- [ ] Revalidate the accepted P11 baseline.
+- [ ] Produce private-trial release notes for testers.
+- [ ] Produce feedback intake template and triage taxonomy.
+- [ ] Define first private-trial pass/fail criteria.
+- [ ] Run or document manual assistive-technology, DPI, multi-monitor, visible
+  GUI, packaged fake smoke, and trial-script checks.
+- [ ] Decide optional real-provider smoke policy and record run/skip evidence.
+- [ ] Decide whether credential-capable package variant should be built,
+  deferred, or rejected for the private pilot.
+- [ ] Update private-trial checklist and onboarding docs.
+- [ ] Preserve deterministic no-network tests, fake smoke, P10 credential
+  boundaries, and no-secret repository hygiene.
+- [ ] Produce P12 final validation report.
+- [ ] Produce P12 to P13 handoff.
+
+## Deferred Outside P12
+
+- Production SnapLex Cloud, account OAuth, billing, hosted token broker, or
+  remote accounts.
+- Raw API-key persistence in app config.
+- Production browser extension runtime.
+- AI summary runtime.
+- Global hotkeys.
+- Provider rewrites unrelated to private-trial feedback classification.
+- OCR/capture rewrites.
+- Full localization implementation.
+- Credential-capable package implementation unless explicitly approved later.
+- Real network validation in automated tests.
+- Committed screenshots, package outputs, local app data, `.env`, keyring
+  exports, logs, OCR model caches, tester personal data, or secrets.

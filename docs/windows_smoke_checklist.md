@@ -33,6 +33,9 @@ P11 trial release hardening planning is recorded in
 `docs/p11_packaged_trial_evidence.md`,
 `docs/p11_provider_onboarding_notes.md`,
 `docs/p11_key_rotation_least_privilege.md`, and `docs/p11_todo.md`.
+P12 private trial pilot planning is recorded in
+`docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
+`docs/p12_todo.md`.
 
 ## Automated Precheck
 
@@ -454,6 +457,26 @@ Expected result:
 - Real packaged trial rejects missing real-provider configuration.
 - No generated packages, screenshots, local data, `.env`, logs, keyring
   exports, OCR caches, or provider secrets are tracked.
+
+## P12 Private Trial Pilot Smoke
+
+P12 prepares controlled private-trial operation. Use this checklist to keep
+trial materials and smoke evidence privacy-safe:
+
+- Confirm tester release notes describe fake smoke mode, real provider setup,
+  known limitations, and no-secret feedback rules.
+- Confirm feedback intake templates ask testers not to paste API keys, private
+  documents, screenshots with sensitive content, or personal data.
+- Confirm pass/fail criteria define blocker, must-fix, investigate, defer, and
+  reject categories.
+- Run or explicitly document blockers for assistive technology, DPI scaling,
+  multi-monitor behavior, visible GUI, packaged fake smoke, and real/fake trial
+  paths.
+- Run optional real-provider smoke only when local credentials already exist and
+  a human intentionally approves network use.
+- Decide whether a credential-capable package variant should be built later,
+  deferred, or rejected for the first private pilot.
+- Re-run artifact and secret scans before committing any trial docs.
 
 ## P7 Expansion Planning Validation
 

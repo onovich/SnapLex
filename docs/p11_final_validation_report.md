@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 Phase: P11 Trial Release Hardening
-Status: READY_FOR_CHECK
+Status: PASS, planner-accepted
 
 Accepted input baseline: P10 at
 `5a37564993c67dcf9c5bfe5da2ed06a44327874c`.
@@ -24,6 +24,18 @@ rewrites, OCR/capture rewrites, or full localization.
 Rounds used: 10 of 12.
 
 Buffer rounds consumed: 1.
+
+## Planner Acceptance
+
+- Rechecked by planner on 2026-07-16.
+- Acceptance result: PASS.
+- Recheck validation: `Validate.cmd` PASS with 255 tests, `git diff --check`
+  PASS, CLI bootstrap PASS, real-provider readiness expected rejection PASS,
+  package dry-run PASS, source/package real/fake trial smoke PASS,
+  `SmokeTrial.cmd` PASS, P9 GUI smoke PASS, P11 visible GUI smoke PASS, keyring
+  unavailable smoke PASS, focused credential/readiness tests PASS, P11 docs
+  index check PASS, and artifact/secret boundary scan PASS.
+- Accepted commit: `66d3cef11db492b6c6170c26b69e483528186767`.
 
 ## Main Deliverables
 
@@ -150,19 +162,16 @@ P11 was delivered through incremental pushed commits:
 - `d0e208e` - key rotation guidance.
 - `13ce69c` - private trial checklist.
 - `ca90b5b` - boundary scan evidence.
-- Final closure docs are included in the pushed commit containing this report.
+- `66d3cef` - final trial release hardening report and P11-to-P12 handoff.
 
 ## Push Result
 
-P11 implementation commits through `ca90b5b` are pushed to `origin/main`.
-The final closure commit containing this report should be used as the P11
-READY_FOR_CHECK baseline.
+P11 implementation and closure docs through
+`66d3cef11db492b6c6170c26b69e483528186767` are pushed to `origin/main`.
 
 ## Request For Acceptance
 
-P11 is ready for planner/checker review against
-`docs/p11_trial_release_hardening_goal_guide.md`.
-
+P11 is accepted against `docs/p11_trial_release_hardening_goal_guide.md`.
 Recommended next goal: P12 Private Trial Pilot And Feedback Triage, focused on
 tester-facing release notes, private-trial feedback intake, manual
 assistive-technology/DPI/multi-monitor checks, optional real-provider smoke when
