@@ -78,6 +78,7 @@ def launch_gui(
             QLabel,
             QLineEdit,
             QListWidget,
+            QListWidgetItem,
             QMainWindow,
             QPlainTextEdit,
             QPushButton,
@@ -582,32 +583,59 @@ def launch_gui(
         dialog.setWindowTitle("SnapLex History")
         layout = QVBoxLayout(dialog)
         status = QLabel("")
+        status.setObjectName("StatusText")
+        empty_label = QLabel("")
+        empty_label.setObjectName("SectionLabel")
+        empty_label.setWordWrap(True)
         history_list = QListWidget()
+        _set_accessible(history_list, "Translation history list")
         copy_history_button = QPushButton("Copy")
+        _set_accessible(copy_history_button, "Copy selected history entry")
         delete_history_button = QPushButton("Delete")
+        _set_accessible(delete_history_button, "Delete selected history entry")
         clear_history_button = QPushButton("Clear")
+        _set_accessible(clear_history_button, "Clear translation history")
         close_history_button = QPushButton("Close")
+        _set_accessible(close_history_button, "Close History")
         button_row = QHBoxLayout()
         button_row.addWidget(copy_history_button)
         button_row.addWidget(delete_history_button)
         button_row.addWidget(clear_history_button)
         button_row.addWidget(close_history_button)
         layout.addWidget(status)
+        layout.addWidget(empty_label)
         layout.addWidget(history_list)
         layout.addLayout(button_row)
         entry_ids: list[str] = []
+
+        def update_history_buttons() -> None:
+            has_selection = selected_entry_id() is not None
+            copy_history_button.setEnabled(has_selection)
+            delete_history_button.setEnabled(has_selection)
+            clear_history_button.setEnabled(bool(entry_ids))
 
         def refresh_history() -> None:
             state = history_presenter.load_state()
             status.setText(state.status_text)
             history_list.clear()
             entry_ids.clear()
-            for entry in state.entries:
-                entry_ids.append(entry.id)
-                history_list.addItem(
-                    f"{entry.created_at} | {entry.flow} | "
-                    f"{entry.source_text} -> {entry.translated_text}"
+            if not state.history_enabled:
+                empty_label.setText(
+                    "Enable history in Settings to keep recent successful translations."
                 )
+            elif not state.entry_views:
+                empty_label.setText("No recent translations yet.")
+            else:
+                empty_label.setText("")
+            empty_label.setVisible(bool(empty_label.text()))
+            for entry_view in state.entry_views:
+                entry_ids.append(entry_view.id)
+                item = QListWidgetItem(
+                    f"{entry_view.title}\n{entry_view.detail}\n{entry_view.metadata}"
+                )
+                item.setToolTip(entry_view.detail)
+                history_list.addItem(item)
+            update_history_buttons()
 
         def selected_entry_id() -> str | None:
             row = history_list.currentRow()
@@ -630,12 +658,17 @@ def launch_gui(
             history_presenter.clear_history()
             refresh_history()
 
+        history_list.currentRowChanged.connect(lambda _row: update_history_buttons())
         copy_history_button.clicked.connect(copy_selected_history)
         delete_history_button.clicked.connect(delete_selected_history)
         clear_history_button.clicked.connect(clear_history)
         close_history_button.clicked.connect(dialog.accept)
+        dialog.setTabOrder(history_list, copy_history_button)
+        dialog.setTabOrder(copy_history_button, delete_history_button)
+        dialog.setTabOrder(delete_history_button, clear_history_button)
+        dialog.setTabOrder(clear_history_button, close_history_button)
         refresh_history()
-        dialog.resize(520, 280)
+        dialog.resize(640, 420)
         dialog.exec()
 
     ui_signals.refresh_requested.connect(refresh_view)

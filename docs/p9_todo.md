@@ -23,7 +23,7 @@ Estimated budget: 16 conversation rounds.
   into widgets.
 - [x] Improve Settings keyboard navigation, focus order, labels, tooltips, and
   accessibility metadata.
-- [ ] Polish History empty/list/long-entry states and keyboard operation.
+- [x] Polish History empty/list/long-entry states and keyboard operation.
 - [ ] Review region selector and screen-flow UI feedback without capture/OCR
   rewrites.
 - [ ] Add screenshot-backed offscreen GUI smoke with uncommitted local artifacts.

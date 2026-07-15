@@ -43,6 +43,8 @@ def test_history_presenter_loads_enabled_history_state() -> None:
     assert state.history_enabled is True
     assert state.status_text == "History ready"
     assert [entry.id for entry in state.entries] == ["entry-1"]
+    assert state.entry_views[0].title == "Clipboard | fake | en -> es"
+    assert state.entry_views[0].detail == "hello -> hola"
 
 
 def test_history_presenter_reports_disabled_history() -> None:
@@ -52,6 +54,35 @@ def test_history_presenter_reports_disabled_history() -> None:
 
     assert state.history_enabled is False
     assert state.status_text == "History disabled"
+
+
+def test_history_presenter_clips_long_entry_views() -> None:
+    history_store = InMemoryHistoryStore(
+        (
+            TranslationHistoryEntry(
+                id="entry-long",
+                source_text="source " * 40,
+                translated_text="translated " * 40,
+                provider_name="fake",
+                source_lang="en",
+                target_lang="es",
+                flow="screen",
+                created_at="2026-06-22T10:00:00+00:00",
+            ),
+        )
+    )
+    service = HistoryService(
+        config_store=InMemoryConfigStore(AppConfig(history_enabled=True)),
+        history_store=history_store,
+    )
+    presenter = HistoryPresenter(service)
+
+    state = presenter.load_state()
+
+    view = state.entry_views[0]
+    assert view.title == "Screen | fake | en -> es"
+    assert len(view.detail) < 210
+    assert view.detail.endswith("...")
 
 
 def test_history_presenter_copies_deletes_and_clears_entries() -> None:

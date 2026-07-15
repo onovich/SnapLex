@@ -13,7 +13,16 @@ from snaplex.storage import TranslationHistoryEntry
 class HistoryListState:
     history_enabled: bool
     entries: tuple[TranslationHistoryEntry, ...]
+    entry_views: tuple["HistoryEntryView", ...]
     status_text: str
+
+
+@dataclass(frozen=True)
+class HistoryEntryView:
+    id: str
+    title: str
+    detail: str
+    metadata: str
 
 
 class HistoryPresenter:
@@ -38,6 +47,7 @@ class HistoryPresenter:
         return HistoryListState(
             history_enabled=enabled,
             entries=entries,
+            entry_views=tuple(_entry_view(entry) for entry in entries),
             status_text=status_text,
         )
 
@@ -53,3 +63,19 @@ class HistoryPresenter:
 
     def clear_history(self) -> None:
         self._history_service.clear()
+
+
+def _entry_view(entry: TranslationHistoryEntry) -> HistoryEntryView:
+    return HistoryEntryView(
+        id=entry.id,
+        title=f"{entry.flow.title()} | {entry.provider_name} | {entry.source_lang} -> {entry.target_lang}",
+        detail=f"{_clip_text(entry.source_text)} -> {_clip_text(entry.translated_text)}",
+        metadata=entry.created_at,
+    )
+
+
+def _clip_text(text: str, *, limit: int = 96) -> str:
+    normalized = " ".join(text.split())
+    if len(normalized) <= limit:
+        return normalized
+    return normalized[: limit - 1].rstrip() + "..."
