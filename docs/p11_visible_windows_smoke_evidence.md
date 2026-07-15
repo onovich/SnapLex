@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 Phase: P11 Trial Release Hardening
-Status: planned; baseline revalidation complete
+Status: PASS for automated Windows Qt-platform visible smoke
 
 P11 starts from the planner-accepted P10 baseline at
 `5a37564993c67dcf9c5bfe5da2ed06a44327874c`. The release-hardening risk is no
@@ -48,6 +48,45 @@ If the executor environment cannot expose a visible Windows desktop to Qt, P11
 must record the exact blocker and keep release readiness scoped accordingly.
 Offscreen screenshot smoke remains useful regression evidence, but it does not
 replace a visible desktop-font pass for broader private trial readiness.
+
+## Round 2 Visible Windows Qt-Platform Smoke
+
+P11 added `scripts/p11_visible_gui_smoke.py` and ran it against the native
+Windows Qt platform plugin. The helper opens real Qt windows, validates at
+least one desktop font family is available, checks expected visible text/focus,
+captures screenshots, and closes each window by timer.
+
+Command:
+
+```powershell
+python scripts\p11_visible_gui_smoke.py
+```
+
+Result: PASS.
+
+Captured ignored local screenshots:
+
+- `snaplex-smoke-data\p11-visible-screenshots\idle.png` at 520x500.
+- `snaplex-smoke-data\p11-visible-screenshots\fake-success.png` at 520x500.
+- `snaplex-smoke-data\p11-visible-screenshots\long-small.png` at 390x420.
+- `snaplex-smoke-data\p11-visible-screenshots\settings.png` at 640x680.
+- `snaplex-smoke-data\p11-visible-screenshots\history-empty.png` at 640x420.
+- `snaplex-smoke-data\p11-visible-screenshots\focus.png` at 520x500.
+
+The smoke verified:
+
+- shell window opens through the native Windows platform path;
+- normal desktop font discovery is available;
+- fake-provider result state includes fake smoke warning text;
+- long source and translated text remain in a constrained small window;
+- Settings opens and contains provider setup, credential, and future account
+  copy;
+- History opens and shows the disabled/empty guidance;
+- focus can be placed on the primary clipboard action and remains inspectable.
+
+This is automated visible-platform evidence, not a human assistive-technology,
+DPI, or multi-monitor pass. Those checks remain optional/manual future
+validation before broader distribution.
 
 ## Initial Release-Risk Audit
 
