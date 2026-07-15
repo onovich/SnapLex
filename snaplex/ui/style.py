@@ -93,6 +93,40 @@ def build_app_stylesheet() -> str:
             padding: 4px 10px;
             min-height: 24px;
         }}
+        QLabel#StatusPill[resultState="loading"],
+        QLabel#ResultStateBadge[resultState="loading"] {{
+            background: #eef4ff;
+            border-color: #9db7ff;
+            color: #173b85;
+        }}
+        QLabel#StatusPill[resultState="success"],
+        QLabel#ResultStateBadge[resultState="success"] {{
+            background: #eaf7ef;
+            border-color: #9bd3ad;
+            color: #166534;
+        }}
+        QLabel#StatusPill[resultState="empty"],
+        QLabel#StatusPill[resultState="cancelled"],
+        QLabel#ResultStateBadge[resultState="empty"],
+        QLabel#ResultStateBadge[resultState="cancelled"] {{
+            background: {WARNING_BG.value};
+            border-color: {WARNING_BORDER.value};
+            color: {WARNING_TEXT.value};
+        }}
+        QLabel#StatusPill[resultState="error"],
+        QLabel#ResultStateBadge[resultState="error"] {{
+            background: #fff1f0;
+            border-color: #f2aaa5;
+            color: {ERROR_TEXT.value};
+        }}
+        QLabel#ResultStateBadge {{
+            background: {SURFACE.value};
+            border: 1px solid {BORDER.value};
+            border-radius: 10px;
+            color: {TEXT_MUTED.value};
+            font-weight: 600;
+            padding: 4px 8px;
+        }}
         QGroupBox {{
             border: 1px solid {BORDER.value};
             border-radius: 8px;

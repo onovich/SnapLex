@@ -41,6 +41,19 @@ class TranslationResultState:
     can_retry: bool = False
 
 
+@dataclass(frozen=True)
+class TranslationResultDisplay:
+    state_label: str
+    source_text: str
+    translated_text: str
+    provider_text: str = ""
+    provider_notice: str = ""
+    error_message: str = ""
+    provider_visible: bool = False
+    provider_notice_visible: bool = False
+    error_visible: bool = False
+
+
 class TranslationPipelineLike(Protocol):
     async def translate_text_async(self, text: str) -> TranslationResponse:
         """Translate text using the P1 pipeline async boundary."""
@@ -230,3 +243,56 @@ def provider_notice_for(provider_name: str) -> str:
     if provider_name.strip().lower() == "fake":
         return "Fake smoke mode: deterministic placeholder output, not real translation."
     return ""
+
+
+def build_result_display(state: TranslationResultState) -> TranslationResultDisplay:
+    if state.status == TranslationResultStatus.IDLE:
+        return TranslationResultDisplay(
+            state_label="Ready",
+            source_text="No source text yet.",
+            translated_text="Translation will appear here.",
+        )
+
+    if state.status == TranslationResultStatus.LOADING:
+        return TranslationResultDisplay(
+            state_label="Working",
+            source_text=state.source_text or "Reading source text...",
+            translated_text="Translating...",
+        )
+
+    if state.status == TranslationResultStatus.SUCCESS:
+        return TranslationResultDisplay(
+            state_label="Done",
+            source_text=state.source_text,
+            translated_text=state.translated_text,
+            provider_text=f"Provider: {state.provider_name}" if state.provider_name else "",
+            provider_notice=state.provider_notice,
+            provider_visible=bool(state.provider_name),
+            provider_notice_visible=bool(state.provider_notice),
+        )
+
+    if state.status == TranslationResultStatus.EMPTY:
+        return TranslationResultDisplay(
+            state_label="Needs text",
+            source_text=state.source_text or "No source text.",
+            translated_text="No translation available.",
+            error_message=state.error_message,
+            error_visible=bool(state.error_message),
+        )
+
+    if state.status == TranslationResultStatus.CANCELLED:
+        return TranslationResultDisplay(
+            state_label="Cancelled",
+            source_text=state.source_text or "Selection cancelled.",
+            translated_text="No translation available.",
+            error_message=state.error_message,
+            error_visible=bool(state.error_message),
+        )
+
+    return TranslationResultDisplay(
+        state_label="Needs attention",
+        source_text=state.source_text or "Source unavailable.",
+        translated_text="No translation available.",
+        error_message=state.error_message,
+        error_visible=bool(state.error_message),
+    )

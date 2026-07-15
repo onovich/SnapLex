@@ -34,7 +34,11 @@ from snaplex.ui.screen_presenter import ScreenTranslationPresenter
 from snaplex.ui.history_presenter import HistoryPresenter
 from snaplex.ui.settings_presenter import SettingsFormState, SettingsPresenter
 from snaplex.ui.style import SNAPLEX_FONT_FAMILY, build_app_stylesheet
-from snaplex.ui.translation_result import TranslationResultPresenter, TranslationResultStatus
+from snaplex.ui.translation_result import (
+    TranslationResultPresenter,
+    TranslationResultStatus,
+    build_result_display,
+)
 
 
 def is_pyside_available() -> bool:
@@ -156,6 +160,8 @@ def launch_gui(
     provider_notice_label.setObjectName("ProviderNotice")
     error_label = QLabel("")
     error_label.setObjectName("ErrorText")
+    result_state_label = QLabel("")
+    result_state_label.setObjectName("ResultStateBadge")
     source_caption_label = QLabel("Source")
     source_caption_label.setObjectName("SectionLabel")
     result_caption_label = QLabel("Translation")
@@ -203,13 +209,20 @@ def launch_gui(
 
     def refresh_view() -> None:
         state = active_presenter["value"].state
+        display = build_result_display(state)
         is_loading = state.status == TranslationResultStatus.LOADING
         status_label.setText(state.status_text)
-        source_label.setText(state.source_text)
-        result_label.setText(state.translated_text)
-        provider_label.setText(f"Provider: {state.provider_name}" if state.provider_name else "")
-        provider_notice_label.setText(state.provider_notice)
-        error_label.setText(state.error_message)
+        result_state_label.setText(display.state_label)
+        source_label.setText(display.source_text)
+        result_label.setText(display.translated_text)
+        provider_label.setText(display.provider_text)
+        provider_label.setVisible(display.provider_visible)
+        provider_notice_label.setText(display.provider_notice)
+        provider_notice_label.setVisible(display.provider_notice_visible)
+        error_label.setText(display.error_message)
+        error_label.setVisible(display.error_visible)
+        for widget in (status_label, result_state_label):
+            _set_result_state_property(widget, state.status.value)
         translate_button.setEnabled(not is_loading)
         translate_screen_button.setEnabled(not is_loading)
         copy_button.setEnabled(state.can_copy)
@@ -549,6 +562,7 @@ def launch_gui(
     result_group = QGroupBox("Result")
     result_layout = QVBoxLayout(result_group)
     result_layout.setSpacing(6)
+    result_layout.addWidget(result_state_label)
     result_layout.addWidget(source_caption_label)
     result_layout.addWidget(source_label)
     result_layout.addWidget(result_caption_label)
@@ -598,3 +612,9 @@ def _int_spin_box(value: int, spin_box_type: type[Any]) -> Any:
     spin_box.setRange(0, 1000)
     spin_box.setValue(value)
     return spin_box
+
+
+def _set_result_state_property(widget: Any, value: str) -> None:
+    widget.setProperty("resultState", value)
+    widget.style().unpolish(widget)
+    widget.style().polish(widget)

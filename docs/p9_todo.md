@@ -17,7 +17,7 @@ Estimated budget: 16 conversation rounds.
   region selector.
 - [x] Add or refine shared visual tokens/styles for spacing, typography, color,
   focus, and stable controls.
-- [ ] Polish main shell action hierarchy and result state layout.
+- [x] Polish main shell action hierarchy and result state layout.
 - [ ] Improve long text, OCR text, translation text, and small-window behavior.
 - [ ] Refine Settings information architecture without moving provider rules
   into widgets.
