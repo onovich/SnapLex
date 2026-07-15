@@ -24,10 +24,12 @@ from snaplex.services.ocr_service import (
     PaddleOcrService,
 )
 from snaplex.services.provider_setup import (
+    ProviderConnectionTestResult,
     ProviderSetupState,
     ProviderSetupStatus,
     describe_provider_setup,
     describe_provider_setups,
+    test_provider_connection,
 )
 from snaplex.services.screen_translation_service import (
     ScreenTranslationResponse,
@@ -65,6 +67,7 @@ __all__ = [
     "OcrService",
     "OcrUnavailableError",
     "PaddleOcrService",
+    "ProviderConnectionTestResult",
     "ProviderSetupState",
     "ProviderSetupStatus",
     "QtClipboardService",
@@ -80,4 +83,5 @@ __all__ = [
     "describe_provider_setup",
     "describe_provider_setups",
     "normalize_text",
+    "test_provider_connection",
 ]

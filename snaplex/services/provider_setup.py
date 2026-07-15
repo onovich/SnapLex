@@ -7,7 +7,20 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from enum import Enum
 
+from snaplex.errors import (
+    MissingProviderCredentialError,
+    StaleTranslationResultError,
+    TranslationError,
+    TranslationProviderError,
+    TranslationProviderTimeoutError,
+    UnknownTranslationProviderError,
+    UnsupportedLanguageError,
+)
+from snaplex.providers.base import TranslationRequest
 from snaplex.providers.config import ProviderRuntimeConfig, default_provider_runtime_configs
+from snaplex.providers.http import HttpTransport
+from snaplex.providers.registry import create_default_provider_registry
+from snaplex.storage.config import AppConfig
 
 
 class ProviderSetupStatus(str, Enum):
@@ -39,6 +52,16 @@ class ProviderSetupState:
     connect_account_detail: str = (
         "Account sign-in requires a later SnapLex Cloud or provider-supported flow."
     )
+
+
+@dataclass(frozen=True)
+class ProviderConnectionTestResult:
+    provider_name: str
+    display_name: str
+    status: ProviderSetupStatus
+    status_text: str
+    detail_text: str
+    translated_text: str = ""
 
 
 PROVIDER_DISPLAY_NAMES = {
@@ -145,6 +168,106 @@ def describe_provider_setups(
     )
 
 
+def test_provider_connection(
+    provider_name: str,
+    config: AppConfig,
+    *,
+    http_transport: HttpTransport | None = None,
+    environ: Mapping[str, str] | None = None,
+    probe_text: str = "hello",
+    source_lang: str = "en",
+    target_lang: str = "es",
+) -> ProviderConnectionTestResult:
+    """Run a one-shot provider readiness check through provider boundaries."""
+
+    normalized_provider_name = provider_name.strip().lower()
+    setup_state = describe_provider_setup(
+        normalized_provider_name,
+        config.provider_configs.get(normalized_provider_name),
+        environ=environ,
+    )
+    if setup_state.status in {
+        ProviderSetupStatus.FAKE_SMOKE,
+        ProviderSetupStatus.MISSING_CREDENTIAL,
+        ProviderSetupStatus.UNSUPPORTED_PROVIDER,
+    }:
+        return ProviderConnectionTestResult(
+            provider_name=setup_state.provider_name,
+            display_name=setup_state.display_name,
+            status=setup_state.status,
+            status_text=setup_state.status_text,
+            detail_text=setup_state.detail_text,
+        )
+
+    try:
+        registry = create_default_provider_registry(
+            config,
+            http_transport=http_transport,
+            environ=environ,
+        )
+        response = registry.get(normalized_provider_name).translate(
+            TranslationRequest(probe_text, source_lang=source_lang, target_lang=target_lang)
+        )
+    except UnknownTranslationProviderError:
+        return _connection_result(
+            setup_state,
+            ProviderSetupStatus.UNSUPPORTED_PROVIDER,
+            "Provider is not supported",
+            "Choose fake, LibreTranslate, OpenAI, or DeepL.",
+        )
+    except MissingProviderCredentialError as exc:
+        return _connection_result(
+            setup_state,
+            ProviderSetupStatus.MISSING_CREDENTIAL,
+            "Credential missing",
+            _missing_credential_detail(exc.env_var, setup_state.display_name),
+        )
+    except TranslationProviderTimeoutError:
+        return _connection_result(
+            setup_state,
+            ProviderSetupStatus.ENDPOINT_UNAVAILABLE,
+            "Connection timed out",
+            "The provider did not respond before the configured timeout.",
+        )
+    except UnsupportedLanguageError as exc:
+        return _connection_result(
+            setup_state,
+            ProviderSetupStatus.TEST_FAILED,
+            "Language pair not supported",
+            f"{setup_state.display_name} rejected {exc.source_lang} -> {exc.target_lang}.",
+        )
+    except StaleTranslationResultError:
+        return _connection_result(
+            setup_state,
+            ProviderSetupStatus.TEST_FAILED,
+            "Unexpected provider response",
+            "The provider responded, but SnapLex could not read translated text.",
+        )
+    except TranslationProviderError:
+        return _connection_result(
+            setup_state,
+            ProviderSetupStatus.TEST_FAILED,
+            "Connection failed",
+            "Check the provider endpoint, credential environment variable, and account status.",
+        )
+    except TranslationError:
+        return _connection_result(
+            setup_state,
+            ProviderSetupStatus.TEST_FAILED,
+            "Connection failed",
+            "The provider test failed before translation completed.",
+        )
+
+    return ProviderConnectionTestResult(
+        provider_name=setup_state.provider_name,
+        display_name=setup_state.display_name,
+        status=ProviderSetupStatus.TEST_PASSED,
+        status_text="Connection test passed",
+        detail_text=f"{setup_state.display_name} returned a test translation.",
+        translated_text=response.translated_text,
+    )
+
+
 def _missing_credential_detail(api_key_env_var: str, display_name: str) -> str:
     if not api_key_env_var:
         return f"{display_name} needs an API key environment variable name before testing."
@@ -157,3 +280,18 @@ def _ready_detail(provider_name: str, api_key_env_var: str, api_key_present: boo
     if api_key_present:
         return f"{api_key_env_var} is set in this process. The key value is not stored."
     return "Provider settings are ready for a connection test."
+
+
+def _connection_result(
+    setup_state: ProviderSetupState,
+    status: ProviderSetupStatus,
+    status_text: str,
+    detail_text: str,
+) -> ProviderConnectionTestResult:
+    return ProviderConnectionTestResult(
+        provider_name=setup_state.provider_name,
+        display_name=setup_state.display_name,
+        status=status,
+        status_text=status_text,
+        detail_text=detail_text,
+    )

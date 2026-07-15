@@ -128,3 +128,21 @@ Round 2 connects the pure provider setup model to Settings boundaries:
 
 Connection testing remains out of Round 2. Round 3 will add the service and
 presenter orchestration for `Test Connection` using mocked HTTP only.
+
+## Round 3 Connection Testing
+
+Round 3 adds `Test Connection` behavior without introducing real network
+validation:
+
+- `snaplex.services.provider_setup.test_provider_connection(...)` runs a probe
+  translation through the provider registry and provider adapters.
+- `SettingsService.test_provider_connection(...)` loads persisted config and
+  delegates to the provider setup service.
+- `SettingsPresenter.test_provider_connection(...)` exposes the action for the
+  future Settings UI without calling providers directly from widgets.
+- Automated tests inject mocked `HttpTransport` objects for OpenAI, DeepL, and
+  LibreTranslate.
+- Fake mode and missing credentials return user-facing states before any HTTP
+  request is attempted.
+- Timeout, network/bad endpoint, HTTP error, malformed response, unsupported
+  language, and success states are covered by deterministic no-network tests.

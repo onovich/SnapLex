@@ -46,6 +46,28 @@ def test_settings_service_loads_provider_setup_states_without_secret_values() ->
     assert "secret-value" not in repr(states)
 
 
+def test_settings_service_connection_test_returns_provider_result() -> None:
+    class TestTransport:
+        def send(self, request: object) -> object:
+            from snaplex.providers.http import HttpResponse
+
+            return HttpResponse(200, b'{"translatedText":"hola"}')
+
+    store = InMemoryConfigStore(
+        AppConfig(
+            provider_configs={
+                "libretranslate": ProviderRuntimeConfig(base_url="https://libre.example"),
+            },
+        )
+    )
+    service = SettingsService(store)
+
+    result = service.test_provider_connection("libretranslate", http_transport=TestTransport())
+
+    assert result.status == ProviderSetupStatus.TEST_PASSED
+    assert result.translated_text == "hola"
+
+
 def test_settings_service_updates_provider_runtime_config_without_secret_values() -> None:
     store = InMemoryConfigStore()
     service = SettingsService(store)

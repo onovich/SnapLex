@@ -6,7 +6,13 @@ from collections.abc import Mapping
 from dataclasses import replace
 
 from snaplex.providers.config import ProviderRuntimeConfig, copy_provider_runtime_configs
-from snaplex.services.provider_setup import ProviderSetupState, describe_provider_setups
+from snaplex.providers.http import HttpTransport
+from snaplex.services.provider_setup import (
+    ProviderConnectionTestResult,
+    ProviderSetupState,
+    describe_provider_setups,
+    test_provider_connection,
+)
 from snaplex.storage import AppConfig, ConfigStore
 
 
@@ -24,6 +30,27 @@ class SettingsService:
     ) -> tuple[ProviderSetupState, ...]:
         config = self._config_store.load()
         return describe_provider_setups(config.provider_configs, environ=environ)
+
+    def test_provider_connection(
+        self,
+        provider_name: str,
+        *,
+        http_transport: HttpTransport | None = None,
+        environ: Mapping[str, str] | None = None,
+        probe_text: str = "hello",
+        source_lang: str = "en",
+        target_lang: str = "es",
+    ) -> ProviderConnectionTestResult:
+        config = self._config_store.load()
+        return test_provider_connection(
+            provider_name,
+            config,
+            http_transport=http_transport,
+            environ=environ,
+            probe_text=probe_text,
+            source_lang=source_lang,
+            target_lang=target_lang,
+        )
 
     def save(self, config: AppConfig) -> AppConfig:
         self._config_store.save(config)

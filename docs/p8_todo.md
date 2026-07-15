@@ -14,7 +14,7 @@ Executable guide: `docs/p8_provider_setup_real_translation_goal_guide.md`
   scripts.
 - [x] Add Settings-based provider setup state for fake, LibreTranslate, OpenAI,
   and DeepL.
-- [ ] Add provider readiness and connection test behavior behind
+- [x] Add provider readiness and connection test behavior behind
   service/presenter boundaries.
 - [ ] Keep raw provider API key values out of JSON config, history, docs, tests,
   logs, package resources, and screenshots.

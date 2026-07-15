@@ -6,8 +6,9 @@ from collections.abc import Mapping
 from dataclasses import dataclass, field
 
 from snaplex.providers.config import ProviderRuntimeConfig
+from snaplex.providers.http import HttpTransport
 from snaplex.services import SettingsService
-from snaplex.services.provider_setup import ProviderSetupState
+from snaplex.services.provider_setup import ProviderConnectionTestResult, ProviderSetupState
 
 
 PROVIDER_CHOICES = ("fake", "libretranslate", "openai", "deepl")
@@ -132,3 +133,16 @@ class SettingsPresenter:
             max_entries=state.history_max_entries,
         )
         return self.load_state(environ=environ)
+
+    def test_provider_connection(
+        self,
+        provider_name: str,
+        *,
+        http_transport: HttpTransport | None = None,
+        environ: Mapping[str, str] | None = None,
+    ) -> ProviderConnectionTestResult:
+        return self._settings_service.test_provider_connection(
+            provider_name,
+            http_transport=http_transport,
+            environ=environ,
+        )
