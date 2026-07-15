@@ -79,6 +79,7 @@ def launch_gui(
             QLineEdit,
             QListWidget,
             QMainWindow,
+            QPlainTextEdit,
             QPushButton,
             QScrollArea,
             QSpinBox,
@@ -150,9 +151,9 @@ def launch_gui(
     subtitle_label.setObjectName("AppSubtitle")
     status_label = QLabel(presenter.state.status_text)
     status_label.setObjectName("StatusPill")
-    source_label = QLabel("")
+    source_label = QPlainTextEdit()
     source_label.setObjectName("ResultText")
-    result_label = QLabel("")
+    result_label = QPlainTextEdit()
     result_label.setObjectName("ResultText")
     provider_label = QLabel("")
     provider_label.setObjectName("ProviderText")
@@ -197,15 +198,20 @@ def launch_gui(
     history_button.setMinimumWidth(120)
     for label in (
         status_label,
-        source_label,
-        result_label,
         provider_label,
         provider_notice_label,
         error_label,
     ):
         label.setWordWrap(True)
-    for label in (source_label, result_label, error_label):
-        label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+    error_label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+    for text_area in (source_label, result_label):
+        text_area.setReadOnly(True)
+        text_area.setTabChangesFocus(True)
+        text_area.setLineWrapMode(QPlainTextEdit.LineWrapMode.WidgetWidth)
+        text_area.setMinimumHeight(74)
+        text_area.setMaximumHeight(132)
+    source_label.setAccessibleName("Source text")
+    result_label.setAccessibleName("Translated text")
 
     def refresh_view() -> None:
         state = active_presenter["value"].state
@@ -213,8 +219,8 @@ def launch_gui(
         is_loading = state.status == TranslationResultStatus.LOADING
         status_label.setText(state.status_text)
         result_state_label.setText(display.state_label)
-        source_label.setText(display.source_text)
-        result_label.setText(display.translated_text)
+        source_label.setPlainText(display.source_text)
+        result_label.setPlainText(display.translated_text)
         provider_label.setText(display.provider_text)
         provider_label.setVisible(display.provider_visible)
         provider_notice_label.setText(display.provider_notice)
@@ -593,7 +599,8 @@ def launch_gui(
     refresh_view()
 
     window.setCentralWidget(central)
-    window.resize(460, 420)
+    window.setMinimumSize(390, 420)
+    window.resize(520, 500)
     window.show()
 
     return app.exec()

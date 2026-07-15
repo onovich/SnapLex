@@ -60,12 +60,15 @@ def build_app_stylesheet() -> str:
         QLabel#AppSubtitle, QLabel#SectionLabel {{
             color: {TEXT_MUTED.value};
         }}
-        QLabel#ResultText {{
+        QLabel#ResultText, QPlainTextEdit#ResultText {{
             background: {SURFACE.value};
             border: 1px solid {BORDER.value};
             border-radius: {BORDER_RADIUS}px;
             padding: 8px;
             min-height: 36px;
+        }}
+        QPlainTextEdit#ResultText {{
+            selection-background-color: #bfd6ff;
         }}
         QLabel#ProviderText {{
             color: #344054;
