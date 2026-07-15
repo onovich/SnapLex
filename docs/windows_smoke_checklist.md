@@ -323,11 +323,25 @@ Expected result:
 
 P9 final validation additionally requires:
 
+```powershell
+python scripts\p9_gui_smoke.py
+```
+
 - PySide6 offscreen GUI smoke for shell, Settings, History, and result states.
 - Screenshot-backed smoke with local artifacts kept under ignored paths.
 - Keyboard/focus smoke.
 - Long-text and small-window smoke.
 - Artifact scan proving screenshots and smoke outputs are not committed.
+
+Expected result:
+
+- The P9 GUI smoke helper reports PASS.
+- Screenshots are written under `snaplex-smoke-data\p9-screenshots`.
+- `snaplex-smoke-data`, screenshots, local app data, build outputs, `.env`, and
+  provider secrets remain untracked.
+- If the offscreen environment has no fonts, screenshot text may render as
+  square glyphs; visible Windows smoke should still be run before broader trial
+  distribution.
 
 ## P7 Expansion Planning Validation
 
