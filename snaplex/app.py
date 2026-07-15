@@ -22,6 +22,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Run deterministic packaged workflow smoke using SNAPLEX_APP_DATA_DIR.",
     )
+    parser.add_argument(
+        "--check-real-provider",
+        action="store_true",
+        help="Check real-provider credential readiness without network calls.",
+    )
     return parser
 
 
@@ -51,5 +56,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         for line in smoke_lines:
             print(f"- {line}")
         return 0
+
+    if args.check_real_provider:
+        from snaplex.trial_readiness import check_real_provider_readiness
+
+        result = check_real_provider_readiness()
+        print(result.status_text)
+        for line in result.detail_lines:
+            print(f"- {line}")
+        return 0 if result.ready else 1
 
     return launch_gui()

@@ -23,7 +23,7 @@ Estimated budget: 16 conversation rounds.
   boundaries.
 - [x] Update Settings presenter/UI for credential source, readiness, save, and
   delete without echoing secrets.
-- [ ] Update real/fake trial readiness guardrails for the accepted credential
+- [x] Update real/fake trial readiness guardrails for the accepted credential
   boundary.
 - [ ] Document env var, OS keyring, SnapLex Cloud/token broker, and provider
   account/OAuth tradeoffs.
