@@ -66,14 +66,14 @@ echo Real translation provider is not configured.
 echo.
 echo Configure one of these before launching real translation.
 echo PowerShell examples:
-echo   $env:SNAPLEX_OPENAI_API_KEY='your_key'
-echo   $env:SNAPLEX_DEEPL_API_KEY='your_key'
+echo   $env:SNAPLEX_OPENAI_API_KEY='your_trial_key'
+echo   $env:SNAPLEX_DEEPL_API_KEY='your_trial_key'
 echo   $env:SNAPLEX_LIBRETRANSLATE_BASE_URL='http://localhost:5000'
 echo   $env:SNAPLEX_OPENAI_CREDENTIAL_SOURCE='keyring'
 echo.
 echo cmd.exe examples:
-echo   set SNAPLEX_OPENAI_API_KEY=your_key
-echo   set SNAPLEX_DEEPL_API_KEY=your_key
+echo   set SNAPLEX_OPENAI_API_KEY=your_trial_key
+echo   set SNAPLEX_DEEPL_API_KEY=your_trial_key
 echo   set SNAPLEX_LIBRETRANSLATE_BASE_URL=http://localhost:5000
 echo   set SNAPLEX_OPENAI_CREDENTIAL_SOURCE=keyring
 echo.
