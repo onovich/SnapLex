@@ -143,3 +143,7 @@ The final P7 closure commit is
 After P7 planner acceptance, close the P0-P7 execution track. If continuing
 directly into post-MVP work, create a new goal from the localization foundation
 recommendation in `docs/p7_expansion_roadmap.md`.
+
+Planner update on 2026-07-15: trial feedback selected P8 Provider Setup And Real
+Translation UX as the next post-MVP implementation goal. The executable guide is
+`docs/p8_provider_setup_real_translation_goal_guide.md`.

@@ -176,6 +176,25 @@ The repository now has accepted post-MVP expansion planning:
 P7 introduced no runtime code or prototype. The accepted P6 package/release
 baseline remains stable.
 
+## Selected P8 Provider Setup And Real Translation UX
+
+P8 is the selected first post-MVP implementation goal after trial feedback. It
+supersedes the earlier low-risk localization recommendation because the current
+trial blocker is user confidence in real translation:
+
+- Provider setup must move into Settings instead of asking ordinary users to
+  edit config files.
+- Fake provider output must be visibly labeled as smoke/dev behavior.
+- Real trial launch paths must not silently fall back to fake output.
+- Provider readiness and connection checks should be testable without real
+  network calls.
+- The main shell, settings flow, and result view need an Apple HIG-inspired
+  visual foundation before broader trial use.
+
+The executable guide is
+`docs/p8_provider_setup_real_translation_goal_guide.md`; the handoff is
+`docs/p7_to_p8_handoff.md`.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.
@@ -250,8 +269,12 @@ Summary:
 - P5 History, Persistence, and Settings UX: 6 conversation rounds.
 - P6 Packaging and Release Readiness: 7 conversation rounds.
 - P7 Expansion Track: 5 conversation rounds.
+- P8 Provider Setup And Real Translation UX: 8 conversation rounds.
 
-Estimated total through the Windows MVP release candidate is 48 rounds. Including the post-MVP expansion track, the plan is 53 rounds.
+Estimated total through the Windows MVP release candidate is 48 rounds.
+Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
+Including the selected P8 implementation goal, the current post-MVP plan is 61
+rounds.
 
 ## Validation Plan
 

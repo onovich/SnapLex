@@ -46,3 +46,6 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest accepted phase report: `docs/p7_final_validation_report.md`.
 - Whole-track closure report: `docs/p0_p7_final_report.md`.
 - Post-MVP expansion roadmap: `docs/p7_expansion_roadmap.md`.
+- Current post-MVP execution guide: `docs/p8_provider_setup_real_translation_goal_guide.md`.
+- Current post-MVP TODO: `docs/p8_todo.md`.
+- P7 to P8 handoff: `docs/p7_to_p8_handoff.md`.

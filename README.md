@@ -44,6 +44,9 @@ The current project source of truth lives in:
 - `docs/p7_expansion_roadmap.md`
 - `docs/p7_final_validation_report.md`
 - `docs/p0_p7_final_report.md`
+- `docs/p7_to_p8_handoff.md`
+- `docs/p8_provider_setup_real_translation_goal_guide.md`
+- `docs/p8_todo.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -80,7 +83,10 @@ PyInstaller spec, packaged release smoke commands, and post-MVP expansion
 plans.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
-`docs/p7_expansion_roadmap.md` for the P7 closure package.
+`docs/p7_expansion_roadmap.md` for the P7 closure package. The selected next
+post-MVP implementation goal is P8 Provider Setup And Real Translation UX; use
+`docs/p8_provider_setup_real_translation_goal_guide.md` and
+`docs/p7_to_p8_handoff.md` for execution.
 
 ## Setup
 
@@ -331,8 +337,12 @@ keeps the accepted P6 package baseline stable while defining post-MVP paths for:
 - browser selection bridge design with explicit trust and privacy boundaries,
 - roadmap triage for accepted, deferred, and rejected ideas.
 
-Recommended first post-MVP implementation goal: localization foundation. See
-`docs/p7_expansion_roadmap.md`.
+P7 originally recommended localization foundation as the lowest-risk first
+post-MVP goal. Trial feedback changed the priority: the selected next goal is
+P8 Provider Setup And Real Translation UX, focused on Settings-based provider
+setup, fake-versus-real translation clarity, real trial guardrails, and an Apple
+HIG-inspired UI foundation. See
+`docs/p8_provider_setup_real_translation_goal_guide.md`.
 
 ## Current Boundaries
 

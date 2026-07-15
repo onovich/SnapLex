@@ -136,6 +136,22 @@ Alternative next goals:
 - Release hardening if P6 package smoke or manual Windows smoke reports
   priority regressions.
 
+## Planner Update 2026-07-15
+
+Trial feedback changed the first post-MVP priority. The selected next goal is
+P8 Provider Setup And Real Translation UX, not localization foundation.
+
+Reasoning:
+
+- Fake provider output currently looks like broken translation to trial users.
+- Real provider setup is too environment/config-file oriented for ordinary use.
+- Trial commands now separate real and fake paths, but the UI must make the same
+  distinction.
+- The desktop UI needs an Apple HIG-inspired foundation before broader trial
+  distribution.
+
+Executable guide: `docs/p8_provider_setup_real_translation_goal_guide.md`.
+
 ## Exit Criteria For Future Expansion Goals
 
 Every post-P7 implementation goal should prove:

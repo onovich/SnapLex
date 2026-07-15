@@ -21,9 +21,11 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P5 | History, Persistence, and Settings UX | Add local settings and optional recent translation history. | 6 rounds |
 | P6 | Packaging and Release Readiness | Produce and smoke-test a Windows distributable. | 7 rounds |
 | P7 | Expansion Track | Prepare optional AI summary, multilingual polish, and browser-extension bridge planning. | 5 rounds |
+| P8 | Provider Setup And Real Translation UX | Make real translation setup usable from Settings, separate fake smoke from real trial behavior, and establish the first Apple HIG-inspired UI foundation. | 8 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
+Total including selected P8 post-MVP implementation: 61 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -359,10 +361,57 @@ Current accepted phase: P7 - Expansion Track.
 
 P0-P7 status: complete.
 
-Recommended next step: create a post-MVP goal from
-`docs/p7_expansion_roadmap.md` when ready.
+Selected next step: execute P8 Provider Setup And Real Translation UX from
+`docs/p8_provider_setup_real_translation_goal_guide.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
 The latest accepted phase report is `docs/p7_final_validation_report.md`.
 The whole-track closure report is `docs/p0_p7_final_report.md`.
+
+## 11. P8 - Provider Setup And Real Translation UX
+
+Estimated rounds: 8
+
+Execution guide: `docs/p8_provider_setup_real_translation_goal_guide.md`
+
+Goal: make real translation setup usable for trial users without config-file
+editing, make fake mode visibly separate from real translation, and improve the
+first-run UI foundation.
+
+Scope:
+
+- Settings-based provider setup for fake, LibreTranslate, OpenAI, and DeepL.
+- Provider readiness and connection testing behind service/presenter boundaries.
+- Clear fake-versus-real trial behavior in commands, docs, and result UI.
+- No raw API key values stored in JSON config, history, docs, tests, logs, or
+  package resources.
+- Apple HIG-inspired main shell, settings, and result-view polish.
+
+Deliverables:
+
+- Provider setup UX in Settings.
+- Deterministic tests for provider setup and mocked provider readiness checks.
+- Updated trial docs and smoke checklist.
+- P8 final validation report and P8 to P9 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Package dry-run remains green.
+- Real trial path rejects missing real providers clearly.
+- Fake trial path remains deterministic smoke/dev mode.
+- Boundary scan confirms no generated artifacts, local data, `.env`, or secrets
+  are committed.
+
+Round split:
+
+- Round 1: rebaseline, provider setup state decisions, and audit.
+- Round 2: settings presenter/service provider setup model.
+- Round 3: provider readiness and connection testing.
+- Round 4: Settings UI integration and no-config onboarding.
+- Round 5: real trial commands, fake guardrails, and docs.
+- Round 6: main shell and result visual foundation.
+- Round 7: buffer hardening and package preservation.
+- Round 8: final validation, report, and P9 handoff.

@@ -10,6 +10,9 @@ and `docs/p5_privacy_and_storage.md`.
 P6 packaging smoke evidence is recorded in `docs/p6_packaging_smoke_evidence.md`.
 P7 expansion planning is recorded in `docs/p7_expansion_track_goal_guide.md`,
 `docs/p7_final_validation_report.md`, and `docs/p0_p7_final_report.md`.
+P8 provider setup and real translation UX planning is recorded in
+`docs/p8_provider_setup_real_translation_goal_guide.md` and
+`docs/p7_to_p8_handoff.md`.
 
 ## Automated Precheck
 
@@ -241,6 +244,41 @@ Expected result:
 - Global clipboard hotkey handling.
 - Production browser extension implementation.
 - Real AI summary service integration.
+
+## P8 Provider Setup And Real Trial Smoke
+
+After P8 is implemented, smoke the user-facing provider setup path before
+broader trial distribution:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexP8Smoke"
+python -m snaplex
+```
+
+Expected result:
+
+- Settings exposes provider setup for fake, LibreTranslate, OpenAI, and DeepL.
+- Provider readiness shows whether required environment variables or endpoints
+  are configured without displaying raw secrets.
+- `Test Connection` reports success/failure through user-friendly states and
+  does not expose credential values.
+- Fake provider mode is clearly labeled as fake smoke/dev behavior.
+- The main result view shows provider identity, language pair, source text,
+  translated text, loading, empty, and error states with readable hierarchy.
+
+Real trial command behavior:
+
+```powershell
+.\StartTrial.cmd --no-gui
+.\StartFakeTrial.cmd --no-gui
+```
+
+Expected result:
+
+- `StartTrial.cmd` rejects missing real provider configuration with a clear
+  message.
+- `StartFakeTrial.cmd` remains the deterministic fake smoke path.
+- Automated validation does not require real provider credentials or network.
 
 ## P7 Expansion Planning Validation
 
