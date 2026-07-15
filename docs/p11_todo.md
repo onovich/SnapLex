@@ -15,7 +15,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Revalidate the accepted P10 baseline.
 - [x] Audit release risks from P10 handoff, package docs, and smoke checklist.
 - [x] Run visible Windows GUI smoke or document the exact blocker.
-- [ ] Run Windows Credential Locker/keyring smoke with a throwaway fake secret
+- [x] Run Windows Credential Locker/keyring smoke with a throwaway fake secret
   or document the exact blocker.
 - [ ] Decide and document packaged keyring/credential support.
 - [ ] Recheck packaged fake smoke and real-trial fail-closed behavior.
