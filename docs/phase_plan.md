@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P10 executor-complete planning document pending planner check
+Status: P10 planner-accepted planning document with selected P11 execution goal
 
 ## 0. Round Estimate Rules
 
@@ -24,12 +24,14 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P8 | Provider Setup And Real Translation UX | Make real translation setup usable from Settings, separate fake smoke from real trial behavior, and establish the first Apple HIG-inspired UI foundation. | 8 rounds |
 | P9 | Apple-Inspired UI/UX Polish | Make the PySide6 desktop shell trial-ready with visual hierarchy, accessibility, keyboard flow, long-text handling, and screenshot-backed GUI smoke. | 16 rounds |
 | P10 | Secure Credential And Account Strategy | Add credential service boundaries, preserve env-var users, evaluate optional OS keyring storage, and document account/cloud strategy without production OAuth. | 16 rounds |
+| P11 | Trial Release Hardening | Validate visible Windows behavior, manual keyring smoke, packaged credential behavior, onboarding copy, and release notes before broader private trial. | 12 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
 Total including selected P8 post-MVP implementation: 61 rounds.
 Total including selected P9 post-MVP implementation: 77 rounds.
 Total including selected P10 post-MVP implementation: 93 rounds.
+Total including selected P11 post-MVP implementation: 105 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -361,12 +363,12 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P9 - Apple-Inspired UI/UX Polish.
+Current accepted phase: P10 - Secure Credential And Account Strategy.
 
 P0-P7 status: complete.
 
-Current planner-check target: P10 Secure Credential And Account Strategy using
-`docs/p10_final_validation_report.md` and `docs/p10_to_p11_handoff.md`.
+Selected next step: execute P11 using
+`docs/p11_trial_release_hardening_goal_guide.md` and `docs/p11_todo.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -570,7 +572,63 @@ Executor completion artifacts:
 - `docs/p10_final_validation_report.md`
 - `docs/p10_to_p11_handoff.md`
 
-Planner check:
+Planner acceptance:
 
-- P10 executor-complete on 2026-07-15.
-- Recommended next phase: P11 Trial Release Hardening.
+- P10 accepted on 2026-07-16 at
+  `5a37564993c67dcf9c5bfe5da2ed06a44327874c`.
+- Selected next phase: P11 Trial Release Hardening.
+
+## 14. P11 - Trial Release Hardening
+
+Estimated rounds: 12
+
+Execution guide: `docs/p11_trial_release_hardening_goal_guide.md`
+
+Goal: harden SnapLex for a private Windows trial release by validating visible
+desktop behavior, manual credential/keyring behavior, packaged trial behavior,
+provider onboarding clarity, and release notes while preserving P10 credential
+boundaries.
+
+Scope:
+
+- Revalidate the accepted P10 baseline.
+- Visible Windows smoke for shell, Settings, History, focus, long text, fake
+  warnings, and real/fake trial launch behavior.
+- Manual Windows Credential Locker/keyring smoke with a throwaway fake secret
+  when the environment supports it.
+- Packaged keyring/credential support decision.
+- Packaged fake smoke and real-trial fail-closed checks.
+- Provider onboarding copy polish.
+- Key rotation and least-privilege notes.
+- Release smoke checklist and private trial checklist consolidation.
+
+Deliverables:
+
+- `docs/p11_visible_windows_smoke_evidence.md`
+- `docs/p11_keyring_packaging_decision.md`
+- `docs/p11_provider_onboarding_notes.md`
+- P11 final validation report and P11 to P12 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Package dry-run remains green.
+- Fake/real trial command smoke remains green.
+- P9 GUI smoke remains green.
+- Visible Windows and manual keyring smoke pass or document exact blockers.
+- Docs link/index and artifact/secret scans remain green.
+
+Round split:
+
+- Round 1: rebaseline and release-risk audit.
+- Round 2: visible Windows GUI smoke.
+- Round 3: manual keyring smoke.
+- Round 4: packaged credential decision.
+- Round 5: packaged trial hardening.
+- Round 6: provider onboarding copy.
+- Round 7: key rotation and least privilege.
+- Round 8: release checklist consolidation.
+- Rounds 9-11: buffer hardening.
+- Round 12: final validation, report, and P12 handoff.

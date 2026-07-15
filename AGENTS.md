@@ -53,8 +53,9 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest accepted P9 guide: `docs/p9_apple_inspired_ui_ux_goal_guide.md`.
 - Latest accepted P9 report: `docs/p9_final_validation_report.md`.
 - P9 to P10 handoff: `docs/p9_to_p10_handoff.md`.
-- P10 execution guide: `docs/p10_secure_credential_account_strategy_goal_guide.md`.
-- P10 final report ready for check: `docs/p10_final_validation_report.md`.
-- P10 to P11 handoff ready for check: `docs/p10_to_p11_handoff.md`.
+- Latest accepted P10 guide: `docs/p10_secure_credential_account_strategy_goal_guide.md`.
+- Latest accepted P10 report: `docs/p10_final_validation_report.md`.
+- P10 to P11 handoff: `docs/p10_to_p11_handoff.md`.
 - P10 credential/account strategy docs: `docs/p10_credential_strategy_decisions.md`, `docs/p10_secure_storage_notes.md`, `docs/p10_account_strategy.md`.
-- Current post-MVP TODO: `docs/p10_todo.md`.
+- Current post-MVP execution guide: `docs/p11_trial_release_hardening_goal_guide.md`.
+- Current post-MVP TODO: `docs/p11_todo.md`.

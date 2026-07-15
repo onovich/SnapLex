@@ -1,13 +1,16 @@
 # P10 To P11 Handoff
 
 Date: 2026-07-15
-Status: P10 executor-complete; planner check requested
+Status: P10 planner-accepted; P11 ready for execution planning
 
 Recommended next phase: P11 Trial Release Hardening.
 
-Candidate P11 guide should preserve P10 credential boundaries while focusing on
-visible Windows validation, manual keyring smoke, packaged credential behavior,
-and real-provider onboarding clarity.
+Executable P11 guide: `docs/p11_trial_release_hardening_goal_guide.md`
+P11 TODO: `docs/p11_todo.md`
+
+P11 should preserve P10 credential boundaries while focusing on visible Windows
+validation, manual keyring smoke, packaged credential behavior, and
+real-provider onboarding clarity.
 
 ## Accepted P10 Baseline For Review
 
@@ -61,9 +64,9 @@ self-hosted LibreTranslate.
 - Assistive technology checks remain manual future validation.
 - Provider-specific least-privilege and key-rotation notes are still light.
 
-## Recommended P11 Scope
+## Selected P11 Scope
 
-P11 should be release-hardening, not feature expansion:
+P11 is selected as release-hardening, not feature expansion:
 
 - run visible Windows smoke for shell, Settings, History, long text, focus, and
   real/fake trial commands;

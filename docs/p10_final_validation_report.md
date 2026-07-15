@@ -2,7 +2,7 @@
 
 Date: 2026-07-15
 Phase: P10 Secure Credential And Account Strategy
-Status: PASS, ready for planner acceptance
+Status: PASS, planner-accepted
 
 Accepted input baseline: P9 at
 `a2ebc99a47bc810fe3f6245f61a26a16fc6650b3`.
@@ -23,6 +23,17 @@ runtime, AI summary runtime, or global hotkeys.
 Rounds used: 12 of 16.
 
 Buffer rounds consumed: 0.
+
+## Planner Acceptance
+
+- Rechecked by planner on 2026-07-16.
+- Acceptance result: PASS.
+- Recheck validation: `Validate.cmd` PASS with 255 tests, `git diff --check`
+  PASS, CLI bootstrap PASS, package dry-run PASS, real-provider readiness
+  expected rejection PASS, real/fake trial command smoke PASS, `SmokeTrial.cmd`
+  PASS, P9 GUI screenshot smoke PASS, dummy OpenAI env-var readiness smoke PASS,
+  P10 docs index check PASS, and artifact/secret boundary scan PASS.
+- Accepted commit: `5a37564993c67dcf9c5bfe5da2ed06a44327874c`.
 
 ## Main Deliverables
 
@@ -171,20 +182,16 @@ P10 was delivered through incremental pushed commits:
 - `da65254` - trial credential readiness.
 - `c56d132` - credential/account strategy docs.
 - `f1406cb` - credential smoke evidence.
-
-The closure commit containing this report and P10-to-P11 handoff is supplied in
-the executor READY_FOR_CHECK response.
+- `5a37564` - final credential strategy report and P10-to-P11 handoff.
 
 ## Push Result
 
-P10 implementation commits through `f1406cb` are pushed to `origin/main`.
-Closure docs are ready to be committed and pushed with this report.
+P10 implementation and closure docs through
+`5a37564993c67dcf9c5bfe5da2ed06a44327874c` are pushed to `origin/main`.
 
 ## Request For Acceptance
 
-P10 is ready for architect/planner acceptance against
-`docs/p10_secure_credential_account_strategy_goal_guide.md`.
-
+P10 is accepted against `docs/p10_secure_credential_account_strategy_goal_guide.md`.
 Recommended next goal: P11 Trial Release Hardening, focused on visible Windows
 smoke, Windows Credential Locker/manual keyring smoke, packaged credential
 variant decision, and provider onboarding polish.

@@ -24,6 +24,8 @@ P10 secure credential/account strategy planning is recorded in
 `docs/p10_secure_storage_notes.md`, `docs/p10_account_strategy.md`,
 `docs/p10_smoke_evidence.md`, `docs/p10_final_validation_report.md`,
 `docs/p10_to_p11_handoff.md`, and `docs/p10_todo.md`.
+P11 trial release hardening planning is recorded in
+`docs/p11_trial_release_hardening_goal_guide.md` and `docs/p11_todo.md`.
 
 ## Automated Precheck
 
@@ -391,6 +393,41 @@ Optional manual Windows Credential Locker smoke:
 P10 final validation should additionally prove generated keyring exports, local
 config/history, `.env`, screenshots, logs, package outputs, and provider secrets
 remain untracked and uncommitted.
+
+## P11 Trial Release Hardening Smoke
+
+P11 is the release-hardening pass before broader private trial distribution.
+Run visible desktop smoke when the environment supports it:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexP11VisibleSmoke"
+python -m snaplex
+```
+
+Expected result:
+
+- Shell, Settings, History, result states, long text, fake warnings, and focus
+  outlines are readable with normal Windows desktop fonts.
+- Real trial paths fail closed when no real provider or accepted credential
+  source is configured.
+- Fake trial paths remain deterministic and visibly fake.
+- Credential source/readiness controls do not echo raw secret values.
+- Screenshots or notes from visible smoke remain local ignored artifacts.
+
+Manual keyring smoke should use only a throwaway fake secret:
+
+1. Install optional credential support when needed:
+   `python -m pip install -e ".[gui,credentials]"`.
+2. Select keyring/local secure credential source in Settings.
+3. Save the throwaway value.
+4. Confirm readiness reports a non-secret keyring reference.
+5. Relaunch SnapLex with the same local app data directory.
+6. Confirm readiness persists without displaying the value.
+7. Delete the credential and confirm readiness returns to missing.
+
+Packaging hardening should decide whether keyring support is included in the
+base package, an explicit credential-capable variant, or a manual-install path
+for the private trial. Base package fake smoke must remain deterministic.
 
 ## P7 Expansion Planning Validation
 

@@ -66,6 +66,8 @@ The current project source of truth lives in:
 - `docs/p10_smoke_evidence.md`
 - `docs/p10_final_validation_report.md`
 - `docs/p10_to_p11_handoff.md`
+- `docs/p11_trial_release_hardening_goal_guide.md`
+- `docs/p11_todo.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -99,8 +101,8 @@ optional lazy real capture/OCR adapters, real provider adapters for
 LibreTranslate/OpenAI/DeepL, mocked HTTP tests, fake offline defaults, persisted
 settings, optional recent translation history, shared result states, a
 PyInstaller spec, packaged release smoke commands, post-MVP expansion plans,
-provider setup UX, Apple-inspired UI polish, and P10 credential/account work
-ready for planner check.
+provider setup UX, Apple-inspired UI polish, and accepted P10
+credential/account work.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -109,8 +111,10 @@ And Real Translation UX is planner-accepted; use
 closure package. P9 Apple-Inspired UI/UX Polish is planner-accepted; use
 `docs/p9_final_validation_report.md` and `docs/p9_to_p10_handoff.md` for the
 P9 closure package. P10 Secure Credential And Account Strategy is
-executor-complete and ready for planner check; use
-`docs/p10_final_validation_report.md` and `docs/p10_to_p11_handoff.md`.
+planner-accepted; use `docs/p10_final_validation_report.md` and
+`docs/p10_to_p11_handoff.md`. The selected next goal is P11 Trial Release
+Hardening; use `docs/p11_trial_release_hardening_goal_guide.md` and
+`docs/p11_todo.md`.
 
 ## Setup
 
@@ -429,6 +433,19 @@ See `docs/p10_secure_credential_account_strategy_goal_guide.md`,
 `docs/p10_secure_storage_notes.md`, `docs/p10_account_strategy.md`,
 `docs/p10_smoke_evidence.md`, `docs/p10_final_validation_report.md`,
 `docs/p10_to_p11_handoff.md`, and `docs/p10_todo.md`.
+
+## P11 Trial Release Hardening
+
+P11 is the selected next post-MVP implementation goal. It should harden SnapLex
+for private Windows trial release by validating visible desktop behavior,
+manual Windows Credential Locker/keyring behavior, packaged trial behavior,
+provider onboarding copy, and key rotation/least-privilege notes.
+
+P11 must preserve P10 credential boundaries, deterministic fake smoke paths,
+no-network automated tests, and no-secret repository hygiene. It is
+release-hardening, not feature expansion.
+
+See `docs/p11_trial_release_hardening_goal_guide.md` and `docs/p11_todo.md`.
 
 ## Current Boundaries
 

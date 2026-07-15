@@ -232,10 +232,10 @@ closure package is `docs/p9_final_validation_report.md` and
 
 ## P10 Secure Credential And Account Strategy Completion
 
-P10 executor work addresses the remaining real-provider setup gap after P8/P9:
-ordinary users should not need to edit environment variables forever, but
-SnapLex also must not pretend that consumer account OAuth exists for providers
-that expose API-key-based access.
+P10 planner-accepted work addresses the remaining real-provider setup gap after
+P8/P9: ordinary users should not need to edit environment variables forever,
+but SnapLex also must not pretend that consumer account OAuth exists for
+providers that expose API-key-based access.
 
 P10 preserves environment-variable users, introduces credential service/store
 boundaries, adds optional OS keyring support behind lazy dependencies and
@@ -245,8 +245,26 @@ broker tradeoffs without implementing production OAuth, billing, or SnapLex
 Cloud.
 
 The closure package is `docs/p10_final_validation_report.md` and
-`docs/p10_to_p11_handoff.md`. The recommended next phase is P11 Trial Release
-Hardening.
+`docs/p10_to_p11_handoff.md`.
+
+## Selected P11 Trial Release Hardening
+
+P11 is the selected next post-MVP implementation goal. It is release hardening,
+not feature expansion:
+
+- visible Windows smoke for shell, Settings, History, focus, long text, fake
+  warnings, and real/fake trial launch behavior;
+- Windows Credential Locker/keyring smoke with a throwaway fake credential when
+  the environment supports it;
+- packaged credential behavior decision for base package versus a
+  credential-capable variant or manual credentials extra;
+- provider onboarding copy polish;
+- key rotation and least-privilege notes;
+- preservation of P10 credential boundaries, no-secret hygiene, deterministic
+  fake smoke paths, and no-network automated tests.
+
+The executable guide is `docs/p11_trial_release_hardening_goal_guide.md`; the
+TODO is `docs/p11_todo.md`.
 
 ## MVP Goals
 
@@ -325,13 +343,15 @@ Summary:
 - P8 Provider Setup And Real Translation UX: 8 conversation rounds.
 - P9 Apple-Inspired UI/UX Polish: 16 conversation rounds.
 - P10 Secure Credential And Account Strategy: 16 conversation rounds.
+- P11 Trial Release Hardening: 12 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
 Including the selected P8 implementation goal, the post-MVP plan became 61
 rounds. Including the accepted P9 implementation goal, the post-MVP plan became
-77 rounds. Including P10 credential/account strategy, the current post-MVP plan
-is 93 rounds.
+77 rounds. Including accepted P10 credential/account strategy, the post-MVP
+plan became 93 rounds. Including selected P11 trial release hardening, the
+current post-MVP plan is 105 rounds.
 
 ## Validation Plan
 
