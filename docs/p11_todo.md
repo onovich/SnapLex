@@ -12,8 +12,8 @@ Estimated budget: 12 conversation rounds.
 
 ## Tasks
 
-- [ ] Revalidate the accepted P10 baseline.
-- [ ] Audit release risks from P10 handoff, package docs, and smoke checklist.
+- [x] Revalidate the accepted P10 baseline.
+- [x] Audit release risks from P10 handoff, package docs, and smoke checklist.
 - [ ] Run visible Windows GUI smoke or document the exact blocker.
 - [ ] Run Windows Credential Locker/keyring smoke with a throwaway fake secret
   or document the exact blocker.
