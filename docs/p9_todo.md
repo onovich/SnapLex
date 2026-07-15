@@ -12,8 +12,8 @@ Estimated budget: 16 conversation rounds.
 
 ## Tasks
 
-- [ ] Revalidate the accepted P8 baseline.
-- [ ] Produce a UI audit for main shell, result states, Settings, History, and
+- [x] Revalidate the accepted P8 baseline.
+- [x] Produce a UI audit for main shell, result states, Settings, History, and
   region selector.
 - [ ] Add or refine shared visual tokens/styles for spacing, typography, color,
   focus, and stable controls.
