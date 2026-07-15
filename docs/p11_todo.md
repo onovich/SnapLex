@@ -17,7 +17,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Run visible Windows GUI smoke or document the exact blocker.
 - [x] Run Windows Credential Locker/keyring smoke with a throwaway fake secret
   or document the exact blocker.
-- [ ] Decide and document packaged keyring/credential support.
+- [x] Decide and document packaged keyring/credential support.
 - [ ] Recheck packaged fake smoke and real-trial fail-closed behavior.
 - [ ] Polish provider onboarding and credential setup copy.
 - [ ] Add key rotation and least-privilege notes.
