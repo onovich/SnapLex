@@ -215,8 +215,8 @@ The repository now has planner-accepted P8 provider setup UX:
 
 ## P9 Apple-Inspired UI/UX Polish Completion
 
-P9 executor work polishes the existing PySide6 desktop experience without
-adding new product capabilities:
+P9 planner-accepted work polishes the existing PySide6 desktop experience
+without adding new product capabilities:
 
 - Main shell and result-state hierarchy.
 - Settings provider setup layout, focus order, and accessibility labels.
@@ -230,8 +230,23 @@ The executable guide is `docs/p9_apple_inspired_ui_ux_goal_guide.md`. The P9
 closure package is `docs/p9_final_validation_report.md` and
 `docs/p9_to_p10_handoff.md`.
 
-Recommended next goal after P9 acceptance: P10 Secure Credential/Account
-Strategy, unless localization is more urgent from trial feedback.
+## Selected P10 Secure Credential And Account Strategy
+
+P10 is the selected next post-MVP implementation goal. It addresses the
+remaining real-provider setup gap after P8/P9: ordinary users should not need
+to edit environment variables forever, but SnapLex also must not pretend that
+consumer account OAuth exists for providers that expose API-key-based access.
+
+P10 should preserve environment-variable users, introduce credential
+service/store boundaries, add or explicitly defer optional OS keyring support
+behind lazy dependencies and fake-store tests, update Settings and trial
+readiness to use credential references instead of raw secrets, and document
+future account/cloud/token-broker tradeoffs without implementing production
+OAuth, billing, or SnapLex Cloud.
+
+The executable guide is
+`docs/p10_secure_credential_account_strategy_goal_guide.md`; the TODO is
+`docs/p10_todo.md`.
 
 ## MVP Goals
 
@@ -309,12 +324,14 @@ Summary:
 - P7 Expansion Track: 5 conversation rounds.
 - P8 Provider Setup And Real Translation UX: 8 conversation rounds.
 - P9 Apple-Inspired UI/UX Polish: 16 conversation rounds.
+- P10 Secure Credential And Account Strategy: 16 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
 Including the selected P8 implementation goal, the current post-MVP plan is 61
-rounds. Including the executor-complete P9 implementation goal, the current
-post-MVP plan is 77 rounds.
+rounds. Including the accepted P9 implementation goal, the current post-MVP
+plan is 77 rounds. Including the selected P10 credential/account strategy goal,
+the current post-MVP plan is 93 rounds.
 
 ## Validation Plan
 

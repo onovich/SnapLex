@@ -58,6 +58,8 @@ The current project source of truth lives in:
 - `docs/p9_hardening_notes.md`
 - `docs/p9_final_validation_report.md`
 - `docs/p9_to_p10_handoff.md`
+- `docs/p10_secure_credential_account_strategy_goal_guide.md`
+- `docs/p10_todo.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -97,9 +99,11 @@ Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
 And Real Translation UX is planner-accepted; use
 `docs/p8_final_validation_report.md` and `docs/p8_to_p9_handoff.md` for the P8
-closure package. P9 Apple-Inspired UI/UX Polish is executor-complete and ready
-for planner validation; use `docs/p9_final_validation_report.md` and
-`docs/p9_to_p10_handoff.md` for the P9 closure package.
+closure package. P9 Apple-Inspired UI/UX Polish is planner-accepted; use
+`docs/p9_final_validation_report.md` and `docs/p9_to_p10_handoff.md` for the
+P9 closure package. The selected next goal is P10 Secure Credential And Account
+Strategy; use `docs/p10_secure_credential_account_strategy_goal_guide.md` and
+`docs/p10_todo.md`.
 
 ## Setup
 
@@ -394,6 +398,17 @@ P9 executor work refines the PySide6 desktop experience for trial use:
 
 See `docs/p9_final_validation_report.md`, `docs/p9_visual_smoke_evidence.md`,
 and `docs/p9_to_p10_handoff.md`.
+
+## P10 Secure Credential And Account Strategy
+
+P10 is the selected next post-MVP implementation goal. It should preserve
+existing environment-variable provider setup while adding a credential service
+boundary and first local secure credential path, with optional OS keyring
+support kept lazy and testable. Production account OAuth, SnapLex Cloud, token
+broker, and billing remain out of runtime scope for P10.
+
+See `docs/p10_secure_credential_account_strategy_goal_guide.md` and
+`docs/p10_todo.md`.
 
 ## Current Boundaries
 

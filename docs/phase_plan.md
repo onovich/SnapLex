@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P9 executor-complete planning document, pending planner acceptance
+Status: P9 planner-accepted planning document with selected P10 execution goal
 
 ## 0. Round Estimate Rules
 
@@ -23,11 +23,13 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P7 | Expansion Track | Prepare optional AI summary, multilingual polish, and browser-extension bridge planning. | 5 rounds |
 | P8 | Provider Setup And Real Translation UX | Make real translation setup usable from Settings, separate fake smoke from real trial behavior, and establish the first Apple HIG-inspired UI foundation. | 8 rounds |
 | P9 | Apple-Inspired UI/UX Polish | Make the PySide6 desktop shell trial-ready with visual hierarchy, accessibility, keyboard flow, long-text handling, and screenshot-backed GUI smoke. | 16 rounds |
+| P10 | Secure Credential And Account Strategy | Add credential service boundaries, preserve env-var users, evaluate optional OS keyring storage, and document account/cloud strategy without production OAuth. | 16 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
 Total including selected P8 post-MVP implementation: 61 rounds.
 Total including selected P9 post-MVP implementation: 77 rounds.
+Total including selected P10 post-MVP implementation: 93 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -359,15 +361,13 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P8 - Provider Setup And Real Translation UX.
-
-Current executor-complete phase pending planner acceptance: P9 - Apple-Inspired
-UI/UX Polish.
+Current accepted phase: P9 - Apple-Inspired UI/UX Polish.
 
 P0-P7 status: complete.
 
-Selected next step: planner validation of P9 using
-`docs/p9_final_validation_report.md` and `docs/p9_to_p10_handoff.md`.
+Selected next step: execute P10 using
+`docs/p10_secure_credential_account_strategy_goal_guide.md` and
+`docs/p10_todo.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -497,4 +497,66 @@ Executor completion artifacts:
 
 Planner acceptance:
 
-- Pending P9 planner validation.
+- P9 accepted on 2026-07-15 at
+  `a2ebc99a47bc810fe3f6245f61a26a16fc6650b3`.
+
+## 13. P10 - Secure Credential And Account Strategy
+
+Estimated rounds: 16
+
+Execution guide: `docs/p10_secure_credential_account_strategy_goal_guide.md`
+
+Goal: add a safe credential/account strategy and first local secure credential
+path without breaking existing environment-variable provider users or adding
+production cloud/account OAuth scope.
+
+Scope:
+
+- Credential threat model and strategy decision document.
+- Credential reference/status models and service/store boundaries.
+- Environment-variable credential compatibility and migration-safe config.
+- Optional lazy OS keyring path with fake-store tests, or a documented concrete
+  blocker if the path cannot be implemented safely.
+- Provider readiness and Test Connection routed through credential boundaries.
+- Settings secure credential controls that never echo or serialize raw secrets.
+- Trial launch readiness that recognizes accepted credential sources while
+  preserving fake/real separation.
+- Account/cloud/token-broker strategy docs without runtime production OAuth,
+  billing, or SnapLex Cloud.
+
+Deliverables:
+
+- `docs/p10_credential_strategy_decisions.md`
+- `docs/p10_secure_storage_notes.md`
+- `docs/p10_account_strategy.md`
+- Credential service/store implementation and tests.
+- Settings/provider setup integration and tests.
+- P10 final validation report and P10 to P11 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Package dry-run remains green.
+- Fake/real trial command smoke remains green.
+- P9 GUI smoke remains green.
+- Credential/store/provider setup tests prove secrets are not serialized,
+  echoed, logged, or committed.
+- Docs link/index and artifact/secret scans remain green.
+
+Round split:
+
+- Round 1: rebaseline, threat model, and source refresh.
+- Round 2: credential domain model.
+- Round 3: env credential resolver compatibility.
+- Round 4: optional keyring adapter.
+- Round 5: credential-aware provider setup.
+- Round 6: provider connection integration.
+- Round 7: Settings presenter and service integration.
+- Round 8: Settings UI secure credential controls.
+- Round 9: trial command and CLI readiness.
+- Round 10: package and optional dependency boundaries.
+- Round 11: account/cloud/token-broker strategy.
+- Round 12: credential smoke and documentation.
+- Rounds 13-15: buffer hardening.
+- Round 16: final validation, report, and P11 handoff.

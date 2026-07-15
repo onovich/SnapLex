@@ -18,6 +18,9 @@ P9 UI/UX polish planning and executor evidence are recorded in
 `docs/p9_apple_inspired_ui_ux_goal_guide.md`,
 `docs/p9_visual_smoke_evidence.md`, and
 `docs/p9_final_validation_report.md`.
+P10 secure credential/account strategy planning is recorded in
+`docs/p10_secure_credential_account_strategy_goal_guide.md` and
+`docs/p10_todo.md`.
 
 ## Automated Precheck
 
@@ -344,6 +347,44 @@ Expected result:
 - If the offscreen environment has no fonts, screenshot text may render as
   square glyphs; visible Windows smoke should still be run before broader trial
   distribution.
+
+## P10 Secure Credential And Account Strategy Smoke
+
+After P10 is implemented, smoke credential setup without using real provider
+secrets unless the user explicitly approves a real-provider trial:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexP10Smoke"
+python -m snaplex
+```
+
+Expected result:
+
+- Settings shows credential source and readiness without displaying secret
+  values.
+- Environment-variable provider setup still works for existing P8/P9 users.
+- Local secure credential save/delete, if implemented, uses password-style
+  transient input and clears the field after save or test.
+- Unsupported or unavailable keyring backends produce a clear user-facing state
+  without crashing app launch, no-GUI bootstrap, or package dry-run.
+- `Test Connection` resolves credentials through service boundaries and never
+  echoes raw values in status text, logs, screenshots, config, or history.
+- `StartTrial.cmd --no-gui` still rejects missing real provider configuration
+  clearly when no accepted credential source is present.
+- `StartFakeTrial.cmd --no-gui` remains deterministic fake smoke/dev mode.
+
+Optional manual Windows Credential Locker smoke:
+
+1. Use only a throwaway fake secret value.
+2. Save the credential through Settings.
+3. Close and relaunch SnapLex with the same `SNAPLEX_APP_DATA_DIR`.
+4. Confirm readiness reports the credential reference, not the secret value.
+5. Delete the credential and confirm readiness returns to missing or
+   unconfigured state.
+
+P10 final validation should additionally prove generated keyring exports, local
+config/history, `.env`, screenshots, logs, package outputs, and provider secrets
+remain untracked and uncommitted.
 
 ## P7 Expansion Planning Validation
 

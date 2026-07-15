@@ -1,10 +1,13 @@
 # P9 To P10 Handoff
 
 Date: 2026-07-15
-Status: P9 executor-complete; pending planner acceptance
+Status: P9 planner-accepted; P10 ready for execution planning
 
 Recommended next phase: P10 Secure Credential/Account Strategy, unless trial
 feedback makes localization more urgent.
+
+Executable P10 guide: `docs/p10_secure_credential_account_strategy_goal_guide.md`
+P10 TODO: `docs/p10_todo.md`
 
 ## Accepted P9 Baseline
 
@@ -50,9 +53,9 @@ providers. The disabled future account-connect affordance is only a placeholder;
 there is no token broker, account OAuth, billing, cloud account, or keychain
 flow.
 
-## Recommended P10 Scope
+## Selected P10 Scope
 
-Default P10 candidate: Secure Credential/Account Strategy.
+Selected P10 goal: Secure Credential/Account Strategy.
 
 Suggested planning questions:
 

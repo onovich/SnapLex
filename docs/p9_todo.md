@@ -4,7 +4,7 @@ P9 goal: polish the SnapLex PySide6 desktop experience using Apple
 HIG-inspired clarity, hierarchy, accessibility, keyboard quality, and
 screenshot-backed GUI smoke, while preserving P8 provider/setup boundaries.
 
-Status: executor-complete; ready for planner validation.
+Status: complete, planner-accepted.
 
 Executable guide: `docs/p9_apple_inspired_ui_ux_goal_guide.md`
 

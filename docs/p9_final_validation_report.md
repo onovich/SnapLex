@@ -2,7 +2,7 @@
 
 Date: 2026-07-15
 Phase: P9 Apple-Inspired UI/UX Polish
-Status: executor-complete; ready for planner validation
+Status: PASS, planner-accepted
 
 Accepted input baseline: P8 at `d8d451a0c2efc140032737ec2afbbbdb2a4f704c`.
 
@@ -16,6 +16,17 @@ region-selection feedback, and deterministic screenshot-backed GUI smoke.
 Rounds used: 16.
 
 Buffer rounds consumed: 3.
+
+## Planner Acceptance
+
+- Rechecked by planner on 2026-07-15.
+- Acceptance result: PASS.
+- Recheck validation: `Validate.cmd` PASS with 221 tests, `git diff --check`
+  PASS, CLI bootstrap PASS, package dry-run PASS, fake/real trial command smoke
+  PASS, `SmokeTrial.cmd` PASS, P9 GUI screenshot smoke PASS,
+  `StartPackagedFakeTrial.cmd` PASS, P9 docs index check PASS, and
+  artifact/secret boundary scan PASS.
+- Accepted commit: `a2ebc99a47bc810fe3f6245f61a26a16fc6650b3`.
 
 ## Main Deliverables
 
@@ -127,18 +138,15 @@ scrolling on a normal Windows desktop.
 ## Commit Hashes
 
 P9 was delivered as incremental pushed commits from `af2d857` through the final
-P9 closure commit. The planner READY_FOR_CHECK message records the exact final
-hash after this report is committed and pushed.
+P9 closure commit `a2ebc99a47bc810fe3f6245f61a26a16fc6650b3`.
 
 ## Push Result
 
-Final P9 closure changes are pushed to `origin/main` by the executor after this
-report passes validation. The planner READY_FOR_CHECK message records the exact
-final pushed hash.
+Final P9 closure changes through
+`a2ebc99a47bc810fe3f6245f61a26a16fc6650b3` are pushed to `origin/main`.
 
 ## Request For Acceptance
 
-Planner should validate this P9 closure package against
-`docs/p9_apple_inspired_ui_ux_goal_guide.md`. If accepted, the recommended next
-goal is P10 Secure Credential/Account Strategy unless trial feedback makes
-localization more urgent.
+P9 is accepted against `docs/p9_apple_inspired_ui_ux_goal_guide.md`.
+Recommended next goal: P10 Secure Credential/Account Strategy unless trial
+feedback makes localization more urgent.
