@@ -68,6 +68,16 @@ python -m snaplex --check-real-provider
 Use `Test Connection` only when you intentionally want SnapLex to contact the
 selected provider. Automated tests and release smoke use mocked or fake paths.
 
+## Key Rotation And Least Privilege
+
+Use a separate short-lived trial key with low quota or budget controls whenever
+the provider account supports them. Keep raw keys only in the active shell, an
+ignored local launcher, or the optional local OS keyring. Rotate keys before
+handing a build to another tester and after any suspected exposure.
+
+See `docs/p11_key_rotation_least_privilege.md` for the full private-trial
+checklist.
+
 ## Missing Provider Behavior
 
 Real trial commands must fail closed when no real provider credential or

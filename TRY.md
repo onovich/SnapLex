@@ -24,8 +24,8 @@ environment variable names or keyring identifiers; never paste a provider key
 into docs, screenshots, commits, issues, or chat.
 
 ```powershell
-$env:SNAPLEX_OPENAI_API_KEY = "your_key"
-$env:SNAPLEX_DEEPL_API_KEY = "your_key"
+$env:SNAPLEX_OPENAI_API_KEY = "your_trial_key"
+$env:SNAPLEX_DEEPL_API_KEY = "your_trial_key"
 $env:SNAPLEX_LIBRETRANSLATE_BASE_URL = "http://localhost:5000"
 ```
 
@@ -34,6 +34,10 @@ environment variables. The default target language is `zh`. Trial data is
 written under `snaplex-smoke-data\trial-real-source`, which is ignored by git.
 If none of those real provider settings exists, the command exits with a clear
 message instead of falling back to fake translation.
+
+Use a separate private-trial provider key with the lowest practical quota,
+budget, and access. Rotate it before sharing a build with another tester and
+after any suspected exposure.
 
 If you already use standard provider variables, `OPENAI_API_KEY` and
 `DEEPL_API_KEY` are also detected.
@@ -128,4 +132,6 @@ See `docs\p10_account_strategy.md` for environment-variable, OS keyring,
 SnapLex Cloud, token broker, and provider account/OAuth tradeoffs. Do not paste
 real provider secrets into docs, screenshots, issues, commits, or chat logs.
 See `docs\p11_provider_onboarding_notes.md` for the private-trial provider
-setup paths and current packaging decision.
+setup paths and current packaging decision. See
+`docs\p11_key_rotation_least_privilege.md` for key rotation, cleanup, and
+least-privilege guidance.
