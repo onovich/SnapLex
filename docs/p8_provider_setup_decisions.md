@@ -146,3 +146,24 @@ validation:
   request is attempted.
 - Timeout, network/bad endpoint, HTTP error, malformed response, unsupported
   language, and success states are covered by deterministic no-network tests.
+
+## Round 4 Settings UI Integration
+
+Round 4 renders the provider setup model in the PySide6 Settings dialog:
+
+- Provider selection is now a constrained native combo box for `fake`,
+  `libretranslate`, `openai`, and `deepl`.
+- Readiness, provider details, and API-key env var presence are visible without
+  opening `config.json`.
+- `Test Connection` is exposed from Settings and delegates through
+  `SettingsPresenter` / `SettingsService`; widgets do not call providers or HTTP
+  transports directly.
+- A disabled `Connect account (future)` affordance is present with honest copy
+  that account sign-in requires a later SnapLex Cloud or provider-supported
+  flow.
+- Provider-specific endpoint, env var name, timeout, retry, and model fields
+  remain editable and save through existing presenter/service rules.
+
+The connection button uses saved/current Settings values and still requires the
+user to have local provider credentials or endpoints configured. Automated
+tests remain mocked and no-network.

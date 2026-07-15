@@ -20,6 +20,7 @@ from snaplex.services import (
     create_default_translation_pipeline,
 )
 from snaplex.services.translation_service import TranslationPipeline
+from snaplex.services.provider_setup import ProviderSetupState
 from snaplex.storage import (
     JsonFileConfigStore,
     JsonFileHistoryStore,
@@ -61,16 +62,19 @@ def launch_gui(
         from PySide6.QtWidgets import (
             QApplication,
             QCheckBox,
+            QComboBox,
             QDialog,
             QDialogButtonBox,
             QDoubleSpinBox,
             QFormLayout,
+            QGroupBox,
             QHBoxLayout,
             QLabel,
             QLineEdit,
             QListWidget,
             QMainWindow,
             QPushButton,
+            QScrollArea,
             QSpinBox,
             QVBoxLayout,
             QWidget,
@@ -223,11 +227,63 @@ def launch_gui(
         state = settings_presenter.load_state()
         dialog = QDialog(window)
         dialog.setWindowTitle("SnapLex Settings")
-        form = QFormLayout(dialog)
+        dialog.resize(640, 680)
+        outer_layout = QVBoxLayout(dialog)
+
+        title_label = QLabel("Provider Setup")
+        title_label.setObjectName("settingsTitle")
+        title_label.setStyleSheet("font-size: 18px; font-weight: 600;")
+        intro_label = QLabel(
+            "Choose a provider, keep API keys in environment variables, and test "
+            "readiness before trying real translation."
+        )
+        intro_label.setWordWrap(True)
+        outer_layout.addWidget(title_label)
+        outer_layout.addWidget(intro_label)
+
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_content = QWidget()
+        section_layout = QVBoxLayout(scroll_content)
+
+        provider_group = QGroupBox("Translation Provider")
+        provider_form = QFormLayout(provider_group)
+        provider_combo = QComboBox()
+        provider_combo.addItems(list(state.provider_choices))
+        provider_index = provider_combo.findText(state.provider_name)
+        if provider_index >= 0:
+            provider_combo.setCurrentIndex(provider_index)
         source_lang_edit = QLineEdit(state.source_lang)
         target_lang_edit = QLineEdit(state.target_lang)
-        provider_name_edit = QLineEdit(state.provider_name)
         provider_order_edit = QLineEdit(state.provider_order)
+        readiness_label = QLabel("")
+        readiness_detail_label = QLabel("")
+        env_status_label = QLabel("")
+        connection_result_label = QLabel("")
+        connect_account_button = QPushButton("Connect account (future)")
+        connect_account_button.setEnabled(False)
+        test_connection_button = QPushButton("Test Connection")
+        for label in (
+            readiness_label,
+            readiness_detail_label,
+            env_status_label,
+            connection_result_label,
+        ):
+            label.setWordWrap(True)
+
+        provider_form.addRow("Provider", provider_combo)
+        provider_form.addRow("Fallback Order", provider_order_edit)
+        provider_form.addRow("Source", source_lang_edit)
+        provider_form.addRow("Target", target_lang_edit)
+        provider_form.addRow("Readiness", readiness_label)
+        provider_form.addRow("Details", readiness_detail_label)
+        provider_form.addRow("Env Var", env_status_label)
+        provider_form.addRow(connect_account_button)
+        provider_form.addRow(test_connection_button)
+        provider_form.addRow("Test Result", connection_result_label)
+
+        libretranslate_group = QGroupBox("LibreTranslate")
+        libretranslate_form = QFormLayout(libretranslate_group)
         libretranslate_base_url_edit = QLineEdit(state.libretranslate_base_url)
         libretranslate_api_key_env_var_edit = QLineEdit(state.libretranslate_api_key_env_var)
         libretranslate_timeout_spin = _double_spin_box(
@@ -235,74 +291,122 @@ def launch_gui(
             QDoubleSpinBox,
         )
         libretranslate_retry_spin = _int_spin_box(state.libretranslate_retry_count, QSpinBox)
+        libretranslate_form.addRow("Base URL", libretranslate_base_url_edit)
+        libretranslate_form.addRow("API Key Env", libretranslate_api_key_env_var_edit)
+        libretranslate_form.addRow("Timeout", libretranslate_timeout_spin)
+        libretranslate_form.addRow("Retry", libretranslate_retry_spin)
+
+        openai_group = QGroupBox("OpenAI")
+        openai_form = QFormLayout(openai_group)
         openai_base_url_edit = QLineEdit(state.openai_base_url)
         openai_api_key_env_var_edit = QLineEdit(state.openai_api_key_env_var)
         openai_timeout_spin = _double_spin_box(state.openai_timeout_seconds, QDoubleSpinBox)
         openai_retry_spin = _int_spin_box(state.openai_retry_count, QSpinBox)
         openai_model_edit = QLineEdit(state.openai_model)
+        openai_form.addRow("Base URL", openai_base_url_edit)
+        openai_form.addRow("API Key Env", openai_api_key_env_var_edit)
+        openai_form.addRow("Timeout", openai_timeout_spin)
+        openai_form.addRow("Retry", openai_retry_spin)
+        openai_form.addRow("Model", openai_model_edit)
+
+        deepl_group = QGroupBox("DeepL")
+        deepl_form = QFormLayout(deepl_group)
         deepl_base_url_edit = QLineEdit(state.deepl_base_url)
         deepl_api_key_env_var_edit = QLineEdit(state.deepl_api_key_env_var)
         deepl_timeout_spin = _double_spin_box(state.deepl_timeout_seconds, QDoubleSpinBox)
         deepl_retry_spin = _int_spin_box(state.deepl_retry_count, QSpinBox)
         deepl_model_type_edit = QLineEdit(state.deepl_model_type)
+        deepl_form.addRow("Base URL", deepl_base_url_edit)
+        deepl_form.addRow("API Key Env", deepl_api_key_env_var_edit)
+        deepl_form.addRow("Timeout", deepl_timeout_spin)
+        deepl_form.addRow("Retry", deepl_retry_spin)
+        deepl_form.addRow("Model Type", deepl_model_type_edit)
+
+        history_group = QGroupBox("History")
+        history_form = QFormLayout(history_group)
         history_enabled_checkbox = QCheckBox()
         history_enabled_checkbox.setChecked(state.history_enabled)
         history_max_entries_spin = _int_spin_box(state.history_max_entries, QSpinBox)
+        history_form.addRow("Enabled", history_enabled_checkbox)
+        history_form.addRow("Max Entries", history_max_entries_spin)
+
+        section_layout.addWidget(provider_group)
+        section_layout.addWidget(libretranslate_group)
+        section_layout.addWidget(openai_group)
+        section_layout.addWidget(deepl_group)
+        section_layout.addWidget(history_group)
+        section_layout.addStretch(1)
+        scroll_area.setWidget(scroll_content)
+        outer_layout.addWidget(scroll_area)
+
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Save | QDialogButtonBox.StandardButton.Cancel
         )
+        outer_layout.addWidget(buttons)
 
-        form.addRow("Source", source_lang_edit)
-        form.addRow("Target", target_lang_edit)
-        form.addRow("Provider", provider_name_edit)
-        form.addRow("Fallback Order", provider_order_edit)
-        form.addRow("Libre URL", libretranslate_base_url_edit)
-        form.addRow("Libre Key Env", libretranslate_api_key_env_var_edit)
-        form.addRow("Libre Timeout", libretranslate_timeout_spin)
-        form.addRow("Libre Retry", libretranslate_retry_spin)
-        form.addRow("OpenAI URL", openai_base_url_edit)
-        form.addRow("OpenAI Key Env", openai_api_key_env_var_edit)
-        form.addRow("OpenAI Timeout", openai_timeout_spin)
-        form.addRow("OpenAI Retry", openai_retry_spin)
-        form.addRow("OpenAI Model", openai_model_edit)
-        form.addRow("DeepL URL", deepl_base_url_edit)
-        form.addRow("DeepL Key Env", deepl_api_key_env_var_edit)
-        form.addRow("DeepL Timeout", deepl_timeout_spin)
-        form.addRow("DeepL Retry", deepl_retry_spin)
-        form.addRow("DeepL Model Type", deepl_model_type_edit)
-        form.addRow("History", history_enabled_checkbox)
-        form.addRow("History Max", history_max_entries_spin)
-        form.addRow(buttons)
+        def current_form_state() -> SettingsFormState:
+            return SettingsFormState(
+                source_lang=source_lang_edit.text(),
+                target_lang=target_lang_edit.text(),
+                provider_name=provider_combo.currentText(),
+                provider_order=provider_order_edit.text(),
+                libretranslate_base_url=libretranslate_base_url_edit.text(),
+                libretranslate_api_key_env_var=libretranslate_api_key_env_var_edit.text(),
+                libretranslate_timeout_seconds=libretranslate_timeout_spin.value(),
+                libretranslate_retry_count=libretranslate_retry_spin.value(),
+                openai_base_url=openai_base_url_edit.text(),
+                openai_api_key_env_var=openai_api_key_env_var_edit.text(),
+                openai_timeout_seconds=openai_timeout_spin.value(),
+                openai_retry_count=openai_retry_spin.value(),
+                openai_model=openai_model_edit.text(),
+                deepl_base_url=deepl_base_url_edit.text(),
+                deepl_api_key_env_var=deepl_api_key_env_var_edit.text(),
+                deepl_timeout_seconds=deepl_timeout_spin.value(),
+                deepl_retry_count=deepl_retry_spin.value(),
+                deepl_model_type=deepl_model_type_edit.text(),
+                history_enabled=history_enabled_checkbox.isChecked(),
+                history_max_entries=history_max_entries_spin.value(),
+            )
+
+        def selected_setup() -> ProviderSetupState | None:
+            refreshed_state = settings_presenter.load_state()
+            setups = {setup.provider_name: setup for setup in refreshed_state.provider_setups}
+            return setups.get(provider_combo.currentText())
+
+        def refresh_provider_setup() -> None:
+            setup = selected_setup()
+            if setup is None:
+                readiness_label.setText("Provider is not supported")
+                readiness_detail_label.setText("Choose fake, LibreTranslate, OpenAI, or DeepL.")
+                env_status_label.setText("")
+                test_connection_button.setEnabled(False)
+                return
+
+            readiness_label.setText(setup.status_text)
+            readiness_detail_label.setText(setup.detail_text)
+            if setup.api_key_env_var:
+                env_status = "present" if setup.api_key_present else "missing"
+                env_status_label.setText(f"{setup.api_key_env_var}: {env_status}")
+            else:
+                env_status_label.setText("No API key env var configured.")
+            connect_account_button.setToolTip(setup.connect_account_detail)
+            test_connection_button.setEnabled(setup.is_real_provider)
 
         def apply_settings() -> None:
-            settings_presenter.apply_state(
-                SettingsFormState(
-                    source_lang=source_lang_edit.text(),
-                    target_lang=target_lang_edit.text(),
-                    provider_name=provider_name_edit.text(),
-                    provider_order=provider_order_edit.text(),
-                    libretranslate_base_url=libretranslate_base_url_edit.text(),
-                    libretranslate_api_key_env_var=libretranslate_api_key_env_var_edit.text(),
-                    libretranslate_timeout_seconds=libretranslate_timeout_spin.value(),
-                    libretranslate_retry_count=libretranslate_retry_spin.value(),
-                    openai_base_url=openai_base_url_edit.text(),
-                    openai_api_key_env_var=openai_api_key_env_var_edit.text(),
-                    openai_timeout_seconds=openai_timeout_spin.value(),
-                    openai_retry_count=openai_retry_spin.value(),
-                    openai_model=openai_model_edit.text(),
-                    deepl_base_url=deepl_base_url_edit.text(),
-                    deepl_api_key_env_var=deepl_api_key_env_var_edit.text(),
-                    deepl_timeout_seconds=deepl_timeout_spin.value(),
-                    deepl_retry_count=deepl_retry_spin.value(),
-                    deepl_model_type=deepl_model_type_edit.text(),
-                    history_enabled=history_enabled_checkbox.isChecked(),
-                    history_max_entries=history_max_entries_spin.value(),
-                )
-            )
+            settings_presenter.apply_state(current_form_state())
             dialog.accept()
 
+        def run_connection_test() -> None:
+            saved_state = settings_presenter.apply_state(current_form_state())
+            result = settings_presenter.test_provider_connection(saved_state.provider_name)
+            connection_result_label.setText(f"{result.status_text}: {result.detail_text}")
+            refresh_provider_setup()
+
+        provider_combo.currentTextChanged.connect(lambda _text: refresh_provider_setup())
+        test_connection_button.clicked.connect(run_connection_test)
         buttons.accepted.connect(apply_settings)
         buttons.rejected.connect(dialog.reject)
+        refresh_provider_setup()
         dialog.exec()
 
     def handle_history() -> None:
