@@ -24,6 +24,8 @@ def test_config_defaults_use_fake_provider() -> None:
     assert config.provider_configs["fake"].base_url == ""
     assert config.provider_configs["libretranslate"].base_url == "http://localhost:5000"
     assert config.provider_configs["openai"].api_key_env_var == "SNAPLEX_OPENAI_API_KEY"
+    assert config.provider_configs["openai"].credential_source == ""
+    assert config.provider_configs["openai"].credential_identifier == ""
     assert config.provider_configs["openai"].options["model"] == "gpt-5.5"
     assert config.provider_configs["deepl"].api_key_env_var == "SNAPLEX_DEEPL_API_KEY"
     assert config.history_enabled is False
@@ -54,6 +56,8 @@ def test_load_app_config_from_environment_selects_provider_without_reading_secre
             "SNAPLEX_TARGET_LANG": "en",
             "SNAPLEX_OPENAI_BASE_URL": "https://api.openai.example/v1",
             "SNAPLEX_OPENAI_API_KEY_ENV": "MY_OPENAI_KEY",
+            "SNAPLEX_OPENAI_CREDENTIAL_SOURCE": "keyring",
+            "SNAPLEX_OPENAI_CREDENTIAL_IDENTIFIER": "snaplex/openai/local",
             "SNAPLEX_OPENAI_API_KEY": "secret-value",
             "SNAPLEX_OPENAI_TIMEOUT_SECONDS": "3.5",
             "SNAPLEX_OPENAI_RETRY_COUNT": "2",
@@ -68,6 +72,8 @@ def test_load_app_config_from_environment_selects_provider_without_reading_secre
     assert config.target_lang == "en"
     assert openai_config.base_url == "https://api.openai.example/v1"
     assert openai_config.api_key_env_var == "MY_OPENAI_KEY"
+    assert openai_config.credential_source == "keyring"
+    assert openai_config.credential_identifier == "snaplex/openai/local"
     assert openai_config.timeout_seconds == 3.5
     assert openai_config.retry_count == 2
     assert openai_config.options["model"] == "gpt-test"
@@ -119,6 +125,8 @@ def test_json_file_config_store_saves_and_loads_config(tmp_path) -> None:
             "openai": ProviderRuntimeConfig(
                 base_url="https://api.openai.example/v1",
                 api_key_env_var="MY_OPENAI_KEY",
+                credential_source="keyring",
+                credential_identifier="snaplex/openai/local",
                 timeout_seconds=3.5,
                 retry_count=2,
                 options={"model": "gpt-test"},
@@ -138,6 +146,8 @@ def test_json_file_config_store_saves_and_loads_config(tmp_path) -> None:
     assert loaded.provider_order == ("openai", "fake")
     assert loaded.provider_configs["openai"].base_url == "https://api.openai.example/v1"
     assert loaded.provider_configs["openai"].api_key_env_var == "MY_OPENAI_KEY"
+    assert loaded.provider_configs["openai"].credential_source == "keyring"
+    assert loaded.provider_configs["openai"].credential_identifier == "snaplex/openai/local"
     assert loaded.provider_configs["openai"].timeout_seconds == 3.5
     assert loaded.provider_configs["openai"].retry_count == 2
     assert loaded.provider_configs["openai"].options == {"model": "gpt-test"}
@@ -218,6 +228,8 @@ def test_app_config_serialization_does_not_keep_provider_secret_values() -> None
                 "openai": {
                     "base_url": "https://api.openai.example/v1",
                     "api_key_env_var": "SNAPLEX_OPENAI_API_KEY",
+                    "credential_source": "keyring",
+                    "credential_identifier": "snaplex/openai/local",
                     "api_key": "secret-value",
                     "api_key_value": "another-secret",
                     "timeout_seconds": 5,
@@ -231,6 +243,8 @@ def test_app_config_serialization_does_not_keep_provider_secret_values() -> None
     serialized_text = json.dumps(serialized)
 
     assert config.provider_configs["openai"].api_key_env_var == "SNAPLEX_OPENAI_API_KEY"
+    assert config.provider_configs["openai"].credential_source == "keyring"
+    assert config.provider_configs["openai"].credential_identifier == "snaplex/openai/local"
     assert "secret-value" not in repr(config)
     assert "secret-value" not in serialized_text
     assert "another-secret" not in serialized_text

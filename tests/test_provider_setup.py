@@ -1,9 +1,28 @@
 from snaplex.providers.config import ProviderRuntimeConfig
+from snaplex.services.credentials import (
+    CredentialService,
+    CredentialSource,
+    CredentialStatusCode,
+    InMemoryCredentialStore,
+    KeyringCredentialStore,
+    keyring_credential_reference,
+)
 from snaplex.services.provider_setup import (
     ProviderSetupStatus,
     describe_provider_setup,
     describe_provider_setups,
 )
+
+
+class BrokenKeyringModule:
+    def get_password(self, service_name: str, username: str) -> str | None:
+        raise RuntimeError("backend unavailable")
+
+    def set_password(self, service_name: str, username: str, password: str) -> None:
+        raise RuntimeError("backend unavailable")
+
+    def delete_password(self, service_name: str, username: str) -> None:
+        raise RuntimeError("backend unavailable")
 
 
 def test_fake_provider_setup_is_labeled_as_smoke_mode() -> None:
@@ -39,9 +58,55 @@ def test_openai_provider_setup_reports_ready_without_exposing_secret_value() -> 
 
     assert state.status == ProviderSetupStatus.READY_FROM_ENVIRONMENT
     assert state.api_key_present is True
+    assert state.credential_source == "environment"
+    assert state.credential_identifier == "SNAPLEX_OPENAI_API_KEY"
+    assert state.credential_status == CredentialStatusCode.READY
     assert state.can_test_connection is True
     assert "test-secret-value" not in repr(state)
     assert "key value is not stored" in state.detail_text
+
+
+def test_openai_provider_setup_reports_ready_from_keyring_without_secret_value() -> None:
+    reference = keyring_credential_reference("openai")
+    credential_store = InMemoryCredentialStore()
+    credential_store.save(reference, "secret-value")
+    credential_service = CredentialService({CredentialSource.KEYRING: credential_store})
+
+    state = describe_provider_setup(
+        "openai",
+        ProviderRuntimeConfig(credential_source="keyring"),
+        credential_service=credential_service,
+    )
+
+    assert state.status == ProviderSetupStatus.READY_FROM_KEYRING
+    assert state.api_key_present is True
+    assert state.credential_source == "keyring"
+    assert state.credential_identifier == "snaplex/openai/default"
+    assert state.credential_status == CredentialStatusCode.READY
+    assert state.can_test_connection is True
+    assert state.can_delete_credential is True
+    assert "secret-value" not in repr(state)
+
+
+def test_deepl_provider_setup_reports_unavailable_keyring_without_secret_value() -> None:
+    credential_service = CredentialService(
+        {
+            CredentialSource.KEYRING: KeyringCredentialStore(
+                keyring_module=BrokenKeyringModule(),
+            ),
+        },
+    )
+
+    state = describe_provider_setup(
+        "deepl",
+        ProviderRuntimeConfig(credential_source="keyring"),
+        credential_service=credential_service,
+    )
+
+    assert state.status == ProviderSetupStatus.CREDENTIAL_UNAVAILABLE
+    assert state.credential_status == CredentialStatusCode.UNAVAILABLE
+    assert state.can_test_connection is False
+    assert "secret" not in repr(state).lower()
 
 
 def test_deepl_provider_setup_requires_env_credential() -> None:

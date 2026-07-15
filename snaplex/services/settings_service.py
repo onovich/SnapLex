@@ -7,6 +7,7 @@ from dataclasses import replace
 
 from snaplex.providers.config import ProviderRuntimeConfig, copy_provider_runtime_configs
 from snaplex.providers.http import HttpTransport
+from snaplex.credentials import CredentialService
 from snaplex.services.provider_setup import (
     ProviderConnectionTestResult,
     ProviderSetupState,
@@ -27,9 +28,14 @@ class SettingsService:
         self,
         *,
         environ: Mapping[str, str] | None = None,
+        credential_service: CredentialService | None = None,
     ) -> tuple[ProviderSetupState, ...]:
         config = self._config_store.load()
-        return describe_provider_setups(config.provider_configs, environ=environ)
+        return describe_provider_setups(
+            config.provider_configs,
+            environ=environ,
+            credential_service=credential_service,
+        )
 
     def test_provider_connection(
         self,
@@ -37,6 +43,7 @@ class SettingsService:
         *,
         http_transport: HttpTransport | None = None,
         environ: Mapping[str, str] | None = None,
+        credential_service: CredentialService | None = None,
         probe_text: str = "hello",
         source_lang: str = "en",
         target_lang: str = "es",
@@ -47,6 +54,7 @@ class SettingsService:
             config,
             http_transport=http_transport,
             environ=environ,
+            credential_service=credential_service,
             probe_text=probe_text,
             source_lang=source_lang,
             target_lang=target_lang,
@@ -92,6 +100,8 @@ class SettingsService:
         *,
         base_url: str | None = None,
         api_key_env_var: str | None = None,
+        credential_source: str | None = None,
+        credential_identifier: str | None = None,
         timeout_seconds: float | int | str | None = None,
         retry_count: int | str | None = None,
         options: dict[str, str] | None = None,
@@ -105,6 +115,14 @@ class SettingsService:
             api_key_env_var=_clean_text(
                 api_key_env_var,
                 existing_provider_config.api_key_env_var,
+            ),
+            credential_source=_clean_text(
+                credential_source,
+                existing_provider_config.credential_source,
+            ),
+            credential_identifier=_clean_text(
+                credential_identifier,
+                existing_provider_config.credential_identifier,
             ),
             timeout_seconds=_positive_float(
                 timeout_seconds,

@@ -196,6 +196,8 @@ def _provider_runtime_config_to_dict(config: ProviderRuntimeConfig) -> dict[str,
     return {
         "base_url": config.base_url,
         "api_key_env_var": config.api_key_env_var,
+        "credential_source": config.credential_source,
+        "credential_identifier": config.credential_identifier,
         "timeout_seconds": config.timeout_seconds,
         "retry_count": config.retry_count,
         "options": dict(config.options),
@@ -222,6 +224,14 @@ def _provider_runtime_config_from_dict(payload: Mapping[object, object]) -> Prov
         api_key_env_var=_string_value(
             payload.get("api_key_env_var"),
             defaults.api_key_env_var,
+        ),
+        credential_source=_string_value(
+            payload.get("credential_source"),
+            defaults.credential_source,
+        ),
+        credential_identifier=_string_value(
+            payload.get("credential_identifier"),
+            defaults.credential_identifier,
         ),
         timeout_seconds=_positive_float_value(
             payload.get("timeout_seconds"),
@@ -255,6 +265,16 @@ def _provider_configs_from_environment(
                 env,
                 f"{prefix}_API_KEY_ENV",
                 default_config.api_key_env_var,
+            ),
+            credential_source=_env_text(
+                env,
+                f"{prefix}_CREDENTIAL_SOURCE",
+                default_config.credential_source,
+            ),
+            credential_identifier=_env_text(
+                env,
+                f"{prefix}_CREDENTIAL_IDENTIFIER",
+                default_config.credential_identifier,
             ),
             timeout_seconds=_env_float(
                 env,

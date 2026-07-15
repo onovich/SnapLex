@@ -9,6 +9,7 @@ from snaplex.providers.config import (
     ProviderRuntimeConfig,
     copy_provider_runtime_configs,
     default_provider_runtime_configs,
+    provider_credential_reference,
     resolve_api_key,
 )
 from snaplex.providers.deepl import DeepLTranslationProvider
@@ -59,5 +60,6 @@ __all__ = [
     "copy_provider_runtime_configs",
     "create_default_provider_registry",
     "default_provider_runtime_configs",
+    "provider_credential_reference",
     "resolve_api_key",
 ]

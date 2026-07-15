@@ -7,11 +7,14 @@ from collections.abc import Mapping
 from dataclasses import dataclass, field, replace
 
 from snaplex.errors import MissingProviderCredentialError
-from snaplex.services.credentials import (
+from snaplex.credentials import (
+    CredentialReference,
     CredentialService,
+    CredentialSource,
     CredentialStoreError,
     create_environment_credential_service,
     environment_credential_reference,
+    keyring_credential_reference,
 )
 
 
@@ -21,6 +24,8 @@ class ProviderRuntimeConfig:
 
     base_url: str = ""
     api_key_env_var: str = ""
+    credential_source: str = ""
+    credential_identifier: str = ""
     timeout_seconds: float = 10.0
     retry_count: int = 0
     options: dict[str, str] = field(default_factory=dict)
@@ -66,7 +71,7 @@ def resolve_api_key(
     credential_service: CredentialService | None = None,
 ) -> str:
     env_var = config.api_key_env_var.strip()
-    reference = environment_credential_reference(provider_name, env_var)
+    reference = provider_credential_reference(provider_name, config)
     service = credential_service or create_environment_credential_service(
         os.environ if environ is None else environ,
     )
@@ -83,3 +88,39 @@ def resolve_api_key(
             env_var=env_var,
             provider_name=provider_name,
         ) from exc
+
+
+def provider_credential_reference(
+    provider_name: str,
+    config: ProviderRuntimeConfig,
+) -> CredentialReference:
+    """Return the configured non-secret credential reference for a provider."""
+
+    source_text = config.credential_source.strip().lower()
+    identifier = config.credential_identifier.strip()
+    if not source_text:
+        return environment_credential_reference(provider_name, config.api_key_env_var)
+
+    try:
+        source = CredentialSource(source_text)
+    except ValueError:
+        return CredentialReference(
+            provider_name=provider_name,
+            source=CredentialSource.UNSUPPORTED,
+            identifier=identifier,
+        )
+
+    if source == CredentialSource.ENVIRONMENT:
+        return environment_credential_reference(
+            provider_name,
+            identifier or config.api_key_env_var,
+        )
+    if source == CredentialSource.KEYRING:
+        return keyring_credential_reference(provider_name, identifier)
+    if source == CredentialSource.NONE:
+        return CredentialReference(provider_name=provider_name)
+    return CredentialReference(
+        provider_name=provider_name,
+        source=source,
+        identifier=identifier,
+    )

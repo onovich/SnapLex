@@ -14,7 +14,7 @@ from snaplex.services.clipboard_service import (
     InMemoryClipboardService,
     QtClipboardService,
 )
-from snaplex.services.credentials import (
+from snaplex.credentials import (
     CredentialMissingError,
     CredentialReference,
     CredentialService,

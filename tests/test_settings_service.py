@@ -1,5 +1,11 @@
 from snaplex.providers.config import ProviderRuntimeConfig
-from snaplex.services import SettingsService
+from snaplex.services import (
+    CredentialService,
+    CredentialSource,
+    InMemoryCredentialStore,
+    SettingsService,
+    keyring_credential_reference,
+)
 from snaplex.services.provider_setup import ProviderSetupStatus
 from snaplex.storage import AppConfig, InMemoryConfigStore
 
@@ -46,6 +52,29 @@ def test_settings_service_loads_provider_setup_states_without_secret_values() ->
     assert "secret-value" not in repr(states)
 
 
+def test_settings_service_loads_keyring_provider_setup_states_without_secret_values() -> None:
+    reference = keyring_credential_reference("openai")
+    credential_store = InMemoryCredentialStore()
+    credential_store.save(reference, "secret-value")
+    store = InMemoryConfigStore(
+        AppConfig(
+            provider_configs={
+                "openai": ProviderRuntimeConfig(credential_source="keyring"),
+            },
+        )
+    )
+    service = SettingsService(store)
+
+    states = service.load_provider_setup_states(
+        credential_service=CredentialService({CredentialSource.KEYRING: credential_store}),
+    )
+
+    openai_state = next(state for state in states if state.provider_name == "openai")
+    assert openai_state.status == ProviderSetupStatus.READY_FROM_KEYRING
+    assert openai_state.credential_source == "keyring"
+    assert "secret-value" not in repr(states)
+
+
 def test_settings_service_connection_test_returns_provider_result() -> None:
     class TestTransport:
         def send(self, request: object) -> object:
@@ -76,6 +105,8 @@ def test_settings_service_updates_provider_runtime_config_without_secret_values(
         "openai",
         base_url="https://api.openai.example/v1",
         api_key_env_var="MY_OPENAI_KEY",
+        credential_source="keyring",
+        credential_identifier="snaplex/openai/local",
         timeout_seconds="4.5",
         retry_count="2",
         options={"model": "gpt-test", "unused": ""},
@@ -84,6 +115,8 @@ def test_settings_service_updates_provider_runtime_config_without_secret_values(
     openai_config = config.provider_configs["openai"]
     assert openai_config.base_url == "https://api.openai.example/v1"
     assert openai_config.api_key_env_var == "MY_OPENAI_KEY"
+    assert openai_config.credential_source == "keyring"
+    assert openai_config.credential_identifier == "snaplex/openai/local"
     assert openai_config.timeout_seconds == 4.5
     assert openai_config.retry_count == 2
     assert openai_config.options == {"model": "gpt-test"}

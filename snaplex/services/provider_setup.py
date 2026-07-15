@@ -17,9 +17,20 @@ from snaplex.errors import (
     UnsupportedLanguageError,
 )
 from snaplex.providers.base import TranslationRequest
-from snaplex.providers.config import ProviderRuntimeConfig, default_provider_runtime_configs
+from snaplex.providers.config import (
+    ProviderRuntimeConfig,
+    default_provider_runtime_configs,
+    provider_credential_reference,
+)
 from snaplex.providers.http import HttpTransport
 from snaplex.providers.registry import create_default_provider_registry
+from snaplex.credentials import (
+    CredentialReference,
+    CredentialService,
+    CredentialSource,
+    CredentialStatusCode,
+    create_default_credential_service,
+)
 from snaplex.storage.config import AppConfig
 
 
@@ -27,6 +38,8 @@ class ProviderSetupStatus(str, Enum):
     FAKE_SMOKE = "fake_smoke"
     MISSING_CREDENTIAL = "missing_credential"
     READY_FROM_ENVIRONMENT = "ready_from_environment"
+    READY_FROM_KEYRING = "ready_from_keyring"
+    CREDENTIAL_UNAVAILABLE = "credential_unavailable"
     ENDPOINT_UNAVAILABLE = "endpoint_unavailable"
     TEST_PASSED = "test_passed"
     TEST_FAILED = "test_failed"
@@ -44,6 +57,13 @@ class ProviderSetupState:
     base_url: str = ""
     api_key_env_var: str = ""
     api_key_present: bool = False
+    credential_source: str = ""
+    credential_identifier: str = ""
+    credential_status: CredentialStatusCode = CredentialStatusCode.MISSING
+    credential_status_text: str = ""
+    credential_detail_text: str = ""
+    can_save_credential: bool = False
+    can_delete_credential: bool = False
     can_test_connection: bool = False
     is_fake: bool = False
     is_real_provider: bool = False
@@ -79,6 +99,7 @@ def describe_provider_setup(
     provider_config: ProviderRuntimeConfig | None = None,
     *,
     environ: Mapping[str, str] | None = None,
+    credential_service: CredentialService | None = None,
 ) -> ProviderSetupState:
     """Describe user-facing setup readiness without exposing secret values."""
 
@@ -115,39 +136,61 @@ def describe_provider_setup(
         )
 
     api_key_env_var = config.api_key_env_var.strip()
-    api_key_present = bool(api_key_env_var and env.get(api_key_env_var, "").strip())
     base_url = config.base_url.strip()
-    is_missing_required_credential = (
-        normalized_provider_name in REQUIRED_CREDENTIAL_PROVIDERS and not api_key_present
-    ) or (
-        normalized_provider_name == "libretranslate"
-        and bool(api_key_env_var)
-        and not api_key_present
+    credential_reference = provider_credential_reference(normalized_provider_name, config)
+    service = credential_service or create_default_credential_service(
+        env,
+        include_keyring=credential_reference.source == CredentialSource.KEYRING,
     )
+    credential_status = service.status(credential_reference)
+    credential_required = _credential_required(normalized_provider_name, credential_reference)
+    credential_ready = credential_status.code == CredentialStatusCode.READY
 
-    if is_missing_required_credential:
+    if credential_required and not credential_ready:
+        setup_status = _setup_status_from_credential_status(credential_status.code)
         return ProviderSetupState(
             provider_name=normalized_provider_name,
             display_name=display_name,
-            status=ProviderSetupStatus.MISSING_CREDENTIAL,
-            status_text="Credential missing",
-            detail_text=_missing_credential_detail(api_key_env_var, display_name),
+            status=setup_status,
+            status_text=credential_status.status_text,
+            detail_text=credential_status.detail_text
+            or _missing_credential_detail(api_key_env_var, display_name),
             base_url=base_url,
             api_key_env_var=api_key_env_var,
             api_key_present=False,
+            credential_source=credential_reference.source.value,
+            credential_identifier=credential_reference.identifier,
+            credential_status=credential_status.code,
+            credential_status_text=credential_status.status_text,
+            credential_detail_text=credential_status.detail_text,
+            can_save_credential=credential_status.can_save,
+            can_delete_credential=credential_status.can_delete,
             can_test_connection=False,
             is_real_provider=True,
         )
 
+    setup_status = _ready_setup_status(credential_reference.source)
     return ProviderSetupState(
         provider_name=normalized_provider_name,
         display_name=display_name,
-        status=ProviderSetupStatus.READY_FROM_ENVIRONMENT,
+        status=setup_status,
         status_text="Ready to test",
-        detail_text=_ready_detail(normalized_provider_name, api_key_env_var, api_key_present),
+        detail_text=_ready_detail(
+            normalized_provider_name,
+            api_key_env_var,
+            credential_ready,
+            credential_reference.source,
+        ),
         base_url=base_url,
         api_key_env_var=api_key_env_var,
-        api_key_present=api_key_present,
+        api_key_present=credential_ready,
+        credential_source=credential_reference.source.value,
+        credential_identifier=credential_reference.identifier,
+        credential_status=credential_status.code,
+        credential_status_text=credential_status.status_text,
+        credential_detail_text=credential_status.detail_text,
+        can_save_credential=credential_status.can_save,
+        can_delete_credential=credential_status.can_delete,
         can_test_connection=True,
         is_real_provider=True,
     )
@@ -157,13 +200,19 @@ def describe_provider_setups(
     provider_configs: Mapping[str, ProviderRuntimeConfig],
     *,
     environ: Mapping[str, str] | None = None,
+    credential_service: CredentialService | None = None,
 ) -> tuple[ProviderSetupState, ...]:
     """Describe all supported provider setup states in stable display order."""
 
     default_configs = default_provider_runtime_configs()
     merged_configs = {**default_configs, **provider_configs}
     return tuple(
-        describe_provider_setup(provider_name, merged_configs[provider_name], environ=environ)
+        describe_provider_setup(
+            provider_name,
+            merged_configs[provider_name],
+            environ=environ,
+            credential_service=credential_service,
+        )
         for provider_name in ("fake", "libretranslate", "openai", "deepl")
     )
 
@@ -174,6 +223,7 @@ def test_provider_connection(
     *,
     http_transport: HttpTransport | None = None,
     environ: Mapping[str, str] | None = None,
+    credential_service: CredentialService | None = None,
     probe_text: str = "hello",
     source_lang: str = "en",
     target_lang: str = "es",
@@ -185,10 +235,12 @@ def test_provider_connection(
         normalized_provider_name,
         config.provider_configs.get(normalized_provider_name),
         environ=environ,
+        credential_service=credential_service,
     )
     if setup_state.status in {
         ProviderSetupStatus.FAKE_SMOKE,
         ProviderSetupStatus.MISSING_CREDENTIAL,
+        ProviderSetupStatus.CREDENTIAL_UNAVAILABLE,
         ProviderSetupStatus.UNSUPPORTED_PROVIDER,
     }:
         return ProviderConnectionTestResult(
@@ -274,12 +326,44 @@ def _missing_credential_detail(api_key_env_var: str, display_name: str) -> str:
     return f"Set {api_key_env_var} in your shell before testing {display_name}."
 
 
-def _ready_detail(provider_name: str, api_key_env_var: str, api_key_present: bool) -> str:
+def _ready_detail(
+    provider_name: str,
+    api_key_env_var: str,
+    credential_ready: bool,
+    credential_source: CredentialSource,
+) -> str:
     if provider_name == "libretranslate" and not api_key_env_var:
         return "Endpoint is configured. If your server requires a key, add an env var name."
-    if api_key_present:
+    if credential_source == CredentialSource.KEYRING and credential_ready:
+        return "Local secure credential is available. The key value is not stored in config."
+    if credential_ready:
         return f"{api_key_env_var} is set in this process. The key value is not stored."
     return "Provider settings are ready for a connection test."
+
+
+def _credential_required(
+    provider_name: str,
+    credential_reference: CredentialReference,
+) -> bool:
+    if provider_name in REQUIRED_CREDENTIAL_PROVIDERS:
+        return True
+    if provider_name != "libretranslate":
+        return False
+    return credential_reference.source != CredentialSource.NONE
+
+
+def _setup_status_from_credential_status(
+    credential_status: CredentialStatusCode,
+) -> ProviderSetupStatus:
+    if credential_status == CredentialStatusCode.MISSING:
+        return ProviderSetupStatus.MISSING_CREDENTIAL
+    return ProviderSetupStatus.CREDENTIAL_UNAVAILABLE
+
+
+def _ready_setup_status(source: CredentialSource) -> ProviderSetupStatus:
+    if source == CredentialSource.KEYRING:
+        return ProviderSetupStatus.READY_FROM_KEYRING
+    return ProviderSetupStatus.READY_FROM_ENVIRONMENT
 
 
 def _connection_result(

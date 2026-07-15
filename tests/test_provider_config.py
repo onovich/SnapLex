@@ -5,6 +5,7 @@ from snaplex.providers.config import (
     ProviderRuntimeConfig,
     copy_provider_runtime_configs,
     default_provider_runtime_configs,
+    provider_credential_reference,
     resolve_api_key,
 )
 from snaplex.services.credentials import (
@@ -92,3 +93,25 @@ def test_resolve_api_key_raises_when_env_value_is_missing() -> None:
 
     assert exc_info.value.provider_name == "example"
     assert exc_info.value.env_var == "SNAPLEX_EXAMPLE_API_KEY"
+
+
+def test_provider_credential_reference_defaults_to_environment_compatibility() -> None:
+    reference = provider_credential_reference(
+        "openai",
+        ProviderRuntimeConfig(api_key_env_var="SNAPLEX_OPENAI_API_KEY"),
+    )
+
+    assert reference.provider_name == "openai"
+    assert reference.source == CredentialSource.ENVIRONMENT
+    assert reference.identifier == "SNAPLEX_OPENAI_API_KEY"
+
+
+def test_provider_credential_reference_supports_keyring_without_secret_value() -> None:
+    reference = provider_credential_reference(
+        "openai",
+        ProviderRuntimeConfig(credential_source="keyring"),
+    )
+
+    assert reference.source == CredentialSource.KEYRING
+    assert reference.identifier == "snaplex/openai/default"
+    assert "secret" not in repr(reference).lower()
