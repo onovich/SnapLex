@@ -230,23 +230,23 @@ The executable guide is `docs/p9_apple_inspired_ui_ux_goal_guide.md`. The P9
 closure package is `docs/p9_final_validation_report.md` and
 `docs/p9_to_p10_handoff.md`.
 
-## Selected P10 Secure Credential And Account Strategy
+## P10 Secure Credential And Account Strategy Completion
 
-P10 is the selected next post-MVP implementation goal. It addresses the
-remaining real-provider setup gap after P8/P9: ordinary users should not need
-to edit environment variables forever, but SnapLex also must not pretend that
-consumer account OAuth exists for providers that expose API-key-based access.
+P10 executor work addresses the remaining real-provider setup gap after P8/P9:
+ordinary users should not need to edit environment variables forever, but
+SnapLex also must not pretend that consumer account OAuth exists for providers
+that expose API-key-based access.
 
-P10 should preserve environment-variable users, introduce credential
-service/store boundaries, add or explicitly defer optional OS keyring support
-behind lazy dependencies and fake-store tests, update Settings and trial
-readiness to use credential references instead of raw secrets, and document
-future account/cloud/token-broker tradeoffs without implementing production
-OAuth, billing, or SnapLex Cloud.
+P10 preserves environment-variable users, introduces credential service/store
+boundaries, adds optional OS keyring support behind lazy dependencies and
+fake-store tests, updates Settings and trial readiness to use credential
+references instead of raw secrets, and documents future account/cloud/token
+broker tradeoffs without implementing production OAuth, billing, or SnapLex
+Cloud.
 
-The executable guide is
-`docs/p10_secure_credential_account_strategy_goal_guide.md`; the TODO is
-`docs/p10_todo.md`.
+The closure package is `docs/p10_final_validation_report.md` and
+`docs/p10_to_p11_handoff.md`. The recommended next phase is P11 Trial Release
+Hardening.
 
 ## MVP Goals
 
@@ -328,10 +328,10 @@ Summary:
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
-Including the selected P8 implementation goal, the current post-MVP plan is 61
-rounds. Including the accepted P9 implementation goal, the current post-MVP
-plan is 77 rounds. Including the selected P10 credential/account strategy goal,
-the current post-MVP plan is 93 rounds.
+Including the selected P8 implementation goal, the post-MVP plan became 61
+rounds. Including the accepted P9 implementation goal, the post-MVP plan became
+77 rounds. Including P10 credential/account strategy, the current post-MVP plan
+is 93 rounds.
 
 ## Validation Plan
 

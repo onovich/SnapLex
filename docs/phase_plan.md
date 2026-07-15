@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P9 planner-accepted planning document with selected P10 execution goal
+Status: P10 executor-complete planning document pending planner check
 
 ## 0. Round Estimate Rules
 
@@ -365,13 +365,12 @@ Current accepted phase: P9 - Apple-Inspired UI/UX Polish.
 
 P0-P7 status: complete.
 
-Selected next step: execute P10 using
-`docs/p10_secure_credential_account_strategy_goal_guide.md` and
-`docs/p10_todo.md`.
+Current planner-check target: P10 Secure Credential And Account Strategy using
+`docs/p10_final_validation_report.md` and `docs/p10_to_p11_handoff.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
-The latest accepted phase report is `docs/p7_final_validation_report.md`.
+The latest accepted phase report is `docs/p9_final_validation_report.md`.
 The whole-track closure report is `docs/p0_p7_final_report.md`.
 
 ## 11. P8 - Provider Setup And Real Translation UX
@@ -529,6 +528,7 @@ Deliverables:
 - `docs/p10_credential_strategy_decisions.md`
 - `docs/p10_secure_storage_notes.md`
 - `docs/p10_account_strategy.md`
+- `docs/p10_smoke_evidence.md`
 - Credential service/store implementation and tests.
 - Settings/provider setup integration and tests.
 - P10 final validation report and P10 to P11 handoff.
@@ -560,3 +560,17 @@ Round split:
 - Round 12: credential smoke and documentation.
 - Rounds 13-15: buffer hardening.
 - Round 16: final validation, report, and P11 handoff.
+
+Executor completion artifacts:
+
+- `docs/p10_credential_strategy_decisions.md`
+- `docs/p10_secure_storage_notes.md`
+- `docs/p10_account_strategy.md`
+- `docs/p10_smoke_evidence.md`
+- `docs/p10_final_validation_report.md`
+- `docs/p10_to_p11_handoff.md`
+
+Planner check:
+
+- P10 executor-complete on 2026-07-15.
+- Recommended next phase: P11 Trial Release Hardening.

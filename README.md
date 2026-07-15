@@ -61,8 +61,11 @@ The current project source of truth lives in:
 - `docs/p10_secure_credential_account_strategy_goal_guide.md`
 - `docs/p10_todo.md`
 - `docs/p10_credential_strategy_decisions.md`
+- `docs/p10_secure_storage_notes.md`
 - `docs/p10_account_strategy.md`
 - `docs/p10_smoke_evidence.md`
+- `docs/p10_final_validation_report.md`
+- `docs/p10_to_p11_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -89,14 +92,15 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P7. The P0-P7 track is complete with a Windows
+SnapLex has accepted P0 through P9. The P0-P7 track is complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
 optional lazy real capture/OCR adapters, real provider adapters for
 LibreTranslate/OpenAI/DeepL, mocked HTTP tests, fake offline defaults, persisted
 settings, optional recent translation history, shared result states, a
-PyInstaller spec, packaged release smoke commands, and post-MVP expansion
-plans.
+PyInstaller spec, packaged release smoke commands, post-MVP expansion plans,
+provider setup UX, Apple-inspired UI polish, and P10 credential/account work
+ready for planner check.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -104,9 +108,9 @@ And Real Translation UX is planner-accepted; use
 `docs/p8_final_validation_report.md` and `docs/p8_to_p9_handoff.md` for the P8
 closure package. P9 Apple-Inspired UI/UX Polish is planner-accepted; use
 `docs/p9_final_validation_report.md` and `docs/p9_to_p10_handoff.md` for the
-P9 closure package. The selected next goal is P10 Secure Credential And Account
-Strategy; use `docs/p10_secure_credential_account_strategy_goal_guide.md` and
-`docs/p10_todo.md`.
+P9 closure package. P10 Secure Credential And Account Strategy is
+executor-complete and ready for planner check; use
+`docs/p10_final_validation_report.md` and `docs/p10_to_p11_handoff.md`.
 
 ## Setup
 
@@ -411,9 +415,9 @@ and `docs/p9_to_p10_handoff.md`.
 
 ## P10 Secure Credential And Account Strategy
 
-P10 is the selected next post-MVP implementation goal. It should preserve
-existing environment-variable provider setup while adding a credential service
-boundary and first local secure credential path. The implementation keeps
+P10 executor work preserves existing environment-variable provider setup while
+adding a credential service boundary and first local secure credential path.
+The implementation keeps
 provider secrets behind `CredentialService`, stores only env-var names or
 keyring identifiers in config, adds optional lazy OS keyring support, updates
 Settings credential save/delete/readiness controls, and hardens real/fake trial
@@ -422,8 +426,9 @@ remain out of runtime scope for P10.
 
 See `docs/p10_secure_credential_account_strategy_goal_guide.md`,
 `docs/p10_credential_strategy_decisions.md`,
-`docs/p10_account_strategy.md`, `docs/p10_smoke_evidence.md`, and
-`docs/p10_todo.md`.
+`docs/p10_secure_storage_notes.md`, `docs/p10_account_strategy.md`,
+`docs/p10_smoke_evidence.md`, `docs/p10_final_validation_report.md`,
+`docs/p10_to_p11_handoff.md`, and `docs/p10_todo.md`.
 
 ## Current Boundaries
 
