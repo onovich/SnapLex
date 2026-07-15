@@ -27,7 +27,7 @@ Estimated budget: 16 conversation rounds.
 - [x] Review region selector and screen-flow UI feedback without capture/OCR
   rewrites.
 - [x] Add optional iconography and clarify command semantics without new dependencies.
-- [ ] Add screenshot-backed offscreen GUI smoke with uncommitted local artifacts.
+- [x] Add screenshot-backed offscreen GUI smoke with uncommitted local artifacts.
 - [ ] Record visual smoke evidence and update Windows smoke notes.
 - [ ] Preserve P8 real/fake trial guardrails and no-secret boundaries.
 - [ ] Produce P9 final validation report.
