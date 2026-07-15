@@ -21,6 +21,9 @@ capture = [
 ocr = [
   "paddleocr>=2.8",
 ]
+credentials = [
+  "keyring>=25",
+]
 dev = [
   "pytest>=8.2",
   "ruff>=0.5",

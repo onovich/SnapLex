@@ -8,14 +8,43 @@ from snaplex.services.credentials import (
     CredentialService,
     CredentialSource,
     CredentialStatusCode,
+    CredentialUnavailableError,
     CredentialUnsupportedError,
     EnvironmentCredentialStore,
     InMemoryCredentialStore,
+    KeyringCredentialStore,
+    create_default_credential_service,
     credential_reference_from_dict,
     credential_reference_to_dict,
     create_environment_credential_service,
     environment_credential_reference,
+    keyring_credential_reference,
 )
+
+
+class FakeKeyringModule:
+    def __init__(self) -> None:
+        self._passwords: dict[tuple[str, str], str] = {}
+
+    def get_password(self, service_name: str, username: str) -> str | None:
+        return self._passwords.get((service_name, username))
+
+    def set_password(self, service_name: str, username: str, password: str) -> None:
+        self._passwords[(service_name, username)] = password
+
+    def delete_password(self, service_name: str, username: str) -> None:
+        self._passwords.pop((service_name, username), None)
+
+
+class BrokenKeyringModule:
+    def get_password(self, service_name: str, username: str) -> str | None:
+        raise RuntimeError("backend unavailable")
+
+    def set_password(self, service_name: str, username: str, password: str) -> None:
+        raise RuntimeError("backend unavailable")
+
+    def delete_password(self, service_name: str, username: str) -> None:
+        raise RuntimeError("backend unavailable")
 
 
 def test_credential_reference_serializes_without_secret_value() -> None:
@@ -116,6 +145,52 @@ def test_environment_credential_reference_uses_none_for_missing_env_var() -> Non
     assert reference.provider_name == "openai"
     assert reference.source == CredentialSource.NONE
     assert reference.identifier == ""
+
+
+def test_keyring_credential_store_uses_injected_module_without_repr_leak() -> None:
+    reference = keyring_credential_reference("openai")
+    store = KeyringCredentialStore(keyring_module=FakeKeyringModule())
+
+    store.save(reference, " secret-value ")
+
+    assert store.resolve(reference) == "secret-value"
+    assert store.contains(reference) is True
+    assert "secret-value" not in repr(store)
+
+    store.delete(reference)
+    assert store.contains(reference) is False
+
+
+def test_keyring_credential_store_reports_unavailable_backend() -> None:
+    reference = keyring_credential_reference("deepl")
+    service = CredentialService(
+        {
+            CredentialSource.KEYRING: KeyringCredentialStore(
+                keyring_module=BrokenKeyringModule(),
+            ),
+        },
+    )
+
+    status = service.status(reference)
+
+    assert status.code == CredentialStatusCode.UNAVAILABLE
+    assert status.can_resolve is False
+    assert status.can_save is False
+    with pytest.raises(CredentialUnavailableError):
+        service.resolve(reference)
+
+
+def test_default_credential_service_can_include_lazy_keyring_store() -> None:
+    reference = keyring_credential_reference("openai")
+    service = create_default_credential_service(keyring_module=FakeKeyringModule())
+
+    saved = service.save(reference, "secret-value")
+    ready = service.status(reference)
+
+    assert saved.code == CredentialStatusCode.SAVED
+    assert ready.code == CredentialStatusCode.READY
+    assert service.resolve(reference) == "secret-value"
+    assert "secret-value" not in repr(ready)
 
 
 def test_credential_service_reports_missing_none_reference() -> None:

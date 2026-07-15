@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+import importlib
 import os
 from collections.abc import Mapping
 from dataclasses import dataclass
 from enum import Enum
-from typing import Protocol
+from typing import Any, Protocol
 
 
 class CredentialSource(str, Enum):
@@ -94,6 +95,10 @@ class CredentialUnsupportedError(CredentialStoreError):
     pass
 
 
+class CredentialUnavailableError(CredentialStoreError):
+    pass
+
+
 class InMemoryCredentialStore:
     """Deterministic fake credential store for tests and smoke paths."""
 
@@ -169,6 +174,85 @@ class EnvironmentCredentialStore:
         return bool(identifier and self._environ.get(identifier, "").strip())
 
 
+class KeyringCredentialStore:
+    """Optional OS keyring store loaded only when it is used."""
+
+    source = CredentialSource.KEYRING
+
+    def __init__(
+        self,
+        *,
+        service_name: str = "SnapLex",
+        keyring_module: Any | None = None,
+    ) -> None:
+        self._service_name = service_name
+        self._keyring_module = keyring_module
+
+    def __repr__(self) -> str:
+        module_state = "injected" if self._keyring_module is not None else "lazy"
+        return f"KeyringCredentialStore(service_name={self._service_name!r}, module={module_state})"
+
+    def resolve(self, reference: CredentialReference) -> str:
+        secret = self._get_password(reference)
+        if not secret:
+            raise CredentialMissingError("Credential is missing.", reference=reference)
+        return secret.strip()
+
+    def save(self, reference: CredentialReference, secret: str) -> None:
+        cleaned_secret = secret.strip()
+        if not cleaned_secret:
+            raise CredentialMissingError("Credential value is empty.", reference=reference)
+        keyring = self._keyring(reference)
+        try:
+            keyring.set_password(
+                self._service_name,
+                _keyring_username(reference),
+                cleaned_secret,
+            )
+        except Exception as exc:
+            raise CredentialUnavailableError(
+                "Local secure credential store is unavailable.",
+                reference=reference,
+            ) from exc
+
+    def delete(self, reference: CredentialReference) -> None:
+        keyring = self._keyring(reference)
+        try:
+            keyring.delete_password(self._service_name, _keyring_username(reference))
+        except Exception as exc:
+            raise CredentialUnavailableError(
+                "Local secure credential store is unavailable.",
+                reference=reference,
+            ) from exc
+
+    def contains(self, reference: CredentialReference) -> bool:
+        return bool(self._get_password(reference))
+
+    def _get_password(self, reference: CredentialReference) -> str:
+        keyring = self._keyring(reference)
+        try:
+            return (
+                keyring.get_password(self._service_name, _keyring_username(reference)) or ""
+            ).strip()
+        except Exception as exc:
+            raise CredentialUnavailableError(
+                "Local secure credential store is unavailable.",
+                reference=reference,
+            ) from exc
+
+    def _keyring(self, reference: CredentialReference) -> Any:
+        if self._keyring_module is not None:
+            return self._keyring_module
+        try:
+            self._keyring_module = importlib.import_module("keyring")
+        except Exception as exc:
+            raise CredentialUnavailableError(
+                "Install the optional credentials extra to use local secure storage.",
+                reference=reference,
+            ) from exc
+        return self._keyring_module
+
+
 class CredentialService:
     """Resolve credential references through source-specific stores."""
 
@@ -202,7 +286,27 @@ class CredentialService:
                 detail_text="Configure a non-secret credential reference before testing.",
                 can_save=_store_can_save(reference),
             )
-        if store.contains(reference):
+        try:
+            has_credential = store.contains(reference)
+        except CredentialUnavailableError as exc:
+            return CredentialStatus(
+                reference=reference,
+                code=CredentialStatusCode.UNAVAILABLE,
+                status_text="Credential source unavailable",
+                detail_text=str(exc),
+                can_save=False,
+                can_delete=False,
+            )
+        except CredentialStoreError as exc:
+            return CredentialStatus(
+                reference=reference,
+                code=CredentialStatusCode.FAILED,
+                status_text="Credential check failed",
+                detail_text=str(exc),
+                can_save=False,
+                can_delete=False,
+            )
+        if has_credential:
             return CredentialStatus(
                 reference=reference,
                 code=CredentialStatusCode.READY,
@@ -302,12 +406,45 @@ def create_environment_credential_service(
     )
 
 
+def keyring_credential_reference(
+    provider_name: str,
+    identifier: str = "",
+) -> CredentialReference:
+    cleaned_provider_name = provider_name.strip().lower()
+    cleaned_identifier = identifier.strip() or f"snaplex/{cleaned_provider_name}/default"
+    return CredentialReference(
+        provider_name=cleaned_provider_name,
+        source=CredentialSource.KEYRING,
+        identifier=cleaned_identifier,
+    )
+
+
+def create_default_credential_service(
+    environ: Mapping[str, str] | None = None,
+    *,
+    include_keyring: bool = False,
+    keyring_module: Any | None = None,
+) -> CredentialService:
+    stores: dict[CredentialSource, CredentialStore] = {
+        CredentialSource.ENVIRONMENT: EnvironmentCredentialStore(environ),
+    }
+    if include_keyring or keyring_module is not None:
+        stores[CredentialSource.KEYRING] = KeyringCredentialStore(keyring_module=keyring_module)
+    return CredentialService(stores)
+
+
 def _reference_key(reference: CredentialReference) -> tuple[str, str, str]:
     return (
         reference.provider_name.strip().lower(),
         reference.source.value,
         reference.identifier.strip(),
     )
+
+
+def _keyring_username(reference: CredentialReference) -> str:
+    provider_name = reference.provider_name.strip().lower()
+    identifier = reference.identifier.strip()
+    return f"{provider_name}:{identifier}"
 
 
 def _ready_detail(reference: CredentialReference) -> str:

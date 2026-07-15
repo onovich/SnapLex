@@ -14,10 +14,10 @@ Estimated budget: 16 conversation rounds.
 
 - [x] Revalidate the accepted P9 baseline.
 - [x] Produce credential threat model and strategy decisions.
-- [ ] Add credential reference/status models and credential service/store
+- [x] Add credential reference/status models and credential service/store
   boundaries.
-- [ ] Preserve existing environment-variable provider credentials.
-- [ ] Add optional lazy OS keyring storage path or document a concrete blocker.
+- [x] Preserve existing environment-variable provider credentials.
+- [x] Add optional lazy OS keyring storage path or document a concrete blocker.
 - [ ] Ensure config stores credential references only, not raw values.
 - [ ] Route provider readiness and Test Connection through credential
   boundaries.
