@@ -29,7 +29,7 @@ Estimated budget: 16 conversation rounds.
 - [x] Add optional iconography and clarify command semantics without new dependencies.
 - [x] Add screenshot-backed offscreen GUI smoke with uncommitted local artifacts.
 - [x] Record visual smoke evidence and update Windows smoke notes.
-- [ ] Preserve P8 real/fake trial guardrails and no-secret boundaries.
+- [x] Preserve P8 real/fake trial guardrails and no-secret boundaries.
 - [ ] Produce P9 final validation report.
 - [ ] Produce P9 to P10 handoff.
 
