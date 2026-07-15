@@ -195,6 +195,26 @@ The executable guide is
 `docs/p8_provider_setup_real_translation_goal_guide.md`; the handoff is
 `docs/p7_to_p8_handoff.md`.
 
+## P8 Provider Setup And Real Translation UX Completion
+
+The repository now has executor-complete P8 provider setup UX:
+
+- `snaplex/services/provider_setup.py` models provider setup and connection-test
+  states without storing or displaying secret values.
+- `SettingsService` and `SettingsPresenter` expose provider readiness and
+  connection testing behind service/presenter boundaries.
+- Settings UI renders provider choices, readiness, env var presence, provider
+  fields, and a disabled future account-connect affordance.
+- Real provider connection tests use mocked HTTP in automated tests.
+- Fake provider output is labeled as fake smoke/dev mode in shared result
+  state and UI.
+- Trial docs and scripts keep real-provider launch paths separate from fake
+  smoke paths.
+- `docs/p8_final_validation_report.md` and `docs/p8_to_p9_handoff.md` provide
+  the P8 closure package for planner validation.
+
+Recommended next goal after acceptance: P9 Apple-Inspired UI/UX Polish.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.

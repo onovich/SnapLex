@@ -47,6 +47,10 @@ The current project source of truth lives in:
 - `docs/p7_to_p8_handoff.md`
 - `docs/p8_provider_setup_real_translation_goal_guide.md`
 - `docs/p8_todo.md`
+- `docs/p8_provider_setup_decisions.md`
+- `docs/p8_real_provider_trial_notes.md`
+- `docs/p8_final_validation_report.md`
+- `docs/p8_to_p9_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -83,10 +87,10 @@ PyInstaller spec, packaged release smoke commands, and post-MVP expansion
 plans.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
-`docs/p7_expansion_roadmap.md` for the P7 closure package. The selected next
-post-MVP implementation goal is P8 Provider Setup And Real Translation UX; use
-`docs/p8_provider_setup_real_translation_goal_guide.md` and
-`docs/p7_to_p8_handoff.md` for execution.
+`docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
+And Real Translation UX executor work is complete and ready for planner
+validation; use `docs/p8_final_validation_report.md` and
+`docs/p8_to_p9_handoff.md` for the P8 closure package.
 
 ## Setup
 
@@ -305,6 +309,11 @@ Use `.env.example` and `docs/p4_provider_configuration.md` for provider-specific
 base URLs, API-key env var names, timeout, retry, OpenAI model, and DeepL model
 type settings. Do not commit real API keys or local `.env` files.
 
+P8 adds Settings-based provider setup and `Test Connection` behavior. Settings
+shows provider readiness and whether configured env vars are present, but it
+does not display or store key values. Real trial commands require a real
+provider; fake trial commands remain smoke/dev only.
+
 ## Settings And History
 
 P5 adds local JSON settings and optional recent translation history. By default,
@@ -343,6 +352,21 @@ P8 Provider Setup And Real Translation UX, focused on Settings-based provider
 setup, fake-versus-real translation clarity, real trial guardrails, and an Apple
 HIG-inspired UI foundation. See
 `docs/p8_provider_setup_real_translation_goal_guide.md`.
+
+## P8 Provider Setup And Real Translation UX
+
+P8 executor work adds the first real-provider trial UX:
+
+- Settings exposes provider choices, readiness, endpoint/env-var fields, and
+  connection testing for fake, LibreTranslate, OpenAI, and DeepL.
+- Connection tests run through service/presenter/provider boundaries and are
+  covered by mocked HTTP tests.
+- Fake provider output is labeled as fake smoke mode, not real translation.
+- Real trial launch paths reject missing real provider configuration.
+- The main shell and result view have a clearer, restrained UI foundation.
+
+See `docs/p8_final_validation_report.md`, `docs/p8_real_provider_trial_notes.md`,
+and `docs/p8_to_p9_handoff.md`.
 
 ## Current Boundaries
 

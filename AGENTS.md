@@ -49,3 +49,5 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Current post-MVP execution guide: `docs/p8_provider_setup_real_translation_goal_guide.md`.
 - Current post-MVP TODO: `docs/p8_todo.md`.
 - P7 to P8 handoff: `docs/p7_to_p8_handoff.md`.
+- Latest executor-complete phase report: `docs/p8_final_validation_report.md`.
+- P8 to P9 handoff: `docs/p8_to_p9_handoff.md`.

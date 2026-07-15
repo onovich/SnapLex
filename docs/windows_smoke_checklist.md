@@ -11,8 +11,9 @@ P6 packaging smoke evidence is recorded in `docs/p6_packaging_smoke_evidence.md`
 P7 expansion planning is recorded in `docs/p7_expansion_track_goal_guide.md`,
 `docs/p7_final_validation_report.md`, and `docs/p0_p7_final_report.md`.
 P8 provider setup and real translation UX planning is recorded in
-`docs/p8_provider_setup_real_translation_goal_guide.md` and
-`docs/p7_to_p8_handoff.md`.
+`docs/p8_provider_setup_real_translation_goal_guide.md`,
+`docs/p7_to_p8_handoff.md`, `docs/p8_final_validation_report.md`, and
+`docs/p8_real_provider_trial_notes.md`.
 
 ## Automated Precheck
 
@@ -283,6 +284,19 @@ Expected result:
 - Real trial scripts must not set provider order to `fake` when no real provider
   is configured.
 - Automated validation does not require real provider credentials or network.
+
+P8 final validation additionally requires:
+
+```powershell
+cmd /c SmokeTrial.cmd
+cmd /c StartPackagedFakeTrial.cmd --no-gui
+```
+
+Expected result:
+
+- SmokeTrial passes source bootstrap, package dry-run, and packaged fake
+  workflow smoke when a packaged executable exists.
+- Packaged fake trial no-GUI remains deterministic and labels fake smoke mode.
 
 ## P7 Expansion Planning Validation
 

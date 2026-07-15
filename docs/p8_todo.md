@@ -23,8 +23,8 @@ Executable guide: `docs/p8_provider_setup_real_translation_goal_guide.md`
 - [x] Update provider setup docs, trial docs, and smoke checklist.
 - [x] Apply Apple HIG-inspired visual foundation to the main shell, settings,
   and result view.
-- [ ] Produce P8 final validation report.
-- [ ] Produce P8 to P9 handoff.
+- [x] Produce P8 final validation report.
+- [x] Produce P8 to P9 handoff.
 
 ## Deferred Outside P8
 
