@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 
 from snaplex.providers.config import ProviderRuntimeConfig
 from snaplex.providers.http import HttpTransport
-from snaplex.services import SettingsService
+from snaplex.services import CredentialService, CredentialStatus, SettingsService
 from snaplex.services.provider_setup import ProviderConnectionTestResult, ProviderSetupState
 
 
@@ -23,15 +23,21 @@ class SettingsFormState:
     provider_order: str = "fake"
     libretranslate_base_url: str = "http://localhost:5000"
     libretranslate_api_key_env_var: str = ""
+    libretranslate_credential_source: str = ""
+    libretranslate_credential_identifier: str = ""
     libretranslate_timeout_seconds: float = 10.0
     libretranslate_retry_count: int = 0
     openai_base_url: str = "https://api.openai.com/v1"
     openai_api_key_env_var: str = "SNAPLEX_OPENAI_API_KEY"
+    openai_credential_source: str = ""
+    openai_credential_identifier: str = ""
     openai_timeout_seconds: float = 20.0
     openai_retry_count: int = 0
     openai_model: str = "gpt-5.5"
     deepl_base_url: str = "https://api-free.deepl.com/v2"
     deepl_api_key_env_var: str = "SNAPLEX_DEEPL_API_KEY"
+    deepl_credential_source: str = ""
+    deepl_credential_identifier: str = ""
     deepl_timeout_seconds: float = 20.0
     deepl_retry_count: int = 0
     deepl_model_type: str = ""
@@ -44,7 +50,12 @@ class SettingsPresenter:
     def __init__(self, settings_service: SettingsService) -> None:
         self._settings_service = settings_service
 
-    def load_state(self, *, environ: Mapping[str, str] | None = None) -> SettingsFormState:
+    def load_state(
+        self,
+        *,
+        environ: Mapping[str, str] | None = None,
+        credential_service: CredentialService | None = None,
+    ) -> SettingsFormState:
         config = self._settings_service.load()
         libretranslate_config = config.provider_configs.get(
             "libretranslate",
@@ -74,21 +85,30 @@ class SettingsPresenter:
             provider_order=", ".join(config.provider_order),
             libretranslate_base_url=libretranslate_config.base_url,
             libretranslate_api_key_env_var=libretranslate_config.api_key_env_var,
+            libretranslate_credential_source=libretranslate_config.credential_source,
+            libretranslate_credential_identifier=libretranslate_config.credential_identifier,
             libretranslate_timeout_seconds=libretranslate_config.timeout_seconds,
             libretranslate_retry_count=libretranslate_config.retry_count,
             openai_base_url=openai_config.base_url,
             openai_api_key_env_var=openai_config.api_key_env_var,
+            openai_credential_source=openai_config.credential_source,
+            openai_credential_identifier=openai_config.credential_identifier,
             openai_timeout_seconds=openai_config.timeout_seconds,
             openai_retry_count=openai_config.retry_count,
             openai_model=openai_config.options.get("model", ""),
             deepl_base_url=deepl_config.base_url,
             deepl_api_key_env_var=deepl_config.api_key_env_var,
+            deepl_credential_source=deepl_config.credential_source,
+            deepl_credential_identifier=deepl_config.credential_identifier,
             deepl_timeout_seconds=deepl_config.timeout_seconds,
             deepl_retry_count=deepl_config.retry_count,
             deepl_model_type=deepl_config.options.get("model_type", ""),
             history_enabled=config.history_enabled,
             history_max_entries=config.history_max_entries,
-            provider_setups=self._settings_service.load_provider_setup_states(environ=environ),
+            provider_setups=self._settings_service.load_provider_setup_states(
+                environ=environ,
+                credential_service=credential_service,
+            ),
         )
 
     def apply_state(
@@ -109,6 +129,8 @@ class SettingsPresenter:
             "libretranslate",
             base_url=state.libretranslate_base_url,
             api_key_env_var=state.libretranslate_api_key_env_var,
+            credential_source=state.libretranslate_credential_source,
+            credential_identifier=state.libretranslate_credential_identifier,
             timeout_seconds=state.libretranslate_timeout_seconds,
             retry_count=state.libretranslate_retry_count,
         )
@@ -116,6 +138,8 @@ class SettingsPresenter:
             "openai",
             base_url=state.openai_base_url,
             api_key_env_var=state.openai_api_key_env_var,
+            credential_source=state.openai_credential_source,
+            credential_identifier=state.openai_credential_identifier,
             timeout_seconds=state.openai_timeout_seconds,
             retry_count=state.openai_retry_count,
             options={"model": state.openai_model},
@@ -124,6 +148,8 @@ class SettingsPresenter:
             "deepl",
             base_url=state.deepl_base_url,
             api_key_env_var=state.deepl_api_key_env_var,
+            credential_source=state.deepl_credential_source,
+            credential_identifier=state.deepl_credential_identifier,
             timeout_seconds=state.deepl_timeout_seconds,
             retry_count=state.deepl_retry_count,
             options={"model_type": state.deepl_model_type},
@@ -134,15 +160,55 @@ class SettingsPresenter:
         )
         return self.load_state(environ=environ)
 
+    def update_provider_credential_reference(
+        self,
+        provider_name: str,
+        *,
+        credential_source: str,
+        credential_identifier: str = "",
+    ) -> SettingsFormState:
+        self._settings_service.update_provider_credential_reference(
+            provider_name,
+            credential_source=credential_source,
+            credential_identifier=credential_identifier,
+        )
+        return self.load_state()
+
+    def save_provider_credential(
+        self,
+        provider_name: str,
+        secret: str,
+        *,
+        credential_service: CredentialService | None = None,
+    ) -> CredentialStatus:
+        return self._settings_service.save_provider_credential(
+            provider_name,
+            secret,
+            credential_service=credential_service,
+        )
+
+    def delete_provider_credential(
+        self,
+        provider_name: str,
+        *,
+        credential_service: CredentialService | None = None,
+    ) -> CredentialStatus:
+        return self._settings_service.delete_provider_credential(
+            provider_name,
+            credential_service=credential_service,
+        )
+
     def test_provider_connection(
         self,
         provider_name: str,
         *,
         http_transport: HttpTransport | None = None,
         environ: Mapping[str, str] | None = None,
+        credential_service: CredentialService | None = None,
     ) -> ProviderConnectionTestResult:
         return self._settings_service.test_provider_connection(
             provider_name,
             http_transport=http_transport,
             environ=environ,
+            credential_service=credential_service,
         )

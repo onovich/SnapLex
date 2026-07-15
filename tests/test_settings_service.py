@@ -2,6 +2,7 @@ from snaplex.providers.config import ProviderRuntimeConfig
 from snaplex.services import (
     CredentialService,
     CredentialSource,
+    CredentialStatusCode,
     InMemoryCredentialStore,
     SettingsService,
     keyring_credential_reference,
@@ -121,6 +122,48 @@ def test_settings_service_updates_provider_runtime_config_without_secret_values(
     assert openai_config.retry_count == 2
     assert openai_config.options == {"model": "gpt-test"}
     assert "secret" not in repr(config)
+
+
+def test_settings_service_updates_provider_credential_reference() -> None:
+    store = InMemoryConfigStore()
+    service = SettingsService(store)
+
+    config = service.update_provider_credential_reference(
+        "openai",
+        credential_source="keyring",
+        credential_identifier="snaplex/openai/local",
+    )
+
+    openai_config = config.provider_configs["openai"]
+    assert openai_config.credential_source == "keyring"
+    assert openai_config.credential_identifier == "snaplex/openai/local"
+    assert openai_config.api_key_env_var == "SNAPLEX_OPENAI_API_KEY"
+
+
+def test_settings_service_saves_and_deletes_keyring_credential_without_config_secret() -> None:
+    reference = keyring_credential_reference("openai", "snaplex/openai/local")
+    credential_store = InMemoryCredentialStore()
+    store = InMemoryConfigStore()
+    service = SettingsService(
+        store,
+        credential_service=CredentialService({CredentialSource.KEYRING: credential_store}),
+    )
+    service.update_provider_credential_reference(
+        "openai",
+        credential_source="keyring",
+        credential_identifier="snaplex/openai/local",
+    )
+
+    saved = service.save_provider_credential("openai", "secret-value")
+    ready = service.provider_credential_status("openai")
+    deleted = service.delete_provider_credential("openai")
+
+    assert saved.code == CredentialStatusCode.SAVED
+    assert ready.code == CredentialStatusCode.READY
+    assert deleted.code == CredentialStatusCode.DELETED
+    assert credential_store.contains(reference) is False
+    assert "secret-value" not in repr(store.load())
+    assert "secret-value" not in repr(saved)
 
 
 def test_settings_service_updates_history_preferences() -> None:

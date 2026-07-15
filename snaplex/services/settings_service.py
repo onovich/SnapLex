@@ -5,9 +5,16 @@ from __future__ import annotations
 from collections.abc import Mapping
 from dataclasses import replace
 
+from snaplex.credentials import (
+    CredentialReference,
+    CredentialService,
+    CredentialSource,
+    CredentialStatus,
+    create_default_credential_service,
+)
 from snaplex.providers.config import ProviderRuntimeConfig, copy_provider_runtime_configs
+from snaplex.providers.config import provider_credential_reference
 from snaplex.providers.http import HttpTransport
-from snaplex.credentials import CredentialService
 from snaplex.services.provider_setup import (
     ProviderConnectionTestResult,
     ProviderSetupState,
@@ -18,8 +25,14 @@ from snaplex.storage import AppConfig, ConfigStore
 
 
 class SettingsService:
-    def __init__(self, config_store: ConfigStore) -> None:
+    def __init__(
+        self,
+        config_store: ConfigStore,
+        *,
+        credential_service: CredentialService | None = None,
+    ) -> None:
         self._config_store = config_store
+        self._credential_service = credential_service
 
     def load(self) -> AppConfig:
         return self._config_store.load()
@@ -34,7 +47,7 @@ class SettingsService:
         return describe_provider_setups(
             config.provider_configs,
             environ=environ,
-            credential_service=credential_service,
+            credential_service=credential_service or self._credential_service,
         )
 
     def test_provider_connection(
@@ -54,7 +67,7 @@ class SettingsService:
             config,
             http_transport=http_transport,
             environ=environ,
-            credential_service=credential_service,
+            credential_service=credential_service or self._credential_service,
             probe_text=probe_text,
             source_lang=source_lang,
             target_lang=target_lang,
@@ -116,11 +129,11 @@ class SettingsService:
                 api_key_env_var,
                 existing_provider_config.api_key_env_var,
             ),
-            credential_source=_clean_text(
+            credential_source=_clean_optional_text(
                 credential_source,
                 existing_provider_config.credential_source,
             ),
-            credential_identifier=_clean_text(
+            credential_identifier=_clean_optional_text(
                 credential_identifier,
                 existing_provider_config.credential_identifier,
             ),
@@ -132,6 +145,58 @@ class SettingsService:
             options=_merge_options(existing_provider_config.options, options),
         )
         return self.save(replace(config, provider_configs=provider_configs))
+
+    def update_provider_credential_reference(
+        self,
+        provider_name: str,
+        *,
+        credential_source: str,
+        credential_identifier: str = "",
+    ) -> AppConfig:
+        clean_source = credential_source.strip().lower()
+        clean_identifier = credential_identifier.strip()
+        api_key_env_var = (
+            clean_identifier if clean_source == CredentialSource.ENVIRONMENT.value else None
+        )
+        return self.update_provider_runtime_config(
+            provider_name,
+            api_key_env_var=api_key_env_var,
+            credential_source=clean_source,
+            credential_identifier=clean_identifier,
+        )
+
+    def provider_credential_reference(self, provider_name: str) -> CredentialReference:
+        config = self._config_store.load()
+        provider_config = config.provider_configs.get(provider_name, ProviderRuntimeConfig())
+        return provider_credential_reference(provider_name, provider_config)
+
+    def provider_credential_status(
+        self,
+        provider_name: str,
+        *,
+        credential_service: CredentialService | None = None,
+    ) -> CredentialStatus:
+        reference = self.provider_credential_reference(provider_name)
+        return self._service_for_reference(reference, credential_service).status(reference)
+
+    def save_provider_credential(
+        self,
+        provider_name: str,
+        secret: str,
+        *,
+        credential_service: CredentialService | None = None,
+    ) -> CredentialStatus:
+        reference = self.provider_credential_reference(provider_name)
+        return self._service_for_reference(reference, credential_service).save(reference, secret)
+
+    def delete_provider_credential(
+        self,
+        provider_name: str,
+        *,
+        credential_service: CredentialService | None = None,
+    ) -> CredentialStatus:
+        reference = self.provider_credential_reference(provider_name)
+        return self._service_for_reference(reference, credential_service).delete(reference)
 
     def update_history_preferences(
         self,
@@ -155,12 +220,31 @@ class SettingsService:
         )
         return self.save(replace(config, ui_preferences=updated_preferences))
 
+    def _service_for_reference(
+        self,
+        reference: CredentialReference,
+        credential_service: CredentialService | None,
+    ) -> CredentialService:
+        if credential_service is not None:
+            return credential_service
+        if self._credential_service is not None:
+            return self._credential_service
+        return create_default_credential_service(
+            include_keyring=reference.source == CredentialSource.KEYRING,
+        )
+
 
 def _clean_text(value: str | None, default: str) -> str:
     if value is None:
         return default
     cleaned = value.strip()
     return cleaned or default
+
+
+def _clean_optional_text(value: str | None, default: str) -> str:
+    if value is None:
+        return default
+    return value.strip()
 
 
 def _clean_provider_order(
