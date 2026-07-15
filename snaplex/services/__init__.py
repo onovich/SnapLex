@@ -24,9 +24,12 @@ from snaplex.services.credentials import (
     CredentialStore,
     CredentialStoreError,
     CredentialUnsupportedError,
+    EnvironmentCredentialStore,
     InMemoryCredentialStore,
     credential_reference_from_dict,
     credential_reference_to_dict,
+    create_environment_credential_service,
+    environment_credential_reference,
 )
 from snaplex.services.ocr_service import (
     FakeOcrScenario,
@@ -78,6 +81,7 @@ __all__ = [
     "CredentialStore",
     "CredentialStoreError",
     "CredentialUnsupportedError",
+    "EnvironmentCredentialStore",
     "FakeCaptureService",
     "FakeOcrScenario",
     "FakeOcrService",
@@ -105,9 +109,11 @@ __all__ = [
     "TranslationService",
     "credential_reference_from_dict",
     "credential_reference_to_dict",
+    "create_environment_credential_service",
     "create_default_translation_pipeline",
     "describe_provider_setup",
     "describe_provider_setups",
+    "environment_credential_reference",
     "normalize_text",
     "test_provider_connection",
 ]

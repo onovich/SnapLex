@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from collections.abc import Mapping
 from dataclasses import dataclass
 from enum import Enum
@@ -125,6 +126,49 @@ class InMemoryCredentialStore:
         return bool(self._secrets.get(_reference_key(reference)))
 
 
+class EnvironmentCredentialStore:
+    """Read-only credential store backed by the current process environment."""
+
+    source = CredentialSource.ENVIRONMENT
+
+    def __init__(self, environ: Mapping[str, str] | None = None) -> None:
+        self._environ = os.environ if environ is None else environ
+
+    def __repr__(self) -> str:
+        return "EnvironmentCredentialStore()"
+
+    def resolve(self, reference: CredentialReference) -> str:
+        identifier = reference.identifier.strip()
+        if not identifier:
+            raise CredentialMissingError(
+                "Credential environment variable is not configured.",
+                reference=reference,
+            )
+        secret = self._environ.get(identifier, "").strip()
+        if not secret:
+            raise CredentialMissingError(
+                "Credential environment variable is missing.",
+                reference=reference,
+            )
+        return secret
+
+    def save(self, reference: CredentialReference, secret: str) -> None:
+        raise CredentialUnsupportedError(
+            "Environment credentials must be managed outside SnapLex.",
+            reference=reference,
+        )
+
+    def delete(self, reference: CredentialReference) -> None:
+        raise CredentialUnsupportedError(
+            "Environment credentials must be managed outside SnapLex.",
+            reference=reference,
+        )
+
+    def contains(self, reference: CredentialReference) -> bool:
+        identifier = reference.identifier.strip()
+        return bool(identifier and self._environ.get(identifier, "").strip())
+
+
 class CredentialService:
     """Resolve credential references through source-specific stores."""
 
@@ -156,7 +200,7 @@ class CredentialService:
                 code=CredentialStatusCode.MISSING,
                 status_text="Credential reference missing",
                 detail_text="Configure a non-secret credential reference before testing.",
-                can_save=True,
+                can_save=_store_can_save(reference),
             )
         if store.contains(reference):
             return CredentialStatus(
@@ -165,15 +209,15 @@ class CredentialService:
                 status_text="Credential ready",
                 detail_text=_ready_detail(reference),
                 can_resolve=True,
-                can_save=True,
-                can_delete=True,
+                can_save=_store_can_save(reference),
+                can_delete=_store_can_delete(reference),
             )
         return CredentialStatus(
             reference=reference,
             code=CredentialStatusCode.MISSING,
             status_text="Credential missing",
             detail_text=_missing_detail(reference),
-            can_save=True,
+            can_save=_store_can_save(reference),
         )
 
     def resolve(self, reference: CredentialReference) -> str:
@@ -234,6 +278,30 @@ def credential_reference_from_dict(payload: Mapping[object, object]) -> Credenti
     )
 
 
+def environment_credential_reference(
+    provider_name: str,
+    env_var_name: str,
+) -> CredentialReference:
+    cleaned_env_var = env_var_name.strip()
+    if not cleaned_env_var:
+        return CredentialReference(provider_name=provider_name)
+    return CredentialReference(
+        provider_name=provider_name,
+        source=CredentialSource.ENVIRONMENT,
+        identifier=cleaned_env_var,
+    )
+
+
+def create_environment_credential_service(
+    environ: Mapping[str, str] | None = None,
+) -> CredentialService:
+    return CredentialService(
+        {
+            CredentialSource.ENVIRONMENT: EnvironmentCredentialStore(environ),
+        },
+    )
+
+
 def _reference_key(reference: CredentialReference) -> tuple[str, str, str]:
     return (
         reference.provider_name.strip().lower(),
@@ -256,6 +324,14 @@ def _missing_detail(reference: CredentialReference) -> str:
     if reference.source == CredentialSource.KEYRING:
         return "Save a local secure credential before testing."
     return "Configure a credential source before testing."
+
+
+def _store_can_save(reference: CredentialReference) -> bool:
+    return reference.source != CredentialSource.ENVIRONMENT
+
+
+def _store_can_delete(reference: CredentialReference) -> bool:
+    return reference.source != CredentialSource.ENVIRONMENT
 
 
 def _credential_source_value(value: object) -> CredentialSource:

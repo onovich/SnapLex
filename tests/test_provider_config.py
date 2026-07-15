@@ -7,6 +7,11 @@ from snaplex.providers.config import (
     default_provider_runtime_configs,
     resolve_api_key,
 )
+from snaplex.services.credentials import (
+    EnvironmentCredentialStore,
+    CredentialService,
+    CredentialSource,
+)
 
 
 def test_default_provider_runtime_configs_do_not_store_secrets() -> None:
@@ -44,6 +49,27 @@ def test_resolve_api_key_uses_supplied_environment_mapping() -> None:
             environ={"SNAPLEX_EXAMPLE_API_KEY": " secret "},
         )
         == "secret"
+    )
+
+
+def test_resolve_api_key_uses_credential_service_boundary() -> None:
+    config = ProviderRuntimeConfig(api_key_env_var="SNAPLEX_EXAMPLE_API_KEY")
+    credential_service = CredentialService(
+        {
+            CredentialSource.ENVIRONMENT: EnvironmentCredentialStore(
+                {"SNAPLEX_EXAMPLE_API_KEY": " service-secret "},
+            ),
+        },
+    )
+
+    assert (
+        resolve_api_key(
+            "example",
+            config,
+            environ={},
+            credential_service=credential_service,
+        )
+        == "service-secret"
     )
 
 

@@ -7,6 +7,12 @@ from collections.abc import Mapping
 from dataclasses import dataclass, field, replace
 
 from snaplex.errors import MissingProviderCredentialError
+from snaplex.services.credentials import (
+    CredentialService,
+    CredentialStoreError,
+    create_environment_credential_service,
+    environment_credential_reference,
+)
 
 
 @dataclass(frozen=True)
@@ -57,17 +63,23 @@ def resolve_api_key(
     config: ProviderRuntimeConfig,
     *,
     environ: Mapping[str, str] | None = None,
+    credential_service: CredentialService | None = None,
 ) -> str:
     env_var = config.api_key_env_var.strip()
-    if not env_var:
-        raise MissingProviderCredentialError(
-            "Provider credential env var is not configured.",
-            env_var="",
-            provider_name=provider_name,
+    reference = environment_credential_reference(provider_name, env_var)
+    service = credential_service or create_environment_credential_service(
+        os.environ if environ is None else environ,
+    )
+    try:
+        return service.resolve(reference)
+    except CredentialStoreError as exc:
+        message = (
+            "Provider credential env var is not configured."
+            if not env_var
+            else "Provider credential env var is missing."
         )
-
-    env = os.environ if environ is None else environ
-    api_key = env.get(env_var, "").strip()
-    if not api_key:
-        raise MissingProviderCredentialError(env_var=env_var, provider_name=provider_name)
-    return api_key
+        raise MissingProviderCredentialError(
+            message,
+            env_var=env_var,
+            provider_name=provider_name,
+        ) from exc

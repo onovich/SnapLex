@@ -1,6 +1,6 @@
 import json
 
-from snaplex.providers.config import ProviderRuntimeConfig
+from snaplex.providers.config import ProviderRuntimeConfig, resolve_api_key
 from snaplex.storage import (
     APP_DATA_DIR_ENV_VAR,
     CONFIG_FILE_VERSION,
@@ -178,6 +178,36 @@ def test_json_file_config_store_migrates_legacy_payload(tmp_path) -> None:
     assert loaded.provider_configs["openai"].api_key_env_var == "SNAPLEX_OPENAI_API_KEY"
     assert loaded.provider_configs["deepl"].api_key_env_var == "SNAPLEX_DEEPL_API_KEY"
     assert loaded.history_enabled is True
+
+
+def test_legacy_provider_api_key_env_var_remains_environment_compatible(tmp_path) -> None:
+    config_path = tmp_path / "config.json"
+    config_path.write_text(
+        json.dumps(
+            {
+                "version": CONFIG_FILE_VERSION,
+                "provider_configs": {
+                    "openai": {
+                        "api_key_env_var": "LEGACY_OPENAI_KEY",
+                    },
+                },
+            },
+        ),
+        encoding="utf-8",
+    )
+    store = JsonFileConfigStore(config_path)
+
+    loaded = store.load()
+    resolved = resolve_api_key(
+        "openai",
+        loaded.provider_configs["openai"],
+        environ={"LEGACY_OPENAI_KEY": " legacy-secret "},
+    )
+    serialized_text = json.dumps(app_config_to_dict(loaded))
+
+    assert loaded.provider_configs["openai"].api_key_env_var == "LEGACY_OPENAI_KEY"
+    assert resolved == "legacy-secret"
+    assert "legacy-secret" not in serialized_text
 
 
 def test_app_config_serialization_does_not_keep_provider_secret_values() -> None:
