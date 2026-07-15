@@ -64,6 +64,24 @@ $env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexPackageSmoke"
 persistence, fake-provider clipboard translation, fake capture/OCR screen
 translation, history record/list/delete/clear, and local data path containment.
 
+For the P11 private-trial release gate, also run the command wrappers:
+
+```cmd
+SmokeTrial.cmd
+StartPackagedFakeTrial.cmd --no-gui
+StartPackagedTrial.cmd --no-gui
+```
+
+Expected result:
+
+- Fake trial paths pass and remain visibly labeled as fake smoke mode.
+- Real packaged trial fails closed when no real provider credential or accepted
+  endpoint exists.
+- The deterministic base package remains usable without keyring, real provider
+  credentials, network, screen permissions, model downloads, or API keys.
+
+See `docs\p11_private_trial_release_checklist.md` for the full P11 gate.
+
 ## Troubleshooting
 
 - `No module named PyInstaller`: run `python -m pip install -e ".[package]"`.

@@ -25,7 +25,14 @@ P10 secure credential/account strategy planning is recorded in
 `docs/p10_smoke_evidence.md`, `docs/p10_final_validation_report.md`,
 `docs/p10_to_p11_handoff.md`, and `docs/p10_todo.md`.
 P11 trial release hardening planning is recorded in
-`docs/p11_trial_release_hardening_goal_guide.md` and `docs/p11_todo.md`.
+`docs/p11_trial_release_hardening_goal_guide.md`,
+`docs/p11_private_trial_release_checklist.md`,
+`docs/p11_visible_windows_smoke_evidence.md`,
+`docs/p11_keyring_smoke_evidence.md`,
+`docs/p11_keyring_packaging_decision.md`,
+`docs/p11_packaged_trial_evidence.md`,
+`docs/p11_provider_onboarding_notes.md`,
+`docs/p11_key_rotation_least_privilege.md`, and `docs/p11_todo.md`.
 
 ## Automated Precheck
 
@@ -397,6 +404,9 @@ remain untracked and uncommitted.
 ## P11 Trial Release Hardening Smoke
 
 P11 is the release-hardening pass before broader private trial distribution.
+Use `docs/p11_private_trial_release_checklist.md` as the consolidated release
+gate.
+
 Run visible desktop smoke when the environment supports it:
 
 ```powershell
@@ -428,6 +438,22 @@ Manual keyring smoke should use only a throwaway fake secret:
 Packaging hardening should decide whether keyring support is included in the
 base package, an explicit credential-capable variant, or a manual-install path
 for the private trial. Base package fake smoke must remain deterministic.
+
+P11 final package gate:
+
+```powershell
+python scripts\package_windows.py --dry-run --variant base
+cmd /c SmokeTrial.cmd
+cmd /c StartPackagedFakeTrial.cmd --no-gui
+cmd /c StartPackagedTrial.cmd --no-gui
+```
+
+Expected result:
+
+- Dry-run and fake package smoke pass deterministically.
+- Real packaged trial rejects missing real-provider configuration.
+- No generated packages, screenshots, local data, `.env`, logs, keyring
+  exports, OCR caches, or provider secrets are tracked.
 
 ## P7 Expansion Planning Validation
 

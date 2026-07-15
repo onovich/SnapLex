@@ -74,6 +74,7 @@ The current project source of truth lives in:
 - `docs/p11_packaged_trial_evidence.md`
 - `docs/p11_provider_onboarding_notes.md`
 - `docs/p11_key_rotation_least_privilege.md`
+- `docs/p11_private_trial_release_checklist.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -457,7 +458,8 @@ See `docs/p11_trial_release_hardening_goal_guide.md`,
 `docs/p11_keyring_packaging_decision.md`,
 `docs/p11_packaged_trial_evidence.md`,
 `docs/p11_provider_onboarding_notes.md`,
-`docs/p11_key_rotation_least_privilege.md`, and `docs/p11_todo.md`.
+`docs/p11_key_rotation_least_privilege.md`,
+`docs/p11_private_trial_release_checklist.md`, and `docs/p11_todo.md`.
 
 ## Current Boundaries
 

@@ -21,7 +21,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Recheck packaged fake smoke and real-trial fail-closed behavior.
 - [x] Polish provider onboarding and credential setup copy.
 - [x] Add key rotation and least-privilege notes.
-- [ ] Consolidate release smoke and private trial checklist docs.
+- [x] Consolidate release smoke and private trial checklist docs.
 - [ ] Preserve P10 no-secret boundaries and deterministic no-network tests.
 - [ ] Produce P11 final validation report.
 - [ ] Produce P11 to P12 handoff.
