@@ -327,8 +327,8 @@ def launch_gui(
         title_label.setObjectName("settingsTitle")
         title_label.setStyleSheet("font-size: 18px; font-weight: 600;")
         intro_label = QLabel(
-            "Choose a provider, keep API keys in environment variables, and test "
-            "readiness before trying real translation."
+            "Choose a provider, keep keys in environment variables or local secure "
+            "storage, and test readiness before trying real translation."
         )
         intro_label.setWordWrap(True)
         outer_layout.addWidget(title_label)
@@ -406,7 +406,7 @@ def launch_gui(
         language_form.addRow("Target", target_lang_edit)
 
         credential_source_values = {
-            "": "Legacy env var",
+            "": "API key env var",
             "environment": "Environment variable",
             "keyring": "Local secure credential",
         }

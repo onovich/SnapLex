@@ -19,7 +19,7 @@ Estimated budget: 12 conversation rounds.
   or document the exact blocker.
 - [x] Decide and document packaged keyring/credential support.
 - [x] Recheck packaged fake smoke and real-trial fail-closed behavior.
-- [ ] Polish provider onboarding and credential setup copy.
+- [x] Polish provider onboarding and credential setup copy.
 - [ ] Add key rotation and least-privilege notes.
 - [ ] Consolidate release smoke and private trial checklist docs.
 - [ ] Preserve P10 no-secret boundaries and deterministic no-network tests.

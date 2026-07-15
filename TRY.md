@@ -19,7 +19,9 @@ base Windows package.
 ```
 
 This starts the PySide6 desktop shell from source with a real translation
-provider. Configure at least one provider before launching:
+provider. Configure at least one provider before launching. SnapLex stores only
+environment variable names or keyring identifiers; never paste a provider key
+into docs, screenshots, commits, issues, or chat.
 
 ```powershell
 $env:SNAPLEX_OPENAI_API_KEY = "your_key"
@@ -66,6 +68,10 @@ For UI smoke without real translation:
 ```cmd
 .\StartFakeTrial.cmd
 ```
+
+Use fake trial commands when you want to test the interface or package without
+real translation. Fake output is deterministic placeholder text and is visibly
+labeled as fake smoke mode.
 
 ## 3. Build The Packaged Trial
 
@@ -121,3 +127,5 @@ The desktop result view labels fake output as fake smoke mode.
 See `docs\p10_account_strategy.md` for environment-variable, OS keyring,
 SnapLex Cloud, token broker, and provider account/OAuth tradeoffs. Do not paste
 real provider secrets into docs, screenshots, issues, commits, or chat logs.
+See `docs\p11_provider_onboarding_notes.md` for the private-trial provider
+setup paths and current packaging decision.

@@ -68,6 +68,11 @@ The current project source of truth lives in:
 - `docs/p10_to_p11_handoff.md`
 - `docs/p11_trial_release_hardening_goal_guide.md`
 - `docs/p11_todo.md`
+- `docs/p11_visible_windows_smoke_evidence.md`
+- `docs/p11_keyring_smoke_evidence.md`
+- `docs/p11_keyring_packaging_decision.md`
+- `docs/p11_packaged_trial_evidence.md`
+- `docs/p11_provider_onboarding_notes.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -445,7 +450,12 @@ P11 must preserve P10 credential boundaries, deterministic fake smoke paths,
 no-network automated tests, and no-secret repository hygiene. It is
 release-hardening, not feature expansion.
 
-See `docs/p11_trial_release_hardening_goal_guide.md` and `docs/p11_todo.md`.
+See `docs/p11_trial_release_hardening_goal_guide.md`,
+`docs/p11_visible_windows_smoke_evidence.md`,
+`docs/p11_keyring_smoke_evidence.md`,
+`docs/p11_keyring_packaging_decision.md`,
+`docs/p11_packaged_trial_evidence.md`,
+`docs/p11_provider_onboarding_notes.md`, and `docs/p11_todo.md`.
 
 ## Current Boundaries
 
