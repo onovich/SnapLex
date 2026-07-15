@@ -30,6 +30,8 @@ $env:SNAPLEX_LIBRETRANSLATE_BASE_URL = "http://localhost:5000"
 `StartTrial.cmd` auto-selects OpenAI, DeepL, or LibreTranslate from those
 environment variables. The default target language is `zh`. Trial data is
 written under `snaplex-smoke-data\trial-real-source`, which is ignored by git.
+If none of those real provider settings exists, the command exits with a clear
+message instead of falling back to fake translation.
 
 If you already use standard provider variables, `OPENAI_API_KEY` and
 `DEEPL_API_KEY` are also detected.
@@ -69,6 +71,7 @@ Generated `build\` and `dist\` folders are ignored by git.
 This starts `dist\SnapLex\SnapLex.exe` with a real translation provider. Run
 `BuildTrial.cmd` first if the executable does not exist. Configure OpenAI,
 DeepL, or LibreTranslate as shown above before launching.
+The packaged real trial path also rejects missing real provider configuration.
 
 For a packaged bootstrap-only check:
 
@@ -94,3 +97,4 @@ smoke checks when `dist\SnapLex\SnapLex.exe` exists.
 `SmokeTrial.cmd`, `StartFakeTrial.cmd`, and `StartPackagedFakeTrial.cmd` use the
 fake provider by design. Fake mode returns deterministic placeholder text such
 as `hello [zh]`; it is only for packaging and UI smoke, not real translation.
+The desktop result view labels fake output as fake smoke mode.

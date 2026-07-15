@@ -265,6 +265,8 @@ Expected result:
 - Fake provider mode is clearly labeled as fake smoke/dev behavior.
 - The main result view shows provider identity, language pair, source text,
   translated text, loading, empty, and error states with readable hierarchy.
+- Results produced by the fake provider show a visible warning that fake output
+  is deterministic placeholder text, not real translation.
 
 Real trial command behavior:
 
@@ -278,6 +280,8 @@ Expected result:
 - `StartTrial.cmd` rejects missing real provider configuration with a clear
   message.
 - `StartFakeTrial.cmd` remains the deterministic fake smoke path.
+- Real trial scripts must not set provider order to `fake` when no real provider
+  is configured.
 - Automated validation does not require real provider credentials or network.
 
 ## P7 Expansion Planning Validation

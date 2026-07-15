@@ -35,6 +35,7 @@ class TranslationResultState:
     source_text: str = ""
     translated_text: str = ""
     provider_name: str = ""
+    provider_notice: str = ""
     error_message: str = ""
     can_copy: bool = False
     can_retry: bool = False
@@ -111,6 +112,7 @@ class TranslationResultPresenter:
             source_text=source_text,
             translated_text=translated_text,
             provider_name=provider_name,
+            provider_notice=provider_notice_for(provider_name),
             can_copy=bool(translated_text),
             can_retry=True,
         )
@@ -222,3 +224,9 @@ def friendly_translation_error_message(error: Exception) -> str:
         return "Translation failed. Try again."
 
     return "Translation failed unexpectedly. Try again."
+
+
+def provider_notice_for(provider_name: str) -> str:
+    if provider_name.strip().lower() == "fake":
+        return "Fake smoke mode: deterministic placeholder output, not real translation."
+    return ""

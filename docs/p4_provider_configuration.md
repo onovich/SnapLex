@@ -26,6 +26,11 @@ Supported provider names:
 `SNAPLEX_PROVIDER_ORDER` controls fallback order. Keep `fake` last when you want
 a local offline fallback during development.
 
+For P8 trial use, prefer Settings for provider setup and use real trial launch
+scripts. `StartTrial.cmd` and `StartPackagedTrial.cmd` require a real provider
+and do not silently fall back to fake translation. Fake output is only for smoke
+and development.
+
 ## Shared Variables
 
 - `SNAPLEX_PROVIDER`: selected provider when no explicit order is supplied.
@@ -64,6 +69,8 @@ python -m snaplex
 ```
 
 The runtime config stores `SNAPLEX_OPENAI_API_KEY_ENV`, not the API key value.
+Settings shows whether the configured env var is present, but never displays or
+stores the key value.
 
 ## DeepL
 
@@ -77,6 +84,8 @@ python -m snaplex
 ```
 
 The runtime config stores `SNAPLEX_DEEPL_API_KEY_ENV`, not the API key value.
+Settings shows whether the configured env var is present, but never displays or
+stores the key value.
 
 ## Timeout And Retry
 

@@ -133,6 +133,7 @@ def launch_gui(
     source_label = QLabel("")
     result_label = QLabel("")
     provider_label = QLabel("")
+    provider_notice_label = QLabel("")
     error_label = QLabel("")
     translate_button = QPushButton("Translate Clipboard")
     translate_screen_button = QPushButton("Translate Screen")
@@ -141,7 +142,14 @@ def launch_gui(
     copy_button = QPushButton("Copy Result")
     retry_button = QPushButton("Retry")
     close_button = QPushButton("Close Result")
-    for label in (status_label, source_label, result_label, provider_label, error_label):
+    for label in (
+        status_label,
+        source_label,
+        result_label,
+        provider_label,
+        provider_notice_label,
+        error_label,
+    ):
         label.setWordWrap(True)
 
     def refresh_view() -> None:
@@ -151,6 +159,7 @@ def launch_gui(
         source_label.setText(state.source_text)
         result_label.setText(state.translated_text)
         provider_label.setText(f"Provider: {state.provider_name}" if state.provider_name else "")
+        provider_notice_label.setText(state.provider_notice)
         error_label.setText(state.error_message)
         translate_button.setEnabled(not is_loading)
         translate_screen_button.setEnabled(not is_loading)
@@ -485,6 +494,7 @@ def launch_gui(
     layout.addWidget(source_label)
     layout.addWidget(result_label)
     layout.addWidget(provider_label)
+    layout.addWidget(provider_notice_label)
     layout.addWidget(error_label)
     layout.addWidget(copy_button)
     layout.addWidget(retry_button)

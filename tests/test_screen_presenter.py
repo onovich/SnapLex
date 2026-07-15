@@ -101,6 +101,7 @@ def test_screen_presenter_translates_region_through_capture_ocr_and_pipeline() -
     assert state.source_text == "screen text"
     assert state.translated_text == "translated screen"
     assert state.provider_name == "fake"
+    assert "not real translation" in state.provider_notice
     assert state.can_copy is True
     assert state.can_retry is True
 

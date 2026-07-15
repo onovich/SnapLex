@@ -51,6 +51,7 @@ def test_presenter_can_show_success_and_copy_result() -> None:
     assert state.source_text == "hello"
     assert state.translated_text == "hola"
     assert state.provider_name == "fake"
+    assert "not real translation" in state.provider_notice
     assert state.can_copy is True
     assert state.can_retry is True
     assert copied_result is True
@@ -65,6 +66,18 @@ def test_presenter_does_not_copy_when_not_successful() -> None:
 
     assert copied_result is False
     assert copied == []
+
+
+def test_presenter_success_omits_fake_notice_for_real_provider() -> None:
+    presenter = ClipboardTranslationPresenter()
+
+    state = presenter.show_success(
+        source_text="hello",
+        translated_text="hola",
+        provider_name="openai",
+    )
+
+    assert state.provider_notice == ""
 
 
 def test_presenter_can_show_empty_clipboard() -> None:

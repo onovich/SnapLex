@@ -70,6 +70,7 @@ def test_presenter_translates_clipboard_text_through_pipeline() -> None:
     assert state.source_text == "hello"
     assert state.translated_text == "hola"
     assert state.provider_name == "fake"
+    assert "not real translation" in state.provider_notice
     assert state.can_copy is True
 
 

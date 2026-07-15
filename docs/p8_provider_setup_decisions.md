@@ -167,3 +167,18 @@ Round 4 renders the provider setup model in the PySide6 Settings dialog:
 The connection button uses saved/current Settings values and still requires the
 user to have local provider credentials or endpoints configured. Automated
 tests remain mocked and no-network.
+
+## Round 5 Fake And Real Trial Guardrails
+
+Round 5 makes fake mode visible in result state and docs:
+
+- `TranslationResultState.provider_notice` carries a fake-mode warning from
+  shared presenter state to clipboard and screen result views.
+- Fake provider success states say the output is deterministic placeholder text,
+  not real translation.
+- Real trial docs state that `StartTrial.cmd` and `StartPackagedTrial.cmd`
+  reject missing real provider configuration instead of falling back to fake.
+- Fake trial docs keep `StartFakeTrial.cmd`, `StartPackagedFakeTrial.cmd`, and
+  `SmokeTrial.cmd` positioned as package/UI smoke only.
+- `.env.example`, provider docs, and the Windows smoke checklist now repeat the
+  no-secret, fake-vs-real distinction.

@@ -18,9 +18,9 @@ Executable guide: `docs/p8_provider_setup_real_translation_goal_guide.md`
   service/presenter boundaries.
 - [ ] Keep raw provider API key values out of JSON config, history, docs, tests,
   logs, package resources, and screenshots.
-- [ ] Make fake provider mode visibly labeled as fake smoke/dev mode.
-- [ ] Verify real trial launch paths do not silently fall back to fake.
-- [ ] Update provider setup docs, trial docs, and smoke checklist.
+- [x] Make fake provider mode visibly labeled as fake smoke/dev mode.
+- [x] Verify real trial launch paths do not silently fall back to fake.
+- [x] Update provider setup docs, trial docs, and smoke checklist.
 - [ ] Apply Apple HIG-inspired visual foundation to the main shell, settings,
   and result view.
 - [ ] Produce P8 final validation report.
