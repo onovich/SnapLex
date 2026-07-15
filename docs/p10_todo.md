@@ -21,7 +21,7 @@ Estimated budget: 16 conversation rounds.
 - [x] Ensure config stores credential references only, not raw values.
 - [x] Route provider readiness and Test Connection through credential
   boundaries.
-- [ ] Update Settings presenter/UI for credential source, readiness, save, and
+- [x] Update Settings presenter/UI for credential source, readiness, save, and
   delete without echoing secrets.
 - [ ] Update real/fake trial readiness guardrails for the accepted credential
   boundary.

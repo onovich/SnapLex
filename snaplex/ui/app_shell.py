@@ -366,6 +366,7 @@ def launch_gui(
         readiness_label = QLabel("")
         readiness_detail_label = QLabel("")
         env_status_label = QLabel("")
+        credential_result_label = QLabel("")
         connection_result_label = QLabel("")
         connect_account_button = QPushButton("Connect account (future)")
         connect_account_button.setEnabled(False)
@@ -384,6 +385,7 @@ def launch_gui(
             readiness_label,
             readiness_detail_label,
             env_status_label,
+            credential_result_label,
             connection_result_label,
         ):
             label.setWordWrap(True)
@@ -393,6 +395,7 @@ def launch_gui(
         provider_form.addRow("Readiness", readiness_label)
         provider_form.addRow("Details", readiness_detail_label)
         provider_form.addRow("Env Var", env_status_label)
+        provider_form.addRow("Credential", credential_result_label)
         provider_form.addRow(connect_account_button)
         provider_form.addRow(test_connection_button)
         provider_form.addRow("Test Result", connection_result_label)
@@ -402,6 +405,64 @@ def launch_gui(
         language_form.addRow("Source", source_lang_edit)
         language_form.addRow("Target", target_lang_edit)
 
+        credential_source_values = {
+            "": "Legacy env var",
+            "environment": "Environment variable",
+            "keyring": "Local secure credential",
+        }
+
+        def credential_source_combo(initial_source: str) -> QComboBox:
+            combo = QComboBox()
+            for source_value, label in credential_source_values.items():
+                combo.addItem(label, source_value)
+            index = combo.findData(initial_source)
+            combo.setCurrentIndex(index if index >= 0 else 0)
+            _set_accessible(
+                combo,
+                "Credential source",
+                "Choose where SnapLex resolves the provider credential.",
+            )
+            return combo
+
+        def credential_controls(
+            provider_name: str,
+            initial_source: str,
+            initial_identifier: str,
+        ) -> tuple[QComboBox, QLineEdit, QLineEdit, QPushButton, QPushButton, QWidget]:
+            source_combo = credential_source_combo(initial_source)
+            identifier_edit = QLineEdit(initial_identifier)
+            _set_accessible(identifier_edit, f"{provider_name} credential reference")
+            secret_edit = QLineEdit("")
+            secret_edit.setEchoMode(QLineEdit.EchoMode.Password)
+            _set_accessible(secret_edit, f"{provider_name} credential secret")
+            save_credential_button = QPushButton("Save")
+            _set_accessible(save_credential_button, f"Save {provider_name} credential")
+            delete_credential_button = QPushButton("Delete")
+            _set_accessible(delete_credential_button, f"Delete {provider_name} credential")
+            actions = QWidget()
+            actions_layout = QHBoxLayout(actions)
+            actions_layout.setContentsMargins(0, 0, 0, 0)
+            actions_layout.addWidget(secret_edit)
+            actions_layout.addWidget(save_credential_button)
+            actions_layout.addWidget(delete_credential_button)
+
+            def update_enabled() -> None:
+                keyring_selected = source_combo.currentData() == "keyring"
+                secret_edit.setEnabled(keyring_selected)
+                save_credential_button.setEnabled(keyring_selected)
+                delete_credential_button.setEnabled(keyring_selected)
+
+            source_combo.currentIndexChanged.connect(lambda _index: update_enabled())
+            update_enabled()
+            return (
+                source_combo,
+                identifier_edit,
+                secret_edit,
+                save_credential_button,
+                delete_credential_button,
+                actions,
+            )
+
         libretranslate_group = QGroupBox("LibreTranslate")
         libretranslate_form = QFormLayout(libretranslate_group)
         libretranslate_base_url_edit = QLineEdit(state.libretranslate_base_url)
@@ -409,6 +470,18 @@ def launch_gui(
         libretranslate_api_key_env_var_edit = QLineEdit(state.libretranslate_api_key_env_var)
         _set_secret_env_accessible(
             libretranslate_api_key_env_var_edit, "LibreTranslate API key env var"
+        )
+        (
+            libretranslate_credential_source_combo,
+            libretranslate_credential_identifier_edit,
+            libretranslate_secret_edit,
+            libretranslate_save_credential_button,
+            libretranslate_delete_credential_button,
+            libretranslate_credential_actions,
+        ) = credential_controls(
+            "LibreTranslate",
+            state.libretranslate_credential_source,
+            state.libretranslate_credential_identifier,
         )
         libretranslate_timeout_spin = _double_spin_box(
             state.libretranslate_timeout_seconds,
@@ -419,6 +492,12 @@ def launch_gui(
         _set_accessible(libretranslate_retry_spin, "LibreTranslate retry count")
         libretranslate_form.addRow("Base URL", libretranslate_base_url_edit)
         libretranslate_form.addRow("API Key Env", libretranslate_api_key_env_var_edit)
+        libretranslate_form.addRow("Credential Source", libretranslate_credential_source_combo)
+        libretranslate_form.addRow(
+            "Credential Ref",
+            libretranslate_credential_identifier_edit,
+        )
+        libretranslate_form.addRow("Local Secret", libretranslate_credential_actions)
         libretranslate_form.addRow("Timeout", libretranslate_timeout_spin)
         libretranslate_form.addRow("Retry", libretranslate_retry_spin)
 
@@ -428,6 +507,18 @@ def launch_gui(
         _set_accessible(openai_base_url_edit, "OpenAI base URL")
         openai_api_key_env_var_edit = QLineEdit(state.openai_api_key_env_var)
         _set_secret_env_accessible(openai_api_key_env_var_edit, "OpenAI API key env var")
+        (
+            openai_credential_source_combo,
+            openai_credential_identifier_edit,
+            openai_secret_edit,
+            openai_save_credential_button,
+            openai_delete_credential_button,
+            openai_credential_actions,
+        ) = credential_controls(
+            "OpenAI",
+            state.openai_credential_source,
+            state.openai_credential_identifier,
+        )
         openai_timeout_spin = _double_spin_box(state.openai_timeout_seconds, QDoubleSpinBox)
         _set_accessible(openai_timeout_spin, "OpenAI timeout seconds")
         openai_retry_spin = _int_spin_box(state.openai_retry_count, QSpinBox)
@@ -436,6 +527,9 @@ def launch_gui(
         _set_accessible(openai_model_edit, "OpenAI model")
         openai_form.addRow("Base URL", openai_base_url_edit)
         openai_form.addRow("API Key Env", openai_api_key_env_var_edit)
+        openai_form.addRow("Credential Source", openai_credential_source_combo)
+        openai_form.addRow("Credential Ref", openai_credential_identifier_edit)
+        openai_form.addRow("Local Secret", openai_credential_actions)
         openai_form.addRow("Timeout", openai_timeout_spin)
         openai_form.addRow("Retry", openai_retry_spin)
         openai_form.addRow("Model", openai_model_edit)
@@ -446,6 +540,18 @@ def launch_gui(
         _set_accessible(deepl_base_url_edit, "DeepL base URL")
         deepl_api_key_env_var_edit = QLineEdit(state.deepl_api_key_env_var)
         _set_secret_env_accessible(deepl_api_key_env_var_edit, "DeepL API key env var")
+        (
+            deepl_credential_source_combo,
+            deepl_credential_identifier_edit,
+            deepl_secret_edit,
+            deepl_save_credential_button,
+            deepl_delete_credential_button,
+            deepl_credential_actions,
+        ) = credential_controls(
+            "DeepL",
+            state.deepl_credential_source,
+            state.deepl_credential_identifier,
+        )
         deepl_timeout_spin = _double_spin_box(state.deepl_timeout_seconds, QDoubleSpinBox)
         _set_accessible(deepl_timeout_spin, "DeepL timeout seconds")
         deepl_retry_spin = _int_spin_box(state.deepl_retry_count, QSpinBox)
@@ -454,6 +560,9 @@ def launch_gui(
         _set_accessible(deepl_model_type_edit, "DeepL model type")
         deepl_form.addRow("Base URL", deepl_base_url_edit)
         deepl_form.addRow("API Key Env", deepl_api_key_env_var_edit)
+        deepl_form.addRow("Credential Source", deepl_credential_source_combo)
+        deepl_form.addRow("Credential Ref", deepl_credential_identifier_edit)
+        deepl_form.addRow("Local Secret", deepl_credential_actions)
         deepl_form.addRow("Timeout", deepl_timeout_spin)
         deepl_form.addRow("Retry", deepl_retry_spin)
         deepl_form.addRow("Model Type", deepl_model_type_edit)
@@ -512,16 +621,40 @@ def launch_gui(
         dialog.setTabOrder(target_lang_edit, test_connection_button)
         dialog.setTabOrder(test_connection_button, libretranslate_base_url_edit)
         dialog.setTabOrder(libretranslate_base_url_edit, libretranslate_api_key_env_var_edit)
-        dialog.setTabOrder(libretranslate_api_key_env_var_edit, libretranslate_timeout_spin)
+        dialog.setTabOrder(
+            libretranslate_api_key_env_var_edit,
+            libretranslate_credential_source_combo,
+        )
+        dialog.setTabOrder(
+            libretranslate_credential_source_combo,
+            libretranslate_credential_identifier_edit,
+        )
+        dialog.setTabOrder(libretranslate_credential_identifier_edit, libretranslate_secret_edit)
+        dialog.setTabOrder(libretranslate_secret_edit, libretranslate_save_credential_button)
+        dialog.setTabOrder(
+            libretranslate_save_credential_button,
+            libretranslate_delete_credential_button,
+        )
+        dialog.setTabOrder(libretranslate_delete_credential_button, libretranslate_timeout_spin)
         dialog.setTabOrder(libretranslate_timeout_spin, libretranslate_retry_spin)
         dialog.setTabOrder(libretranslate_retry_spin, openai_base_url_edit)
         dialog.setTabOrder(openai_base_url_edit, openai_api_key_env_var_edit)
-        dialog.setTabOrder(openai_api_key_env_var_edit, openai_timeout_spin)
+        dialog.setTabOrder(openai_api_key_env_var_edit, openai_credential_source_combo)
+        dialog.setTabOrder(openai_credential_source_combo, openai_credential_identifier_edit)
+        dialog.setTabOrder(openai_credential_identifier_edit, openai_secret_edit)
+        dialog.setTabOrder(openai_secret_edit, openai_save_credential_button)
+        dialog.setTabOrder(openai_save_credential_button, openai_delete_credential_button)
+        dialog.setTabOrder(openai_delete_credential_button, openai_timeout_spin)
         dialog.setTabOrder(openai_timeout_spin, openai_retry_spin)
         dialog.setTabOrder(openai_retry_spin, openai_model_edit)
         dialog.setTabOrder(openai_model_edit, deepl_base_url_edit)
         dialog.setTabOrder(deepl_base_url_edit, deepl_api_key_env_var_edit)
-        dialog.setTabOrder(deepl_api_key_env_var_edit, deepl_timeout_spin)
+        dialog.setTabOrder(deepl_api_key_env_var_edit, deepl_credential_source_combo)
+        dialog.setTabOrder(deepl_credential_source_combo, deepl_credential_identifier_edit)
+        dialog.setTabOrder(deepl_credential_identifier_edit, deepl_secret_edit)
+        dialog.setTabOrder(deepl_secret_edit, deepl_save_credential_button)
+        dialog.setTabOrder(deepl_save_credential_button, deepl_delete_credential_button)
+        dialog.setTabOrder(deepl_delete_credential_button, deepl_timeout_spin)
         dialog.setTabOrder(deepl_timeout_spin, deepl_retry_spin)
         dialog.setTabOrder(deepl_retry_spin, deepl_model_type_edit)
         dialog.setTabOrder(deepl_model_type_edit, history_enabled_checkbox)
@@ -535,15 +668,23 @@ def launch_gui(
                 provider_order=provider_order_edit.text(),
                 libretranslate_base_url=libretranslate_base_url_edit.text(),
                 libretranslate_api_key_env_var=libretranslate_api_key_env_var_edit.text(),
+                libretranslate_credential_source=str(
+                    libretranslate_credential_source_combo.currentData() or ""
+                ),
+                libretranslate_credential_identifier=libretranslate_credential_identifier_edit.text(),
                 libretranslate_timeout_seconds=libretranslate_timeout_spin.value(),
                 libretranslate_retry_count=libretranslate_retry_spin.value(),
                 openai_base_url=openai_base_url_edit.text(),
                 openai_api_key_env_var=openai_api_key_env_var_edit.text(),
+                openai_credential_source=str(openai_credential_source_combo.currentData() or ""),
+                openai_credential_identifier=openai_credential_identifier_edit.text(),
                 openai_timeout_seconds=openai_timeout_spin.value(),
                 openai_retry_count=openai_retry_spin.value(),
                 openai_model=openai_model_edit.text(),
                 deepl_base_url=deepl_base_url_edit.text(),
                 deepl_api_key_env_var=deepl_api_key_env_var_edit.text(),
+                deepl_credential_source=str(deepl_credential_source_combo.currentData() or ""),
+                deepl_credential_identifier=deepl_credential_identifier_edit.text(),
                 deepl_timeout_seconds=deepl_timeout_spin.value(),
                 deepl_retry_count=deepl_retry_spin.value(),
                 deepl_model_type=deepl_model_type_edit.text(),
@@ -562,6 +703,7 @@ def launch_gui(
                 readiness_label.setText("Provider is not supported")
                 readiness_detail_label.setText("Choose fake, LibreTranslate, OpenAI, or DeepL.")
                 env_status_label.setText("")
+                credential_result_label.setText("")
                 test_connection_button.setEnabled(False)
                 return
 
@@ -572,8 +714,40 @@ def launch_gui(
                 env_status_label.setText(f"{setup.api_key_env_var}: {env_status}")
             else:
                 env_status_label.setText("No API key env var configured.")
+            if setup.credential_source == "keyring":
+                credential_result_label.setText(setup.credential_status_text)
+            elif setup.credential_source == "environment":
+                credential_result_label.setText("Credential resolves from environment.")
+            else:
+                credential_result_label.setText("Credential source follows API key env var.")
             connect_account_button.setToolTip(setup.connect_account_detail)
-            test_connection_button.setEnabled(setup.is_real_provider)
+            test_connection_button.setEnabled(setup.can_test_connection)
+
+        def save_local_credential(provider_name: str, secret_edit: QLineEdit) -> None:
+            settings_presenter.apply_state(current_form_state())
+            try:
+                status = settings_presenter.save_provider_credential(
+                    provider_name,
+                    secret_edit.text(),
+                )
+            except Exception as exc:
+                refresh_provider_setup()
+                credential_result_label.setText(str(exc))
+            else:
+                secret_edit.clear()
+                refresh_provider_setup()
+                credential_result_label.setText(status.status_text)
+
+        def delete_local_credential(provider_name: str) -> None:
+            settings_presenter.apply_state(current_form_state())
+            try:
+                status = settings_presenter.delete_provider_credential(provider_name)
+            except Exception as exc:
+                refresh_provider_setup()
+                credential_result_label.setText(str(exc))
+            else:
+                refresh_provider_setup()
+                credential_result_label.setText(status.status_text)
 
         def apply_settings() -> None:
             settings_presenter.apply_state(current_form_state())
@@ -586,6 +760,20 @@ def launch_gui(
             refresh_provider_setup()
 
         provider_combo.currentTextChanged.connect(lambda _text: refresh_provider_setup())
+        libretranslate_save_credential_button.clicked.connect(
+            lambda: save_local_credential("libretranslate", libretranslate_secret_edit)
+        )
+        libretranslate_delete_credential_button.clicked.connect(
+            lambda: delete_local_credential("libretranslate")
+        )
+        openai_save_credential_button.clicked.connect(
+            lambda: save_local_credential("openai", openai_secret_edit)
+        )
+        openai_delete_credential_button.clicked.connect(lambda: delete_local_credential("openai"))
+        deepl_save_credential_button.clicked.connect(
+            lambda: save_local_credential("deepl", deepl_secret_edit)
+        )
+        deepl_delete_credential_button.clicked.connect(lambda: delete_local_credential("deepl"))
         test_connection_button.clicked.connect(run_connection_test)
         buttons.accepted.connect(apply_settings)
         buttons.rejected.connect(dialog.reject)
