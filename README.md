@@ -53,6 +53,9 @@ The current project source of truth lives in:
 - `docs/p8_to_p9_handoff.md`
 - `docs/p9_apple_inspired_ui_ux_goal_guide.md`
 - `docs/p9_todo.md`
+- `docs/p9_ui_audit.md`
+- `docs/p9_visual_smoke_evidence.md`
+- `docs/p9_hardening_notes.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`

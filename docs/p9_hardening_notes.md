@@ -51,3 +51,16 @@ baseline:
 `SmokeTrial.cmd` covered source version/no-GUI bootstrap, package dry-run, and
 existing packaged executable fake workflow smoke when the local packaged
 executable was present. Generated package and smoke outputs remain ignored.
+
+## Round 15 Documentation Index Check
+
+P9 newly introduced support and evidence documents are linked from README or
+the Windows smoke checklist:
+
+- `docs/p9_ui_audit.md`
+- `docs/p9_visual_smoke_evidence.md`
+- `docs/p9_hardening_notes.md`
+- `scripts/p9_gui_smoke.py`
+
+The final P9 closure round will add final validation and P10 handoff entry
+points.
