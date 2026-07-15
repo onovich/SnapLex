@@ -1,0 +1,113 @@
+# P8 Provider Setup Decisions
+
+Date: 2026-07-15
+Phase: P8 Provider Setup And Real Translation UX
+Status: Round 1 decision record
+
+P8 starts from the accepted P0-P7 baseline and the P8 trial-script commits. The
+first product decision is to make provider setup visible and testable without
+turning credentials into saved app data.
+
+## Baseline Revalidation
+
+Round 1 revalidated the current P8 starting point:
+
+- `Validate.cmd`: PASS with 190 tests.
+- `git diff --check`: PASS.
+- `python -m snaplex --version`: `SnapLex 0.1.0`.
+- `python -m snaplex --no-gui`: `SnapLex bootstrap OK (PySide6 available).`
+- `python scripts\package_windows.py --dry-run --variant base`: PASS.
+- `cmd /c StartTrial.cmd --no-gui`: expected rejection when no real provider
+  is configured.
+- `cmd /c StartFakeTrial.cmd --no-gui`: PASS with fake smoke mode.
+
+## Product Decision
+
+P8 does not need SnapLex Cloud, a backend token broker, billing, accounts, or
+consumer provider OAuth to finish. The short-term provider setup UX should:
+
+- let users choose `fake`, `libretranslate`, `openai`, or `deepl` in Settings,
+- store provider names, order, target language, endpoints, model names,
+  timeout, retry, and API-key environment variable names,
+- never store raw API key values,
+- show whether the configured env var is present in the current process,
+- make fake mode visibly different from real translation,
+- support `Test Connection` behind service/presenter boundaries with mocked
+  tests,
+- keep real trial commands separate from fake smoke commands.
+
+## Provider Setup States
+
+P8 uses these user-facing setup states:
+
+- `fake_smoke`: deterministic placeholder translation for development,
+  package smoke, and UI smoke; not real translation.
+- `missing_credential`: a provider requires a configured env var or the env var
+  is not set in the current process.
+- `ready_from_environment`: the provider has enough local configuration to run
+  a connection test without saving secrets.
+- `endpoint_unavailable`: future connection test reached the provider boundary
+  and the endpoint was unavailable.
+- `test_passed`: future connection test succeeded.
+- `test_failed`: future connection test failed without exposing secrets.
+- `oauth_future`: account sign-in is a later SnapLex Cloud or provider-supported
+  flow, not P8.
+
+Round 1 adds the pure `snaplex.services.provider_setup` model for the first
+three runtime states plus unsupported-provider handling. Round 3 will attach
+connection-test results behind a service/presenter boundary.
+
+## Provider-Specific Rules
+
+Fake:
+
+- Always available for deterministic smoke/dev.
+- Cannot be tested as a real provider connection.
+- Must say it is not real translation in user-facing copy.
+
+LibreTranslate:
+
+- Treat a configured endpoint as enough to run a connection test when no key env
+  var is configured.
+- If a key env var name is configured, require that env var to be present before
+  testing.
+- Present public instances as user-provided endpoints, not product
+  infrastructure.
+
+OpenAI and DeepL:
+
+- Require an API-key env var name and a value in the current process before
+  testing.
+- Store only env var names in config.
+- Never display or persist the secret value.
+
+OAuth:
+
+- `Connect account` may appear only as disabled/future-track UI copy until
+  SnapLex Cloud or a provider-supported desktop-safe flow is designed.
+
+## Architecture Decision
+
+- Provider setup state is a service-level model, not PySide6 widget logic.
+- Settings UI may render setup state and ask presenters/services to save or test
+  providers.
+- Translation execution remains behind `TranslationPipeline`.
+- Provider readiness and future connection tests must use provider boundaries
+  and mocked HTTP in automated tests.
+- History must not store provider setup diagnostics that could expose secrets.
+
+## Round 1 Audit Notes
+
+- `SettingsPresenter` already loads and saves provider selection, provider
+  order, provider endpoints, API-key env var names, timeout/retry, OpenAI model,
+  DeepL model type, and history settings.
+- Current Settings UI is form-based and config-file oriented. Later P8 rounds
+  should make provider choices, readiness badges, env var presence, and
+  connection testing first-class controls.
+- `StartTrial.cmd` and `StartPackagedTrial.cmd` already call
+  `RequireRealProvider.cmd`, while fake trial scripts force `SNAPLEX_PROVIDER`
+  and `SNAPLEX_PROVIDER_ORDER` to `fake`.
+- Result UI currently shows provider name but does not warn that `fake` is
+  smoke/dev output. Round 5 or Round 6 must make that user-facing distinction
+  clear.
+

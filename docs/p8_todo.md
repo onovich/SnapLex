@@ -10,7 +10,7 @@ Executable guide: `docs/p8_provider_setup_real_translation_goal_guide.md`
 
 ## Tasks
 
-- [ ] Revalidate the accepted P0-P7/P6 package baseline and current trial
+- [x] Revalidate the accepted P0-P7/P6 package baseline and current trial
   scripts.
 - [ ] Add Settings-based provider setup state for fake, LibreTranslate, OpenAI,
   and DeepL.

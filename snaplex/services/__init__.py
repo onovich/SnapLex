@@ -23,6 +23,12 @@ from snaplex.services.ocr_service import (
     OcrUnavailableError,
     PaddleOcrService,
 )
+from snaplex.services.provider_setup import (
+    ProviderSetupState,
+    ProviderSetupStatus,
+    describe_provider_setup,
+    describe_provider_setups,
+)
 from snaplex.services.screen_translation_service import (
     ScreenTranslationResponse,
     ScreenTranslationService,
@@ -59,6 +65,8 @@ __all__ = [
     "OcrService",
     "OcrUnavailableError",
     "PaddleOcrService",
+    "ProviderSetupState",
+    "ProviderSetupStatus",
     "QtClipboardService",
     "ScreenRegion",
     "ScreenTranslationResponse",
@@ -69,5 +77,7 @@ __all__ = [
     "TranslationPipeline",
     "TranslationService",
     "create_default_translation_pipeline",
+    "describe_provider_setup",
+    "describe_provider_setups",
     "normalize_text",
 ]
