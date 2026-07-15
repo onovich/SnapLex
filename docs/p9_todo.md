@@ -15,7 +15,7 @@ Estimated budget: 16 conversation rounds.
 - [x] Revalidate the accepted P8 baseline.
 - [x] Produce a UI audit for main shell, result states, Settings, History, and
   region selector.
-- [ ] Add or refine shared visual tokens/styles for spacing, typography, color,
+- [x] Add or refine shared visual tokens/styles for spacing, typography, color,
   focus, and stable controls.
 - [ ] Polish main shell action hierarchy and result state layout.
 - [ ] Improve long text, OCR text, translation text, and small-window behavior.

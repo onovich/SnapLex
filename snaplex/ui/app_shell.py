@@ -33,6 +33,7 @@ from snaplex.ui.region_selector import FixedRegionSelector, QtRegionSelector, Re
 from snaplex.ui.screen_presenter import ScreenTranslationPresenter
 from snaplex.ui.history_presenter import HistoryPresenter
 from snaplex.ui.settings_presenter import SettingsFormState, SettingsPresenter
+from snaplex.ui.style import SNAPLEX_FONT_FAMILY, build_app_stylesheet
 from snaplex.ui.translation_result import TranslationResultPresenter, TranslationResultStatus
 
 
@@ -59,6 +60,7 @@ def launch_gui(
 ) -> int:
     try:
         from PySide6.QtCore import QObject, Qt, Signal
+        from PySide6.QtGui import QFont
         from PySide6.QtWidgets import (
             QApplication,
             QCheckBox,
@@ -87,7 +89,14 @@ def launch_gui(
         )
         return 0
 
-    app = QApplication.instance() or QApplication([])
+    existing_application = QApplication.instance()
+    app: QApplication
+    if isinstance(existing_application, QApplication):
+        app = existing_application
+    else:
+        app = QApplication([])
+    app.setFont(QFont(SNAPLEX_FONT_FAMILY, 9))
+    app.setStyleSheet(build_app_stylesheet())
     clipboard_service = clipboard_service or QtClipboardService.from_application()
     capture_service = capture_service or FakeCaptureService()
     ocr_service = ocr_service or FakeOcrService()
@@ -128,73 +137,6 @@ def launch_gui(
 
     central = QWidget()
     central.setObjectName("SnapLexRoot")
-    central.setStyleSheet(
-        """
-        QWidget#SnapLexRoot {
-            background: #f7f8f6;
-            color: #1f2933;
-            font-size: 13px;
-        }
-        QLabel#AppTitle {
-            font-size: 22px;
-            font-weight: 700;
-            color: #101828;
-        }
-        QLabel#AppSubtitle, QLabel#SectionLabel {
-            color: #5f6b7a;
-        }
-        QLabel#ResultText {
-            background: #ffffff;
-            border: 1px solid #d8dee6;
-            border-radius: 6px;
-            padding: 8px;
-            min-height: 36px;
-        }
-        QLabel#ProviderText {
-            color: #344054;
-            font-weight: 600;
-        }
-        QLabel#ProviderNotice {
-            background: #fff4d6;
-            border: 1px solid #f0c36a;
-            border-radius: 6px;
-            color: #6b4b00;
-            padding: 6px;
-        }
-        QLabel#ErrorText {
-            color: #b42318;
-            font-weight: 600;
-        }
-        QLabel#StatusText {
-            color: #5f6b7a;
-        }
-        QGroupBox {
-            border: 1px solid #d8dee6;
-            border-radius: 8px;
-            margin-top: 10px;
-            padding: 10px 8px 8px 8px;
-            background: #fbfcfb;
-            font-weight: 600;
-        }
-        QPushButton {
-            min-height: 30px;
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid #c7d0da;
-            background: #ffffff;
-        }
-        QPushButton#PrimaryAction {
-            background: #1f6feb;
-            border-color: #1f6feb;
-            color: #ffffff;
-            font-weight: 600;
-        }
-        QPushButton:disabled {
-            color: #98a2b3;
-            background: #eef1f4;
-        }
-        """
-    )
     layout = QVBoxLayout(central)
     layout.setContentsMargins(18, 16, 18, 16)
     layout.setSpacing(10)
