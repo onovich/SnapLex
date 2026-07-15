@@ -329,20 +329,42 @@ def launch_gui(
         provider_group = QGroupBox("Provider Setup")
         provider_form = QFormLayout(provider_group)
         provider_combo = QComboBox()
+        _set_accessible(
+            provider_combo, "Provider", "Choose fake, LibreTranslate, OpenAI, or DeepL."
+        )
         provider_combo.addItems(list(state.provider_choices))
         provider_index = provider_combo.findText(state.provider_name)
         if provider_index >= 0:
             provider_combo.setCurrentIndex(provider_index)
         source_lang_edit = QLineEdit(state.source_lang)
+        _set_accessible(source_lang_edit, "Source language", "Use auto for automatic detection.")
         target_lang_edit = QLineEdit(state.target_lang)
+        _set_accessible(
+            target_lang_edit, "Target language", "Language code used for new translations."
+        )
         provider_order_edit = QLineEdit(state.provider_order)
+        _set_accessible(
+            provider_order_edit,
+            "Fallback provider order",
+            "Comma-separated provider fallback order. Use fake only for smoke mode.",
+        )
         readiness_label = QLabel("")
         readiness_detail_label = QLabel("")
         env_status_label = QLabel("")
         connection_result_label = QLabel("")
         connect_account_button = QPushButton("Connect account (future)")
         connect_account_button.setEnabled(False)
+        _set_accessible(
+            connect_account_button,
+            "Connect account future option",
+            "Disabled until secure account or cloud credential support is designed.",
+        )
         test_connection_button = QPushButton("Test Connection")
+        _set_accessible(
+            test_connection_button,
+            "Test provider connection",
+            "Save current settings and test the selected real provider configuration.",
+        )
         for label in (
             readiness_label,
             readiness_detail_label,
@@ -368,12 +390,18 @@ def launch_gui(
         libretranslate_group = QGroupBox("LibreTranslate")
         libretranslate_form = QFormLayout(libretranslate_group)
         libretranslate_base_url_edit = QLineEdit(state.libretranslate_base_url)
+        _set_accessible(libretranslate_base_url_edit, "LibreTranslate base URL")
         libretranslate_api_key_env_var_edit = QLineEdit(state.libretranslate_api_key_env_var)
+        _set_secret_env_accessible(
+            libretranslate_api_key_env_var_edit, "LibreTranslate API key env var"
+        )
         libretranslate_timeout_spin = _double_spin_box(
             state.libretranslate_timeout_seconds,
             QDoubleSpinBox,
         )
+        _set_accessible(libretranslate_timeout_spin, "LibreTranslate timeout seconds")
         libretranslate_retry_spin = _int_spin_box(state.libretranslate_retry_count, QSpinBox)
+        _set_accessible(libretranslate_retry_spin, "LibreTranslate retry count")
         libretranslate_form.addRow("Base URL", libretranslate_base_url_edit)
         libretranslate_form.addRow("API Key Env", libretranslate_api_key_env_var_edit)
         libretranslate_form.addRow("Timeout", libretranslate_timeout_spin)
@@ -382,10 +410,15 @@ def launch_gui(
         openai_group = QGroupBox("OpenAI")
         openai_form = QFormLayout(openai_group)
         openai_base_url_edit = QLineEdit(state.openai_base_url)
+        _set_accessible(openai_base_url_edit, "OpenAI base URL")
         openai_api_key_env_var_edit = QLineEdit(state.openai_api_key_env_var)
+        _set_secret_env_accessible(openai_api_key_env_var_edit, "OpenAI API key env var")
         openai_timeout_spin = _double_spin_box(state.openai_timeout_seconds, QDoubleSpinBox)
+        _set_accessible(openai_timeout_spin, "OpenAI timeout seconds")
         openai_retry_spin = _int_spin_box(state.openai_retry_count, QSpinBox)
+        _set_accessible(openai_retry_spin, "OpenAI retry count")
         openai_model_edit = QLineEdit(state.openai_model)
+        _set_accessible(openai_model_edit, "OpenAI model")
         openai_form.addRow("Base URL", openai_base_url_edit)
         openai_form.addRow("API Key Env", openai_api_key_env_var_edit)
         openai_form.addRow("Timeout", openai_timeout_spin)
@@ -395,10 +428,15 @@ def launch_gui(
         deepl_group = QGroupBox("DeepL")
         deepl_form = QFormLayout(deepl_group)
         deepl_base_url_edit = QLineEdit(state.deepl_base_url)
+        _set_accessible(deepl_base_url_edit, "DeepL base URL")
         deepl_api_key_env_var_edit = QLineEdit(state.deepl_api_key_env_var)
+        _set_secret_env_accessible(deepl_api_key_env_var_edit, "DeepL API key env var")
         deepl_timeout_spin = _double_spin_box(state.deepl_timeout_seconds, QDoubleSpinBox)
+        _set_accessible(deepl_timeout_spin, "DeepL timeout seconds")
         deepl_retry_spin = _int_spin_box(state.deepl_retry_count, QSpinBox)
+        _set_accessible(deepl_retry_spin, "DeepL retry count")
         deepl_model_type_edit = QLineEdit(state.deepl_model_type)
+        _set_accessible(deepl_model_type_edit, "DeepL model type")
         deepl_form.addRow("Base URL", deepl_base_url_edit)
         deepl_form.addRow("API Key Env", deepl_api_key_env_var_edit)
         deepl_form.addRow("Timeout", deepl_timeout_spin)
@@ -408,8 +446,10 @@ def launch_gui(
         history_group = QGroupBox("History")
         history_form = QFormLayout(history_group)
         history_enabled_checkbox = QCheckBox()
+        _set_accessible(history_enabled_checkbox, "Enable translation history")
         history_enabled_checkbox.setChecked(state.history_enabled)
         history_max_entries_spin = _int_spin_box(state.history_max_entries, QSpinBox)
+        _set_accessible(history_max_entries_spin, "Maximum history entries")
         history_form.addRow("Enabled", history_enabled_checkbox)
         history_form.addRow("Max Entries", history_max_entries_spin)
 
@@ -442,7 +482,35 @@ def launch_gui(
         buttons = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Save | QDialogButtonBox.StandardButton.Cancel
         )
+        save_button = buttons.button(QDialogButtonBox.StandardButton.Save)
+        cancel_button = buttons.button(QDialogButtonBox.StandardButton.Cancel)
+        if save_button is not None:
+            _set_accessible(save_button, "Save Settings")
+            save_button.setDefault(True)
+        if cancel_button is not None:
+            _set_accessible(cancel_button, "Cancel Settings")
         outer_layout.addWidget(buttons)
+
+        dialog.setTabOrder(provider_combo, provider_order_edit)
+        dialog.setTabOrder(provider_order_edit, source_lang_edit)
+        dialog.setTabOrder(source_lang_edit, target_lang_edit)
+        dialog.setTabOrder(target_lang_edit, test_connection_button)
+        dialog.setTabOrder(test_connection_button, libretranslate_base_url_edit)
+        dialog.setTabOrder(libretranslate_base_url_edit, libretranslate_api_key_env_var_edit)
+        dialog.setTabOrder(libretranslate_api_key_env_var_edit, libretranslate_timeout_spin)
+        dialog.setTabOrder(libretranslate_timeout_spin, libretranslate_retry_spin)
+        dialog.setTabOrder(libretranslate_retry_spin, openai_base_url_edit)
+        dialog.setTabOrder(openai_base_url_edit, openai_api_key_env_var_edit)
+        dialog.setTabOrder(openai_api_key_env_var_edit, openai_timeout_spin)
+        dialog.setTabOrder(openai_timeout_spin, openai_retry_spin)
+        dialog.setTabOrder(openai_retry_spin, openai_model_edit)
+        dialog.setTabOrder(openai_model_edit, deepl_base_url_edit)
+        dialog.setTabOrder(deepl_base_url_edit, deepl_api_key_env_var_edit)
+        dialog.setTabOrder(deepl_api_key_env_var_edit, deepl_timeout_spin)
+        dialog.setTabOrder(deepl_timeout_spin, deepl_retry_spin)
+        dialog.setTabOrder(deepl_retry_spin, deepl_model_type_edit)
+        dialog.setTabOrder(deepl_model_type_edit, history_enabled_checkbox)
+        dialog.setTabOrder(history_enabled_checkbox, history_max_entries_spin)
 
         def current_form_state() -> SettingsFormState:
             return SettingsFormState(
@@ -648,3 +716,17 @@ def _set_result_state_property(widget: Any, value: str) -> None:
     widget.setProperty("resultState", value)
     widget.style().unpolish(widget)
     widget.style().polish(widget)
+
+
+def _set_accessible(widget: Any, name: str, tooltip: str = "") -> None:
+    widget.setAccessibleName(name)
+    if tooltip:
+        widget.setToolTip(tooltip)
+
+
+def _set_secret_env_accessible(widget: Any, name: str) -> None:
+    _set_accessible(
+        widget,
+        name,
+        "Environment variable name only. Do not paste an API key value here.",
+    )

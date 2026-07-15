@@ -21,7 +21,7 @@ Estimated budget: 16 conversation rounds.
 - [x] Improve long text, OCR text, translation text, and small-window behavior.
 - [x] Refine Settings information architecture without moving provider rules
   into widgets.
-- [ ] Improve Settings keyboard navigation, focus order, labels, tooltips, and
+- [x] Improve Settings keyboard navigation, focus order, labels, tooltips, and
   accessibility metadata.
 - [ ] Polish History empty/list/long-entry states and keyboard operation.
 - [ ] Review region selector and screen-flow UI feedback without capture/OCR
