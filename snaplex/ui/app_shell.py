@@ -63,7 +63,7 @@ def launch_gui(
     history_service: HistoryService | None = None,
 ) -> int:
     try:
-        from PySide6.QtCore import QObject, Qt, Signal
+        from PySide6.QtCore import QObject, QSize, Qt, Signal
         from PySide6.QtGui import QFont
         from PySide6.QtWidgets import (
             QApplication,
@@ -84,6 +84,7 @@ def launch_gui(
             QPushButton,
             QScrollArea,
             QSpinBox,
+            QStyle,
             QTabWidget,
             QVBoxLayout,
             QWidget,
@@ -183,6 +184,19 @@ def launch_gui(
     retry_button.setObjectName("ResultAction")
     close_button = QPushButton("Close Result")
     close_button.setObjectName("ResultAction")
+    app_style = window.style()
+    button_icons = (
+        (translate_button, QStyle.StandardPixmap.SP_DialogApplyButton),
+        (translate_screen_button, QStyle.StandardPixmap.SP_DesktopIcon),
+        (settings_button, QStyle.StandardPixmap.SP_FileDialogDetailedView),
+        (history_button, QStyle.StandardPixmap.SP_FileDialogListView),
+        (copy_button, QStyle.StandardPixmap.SP_DialogSaveButton),
+        (retry_button, QStyle.StandardPixmap.SP_BrowserReload),
+        (close_button, QStyle.StandardPixmap.SP_DialogCloseButton),
+    )
+    for button, icon_name in button_icons:
+        button.setIcon(app_style.standardIcon(icon_name))
+        button.setIconSize(QSize(16, 16))
     translate_button.setAccessibleName("Translate clipboard text")
     translate_button.setToolTip("Translate the current clipboard text.")
     translate_screen_button.setAccessibleName("Translate selected screen region")
@@ -590,12 +604,26 @@ def launch_gui(
         history_list = QListWidget()
         _set_accessible(history_list, "Translation history list")
         copy_history_button = QPushButton("Copy")
+        copy_history_button.setIcon(
+            app_style.standardIcon(QStyle.StandardPixmap.SP_DialogSaveButton)
+        )
+        copy_history_button.setIconSize(QSize(16, 16))
         _set_accessible(copy_history_button, "Copy selected history entry")
         delete_history_button = QPushButton("Delete")
+        delete_history_button.setIcon(
+            app_style.standardIcon(QStyle.StandardPixmap.SP_DialogCloseButton)
+        )
+        delete_history_button.setIconSize(QSize(16, 16))
         _set_accessible(delete_history_button, "Delete selected history entry")
         clear_history_button = QPushButton("Clear")
+        clear_history_button.setIcon(app_style.standardIcon(QStyle.StandardPixmap.SP_BrowserReload))
+        clear_history_button.setIconSize(QSize(16, 16))
         _set_accessible(clear_history_button, "Clear translation history")
         close_history_button = QPushButton("Close")
+        close_history_button.setIcon(
+            app_style.standardIcon(QStyle.StandardPixmap.SP_DialogCloseButton)
+        )
+        close_history_button.setIconSize(QSize(16, 16))
         _set_accessible(close_history_button, "Close History")
         button_row = QHBoxLayout()
         button_row.addWidget(copy_history_button)
