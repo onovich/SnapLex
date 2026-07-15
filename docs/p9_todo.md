@@ -24,7 +24,7 @@ Estimated budget: 16 conversation rounds.
 - [x] Improve Settings keyboard navigation, focus order, labels, tooltips, and
   accessibility metadata.
 - [x] Polish History empty/list/long-entry states and keyboard operation.
-- [ ] Review region selector and screen-flow UI feedback without capture/OCR
+- [x] Review region selector and screen-flow UI feedback without capture/OCR
   rewrites.
 - [ ] Add screenshot-backed offscreen GUI smoke with uncommitted local artifacts.
 - [ ] Record visual smoke evidence and update Windows smoke notes.

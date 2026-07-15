@@ -16,6 +16,7 @@ def test_region_selection_presenter_confirms_reverse_drag() -> None:
     assert state.region == ScreenRegion(left=40, top=20, width=80, height=60)
     assert state.cancelled is False
     assert state.error_message == ""
+    assert state.status_text == "Region selected."
 
 
 def test_region_selection_presenter_rejects_empty_selection() -> None:
@@ -26,6 +27,7 @@ def test_region_selection_presenter_rejects_empty_selection() -> None:
 
     assert state.region is None
     assert state.error_message == "Select a non-empty screen region."
+    assert state.status_text == "Selection needs an area."
 
 
 def test_region_selection_presenter_can_cancel() -> None:
@@ -36,6 +38,7 @@ def test_region_selection_presenter_can_cancel() -> None:
 
     assert state.cancelled is True
     assert state.region is None
+    assert state.status_text == "Screen selection cancelled."
 
 
 def test_fixed_region_selector_returns_region() -> None:

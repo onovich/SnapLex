@@ -17,6 +17,7 @@ class RegionSelectionState:
     region: ScreenRegion | None = None
     cancelled: bool = False
     error_message: str = ""
+    status_text: str = "Ready to select a screen region."
 
 
 class RegionSelectionPresenter:
@@ -33,6 +34,7 @@ class RegionSelectionPresenter:
             start_y=y,
             current_x=x,
             current_y=y,
+            status_text="Drag to select a screen region.",
         )
         return self._state
 
@@ -42,25 +44,38 @@ class RegionSelectionPresenter:
             start_y=self._state.start_y,
             current_x=x,
             current_y=y,
+            status_text="Release to translate the selected region.",
         )
         return self._state
 
     def confirm(self, x: int, y: int) -> RegionSelectionState:
         if self._state.start_x is None or self._state.start_y is None:
-            self._state = RegionSelectionState(error_message="Start selecting a region first.")
+            self._state = RegionSelectionState(
+                error_message="Start selecting a region first.",
+                status_text="Selection not started.",
+            )
             return self._state
 
         try:
             region = ScreenRegion.from_points(self._state.start_x, self._state.start_y, x, y)
         except ValueError:
-            self._state = RegionSelectionState(error_message="Select a non-empty screen region.")
+            self._state = RegionSelectionState(
+                error_message="Select a non-empty screen region.",
+                status_text="Selection needs an area.",
+            )
             return self._state
 
-        self._state = RegionSelectionState(region=region)
+        self._state = RegionSelectionState(
+            region=region,
+            status_text="Region selected.",
+        )
         return self._state
 
     def cancel(self) -> RegionSelectionState:
-        self._state = RegionSelectionState(cancelled=True)
+        self._state = RegionSelectionState(
+            cancelled=True,
+            status_text="Screen selection cancelled.",
+        )
         return self._state
 
 
@@ -103,6 +118,9 @@ class QtRegionSelector:
                 super().__init__()
                 self.selected_region: ScreenRegion | None = None
                 self._rubber_band = QRubberBand(QRubberBand.Shape.Rectangle, self)
+                self._rubber_band.setStyleSheet(
+                    "QRubberBand { border: 2px solid #1f6feb; background: rgba(31, 111, 235, 36); }"
+                )
 
             def mousePressEvent(self, event: Any) -> None:
                 point = event.position().toPoint()
@@ -135,10 +153,15 @@ class QtRegionSelector:
 
         overlay = SelectionOverlay()
         overlay.setWindowTitle("SnapLex Region Selection")
+        overlay.setAccessibleName("Screen region selector")
+        overlay.setToolTip("Drag to select a screen region. Press Esc to cancel.")
         overlay.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
         overlay.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint, True)
         overlay.setWindowOpacity(0.25)
         overlay.setCursor(Qt.CursorShape.CrossCursor)
+        overlay.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         overlay.showFullScreen()
+        overlay.activateWindow()
+        overlay.setFocus()
         loop.exec()
         return overlay.selected_region
