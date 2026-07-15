@@ -4,7 +4,7 @@ P10 goal: define and implement the first secure credential strategy for
 SnapLex real-provider setup while preserving env-var users, provider boundaries,
 deterministic tests, and no-secret repository hygiene.
 
-Status: ready for execution.
+Status: in execution.
 
 Executable guide: `docs/p10_secure_credential_account_strategy_goal_guide.md`
 
@@ -12,8 +12,8 @@ Estimated budget: 16 conversation rounds.
 
 ## Tasks
 
-- [ ] Revalidate the accepted P9 baseline.
-- [ ] Produce credential threat model and strategy decisions.
+- [x] Revalidate the accepted P9 baseline.
+- [x] Produce credential threat model and strategy decisions.
 - [ ] Add credential reference/status models and credential service/store
   boundaries.
 - [ ] Preserve existing environment-variable provider credentials.
