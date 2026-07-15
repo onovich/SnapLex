@@ -176,6 +176,24 @@ def build_app_stylesheet() -> str:
             border: 1px solid {BORDER.value};
             border-radius: {BORDER_RADIUS}px;
         }}
+        QTabWidget::pane {{
+            border: 1px solid {BORDER.value};
+            border-radius: {BORDER_RADIUS}px;
+            background: {SURFACE.value};
+        }}
+        QTabBar::tab {{
+            background: {DISABLED_BG.value};
+            border: 1px solid {BORDER.value};
+            border-bottom: none;
+            border-top-left-radius: {BORDER_RADIUS}px;
+            border-top-right-radius: {BORDER_RADIUS}px;
+            padding: 7px 12px;
+        }}
+        QTabBar::tab:selected {{
+            background: {SURFACE.value};
+            color: {TEXT_STRONG.value};
+            font-weight: 600;
+        }}
     """
 
 

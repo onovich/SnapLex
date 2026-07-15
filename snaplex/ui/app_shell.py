@@ -83,6 +83,7 @@ def launch_gui(
             QPushButton,
             QScrollArea,
             QSpinBox,
+            QTabWidget,
             QVBoxLayout,
             QWidget,
         )
@@ -322,8 +323,10 @@ def launch_gui(
         scroll_area.setWidgetResizable(True)
         scroll_content = QWidget()
         section_layout = QVBoxLayout(scroll_content)
+        settings_tabs = QTabWidget()
+        settings_tabs.setAccessibleName("Settings sections")
 
-        provider_group = QGroupBox("Translation Provider")
+        provider_group = QGroupBox("Provider Setup")
         provider_form = QFormLayout(provider_group)
         provider_combo = QComboBox()
         provider_combo.addItems(list(state.provider_choices))
@@ -350,14 +353,17 @@ def launch_gui(
 
         provider_form.addRow("Provider", provider_combo)
         provider_form.addRow("Fallback Order", provider_order_edit)
-        provider_form.addRow("Source", source_lang_edit)
-        provider_form.addRow("Target", target_lang_edit)
         provider_form.addRow("Readiness", readiness_label)
         provider_form.addRow("Details", readiness_detail_label)
         provider_form.addRow("Env Var", env_status_label)
         provider_form.addRow(connect_account_button)
         provider_form.addRow(test_connection_button)
         provider_form.addRow("Test Result", connection_result_label)
+
+        language_group = QGroupBox("Language Defaults")
+        language_form = QFormLayout(language_group)
+        language_form.addRow("Source", source_lang_edit)
+        language_form.addRow("Target", target_lang_edit)
 
         libretranslate_group = QGroupBox("LibreTranslate")
         libretranslate_form = QFormLayout(libretranslate_group)
@@ -407,11 +413,28 @@ def launch_gui(
         history_form.addRow("Enabled", history_enabled_checkbox)
         history_form.addRow("Max Entries", history_max_entries_spin)
 
-        section_layout.addWidget(provider_group)
-        section_layout.addWidget(libretranslate_group)
-        section_layout.addWidget(openai_group)
-        section_layout.addWidget(deepl_group)
-        section_layout.addWidget(history_group)
+        setup_tab = QWidget()
+        setup_layout = QVBoxLayout(setup_tab)
+        setup_layout.addWidget(provider_group)
+        setup_layout.addWidget(language_group)
+        setup_layout.addStretch(1)
+
+        details_tab = QWidget()
+        details_layout = QVBoxLayout(details_tab)
+        details_layout.addWidget(libretranslate_group)
+        details_layout.addWidget(openai_group)
+        details_layout.addWidget(deepl_group)
+        details_layout.addStretch(1)
+
+        history_tab = QWidget()
+        history_layout = QVBoxLayout(history_tab)
+        history_layout.addWidget(history_group)
+        history_layout.addStretch(1)
+
+        settings_tabs.addTab(setup_tab, "Setup")
+        settings_tabs.addTab(details_tab, "Provider Details")
+        settings_tabs.addTab(history_tab, "History")
+        section_layout.addWidget(settings_tabs)
         section_layout.addStretch(1)
         scroll_area.setWidget(scroll_content)
         outer_layout.addWidget(scroll_area)
