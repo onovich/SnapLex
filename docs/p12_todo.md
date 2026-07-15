@@ -14,7 +14,7 @@ Estimated budget: 12 conversation rounds.
 ## Tasks
 
 - [x] Revalidate the accepted P11 baseline.
-- [ ] Produce private-trial release notes for testers.
+- [x] Produce private-trial release notes for testers.
 - [ ] Produce feedback intake template and triage taxonomy.
 - [ ] Define first private-trial pass/fail criteria.
 - [ ] Run or document manual assistive-technology, DPI, multi-monitor, visible
