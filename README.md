@@ -62,6 +62,7 @@ The current project source of truth lives in:
 - `docs/p10_todo.md`
 - `docs/p10_credential_strategy_decisions.md`
 - `docs/p10_account_strategy.md`
+- `docs/p10_smoke_evidence.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -421,7 +422,8 @@ remain out of runtime scope for P10.
 
 See `docs/p10_secure_credential_account_strategy_goal_guide.md`,
 `docs/p10_credential_strategy_decisions.md`,
-`docs/p10_account_strategy.md`, and `docs/p10_todo.md`.
+`docs/p10_account_strategy.md`, `docs/p10_smoke_evidence.md`, and
+`docs/p10_todo.md`.
 
 ## Current Boundaries
 

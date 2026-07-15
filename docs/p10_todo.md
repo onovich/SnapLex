@@ -27,7 +27,7 @@ Estimated budget: 16 conversation rounds.
   boundary.
 - [x] Document env var, OS keyring, SnapLex Cloud/token broker, and provider
   account/OAuth tradeoffs.
-- [ ] Preserve P9 GUI smoke, P8 provider smoke, no-GUI bootstrap, and package
+- [x] Preserve P9 GUI smoke, P8 provider smoke, no-GUI bootstrap, and package
   dry-run.
 - [ ] Produce P10 final validation report.
 - [ ] Produce P10 to P11 handoff.

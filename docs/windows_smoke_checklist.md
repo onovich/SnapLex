@@ -21,7 +21,8 @@ P9 UI/UX polish planning and executor evidence are recorded in
 P10 secure credential/account strategy planning is recorded in
 `docs/p10_secure_credential_account_strategy_goal_guide.md`,
 `docs/p10_credential_strategy_decisions.md`,
-`docs/p10_account_strategy.md`, and `docs/p10_todo.md`.
+`docs/p10_account_strategy.md`, `docs/p10_smoke_evidence.md`, and
+`docs/p10_todo.md`.
 
 ## Automated Precheck
 
