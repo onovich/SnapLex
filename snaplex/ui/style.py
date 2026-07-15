@@ -85,6 +85,14 @@ def build_app_stylesheet() -> str:
         QLabel#StatusText {{
             color: {TEXT_MUTED.value};
         }}
+        QLabel#StatusPill {{
+            background: {SURFACE.value};
+            border: 1px solid {BORDER.value};
+            border-radius: 12px;
+            color: {TEXT_MUTED.value};
+            padding: 4px 10px;
+            min-height: 24px;
+        }}
         QGroupBox {{
             border: 1px solid {BORDER.value};
             border-radius: 8px;
@@ -107,6 +115,12 @@ def build_app_stylesheet() -> str:
             border-color: {PRIMARY.value};
             color: {PRIMARY_TEXT.value};
             font-weight: 600;
+        }}
+        QPushButton#SecondaryAction {{
+            background: {SUBTLE_SURFACE.value};
+        }}
+        QPushButton#ResultAction {{
+            min-width: 96px;
         }}
         QPushButton:disabled {{
             color: {DISABLED_TEXT.value};

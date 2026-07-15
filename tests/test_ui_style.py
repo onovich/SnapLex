@@ -21,6 +21,8 @@ def test_stylesheet_names_font_focus_and_primary_action() -> None:
 
     assert SNAPLEX_FONT_FAMILY in stylesheet
     assert "QPushButton#PrimaryAction" in stylesheet
+    assert "QPushButton#SecondaryAction" in stylesheet
+    assert "QLabel#StatusPill" in stylesheet
     assert "QPushButton:focus" in stylesheet
     assert "QLineEdit:focus" in stylesheet
 
