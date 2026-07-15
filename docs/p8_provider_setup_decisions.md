@@ -182,3 +182,21 @@ Round 5 makes fake mode visible in result state and docs:
   `SmokeTrial.cmd` positioned as package/UI smoke only.
 - `.env.example`, provider docs, and the Windows smoke checklist now repeat the
   no-secret, fake-vs-real distinction.
+
+## Round 6 Main Shell Visual Foundation
+
+Round 6 applies the first Apple HIG-inspired visual foundation to the main
+shell and result view:
+
+- The first screen remains the usable translation tool, not a landing page.
+- Primary clipboard/screen actions, utility actions, result content, result
+  actions, and status are visually separated.
+- Source and translated text use selectable, readable result areas.
+- Provider identity, fake-mode warning, and errors have separate visual states.
+- Styling uses restrained neutral surfaces with blue primary action, amber fake
+  warning, and red error treatment.
+- No new animation system, decorative marketing layout, or broad design-system
+  rebuild was introduced.
+
+Offscreen GUI smoke was run by launching the PySide6 shell with
+`QT_QPA_PLATFORM=offscreen` and a timer-driven app quit.

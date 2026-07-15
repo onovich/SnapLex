@@ -21,7 +21,7 @@ Executable guide: `docs/p8_provider_setup_real_translation_goal_guide.md`
 - [x] Make fake provider mode visibly labeled as fake smoke/dev mode.
 - [x] Verify real trial launch paths do not silently fall back to fake.
 - [x] Update provider setup docs, trial docs, and smoke checklist.
-- [ ] Apply Apple HIG-inspired visual foundation to the main shell, settings,
+- [x] Apply Apple HIG-inspired visual foundation to the main shell, settings,
   and result view.
 - [ ] Produce P8 final validation report.
 - [ ] Produce P8 to P9 handoff.

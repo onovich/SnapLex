@@ -127,15 +127,99 @@ def launch_gui(
     window.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint, True)
 
     central = QWidget()
+    central.setObjectName("SnapLexRoot")
+    central.setStyleSheet(
+        """
+        QWidget#SnapLexRoot {
+            background: #f7f8f6;
+            color: #1f2933;
+            font-size: 13px;
+        }
+        QLabel#AppTitle {
+            font-size: 22px;
+            font-weight: 700;
+            color: #101828;
+        }
+        QLabel#AppSubtitle, QLabel#SectionLabel {
+            color: #5f6b7a;
+        }
+        QLabel#ResultText {
+            background: #ffffff;
+            border: 1px solid #d8dee6;
+            border-radius: 6px;
+            padding: 8px;
+            min-height: 36px;
+        }
+        QLabel#ProviderText {
+            color: #344054;
+            font-weight: 600;
+        }
+        QLabel#ProviderNotice {
+            background: #fff4d6;
+            border: 1px solid #f0c36a;
+            border-radius: 6px;
+            color: #6b4b00;
+            padding: 6px;
+        }
+        QLabel#ErrorText {
+            color: #b42318;
+            font-weight: 600;
+        }
+        QLabel#StatusText {
+            color: #5f6b7a;
+        }
+        QGroupBox {
+            border: 1px solid #d8dee6;
+            border-radius: 8px;
+            margin-top: 10px;
+            padding: 10px 8px 8px 8px;
+            background: #fbfcfb;
+            font-weight: 600;
+        }
+        QPushButton {
+            min-height: 30px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #c7d0da;
+            background: #ffffff;
+        }
+        QPushButton#PrimaryAction {
+            background: #1f6feb;
+            border-color: #1f6feb;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        QPushButton:disabled {
+            color: #98a2b3;
+            background: #eef1f4;
+        }
+        """
+    )
     layout = QVBoxLayout(central)
-    layout.addWidget(QLabel("SnapLex"))
+    layout.setContentsMargins(18, 16, 18, 16)
+    layout.setSpacing(10)
+    title_label = QLabel("SnapLex")
+    title_label.setObjectName("AppTitle")
+    subtitle_label = QLabel("Translate clipboard text or a selected screen region.")
+    subtitle_label.setObjectName("AppSubtitle")
     status_label = QLabel(presenter.state.status_text)
+    status_label.setObjectName("StatusText")
     source_label = QLabel("")
+    source_label.setObjectName("ResultText")
     result_label = QLabel("")
+    result_label.setObjectName("ResultText")
     provider_label = QLabel("")
+    provider_label.setObjectName("ProviderText")
     provider_notice_label = QLabel("")
+    provider_notice_label.setObjectName("ProviderNotice")
     error_label = QLabel("")
+    error_label.setObjectName("ErrorText")
+    source_caption_label = QLabel("Source")
+    source_caption_label.setObjectName("SectionLabel")
+    result_caption_label = QLabel("Translation")
+    result_caption_label.setObjectName("SectionLabel")
     translate_button = QPushButton("Translate Clipboard")
+    translate_button.setObjectName("PrimaryAction")
     translate_screen_button = QPushButton("Translate Screen")
     settings_button = QPushButton("Settings")
     history_button = QPushButton("History")
@@ -151,6 +235,8 @@ def launch_gui(
         error_label,
     ):
         label.setWordWrap(True)
+    for label in (source_label, result_label, error_label):
+        label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
 
     def refresh_view() -> None:
         state = active_presenter["value"].state
@@ -487,23 +573,40 @@ def launch_gui(
     retry_button.clicked.connect(handle_retry)
     copy_button.clicked.connect(handle_copy)
     close_button.clicked.connect(handle_close)
-    layout.addWidget(translate_button)
-    layout.addWidget(translate_screen_button)
-    layout.addWidget(settings_button)
-    layout.addWidget(history_button)
-    layout.addWidget(source_label)
-    layout.addWidget(result_label)
-    layout.addWidget(provider_label)
-    layout.addWidget(provider_notice_label)
-    layout.addWidget(error_label)
-    layout.addWidget(copy_button)
-    layout.addWidget(retry_button)
-    layout.addWidget(close_button)
+    primary_actions = QHBoxLayout()
+    primary_actions.addWidget(translate_button)
+    primary_actions.addWidget(translate_screen_button)
+    utility_actions = QHBoxLayout()
+    utility_actions.addWidget(settings_button)
+    utility_actions.addWidget(history_button)
+
+    result_group = QGroupBox("Result")
+    result_layout = QVBoxLayout(result_group)
+    result_layout.setSpacing(6)
+    result_layout.addWidget(source_caption_label)
+    result_layout.addWidget(source_label)
+    result_layout.addWidget(result_caption_label)
+    result_layout.addWidget(result_label)
+    result_layout.addWidget(provider_label)
+    result_layout.addWidget(provider_notice_label)
+    result_layout.addWidget(error_label)
+
+    result_actions = QHBoxLayout()
+    result_actions.addWidget(copy_button)
+    result_actions.addWidget(retry_button)
+    result_actions.addWidget(close_button)
+    result_layout.addLayout(result_actions)
+
+    layout.addWidget(title_label)
+    layout.addWidget(subtitle_label)
+    layout.addLayout(primary_actions)
+    layout.addLayout(utility_actions)
+    layout.addWidget(result_group)
     layout.addWidget(status_label)
     refresh_view()
 
     window.setCentralWidget(central)
-    window.resize(360, 240)
+    window.resize(460, 420)
     window.show()
 
     return app.exec()
