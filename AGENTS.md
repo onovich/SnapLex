@@ -50,5 +50,7 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P7 to P8 handoff: `docs/p7_to_p8_handoff.md`.
 - Latest accepted P8 phase report: `docs/p8_final_validation_report.md`.
 - P8 to P9 handoff: `docs/p8_to_p9_handoff.md`.
-- Current post-MVP execution guide: `docs/p9_apple_inspired_ui_ux_goal_guide.md`.
+- P9 executor-complete guide: `docs/p9_apple_inspired_ui_ux_goal_guide.md`.
+- P9 executor-complete report: `docs/p9_final_validation_report.md`.
+- P9 to P10 handoff: `docs/p9_to_p10_handoff.md`.
 - Current post-MVP TODO: `docs/p9_todo.md`.

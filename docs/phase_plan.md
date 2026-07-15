@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P8 planner-accepted planning document
+Status: P9 executor-complete planning document, pending planner acceptance
 
 ## 0. Round Estimate Rules
 
@@ -361,10 +361,13 @@ Execute P0 through P3 first before broadening provider scope. This gives the pro
 
 Current accepted phase: P8 - Provider Setup And Real Translation UX.
 
+Current executor-complete phase pending planner acceptance: P9 - Apple-Inspired
+UI/UX Polish.
+
 P0-P7 status: complete.
 
-Selected next step: execute P9 Apple-Inspired UI/UX Polish from
-`docs/p9_apple_inspired_ui_ux_goal_guide.md`.
+Selected next step: planner validation of P9 using
+`docs/p9_final_validation_report.md` and `docs/p9_to_p10_handoff.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -483,3 +486,15 @@ Round split:
 - Round 12: Windows visual QA and docs.
 - Rounds 13-15: buffer hardening.
 - Round 16: final validation, report, and P10 handoff.
+
+Executor completion artifacts:
+
+- `docs/p9_ui_audit.md`
+- `docs/p9_visual_smoke_evidence.md`
+- `docs/p9_hardening_notes.md`
+- `docs/p9_final_validation_report.md`
+- `docs/p9_to_p10_handoff.md`
+
+Planner acceptance:
+
+- Pending P9 planner validation.

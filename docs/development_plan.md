@@ -213,21 +213,25 @@ The repository now has planner-accepted P8 provider setup UX:
 - `docs/p8_final_validation_report.md` and `docs/p8_to_p9_handoff.md` provide
   the P8 closure package.
 
-## Selected P9 Apple-Inspired UI/UX Polish
+## P9 Apple-Inspired UI/UX Polish Completion
 
-P9 is the selected next post-MVP implementation goal. It should polish the
-existing PySide6 desktop experience without adding new product capabilities:
+P9 executor work polishes the existing PySide6 desktop experience without
+adding new product capabilities:
 
 - Main shell and result-state hierarchy.
 - Settings provider setup layout, focus order, and accessibility labels.
 - History empty/list/long-entry states.
 - Keyboard navigation and visible focus behavior.
 - Long text and small-window behavior.
+- Region selector status feedback and accessibility metadata.
 - Screenshot-backed offscreen GUI smoke with uncommitted local artifacts.
 
-The executable guide is `docs/p9_apple_inspired_ui_ux_goal_guide.md`.
+The executable guide is `docs/p9_apple_inspired_ui_ux_goal_guide.md`. The P9
+closure package is `docs/p9_final_validation_report.md` and
+`docs/p9_to_p10_handoff.md`.
 
-Recommended next goal after acceptance: P9 Apple-Inspired UI/UX Polish.
+Recommended next goal after P9 acceptance: P10 Secure Credential/Account
+Strategy, unless localization is more urgent from trial feedback.
 
 ## MVP Goals
 
@@ -309,8 +313,8 @@ Summary:
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
 Including the selected P8 implementation goal, the current post-MVP plan is 61
-rounds. Including the selected P9 implementation goal, the current post-MVP plan
-is 77 rounds.
+rounds. Including the executor-complete P9 implementation goal, the current
+post-MVP plan is 77 rounds.
 
 ## Validation Plan
 

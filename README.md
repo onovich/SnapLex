@@ -56,6 +56,8 @@ The current project source of truth lives in:
 - `docs/p9_ui_audit.md`
 - `docs/p9_visual_smoke_evidence.md`
 - `docs/p9_hardening_notes.md`
+- `docs/p9_final_validation_report.md`
+- `docs/p9_to_p10_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -95,8 +97,9 @@ Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
 And Real Translation UX is planner-accepted; use
 `docs/p8_final_validation_report.md` and `docs/p8_to_p9_handoff.md` for the P8
-closure package. The selected next goal is P9 Apple-Inspired UI/UX Polish; use
-`docs/p9_apple_inspired_ui_ux_goal_guide.md` for execution.
+closure package. P9 Apple-Inspired UI/UX Polish is executor-complete and ready
+for planner validation; use `docs/p9_final_validation_report.md` and
+`docs/p9_to_p10_handoff.md` for the P9 closure package.
 
 ## Setup
 
@@ -376,11 +379,21 @@ and `docs/p8_to_p9_handoff.md`.
 
 ## P9 Apple-Inspired UI/UX Polish
 
-P9 is the selected next post-MVP goal. It should refine the PySide6 desktop
-experience for trial use: visual hierarchy, Settings and History polish,
-keyboard/focus behavior, accessibility labels, long-text and small-window
-behavior, and screenshot-backed GUI smoke. See
-`docs/p9_apple_inspired_ui_ux_goal_guide.md`.
+P9 executor work refines the PySide6 desktop experience for trial use:
+
+- shared visual tokens for spacing, typography, semantic colors, focus, and
+  stable controls;
+- clearer main-shell action hierarchy, result states, provider identity, and
+  fake-mode warnings;
+- scrollable/selectable long text regions for OCR/source and translation text;
+- tabbed Settings information architecture with explicit labels, tooltips, and
+  keyboard flow;
+- polished History empty/list/long-entry states;
+- region selector status feedback and accessibility metadata;
+- screenshot-backed offscreen GUI smoke in `scripts/p9_gui_smoke.py`.
+
+See `docs/p9_final_validation_report.md`, `docs/p9_visual_smoke_evidence.md`,
+and `docs/p9_to_p10_handoff.md`.
 
 ## Current Boundaries
 

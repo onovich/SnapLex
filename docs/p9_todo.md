@@ -4,7 +4,7 @@ P9 goal: polish the SnapLex PySide6 desktop experience using Apple
 HIG-inspired clarity, hierarchy, accessibility, keyboard quality, and
 screenshot-backed GUI smoke, while preserving P8 provider/setup boundaries.
 
-Status: ready for execution.
+Status: executor-complete; ready for planner validation.
 
 Executable guide: `docs/p9_apple_inspired_ui_ux_goal_guide.md`
 
@@ -30,8 +30,8 @@ Estimated budget: 16 conversation rounds.
 - [x] Add screenshot-backed offscreen GUI smoke with uncommitted local artifacts.
 - [x] Record visual smoke evidence and update Windows smoke notes.
 - [x] Preserve P8 real/fake trial guardrails and no-secret boundaries.
-- [ ] Produce P9 final validation report.
-- [ ] Produce P9 to P10 handoff.
+- [x] Produce P9 final validation report.
+- [x] Produce P9 to P10 handoff.
 
 ## Deferred Outside P9
 
