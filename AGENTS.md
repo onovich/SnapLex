@@ -57,5 +57,7 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest accepted P10 report: `docs/p10_final_validation_report.md`.
 - P10 to P11 handoff: `docs/p10_to_p11_handoff.md`.
 - P10 credential/account strategy docs: `docs/p10_credential_strategy_decisions.md`, `docs/p10_secure_storage_notes.md`, `docs/p10_account_strategy.md`.
-- Current post-MVP execution guide: `docs/p11_trial_release_hardening_goal_guide.md`.
-- Current post-MVP TODO: `docs/p11_todo.md`.
+- Latest executor-complete P11 guide: `docs/p11_trial_release_hardening_goal_guide.md`.
+- Latest executor-complete P11 report: `docs/p11_final_validation_report.md`.
+- P11 to P12 handoff: `docs/p11_to_p12_handoff.md`.
+- Latest post-MVP TODO: `docs/p11_todo.md`.

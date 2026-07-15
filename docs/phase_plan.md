@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P10 planner-accepted planning document with selected P11 execution goal
+Status: P11 executor-complete planning document; pending planner/checker acceptance
 
 ## 0. Round Estimate Rules
 
@@ -364,11 +364,12 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
 Current accepted phase: P10 - Secure Credential And Account Strategy.
+Latest executor-complete phase pending check: P11 - Trial Release Hardening.
 
 P0-P7 status: complete.
 
-Selected next step: execute P11 using
-`docs/p11_trial_release_hardening_goal_guide.md` and `docs/p11_todo.md`.
+Selected next step: review P11 using `docs/p11_final_validation_report.md` and
+`docs/p11_to_p12_handoff.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -605,8 +606,13 @@ Scope:
 Deliverables:
 
 - `docs/p11_visible_windows_smoke_evidence.md`
+- `docs/p11_keyring_smoke_evidence.md`
 - `docs/p11_keyring_packaging_decision.md`
+- `docs/p11_packaged_trial_evidence.md`
 - `docs/p11_provider_onboarding_notes.md`
+- `docs/p11_key_rotation_least_privilege.md`
+- `docs/p11_private_trial_release_checklist.md`
+- `docs/p11_boundary_scan_evidence.md`
 - P11 final validation report and P11 to P12 handoff.
 
 Validation:
@@ -632,3 +638,20 @@ Round split:
 - Round 8: release checklist consolidation.
 - Rounds 9-11: buffer hardening.
 - Round 12: final validation, report, and P12 handoff.
+
+Executor completion artifacts:
+
+- `docs/p11_visible_windows_smoke_evidence.md`
+- `docs/p11_keyring_smoke_evidence.md`
+- `docs/p11_keyring_packaging_decision.md`
+- `docs/p11_packaged_trial_evidence.md`
+- `docs/p11_provider_onboarding_notes.md`
+- `docs/p11_key_rotation_least_privilege.md`
+- `docs/p11_private_trial_release_checklist.md`
+- `docs/p11_boundary_scan_evidence.md`
+- `docs/p11_final_validation_report.md`
+- `docs/p11_to_p12_handoff.md`
+
+Executor status:
+
+- P11 executor-complete on 2026-07-16; pending planner/checker acceptance.

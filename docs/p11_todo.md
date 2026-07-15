@@ -4,7 +4,7 @@ P11 goal: harden SnapLex for private Windows trial release by validating visible
 desktop behavior, manual credential/keyring behavior, packaged trial behavior,
 and provider onboarding clarity while preserving P10 credential boundaries.
 
-Status: ready for execution.
+Status: executor-complete; ready for planner/checker review.
 
 Executable guide: `docs/p11_trial_release_hardening_goal_guide.md`
 
@@ -23,8 +23,8 @@ Estimated budget: 12 conversation rounds.
 - [x] Add key rotation and least-privilege notes.
 - [x] Consolidate release smoke and private trial checklist docs.
 - [x] Preserve P10 no-secret boundaries and deterministic no-network tests.
-- [ ] Produce P11 final validation report.
-- [ ] Produce P11 to P12 handoff.
+- [x] Produce P11 final validation report.
+- [x] Produce P11 to P12 handoff.
 
 ## Deferred Outside P11
 

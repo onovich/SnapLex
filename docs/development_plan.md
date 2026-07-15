@@ -247,10 +247,10 @@ Cloud.
 The closure package is `docs/p10_final_validation_report.md` and
 `docs/p10_to_p11_handoff.md`.
 
-## Selected P11 Trial Release Hardening
+## P11 Trial Release Hardening Completion
 
-P11 is the selected next post-MVP implementation goal. It is release hardening,
-not feature expansion:
+P11 executor work is complete and ready for planner/checker review. It is
+release hardening, not feature expansion:
 
 - visible Windows smoke for shell, Settings, History, focus, long text, fake
   warnings, and real/fake trial launch behavior;
@@ -263,8 +263,13 @@ not feature expansion:
 - preservation of P10 credential boundaries, no-secret hygiene, deterministic
   fake smoke paths, and no-network automated tests.
 
-The executable guide is `docs/p11_trial_release_hardening_goal_guide.md`; the
-TODO is `docs/p11_todo.md`.
+P11 adds visible Windows GUI smoke, keyring blocker evidence, packaged
+trial evidence, provider onboarding notes, key rotation guidance, a private
+trial checklist, and a final boundary scan while preserving P10 credential
+boundaries.
+
+The closure package is `docs/p11_final_validation_report.md` and
+`docs/p11_to_p12_handoff.md`.
 
 ## MVP Goals
 
@@ -350,8 +355,8 @@ Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
 Including the selected P8 implementation goal, the post-MVP plan became 61
 rounds. Including the accepted P9 implementation goal, the post-MVP plan became
 77 rounds. Including accepted P10 credential/account strategy, the post-MVP
-plan became 93 rounds. Including selected P11 trial release hardening, the
-current post-MVP plan is 105 rounds.
+plan became 93 rounds. Including executor-complete P11 trial release hardening,
+the current post-MVP plan is 105 rounds.
 
 ## Validation Plan
 
