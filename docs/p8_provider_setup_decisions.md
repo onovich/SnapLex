@@ -200,3 +200,17 @@ shell and result view:
 
 Offscreen GUI smoke was run by launching the PySide6 shell with
 `QT_QPA_PLATFORM=offscreen` and a timer-driven app quit.
+
+## Round 7 Hardening
+
+Round 7 preserves the package/no-GUI baseline and records credential
+limitations:
+
+- `SmokeTrial.cmd` passed source version/no-GUI, package dry-run, and existing
+  packaged executable fake workflow smoke.
+- `StartTrial.cmd --no-gui` rejected missing real-provider configuration as
+  expected.
+- `StartFakeTrial.cmd --no-gui` passed with fake smoke mode.
+- Boundary scan was tightened to reject OpenAI-like test key placeholders.
+- `docs/p8_real_provider_trial_notes.md` records real trial paths, fake smoke
+  paths, manual smoke steps, and future secure credential options.

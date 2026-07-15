@@ -34,13 +34,13 @@ def test_openai_provider_setup_reports_ready_without_exposing_secret_value() -> 
     state = describe_provider_setup(
         "openai",
         ProviderRuntimeConfig(api_key_env_var="SNAPLEX_OPENAI_API_KEY"),
-        environ={"SNAPLEX_OPENAI_API_KEY": "sk-secret-value"},
+        environ={"SNAPLEX_OPENAI_API_KEY": "test-secret-value"},
     )
 
     assert state.status == ProviderSetupStatus.READY_FROM_ENVIRONMENT
     assert state.api_key_present is True
     assert state.can_test_connection is True
-    assert "sk-secret-value" not in repr(state)
+    assert "test-secret-value" not in repr(state)
     assert "key value is not stored" in state.detail_text
 
 

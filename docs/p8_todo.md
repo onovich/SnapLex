@@ -16,7 +16,7 @@ Executable guide: `docs/p8_provider_setup_real_translation_goal_guide.md`
   and DeepL.
 - [x] Add provider readiness and connection test behavior behind
   service/presenter boundaries.
-- [ ] Keep raw provider API key values out of JSON config, history, docs, tests,
+- [x] Keep raw provider API key values out of JSON config, history, docs, tests,
   logs, package resources, and screenshots.
 - [x] Make fake provider mode visibly labeled as fake smoke/dev mode.
 - [x] Verify real trial launch paths do not silently fall back to fake.
