@@ -60,6 +60,8 @@ The current project source of truth lives in:
 - `docs/p9_to_p10_handoff.md`
 - `docs/p10_secure_credential_account_strategy_goal_guide.md`
 - `docs/p10_todo.md`
+- `docs/p10_credential_strategy_decisions.md`
+- `docs/p10_account_strategy.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -132,6 +134,13 @@ Install the optional packaging toolchain when building a local Windows package:
 
 ```powershell
 python -m pip install -e ".[gui,package]"
+```
+
+Install the optional local secure credential dependency only when you want to
+save provider keys in the OS keyring:
+
+```powershell
+python -m pip install -e ".[gui,credentials]"
 ```
 
 ## Run
@@ -403,17 +412,23 @@ and `docs/p9_to_p10_handoff.md`.
 
 P10 is the selected next post-MVP implementation goal. It should preserve
 existing environment-variable provider setup while adding a credential service
-boundary and first local secure credential path, with optional OS keyring
-support kept lazy and testable. Production account OAuth, SnapLex Cloud, token
-broker, and billing remain out of runtime scope for P10.
+boundary and first local secure credential path. The implementation keeps
+provider secrets behind `CredentialService`, stores only env-var names or
+keyring identifiers in config, adds optional lazy OS keyring support, updates
+Settings credential save/delete/readiness controls, and hardens real/fake trial
+readiness. Production account OAuth, SnapLex Cloud, token broker, and billing
+remain out of runtime scope for P10.
 
-See `docs/p10_secure_credential_account_strategy_goal_guide.md` and
-`docs/p10_todo.md`.
+See `docs/p10_secure_credential_account_strategy_goal_guide.md`,
+`docs/p10_credential_strategy_decisions.md`,
+`docs/p10_account_strategy.md`, and `docs/p10_todo.md`.
 
 ## Current Boundaries
 
 The current implementation intentionally does not include global hotkeys,
-browser extension, AI summary, cloud sync, accounts, or keychain integration.
-Real capture/OCR adapters and real translation providers are present but
-optional; fake mode remains the deterministic default for automated tests and
-packaged release smoke. Later phases are staged in `docs/phase_plan.md`.
+browser extension runtime, AI summary runtime, cloud sync, accounts, production
+OAuth, billing, or a hosted token broker. Optional local OS keyring support is
+lazy and configured only when requested; real capture/OCR adapters and real
+translation providers are present but optional. Fake mode remains the
+deterministic default for automated tests and packaged release smoke. Later
+phases are staged in `docs/phase_plan.md`.

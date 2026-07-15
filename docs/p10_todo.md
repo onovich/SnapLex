@@ -25,7 +25,7 @@ Estimated budget: 16 conversation rounds.
   delete without echoing secrets.
 - [x] Update real/fake trial readiness guardrails for the accepted credential
   boundary.
-- [ ] Document env var, OS keyring, SnapLex Cloud/token broker, and provider
+- [x] Document env var, OS keyring, SnapLex Cloud/token broker, and provider
   account/OAuth tradeoffs.
 - [ ] Preserve P9 GUI smoke, P8 provider smoke, no-GUI bootstrap, and package
   dry-run.

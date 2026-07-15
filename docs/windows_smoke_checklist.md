@@ -19,8 +19,9 @@ P9 UI/UX polish planning and executor evidence are recorded in
 `docs/p9_visual_smoke_evidence.md`, and
 `docs/p9_final_validation_report.md`.
 P10 secure credential/account strategy planning is recorded in
-`docs/p10_secure_credential_account_strategy_goal_guide.md` and
-`docs/p10_todo.md`.
+`docs/p10_secure_credential_account_strategy_goal_guide.md`,
+`docs/p10_credential_strategy_decisions.md`,
+`docs/p10_account_strategy.md`, and `docs/p10_todo.md`.
 
 ## Automated Precheck
 
@@ -371,6 +372,9 @@ Expected result:
   echoes raw values in status text, logs, screenshots, config, or history.
 - `StartTrial.cmd --no-gui` still rejects missing real provider configuration
   clearly when no accepted credential source is present.
+- `python -m snaplex --check-real-provider` reports real-provider readiness
+  through the credential service without performing a network call or printing
+  a secret value.
 - `StartFakeTrial.cmd --no-gui` remains deterministic fake smoke/dev mode.
 
 Optional manual Windows Credential Locker smoke:

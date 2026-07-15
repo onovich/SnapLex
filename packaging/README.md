@@ -37,9 +37,17 @@ python scripts\package_windows.py --dry-run
 ```
 
 The `base` variant is the deterministic release-smoke path. It does not package
-PaddleOCR model caches and does not require real provider credentials. Generated
-output stays under `build\` and `dist\`. Do not commit those folders, packaged
-executables, local smoke data, provider secrets, OCR model caches, or screenshots.
+PaddleOCR model caches, does not require real provider credentials, and does
+not require the optional `keyring` dependency. Generated output stays under
+`build\` and `dist\`. Do not commit those folders, packaged executables, local
+smoke data, provider secrets, OCR model caches, or screenshots.
+
+P10 local secure credential support is optional and lazy. Source trials can
+install `python -m pip install -e ".[gui,credentials]"` to use the OS keyring.
+Do not add keyring secrets, exports, config files, or provider keys to package
+resources. If a distributable package is expected to support OS keyring storage,
+build it from an environment with the credentials extra installed and run a
+manual credential smoke with a throwaway key before distribution.
 
 ## Smoke
 
@@ -64,9 +72,12 @@ translation, history record/list/delete/clear, and local data path containment.
 - Missing `mss` or PaddleOCR in optional variants: install `.[capture]`,
   `.[ocr]`, or both before using `--variant capture`, `--variant ocr`, or
   `--variant full`.
+- Missing keyring support: install `.[credentials]` for source trials. The
+  deterministic base package smoke path does not depend on keyring.
 - Provider credential errors: use fake provider smoke first. Real provider
-  smoke depends on local environment variables and must not put key values into
-  config files, docs, logs, or package resources.
+  smoke depends on local environment variables, local OS keyring state, or a
+  self-hosted endpoint and must not put key values into config files, docs,
+  logs, screenshots, or package resources.
 - History/config smoke writes to `SNAPLEX_APP_DATA_DIR`. Set it to a temporary
   directory before running package smoke.
 

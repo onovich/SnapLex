@@ -36,6 +36,25 @@ message instead of falling back to fake translation.
 If you already use standard provider variables, `OPENAI_API_KEY` and
 `DEEPL_API_KEY` are also detected.
 
+For local OS keyring setup, install the optional credentials extra and save the
+secret through Settings. SnapLex stores only the non-secret keyring identifier:
+
+```powershell
+python -m pip install -e ".[gui,credentials]"
+$env:SNAPLEX_PROVIDER = "openai"
+$env:SNAPLEX_PROVIDER_ORDER = "openai"
+$env:SNAPLEX_OPENAI_CREDENTIAL_SOURCE = "keyring"
+$env:SNAPLEX_OPENAI_CREDENTIAL_IDENTIFIER = "snaplex/openai/default"
+python -m snaplex
+```
+
+After saving the credential in Settings, verify readiness without a network
+call:
+
+```cmd
+python -m snaplex --check-real-provider
+```
+
 For a bootstrap-only check:
 
 ```cmd
@@ -98,3 +117,7 @@ smoke checks when `dist\SnapLex\SnapLex.exe` exists.
 fake provider by design. Fake mode returns deterministic placeholder text such
 as `hello [zh]`; it is only for packaging and UI smoke, not real translation.
 The desktop result view labels fake output as fake smoke mode.
+
+See `docs\p10_account_strategy.md` for environment-variable, OS keyring,
+SnapLex Cloud, token broker, and provider account/OAuth tradeoffs. Do not paste
+real provider secrets into docs, screenshots, issues, commits, or chat logs.

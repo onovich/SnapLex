@@ -2,7 +2,7 @@
 
 Date: 2026-07-15
 Phase: P10 Secure Credential And Account Strategy
-Status: Round 1 decision record
+Status: implementation decision record
 
 P10 starts from the planner-accepted P9 baseline at
 `a2ebc99a47bc810fe3f6245f61a26a16fc6650b3`. SnapLex is visually trial-ready,
@@ -120,6 +120,26 @@ hosted token broker need explicit backend/security approval.
 P10 will document future options in `docs/p10_account_strategy.md`, including
 environment variables, OS keyring, SnapLex Cloud token broker, provider OAuth or
 enterprise identity, and self-hosted LibreTranslate.
+
+## Implemented P10 Credential Paths
+
+P10 implemented the accepted local paths:
+
+- `snaplex.credentials` owns `CredentialReference`, `CredentialStatus`,
+  `CredentialService`, environment credential resolution, and lazy optional
+  keyring access.
+- Provider config stores `credential_source` and `credential_identifier` as
+  non-secret references. Existing `api_key_env_var` config remains compatible.
+- Provider readiness, provider connection tests, trial readiness, Settings
+  presenter actions, and Settings UI controls all route through the credential
+  boundary.
+- `python -m snaplex --check-real-provider` checks real-provider readiness
+  without a network call and without printing secret values.
+- `StartTrial.cmd` and `StartPackagedTrial.cmd` use the same readiness boundary,
+  while fake trial and package smoke commands remain deterministic fake paths.
+
+Account OAuth, SnapLex Cloud, billing, hosted token broker, and production
+provider-account sign-in remain documented future work, not P10 runtime.
 
 ## Round 1 Debug Self-Check
 
