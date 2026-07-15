@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import replace
 
 from snaplex.providers.config import ProviderRuntimeConfig, copy_provider_runtime_configs
+from snaplex.services.provider_setup import ProviderSetupState, describe_provider_setups
 from snaplex.storage import AppConfig, ConfigStore
 
 
@@ -14,6 +16,14 @@ class SettingsService:
 
     def load(self) -> AppConfig:
         return self._config_store.load()
+
+    def load_provider_setup_states(
+        self,
+        *,
+        environ: Mapping[str, str] | None = None,
+    ) -> tuple[ProviderSetupState, ...]:
+        config = self._config_store.load()
+        return describe_provider_setups(config.provider_configs, environ=environ)
 
     def save(self, config: AppConfig) -> AppConfig:
         self._config_store.save(config)

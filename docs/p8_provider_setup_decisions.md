@@ -111,3 +111,20 @@ OAuth:
   smoke/dev output. Round 5 or Round 6 must make that user-facing distinction
   clear.
 
+## Round 2 Presenter Integration
+
+Round 2 connects the pure provider setup model to Settings boundaries:
+
+- `SettingsService.load_provider_setup_states(...)` returns supported provider
+  readiness states from persisted provider configs and process environment.
+- `SettingsPresenter.load_state(...)` exposes stable provider choices and
+  readiness states for Settings UI rendering.
+- `SettingsPresenter.apply_state(...)` continues to save provider names,
+  provider order, language defaults, endpoints, API-key env var names,
+  timeout/retry, OpenAI model, DeepL model type, and history preferences.
+- Tests cover default fake/real readiness display, env-var-present readiness,
+  missing credential display, malformed legacy config compatibility, and secret
+  values staying out of repr/serialized state.
+
+Connection testing remains out of Round 2. Round 3 will add the service and
+presenter orchestration for `Test Connection` using mocked HTTP only.

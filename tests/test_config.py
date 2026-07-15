@@ -175,6 +175,8 @@ def test_json_file_config_store_migrates_legacy_payload(tmp_path) -> None:
     assert loaded.source_lang == "fr"
     assert loaded.target_lang == "en"
     assert loaded.provider_order == ("fake",)
+    assert loaded.provider_configs["openai"].api_key_env_var == "SNAPLEX_OPENAI_API_KEY"
+    assert loaded.provider_configs["deepl"].api_key_env_var == "SNAPLEX_DEEPL_API_KEY"
     assert loaded.history_enabled is True
 
 

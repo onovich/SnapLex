@@ -2,14 +2,20 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from collections.abc import Mapping
+from dataclasses import dataclass, field
 
 from snaplex.providers.config import ProviderRuntimeConfig
 from snaplex.services import SettingsService
+from snaplex.services.provider_setup import ProviderSetupState
+
+
+PROVIDER_CHOICES = ("fake", "libretranslate", "openai", "deepl")
 
 
 @dataclass(frozen=True)
 class SettingsFormState:
+    provider_choices: tuple[str, ...] = PROVIDER_CHOICES
     source_lang: str = "auto"
     target_lang: str = "en"
     provider_name: str = "fake"
@@ -30,13 +36,14 @@ class SettingsFormState:
     deepl_model_type: str = ""
     history_enabled: bool = False
     history_max_entries: int = 50
+    provider_setups: tuple[ProviderSetupState, ...] = field(default_factory=tuple)
 
 
 class SettingsPresenter:
     def __init__(self, settings_service: SettingsService) -> None:
         self._settings_service = settings_service
 
-    def load_state(self) -> SettingsFormState:
+    def load_state(self, *, environ: Mapping[str, str] | None = None) -> SettingsFormState:
         config = self._settings_service.load()
         libretranslate_config = config.provider_configs.get(
             "libretranslate",
@@ -80,9 +87,15 @@ class SettingsPresenter:
             deepl_model_type=deepl_config.options.get("model_type", ""),
             history_enabled=config.history_enabled,
             history_max_entries=config.history_max_entries,
+            provider_setups=self._settings_service.load_provider_setup_states(environ=environ),
         )
 
-    def apply_state(self, state: SettingsFormState) -> SettingsFormState:
+    def apply_state(
+        self,
+        state: SettingsFormState,
+        *,
+        environ: Mapping[str, str] | None = None,
+    ) -> SettingsFormState:
         self._settings_service.update_language_defaults(
             source_lang=state.source_lang,
             target_lang=state.target_lang,
@@ -118,4 +131,4 @@ class SettingsPresenter:
             enabled=state.history_enabled,
             max_entries=state.history_max_entries,
         )
-        return self.load_state()
+        return self.load_state(environ=environ)

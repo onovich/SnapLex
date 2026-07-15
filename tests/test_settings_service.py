@@ -1,5 +1,6 @@
 from snaplex.providers.config import ProviderRuntimeConfig
 from snaplex.services import SettingsService
+from snaplex.services.provider_setup import ProviderSetupStatus
 from snaplex.storage import AppConfig, InMemoryConfigStore
 
 
@@ -25,6 +26,24 @@ def test_settings_service_updates_provider_selection() -> None:
 
     assert config.provider_name == "libretranslate"
     assert config.provider_order == ("libretranslate", "fake")
+
+
+def test_settings_service_loads_provider_setup_states_without_secret_values() -> None:
+    store = InMemoryConfigStore(
+        AppConfig(
+            provider_configs={
+                "openai": ProviderRuntimeConfig(api_key_env_var="OPENAI_API_KEY"),
+            },
+        )
+    )
+    service = SettingsService(store)
+
+    states = service.load_provider_setup_states(environ={"OPENAI_API_KEY": "secret-value"})
+
+    openai_state = next(state for state in states if state.provider_name == "openai")
+    assert openai_state.status == ProviderSetupStatus.READY_FROM_ENVIRONMENT
+    assert openai_state.api_key_present is True
+    assert "secret-value" not in repr(states)
 
 
 def test_settings_service_updates_provider_runtime_config_without_secret_values() -> None:
