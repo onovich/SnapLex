@@ -14,6 +14,8 @@ P8 provider setup and real translation UX planning is recorded in
 `docs/p8_provider_setup_real_translation_goal_guide.md`,
 `docs/p7_to_p8_handoff.md`, `docs/p8_final_validation_report.md`, and
 `docs/p8_real_provider_trial_notes.md`.
+P9 UI/UX polish planning is recorded in
+`docs/p9_apple_inspired_ui_ux_goal_guide.md`.
 
 ## Automated Precheck
 
@@ -297,6 +299,35 @@ Expected result:
 - SmokeTrial passes source bootstrap, package dry-run, and packaged fake
   workflow smoke when a packaged executable exists.
 - Packaged fake trial no-GUI remains deterministic and labels fake smoke mode.
+
+## P9 Apple-Inspired UI/UX Polish Smoke
+
+After P9 is implemented, smoke the user-facing desktop quality before broader
+trial distribution:
+
+```powershell
+$env:SNAPLEX_APP_DATA_DIR = "D:\Temp\SnapLexP9Smoke"
+python -m snaplex
+```
+
+Expected result:
+
+- Main shell has clear primary actions, secondary actions, result states, and
+  status hierarchy.
+- Settings provider setup is scannable and keyboard-accessible.
+- History empty/list/long-entry states remain readable and operable.
+- Fake provider output remains visibly labeled as fake smoke/dev mode.
+- Long source text, long translation text, provider labels, errors, and history
+  entries do not overflow or overlap at common small window sizes.
+- Focus order is predictable in shell, Settings, and History.
+
+P9 final validation additionally requires:
+
+- PySide6 offscreen GUI smoke for shell, Settings, History, and result states.
+- Screenshot-backed smoke with local artifacts kept under ignored paths.
+- Keyboard/focus smoke.
+- Long-text and small-window smoke.
+- Artifact scan proving screenshots and smoke outputs are not committed.
 
 ## P7 Expansion Planning Validation
 

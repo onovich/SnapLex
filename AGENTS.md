@@ -43,11 +43,12 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Overall delegated implementation guide: `docs/p0_p7_goal_mode_execution_guide.md`.
 - Phase plan and round estimates: `docs/phase_plan.md`.
 - First phase execution guide: `docs/p0_repository_baseline_goal_guide.md`.
-- Latest accepted phase report: `docs/p7_final_validation_report.md`.
+- Latest accepted P7 phase report: `docs/p7_final_validation_report.md`.
 - Whole-track closure report: `docs/p0_p7_final_report.md`.
 - Post-MVP expansion roadmap: `docs/p7_expansion_roadmap.md`.
-- Current post-MVP execution guide: `docs/p8_provider_setup_real_translation_goal_guide.md`.
-- Current post-MVP TODO: `docs/p8_todo.md`.
+- Latest accepted post-MVP guide: `docs/p8_provider_setup_real_translation_goal_guide.md`.
 - P7 to P8 handoff: `docs/p7_to_p8_handoff.md`.
-- Latest executor-complete phase report: `docs/p8_final_validation_report.md`.
+- Latest accepted P8 phase report: `docs/p8_final_validation_report.md`.
 - P8 to P9 handoff: `docs/p8_to_p9_handoff.md`.
+- Current post-MVP execution guide: `docs/p9_apple_inspired_ui_ux_goal_guide.md`.
+- Current post-MVP TODO: `docs/p9_todo.md`.

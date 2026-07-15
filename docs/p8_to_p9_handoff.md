@@ -1,9 +1,11 @@
 # P8 To P9 Handoff
 
 Date: 2026-07-15
-Status: P8 executor-complete, pending planner acceptance
+Status: P8 planner-accepted; P9 ready for execution planning
 
 Recommended next phase: P9 Apple-Inspired UI/UX Polish
+
+Executable P9 guide: `docs/p9_apple_inspired_ui_ux_goal_guide.md`
 
 ## Accepted P8 Baseline
 
@@ -87,4 +89,3 @@ persistence:
 - Global hotkeys.
 - Provider rewrites or real network validation in automated tests.
 - Committing generated screenshots, packages, local data, `.env`, or secrets.
-

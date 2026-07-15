@@ -2,13 +2,23 @@
 
 Date: 2026-07-15
 Phase: P8 Provider Setup And Real Translation UX
-Status: PASS from executor validation, pending planner acceptance
+Status: PASS, planner-accepted
 
 ## Rounds Used
 
 - Planned rounds: 8
 - Used rounds: 8
 - Buffer rounds consumed: 0
+
+## Planner Acceptance
+
+- Rechecked by planner on 2026-07-15.
+- Acceptance result: PASS.
+- Recheck validation: `Validate.cmd` PASS with 213 tests, `git diff --check`
+  PASS, CLI bootstrap PASS, package dry-run PASS, fake/real trial command smoke
+  PASS, SmokeTrial PASS, PySide6 offscreen GUI smoke PASS, P8 docs index check
+  PASS, artifact/secret boundary scan PASS.
+- Accepted commit: `d8d451a0c2efc140032737ec2afbbbdb2a4f704c`.
 
 ## Main Deliverables
 
@@ -138,7 +148,7 @@ remain untracked.
 - `25a172d` - label fake trial output.
 - `7f46bba` - polish shell result layout.
 - `7fc5314` - harden real provider trial notes.
-- Final P8 closure commit: recorded in the executor planner-routing message.
+- Final P8 closure commit: `d8d451a0c2efc140032737ec2afbbbdb2a4f704c`.
 
 ## Push Result
 
@@ -146,12 +156,10 @@ All P8 commits through the final closure commit were pushed to `origin/main`.
 
 ## Request For Architect/PM Acceptance
 
-P8 is ready for planner validation against
-`docs/p8_provider_setup_real_translation_goal_guide.md`.
+P8 is accepted against `docs/p8_provider_setup_real_translation_goal_guide.md`.
 
 ## Recommended Next Goal
 
 P9 Apple-Inspired UI/UX Polish. Recommended focus: visual QA, accessibility,
 keyboard flow, Settings/result layout refinement, and screenshot-backed GUI
 smoke, while preserving P8 provider/setup boundaries.
-

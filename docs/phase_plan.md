@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P8 executor-complete planning document
+Status: P8 planner-accepted planning document
 
 ## 0. Round Estimate Rules
 
@@ -22,10 +22,12 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P6 | Packaging and Release Readiness | Produce and smoke-test a Windows distributable. | 7 rounds |
 | P7 | Expansion Track | Prepare optional AI summary, multilingual polish, and browser-extension bridge planning. | 5 rounds |
 | P8 | Provider Setup And Real Translation UX | Make real translation setup usable from Settings, separate fake smoke from real trial behavior, and establish the first Apple HIG-inspired UI foundation. | 8 rounds |
+| P9 | Apple-Inspired UI/UX Polish | Make the PySide6 desktop shell trial-ready with visual hierarchy, accessibility, keyboard flow, long-text handling, and screenshot-backed GUI smoke. | 16 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
 Total including selected P8 post-MVP implementation: 61 rounds.
+Total including selected P9 post-MVP implementation: 77 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -357,12 +359,12 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P7 - Expansion Track.
+Current accepted phase: P8 - Provider Setup And Real Translation UX.
 
 P0-P7 status: complete.
 
-Current executor-completed phase: P8 - Provider Setup And Real Translation UX,
-pending planner acceptance.
+Selected next step: execute P9 Apple-Inspired UI/UX Polish from
+`docs/p9_apple_inspired_ui_ux_goal_guide.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -423,4 +425,61 @@ Executor completion artifacts:
 - `docs/p8_final_validation_report.md`
 - `docs/p8_to_p9_handoff.md`
 
-Recommended next step: validate P8, then create P9 Apple-Inspired UI/UX Polish.
+Planner acceptance:
+
+- P8 accepted on 2026-07-15 at
+  `d8d451a0c2efc140032737ec2afbbbdb2a4f704c`.
+
+## 12. P9 - Apple-Inspired UI/UX Polish
+
+Estimated rounds: 16
+
+Execution guide: `docs/p9_apple_inspired_ui_ux_goal_guide.md`
+
+Goal: make the existing PySide6 shell feel trial-ready without adding new
+runtime product scope.
+
+Scope:
+
+- Visual audit and UI polish for main shell, result states, Settings, History,
+  and region-selector touchpoints.
+- Shared visual foundation for spacing, typography, semantic color, focus, and
+  stable control dimensions.
+- Keyboard navigation, focus order, accessible labels, and contrast checks.
+- Long-text and small-window behavior for source, translation, OCR, provider,
+  error, and history content.
+- Screenshot-backed offscreen GUI smoke with screenshots kept in ignored local
+  paths only.
+
+Deliverables:
+
+- Polished PySide6 shell, Settings, History, and result states.
+- Screenshot-backed smoke helper/evidence.
+- P9 final validation report and P9 to P10 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Package dry-run remains green.
+- Fake/real trial command smoke remains green.
+- GUI offscreen/screenshot smoke covers representative states.
+- Boundary scan confirms no screenshots, generated artifacts, local data,
+  `.env`, or secrets are committed.
+
+Round split:
+
+- Round 1: UI audit, visual targets, and baseline screenshots.
+- Round 2: shared visual foundation.
+- Round 3: main shell action hierarchy.
+- Round 4: result state polish.
+- Round 5: long text and small-window behavior.
+- Round 6: Settings information architecture.
+- Round 7: Settings keyboard and accessibility.
+- Round 8: History dialog polish.
+- Round 9: region selector and screen-flow UI polish.
+- Round 10: iconography and command semantics.
+- Round 11: screenshot-backed GUI smoke.
+- Round 12: Windows visual QA and docs.
+- Rounds 13-15: buffer hardening.
+- Round 16: final validation, report, and P10 handoff.

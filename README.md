@@ -51,6 +51,8 @@ The current project source of truth lives in:
 - `docs/p8_real_provider_trial_notes.md`
 - `docs/p8_final_validation_report.md`
 - `docs/p8_to_p9_handoff.md`
+- `docs/p9_apple_inspired_ui_ux_goal_guide.md`
+- `docs/p9_todo.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -88,9 +90,10 @@ plans.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
-And Real Translation UX executor work is complete and ready for planner
-validation; use `docs/p8_final_validation_report.md` and
-`docs/p8_to_p9_handoff.md` for the P8 closure package.
+And Real Translation UX is planner-accepted; use
+`docs/p8_final_validation_report.md` and `docs/p8_to_p9_handoff.md` for the P8
+closure package. The selected next goal is P9 Apple-Inspired UI/UX Polish; use
+`docs/p9_apple_inspired_ui_ux_goal_guide.md` for execution.
 
 ## Setup
 
@@ -367,6 +370,14 @@ P8 executor work adds the first real-provider trial UX:
 
 See `docs/p8_final_validation_report.md`, `docs/p8_real_provider_trial_notes.md`,
 and `docs/p8_to_p9_handoff.md`.
+
+## P9 Apple-Inspired UI/UX Polish
+
+P9 is the selected next post-MVP goal. It should refine the PySide6 desktop
+experience for trial use: visual hierarchy, Settings and History polish,
+keyboard/focus behavior, accessibility labels, long-text and small-window
+behavior, and screenshot-backed GUI smoke. See
+`docs/p9_apple_inspired_ui_ux_goal_guide.md`.
 
 ## Current Boundaries
 

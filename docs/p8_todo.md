@@ -4,7 +4,7 @@ P8 goal: make real translation setup usable from Settings, separate fake smoke
 from real trial behavior, and establish the first Apple HIG-inspired UI
 foundation for trial users.
 
-Status: ready for execution.
+Status: complete, planner-accepted.
 
 Executable guide: `docs/p8_provider_setup_real_translation_goal_guide.md`
 

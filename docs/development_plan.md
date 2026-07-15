@@ -197,7 +197,7 @@ The executable guide is
 
 ## P8 Provider Setup And Real Translation UX Completion
 
-The repository now has executor-complete P8 provider setup UX:
+The repository now has planner-accepted P8 provider setup UX:
 
 - `snaplex/services/provider_setup.py` models provider setup and connection-test
   states without storing or displaying secret values.
@@ -211,7 +211,21 @@ The repository now has executor-complete P8 provider setup UX:
 - Trial docs and scripts keep real-provider launch paths separate from fake
   smoke paths.
 - `docs/p8_final_validation_report.md` and `docs/p8_to_p9_handoff.md` provide
-  the P8 closure package for planner validation.
+  the P8 closure package.
+
+## Selected P9 Apple-Inspired UI/UX Polish
+
+P9 is the selected next post-MVP implementation goal. It should polish the
+existing PySide6 desktop experience without adding new product capabilities:
+
+- Main shell and result-state hierarchy.
+- Settings provider setup layout, focus order, and accessibility labels.
+- History empty/list/long-entry states.
+- Keyboard navigation and visible focus behavior.
+- Long text and small-window behavior.
+- Screenshot-backed offscreen GUI smoke with uncommitted local artifacts.
+
+The executable guide is `docs/p9_apple_inspired_ui_ux_goal_guide.md`.
 
 Recommended next goal after acceptance: P9 Apple-Inspired UI/UX Polish.
 
@@ -290,11 +304,13 @@ Summary:
 - P6 Packaging and Release Readiness: 7 conversation rounds.
 - P7 Expansion Track: 5 conversation rounds.
 - P8 Provider Setup And Real Translation UX: 8 conversation rounds.
+- P9 Apple-Inspired UI/UX Polish: 16 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
 Including the selected P8 implementation goal, the current post-MVP plan is 61
-rounds.
+rounds. Including the selected P9 implementation goal, the current post-MVP plan
+is 77 rounds.
 
 ## Validation Plan
 
