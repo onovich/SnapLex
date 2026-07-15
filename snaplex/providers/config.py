@@ -12,7 +12,7 @@ from snaplex.credentials import (
     CredentialService,
     CredentialSource,
     CredentialStoreError,
-    create_environment_credential_service,
+    create_default_credential_service,
     environment_credential_reference,
     keyring_credential_reference,
 )
@@ -72,8 +72,9 @@ def resolve_api_key(
 ) -> str:
     env_var = config.api_key_env_var.strip()
     reference = provider_credential_reference(provider_name, config)
-    service = credential_service or create_environment_credential_service(
+    service = credential_service or create_default_credential_service(
         os.environ if environ is None else environ,
+        include_keyring=reference.source == CredentialSource.KEYRING,
     )
     try:
         return service.resolve(reference)

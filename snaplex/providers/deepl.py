@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 
+from snaplex.credentials import CredentialService
 from snaplex.errors import (
     StaleTranslationResultError,
     TranslationProviderError,
@@ -36,12 +37,14 @@ class DeepLTranslationProvider:
         config: ProviderRuntimeConfig | None = None,
         transport: HttpTransport | None = None,
         environ: Mapping[str, str] | None = None,
+        credential_service: CredentialService | None = None,
         name: str = "deepl",
     ) -> None:
         self.name = name
         self._config = config or default_provider_runtime_configs()["deepl"]
         self._transport = transport or UrllibHttpTransport()
         self._environ = environ
+        self._credential_service = credential_service
 
     def translate(self, request: TranslationRequest) -> TranslationResponse:
         response = self._send_translate_request(request)
@@ -55,7 +58,12 @@ class DeepLTranslationProvider:
                 provider_name=self.name,
             )
 
-        api_key = resolve_api_key(self.name, self._config, environ=self._environ)
+        api_key = resolve_api_key(
+            self.name,
+            self._config,
+            environ=self._environ,
+            credential_service=self._credential_service,
+        )
         payload = _build_payload(request, self._config.options)
         http_request = HttpRequest(
             method="POST",

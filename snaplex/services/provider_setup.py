@@ -256,6 +256,7 @@ def test_provider_connection(
             config,
             http_transport=http_transport,
             environ=environ,
+            credential_service=credential_service,
         )
         response = registry.get(normalized_provider_name).translate(
             TranslationRequest(probe_text, source_lang=source_lang, target_lang=target_lang)

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 
+from snaplex.credentials import CredentialService, CredentialSource
 from snaplex.errors import (
     StaleTranslationResultError,
     TranslationProviderError,
@@ -14,6 +15,7 @@ from snaplex.providers.base import TranslationRequest, TranslationResponse
 from snaplex.providers.config import (
     ProviderRuntimeConfig,
     default_provider_runtime_configs,
+    provider_credential_reference,
     resolve_api_key,
 )
 from snaplex.providers.http import (
@@ -36,12 +38,14 @@ class LibreTranslateProvider:
         config: ProviderRuntimeConfig | None = None,
         transport: HttpTransport | None = None,
         environ: Mapping[str, str] | None = None,
+        credential_service: CredentialService | None = None,
         name: str = "libretranslate",
     ) -> None:
         self.name = name
         self._config = config or default_provider_runtime_configs()["libretranslate"]
         self._transport = transport or UrllibHttpTransport()
         self._environ = environ
+        self._credential_service = credential_service
 
     def translate(self, request: TranslationRequest) -> TranslationResponse:
         response = self._send_translate_request(request)
@@ -61,11 +65,13 @@ class LibreTranslateProvider:
             "target": request.target_lang,
             "format": "text",
         }
-        if self._config.api_key_env_var.strip():
+        credential_reference = provider_credential_reference(self.name, self._config)
+        if credential_reference.source != CredentialSource.NONE:
             payload["api_key"] = resolve_api_key(
                 self.name,
                 self._config,
                 environ=self._environ,
+                credential_service=self._credential_service,
             )
 
         http_request = HttpRequest(

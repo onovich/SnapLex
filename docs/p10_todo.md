@@ -19,7 +19,7 @@ Estimated budget: 16 conversation rounds.
 - [x] Preserve existing environment-variable provider credentials.
 - [x] Add optional lazy OS keyring storage path or document a concrete blocker.
 - [x] Ensure config stores credential references only, not raw values.
-- [ ] Route provider readiness and Test Connection through credential
+- [x] Route provider readiness and Test Connection through credential
   boundaries.
 - [ ] Update Settings presenter/UI for credential source, readiness, save, and
   delete without echoing secrets.

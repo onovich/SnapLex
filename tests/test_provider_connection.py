@@ -7,7 +7,13 @@ from snaplex.providers.http import (
     HttpTransportError,
     HttpTransportTimeout,
 )
-from snaplex.services import SettingsService
+from snaplex.services import (
+    CredentialService,
+    CredentialSource,
+    InMemoryCredentialStore,
+    SettingsService,
+    keyring_credential_reference,
+)
 from snaplex.services.provider_setup import ProviderSetupStatus
 from snaplex.storage import AppConfig, InMemoryConfigStore
 from snaplex.ui.settings_presenter import SettingsPresenter
@@ -51,6 +57,37 @@ def test_provider_connection_passes_for_mocked_openai_without_exposing_secret() 
     assert result.translated_text == "hola"
     assert transport.requests[0].url == "https://api.openai.example/v1/responses"
     assert "secret-value" not in repr(result)
+
+
+def test_provider_connection_passes_for_mocked_openai_keyring_without_exposing_secret() -> None:
+    transport = RecordingTransport(HttpResponse(200, b'{"output_text":"hola"}'))
+    reference = keyring_credential_reference("openai")
+    credential_store = InMemoryCredentialStore()
+    credential_store.save(reference, "keyring-secret")
+    service = SettingsService(
+        InMemoryConfigStore(
+            AppConfig(
+                provider_configs={
+                    "openai": ProviderRuntimeConfig(
+                        base_url="https://api.openai.example/v1",
+                        credential_source="keyring",
+                        options={"model": "gpt-test"},
+                    )
+                }
+            )
+        )
+    )
+
+    result = service.test_provider_connection(
+        "openai",
+        http_transport=transport,
+        environ={},
+        credential_service=CredentialService({CredentialSource.KEYRING: credential_store}),
+    )
+
+    assert result.status == ProviderSetupStatus.TEST_PASSED
+    assert transport.requests[0].headers["Authorization"] == "Bearer keyring-secret"
+    assert "keyring-secret" not in repr(result)
 
 
 def test_provider_connection_passes_for_mocked_deepl() -> None:

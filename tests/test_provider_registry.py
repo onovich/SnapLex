@@ -15,6 +15,12 @@ from snaplex.providers import (
 )
 from snaplex.providers.config import ProviderRuntimeConfig
 from snaplex.providers.http import HttpRequest, HttpResponse, HttpTransportTimeout
+from snaplex.services import (
+    CredentialService,
+    CredentialSource,
+    InMemoryCredentialStore,
+    keyring_credential_reference,
+)
 from snaplex.storage import AppConfig
 
 
@@ -146,3 +152,31 @@ def test_default_registry_applies_provider_retry_count() -> None:
 
     assert result.translated_text == "hola"
     assert len(transport.requests) == 2
+
+
+def test_default_registry_passes_credential_service_to_real_providers() -> None:
+    reference = keyring_credential_reference("openai")
+    credential_store = InMemoryCredentialStore()
+    credential_store.save(reference, "keyring-secret")
+    transport = SequenceTransport([HttpResponse(200, b'{"output_text":"hola"}')])
+    config = AppConfig(
+        provider_configs={
+            "openai": ProviderRuntimeConfig(
+                base_url="https://api.openai.example/v1",
+                credential_source="keyring",
+                options={"model": "gpt-test"},
+            ),
+        },
+    )
+    registry = create_default_provider_registry(
+        config,
+        http_transport=transport,
+        credential_service=CredentialService({CredentialSource.KEYRING: credential_store}),
+    )
+
+    result = registry.get("openai").translate(
+        TranslationRequest("hello", source_lang="en", target_lang="es"),
+    )
+
+    assert result.translated_text == "hola"
+    assert transport.requests[0].headers["Authorization"] == "Bearer keyring-secret"

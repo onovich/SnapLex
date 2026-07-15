@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping
 from typing import TYPE_CHECKING
 
+from snaplex.credentials import CredentialService
 from snaplex.errors import UnknownTranslationProviderError
 from snaplex.providers.base import TranslationProvider
 from snaplex.providers.config import ProviderRuntimeConfig, default_provider_runtime_configs
@@ -49,6 +50,7 @@ def create_default_provider_registry(
     *,
     http_transport: HttpTransport | None = None,
     environ: Mapping[str, str] | None = None,
+    credential_service: CredentialService | None = None,
 ) -> ProviderRegistry:
     provider_configs = _merged_provider_configs(config)
     providers: list[TranslationProvider] = [
@@ -58,6 +60,7 @@ def create_default_provider_registry(
                 config=provider_configs["libretranslate"],
                 transport=http_transport,
                 environ=environ,
+                credential_service=credential_service,
             ),
             provider_configs["libretranslate"],
         ),
@@ -66,6 +69,7 @@ def create_default_provider_registry(
                 config=provider_configs["openai"],
                 transport=http_transport,
                 environ=environ,
+                credential_service=credential_service,
             ),
             provider_configs["openai"],
         ),
@@ -74,6 +78,7 @@ def create_default_provider_registry(
                 config=provider_configs["deepl"],
                 transport=http_transport,
                 environ=environ,
+                credential_service=credential_service,
             ),
             provider_configs["deepl"],
         ),

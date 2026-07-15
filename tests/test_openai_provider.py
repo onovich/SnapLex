@@ -4,6 +4,12 @@ import json
 
 import pytest
 
+from snaplex.credentials import (
+    CredentialService,
+    CredentialSource,
+    InMemoryCredentialStore,
+    keyring_credential_reference,
+)
 from snaplex.errors import (
     MissingProviderCredentialError,
     StaleTranslationResultError,
@@ -39,6 +45,7 @@ def make_provider(
     *,
     config: ProviderRuntimeConfig | None = None,
     environ: dict[str, str] | None = None,
+    credential_service: CredentialService | None = None,
 ) -> tuple[OpenAITranslationProvider, RecordingTransport]:
     transport = RecordingTransport(response)
     provider = OpenAITranslationProvider(
@@ -51,6 +58,7 @@ def make_provider(
         ),
         transport=transport,
         environ={"SNAPLEX_OPENAI_API_KEY": "openai-secret"} if environ is None else environ,
+        credential_service=credential_service,
     )
     return provider, transport
 
@@ -114,6 +122,28 @@ def test_openai_provider_requires_configured_api_key() -> None:
     assert exc_info.value.provider_name == "openai"
     assert exc_info.value.env_var == "SNAPLEX_OPENAI_API_KEY"
     assert transport.requests == []
+
+
+def test_openai_provider_resolves_keyring_credential_without_secret_repr() -> None:
+    reference = keyring_credential_reference("openai")
+    credential_store = InMemoryCredentialStore()
+    credential_store.save(reference, "keyring-secret")
+    provider, transport = make_provider(
+        HttpResponse(200, b'{"output_text":"hola"}'),
+        config=ProviderRuntimeConfig(
+            base_url="https://api.openai.example/v1",
+            credential_source="keyring",
+            options={"model": "gpt-test"},
+        ),
+        environ={},
+        credential_service=CredentialService({CredentialSource.KEYRING: credential_store}),
+    )
+
+    result = provider.translate(TranslationRequest("hello", source_lang="en", target_lang="es"))
+
+    assert result.translated_text == "hola"
+    assert transport.requests[0].headers["Authorization"] == "Bearer keyring-secret"
+    assert "keyring-secret" not in repr(result)
 
 
 def test_openai_provider_maps_timeout() -> None:

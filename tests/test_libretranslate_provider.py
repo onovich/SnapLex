@@ -4,6 +4,12 @@ import json
 
 import pytest
 
+from snaplex.credentials import (
+    CredentialService,
+    CredentialSource,
+    InMemoryCredentialStore,
+    keyring_credential_reference,
+)
 from snaplex.errors import (
     MissingProviderCredentialError,
     StaleTranslationResultError,
@@ -39,12 +45,14 @@ def make_provider(
     *,
     config: ProviderRuntimeConfig | None = None,
     environ: dict[str, str] | None = None,
+    credential_service: CredentialService | None = None,
 ) -> tuple[LibreTranslateProvider, RecordingTransport]:
     transport = RecordingTransport(response)
     provider = LibreTranslateProvider(
         config=config or ProviderRuntimeConfig(base_url="https://libre.example"),
         transport=transport,
         environ=environ,
+        credential_service=credential_service,
     )
     return provider, transport
 
@@ -110,6 +118,25 @@ def test_libretranslate_provider_raises_when_configured_api_key_is_missing() -> 
     assert exc_info.value.provider_name == "libretranslate"
     assert exc_info.value.env_var == "SNAPLEX_LIBRETRANSLATE_API_KEY"
     assert transport.requests == []
+
+
+def test_libretranslate_provider_includes_keyring_api_key_when_configured() -> None:
+    reference = keyring_credential_reference("libretranslate")
+    credential_store = InMemoryCredentialStore()
+    credential_store.save(reference, "libre-keyring-secret")
+    provider, transport = make_provider(
+        HttpResponse(200, b'{"translatedText":"bonjour"}'),
+        config=ProviderRuntimeConfig(
+            base_url="https://libre.example",
+            credential_source="keyring",
+        ),
+        environ={},
+        credential_service=CredentialService({CredentialSource.KEYRING: credential_store}),
+    )
+
+    provider.translate(TranslationRequest("hello", source_lang="en", target_lang="fr"))
+
+    assert request_body(transport)["api_key"] == "libre-keyring-secret"
 
 
 def test_libretranslate_provider_maps_timeout() -> None:
