@@ -15,7 +15,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Collect tester feedback or record honest blockers/absence.
 - [x] Record optional real-provider smoke run/skip decision.
 - [x] Define artifact transfer, retention, and support escalation policy.
-- [ ] Decide signing, installer, and updater requirements.
+- [x] Decide signing, installer, and updater requirements.
 - [ ] Decide whether credentials stay as a separate package variant.
 - [ ] Preserve deterministic base package validation.
 - [ ] Produce P17 boundary scan evidence.
