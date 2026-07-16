@@ -72,7 +72,10 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest accepted P15 guide: `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`.
 - Latest accepted P15 report: `docs/p15_final_validation_report.md`.
 - P15 to P16 handoff: `docs/p15_to_p16_handoff.md`.
-- Latest P16 guide: `docs/p16_credential_capable_package_production_hardening_goal_guide.md`.
-- Latest P16 TODO: `docs/p16_todo.md`.
-- Latest P16 report: `docs/p16_final_validation_report.md`.
+- Latest accepted P16 guide: `docs/p16_credential_capable_package_production_hardening_goal_guide.md`.
+- Latest accepted P16 report: `docs/p16_final_validation_report.md`.
 - P16 to P17 handoff: `docs/p16_to_p17_handoff.md`.
+- Latest P17 guide: `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`.
+- Latest P17 TODO: `docs/p17_todo.md`.
+- Latest P17 report: `docs/p17_final_validation_report.md`.
+- P17 to P18 handoff: `docs/p17_to_p18_handoff.md`.

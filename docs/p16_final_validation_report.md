@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P16 Credential-Capable Package Production Hardening
-Status: PASS - ready for planner acceptance
+Status: PASS - accepted by planner
 Final commit: final docs commit containing this report; see READY_FOR_CHECK
 planner message for hash
 Push: PASS after final docs commit
@@ -189,6 +189,11 @@ Final scans confirmed:
   support policy/blocker cases, not exercised across a tester device matrix.
 - Package artifacts under `build\` and `dist\` are local ignored outputs and
   are not committed.
+
+## Planner Acceptance
+
+P16 was accepted by planner review on 2026-07-17 at
+`d50cd949178adf78a0d54b3dd1ed8159d42770f3`.
 
 ## Recommended Next Phase
 

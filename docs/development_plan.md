@@ -429,6 +429,7 @@ Summary:
 - P14 Manual Environment And Source Keyring Validation: 12 conversation rounds.
 - P15 Isolated Credential-Capable Package Spike Design Gate: 12 conversation rounds.
 - P16 Credential-Capable Package Production Hardening: 12 conversation rounds.
+- P17 Limited Credential Package Pilot And Signing Decision: 12 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -443,7 +444,10 @@ feedback response and credential package feasibility, the post-MVP plan became
 validation, the post-MVP plan became 141 rounds. Including selected P15
 isolated credential-capable package spike design gate, the post-MVP plan became
 153 rounds. Including selected P16 credential-capable package production
-hardening, the current post-MVP plan is 165 rounds.
+hardening, the post-MVP plan became 165 rounds.
+
+Including selected P17 limited credential package pilot and signing decision,
+the current post-MVP plan is 177 rounds.
 
 ## P16 Credential-Capable Package Production Hardening Completion
 
@@ -454,6 +458,16 @@ or signed installer.
 
 The P16 closure package is `docs/p16_boundary_scan_evidence.md`,
 `docs/p16_final_validation_report.md`, and `docs/p16_to_p17_handoff.md`.
+
+## P17 Limited Credential Package Pilot And Signing Decision
+
+P17 executes the controlled private tester lane for the explicit unsigned
+credential package candidate and decides whether signing, installer, updater,
+artifact transfer, retention, and support escalation work is required before
+broader distribution.
+
+The P17 guide is
+`docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`.
 
 ## Validation Plan
 

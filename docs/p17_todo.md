@@ -1,0 +1,42 @@
+# P17 TODO
+
+Date: 2026-07-17
+Phase: P17 Limited Credential Package Pilot And Signing Decision
+Guide: `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`
+Status: ready for executor.
+Estimated budget: 12 conversation rounds.
+
+## Tasks
+
+- [ ] Revalidate the accepted P16 baseline.
+- [ ] Define controlled private tester lane.
+- [ ] Run or rehearse package candidate pre-share gates.
+- [ ] Prepare no-secret tester instructions and feedback intake.
+- [ ] Collect tester feedback or record honest blockers/absence.
+- [ ] Record optional real-provider smoke run/skip decision.
+- [ ] Define artifact transfer, retention, and support escalation policy.
+- [ ] Decide signing, installer, and updater requirements.
+- [ ] Decide whether credentials stay as a separate package variant.
+- [ ] Preserve deterministic base package validation.
+- [ ] Produce P17 boundary scan evidence.
+- [ ] Produce P17 final validation report.
+- [ ] Produce P17 to P18 handoff.
+
+## Deferred Outside P17
+
+- Public release.
+- Signed installer/updater implementation unless explicitly authorized later.
+- Silent keyring support in the base package.
+- Production SnapLex Cloud, account OAuth, billing, hosted token broker, remote
+  accounts, or cloud sync.
+- Raw API-key persistence in app config.
+- Production browser extension runtime.
+- AI summary runtime.
+- Global hotkeys.
+- Broad provider rewrites unrelated to credential package pilot evidence.
+- OCR/capture rewrites.
+- Full localization implementation.
+- Network-required automated tests.
+- Committed screenshots, package outputs, local app data, `.env`, keyring
+  exports, logs, OCR caches, smoke data, tester personal data, or provider
+  secrets.

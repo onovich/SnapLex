@@ -662,6 +662,16 @@ and `docs/p16_todo.md`. Current P16 hardening evidence is recorded in
 `docs/p16_boundary_scan_evidence.md`. The P16 closure package is
 `docs/p16_final_validation_report.md` and `docs/p16_to_p17_handoff.md`.
 
+## P17 Limited Credential Package Pilot And Signing Decision
+
+P17 prepares and evaluates a controlled private tester lane for the explicit
+unsigned `credentials` package candidate. It focuses on pre-share gates,
+no-secret feedback, optional human-approved real-provider smoke, artifact
+transfer/retention/support policy, and signing/installer/updater decisions.
+
+See `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`
+and `docs/p17_todo.md`.
+
 ## Current Boundaries
 
 The current implementation intentionally does not include global hotkeys,

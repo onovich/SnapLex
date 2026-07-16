@@ -1066,7 +1066,8 @@ Round split:
 
 Executor completion:
 
-- P16 completed on 2026-07-17 and is ready for planner acceptance.
+- P16 completed on 2026-07-17 and was accepted by planner review on
+  2026-07-17.
 - Base package remains deterministic and keyring-free.
 - Explicit `credentials` variant remains the only credential-capable package
   path.
@@ -1080,3 +1081,72 @@ Executor completion:
   P16 gates; public release and signed installer remain out of scope.
 - Closure package: `docs/p16_boundary_scan_evidence.md`,
   `docs/p16_final_validation_report.md`, and `docs/p16_to_p17_handoff.md`.
+
+Planner acceptance:
+
+- P16 accepted at `d50cd949178adf78a0d54b3dd1ed8159d42770f3`.
+- Selected next phase: P17 Limited Credential Package Pilot And Signing
+  Decision.
+
+## 20. P17 - Limited Credential Package Pilot And Signing Decision
+
+Estimated rounds: 12
+
+Execution guide:
+`docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`
+
+Goal: run a controlled private tester lane for the explicit unsigned
+`credentials` package candidate and decide signing, installer, updater,
+artifact transfer, retention, support escalation, and variant policy.
+
+Scope:
+
+- Revalidate the accepted P16 baseline.
+- Define controlled private tester lane and pre-share package gates.
+- Build or rehearse explicit credentials package candidate gates from a clean
+  source commit.
+- Preserve deterministic base package validation.
+- Collect no-secret tester feedback or record honest blockers/absence.
+- Record optional real-provider smoke only with explicit human network
+  approval and existing local credentials.
+- Decide whether credentials stay as a separate package variant.
+- Decide signing, installer, updater, artifact transfer, retention, and support
+  escalation requirements.
+
+Deliverables:
+
+- `docs/p17_pilot_lane_plan.md`
+- `docs/p17_package_candidate_gate_evidence.md`
+- `docs/p17_tester_feedback_intake.md`
+- `docs/p17_real_provider_smoke_record.md`
+- `docs/p17_artifact_transfer_retention_support.md`
+- `docs/p17_signing_installer_updater_decision.md`
+- `docs/p17_credential_package_lane_decision.md`
+- `docs/p17_boundary_scan_evidence.md`
+- P17 final validation report and P17 to P18 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Base and credentials package dry-runs pass.
+- Base package remains deterministic and rejects credential smoke.
+- Credentials package smoke covers import, cycle, save/check-delete restart
+  readiness, and cleanup when feasible.
+- Fake/real trial command smoke remains green and real trial paths fail closed.
+- P9 and P11 GUI smoke remain green.
+- Docs link/index and artifact/secret scans remain green.
+
+Round split:
+
+- Round 1: rebaseline and pilot lane.
+- Round 2: package candidate pre-share gate.
+- Round 3: tester instructions and feedback intake.
+- Round 4: tester feedback or blocker record.
+- Round 5: optional real-provider smoke decision.
+- Round 6: artifact transfer, retention, and support policy.
+- Round 7: signing, installer, and updater decision.
+- Round 8: credential package lane decision.
+- Rounds 9-11: buffer hardening.
+- Round 12: final validation, report, and P18 handoff.

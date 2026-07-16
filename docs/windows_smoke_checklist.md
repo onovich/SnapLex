@@ -89,6 +89,9 @@ P16 credential-capable package hardening is recorded in
 `docs/p16_production_hardening_decision.md`, and
 `docs/p16_boundary_scan_evidence.md`,
 `docs/p16_final_validation_report.md`, and `docs/p16_to_p17_handoff.md`.
+P17 pilot and signing-decision planning is recorded in
+`docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md` and
+`docs/p17_todo.md`.
 
 ## Automated Precheck
 

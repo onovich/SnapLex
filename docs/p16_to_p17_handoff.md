@@ -1,9 +1,14 @@
 # P16 To P17 Handoff
 
 Date: 2026-07-17
-Status: P16 executor-complete; ready for planner acceptance
+Status: P16 planner-accepted; ready for P17 execution
 
 Recommended P17: Limited Credential Package Pilot And Signing Decision.
+
+P17 execution guide:
+`docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`
+
+P17 TODO: `docs/p17_todo.md`
 
 ## P16 Baseline
 
