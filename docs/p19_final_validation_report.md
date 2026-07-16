@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P19 Signing Rehearsal And Signed Archive Candidate Gate
-Status: PASS - ready for planner check
+Status: PASS - accepted by planner
 Final commit: recorded in READY_FOR_CHECK planner notification after final
 report commit
 Push: PASS, `origin/main`
@@ -157,6 +157,9 @@ Evidence:
   remain limited.
 
 ## Recommended Next Phase
+
+Planner acceptance: P19 was accepted on 2026-07-17 at
+`11001b64a4b5e093c7ee57615e7e5dbbb288749f`.
 
 Recommended P20: approved signing path acquisition and isolated signing
 rehearsal setup gate.

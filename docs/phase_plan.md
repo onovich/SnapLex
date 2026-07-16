@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P18 planner-accepted; P19 ready for executor
+Status: P19 planner-accepted; P20 ready for executor
 
 ## 0. Round Estimate Rules
 
@@ -33,6 +33,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P17 | Limited Credential Package Pilot And Signing Decision | Run a controlled private tester lane and decide signing, installer, updater, artifact, support, and credential package variant policy. | 12 rounds |
 | P18 | Signing And Distribution Readiness Gate | Decide signing identity, custody, verification, distribution, rollback, retention, and support policy before broader credential package distribution. | 12 rounds |
 | P19 | Signing Rehearsal And Signed Archive Candidate Gate | Decide whether a safe isolated signing rehearsal can run and gate any signed archive candidate without public release. | 12 rounds |
+| P20 | Approved Signing Path Acquisition And Rehearsal Setup Gate | Decide whether an approved safe signing path exists and set up or block isolated rehearsal work without public release. | 12 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -47,7 +48,8 @@ Total including selected P15 post-MVP implementation: 153 rounds.
 Total including selected P16 post-MVP implementation: 165 rounds.
 Total including selected P17 post-MVP implementation: 177 rounds.
 Total including accepted P18 post-MVP implementation: 189 rounds.
-Total including selected P19 post-MVP implementation: 201 rounds.
+Total including accepted P19 post-MVP implementation: 201 rounds.
+Total including selected P20 post-MVP implementation: 213 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -1322,3 +1324,83 @@ Round split:
 - Round 8: signed archive candidate decision.
 - Rounds 9-11: buffer hardening.
 - Round 12: final validation, report, and P20 handoff.
+
+Executor completion:
+
+- P19 completed at `11001b64a4b5e093c7ee57615e7e5dbbb288749f`.
+- P19 preserved base and credentials package separation.
+- P19 recorded signing rehearsal as SKIPPED because no approved safe
+  throwaway/test signing path was supplied.
+- P19 did not run signing commands, create signed artifacts, introduce a
+  production certificate path, or approve public release.
+- P19 closure is recorded in `docs/p19_final_validation_report.md` and
+  `docs/p19_to_p20_handoff.md`.
+
+Planner acceptance:
+
+- P19 accepted at `11001b64a4b5e093c7ee57615e7e5dbbb288749f`.
+- Selected next phase: P20 Approved Signing Path Acquisition And Rehearsal
+  Setup Gate.
+
+## 23. P20 - Approved Signing Path Acquisition And Rehearsal Setup Gate
+
+Estimated rounds: 12
+
+Execution guide:
+`docs/p20_approved_signing_path_acquisition_rehearsal_setup_gate_goal_guide.md`
+
+Goal: decide whether a safe signing path has explicit approval, then either
+prepare an isolated local rehearsal or keep signing blocked.
+
+Scope:
+
+- Revalidate the accepted P19 baseline.
+- Decide whether safe signing-path approval exists.
+- Define required approval inputs, ignored local artifact directories, cleanup,
+  evidence retention, command discovery, verification, timestamp, trust, and
+  revocation rules.
+- Run signing only if approval and safety inputs are explicit.
+- Preserve deterministic base package validation.
+- Preserve explicit credentials package validation.
+- Preserve no-secret and no-artifact repository hygiene.
+
+Deliverables:
+
+- `docs/p20_signing_path_approval_record.md`
+- `docs/p20_rehearsal_artifact_directory_policy.md`
+- `docs/p20_signing_command_discovery.md`
+- `docs/p20_isolated_rehearsal_evidence.md`
+- `docs/p20_signature_verification_evidence_policy.md`
+- `docs/p20_base_package_control_evidence.md`
+- `docs/p20_credentials_package_control_evidence.md`
+- `docs/p20_boundary_scan_evidence.md`
+- P20 final validation report and P20 to P21 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Base and credentials package dry-runs pass.
+- Base package remains deterministic and rejects credential smoke.
+- Credentials package smoke covers import, cycle, save/check-delete restart
+  readiness, and cleanup when feasible.
+- Fake/real trial command smoke remains green and real trial paths fail closed.
+- P9 and P11 GUI smoke remain green.
+- Any signing rehearsal uses only explicit approval, ignored local artifact
+  paths, and non-secret evidence.
+- Docs link/index and artifact/secret/private-key/certificate/signing-material
+  scans remain green.
+
+Round split:
+
+- Round 1: rebaseline P19 and package lanes.
+- Round 2: signing-path approval decision.
+- Round 3: artifact directory, cleanup, and evidence retention policy.
+- Round 4: command discovery and rehearsal command shape.
+- Round 5: approved rehearsal run or BLOCKED/SKIPPED record.
+- Round 6: verification, trust, timestamp, and revocation evidence handling.
+- Round 7: base package control lane.
+- Round 8: credentials package control lane.
+- Rounds 9-11: buffer hardening.
+- Round 12: final validation, report, and P21 handoff.

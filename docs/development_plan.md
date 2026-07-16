@@ -432,6 +432,7 @@ Summary:
 - P17 Limited Credential Package Pilot And Signing Decision: 12 conversation rounds.
 - P18 Signing And Distribution Readiness Gate: 12 conversation rounds.
 - P19 Signing Rehearsal And Signed Archive Candidate Gate: 12 conversation rounds.
+- P20 Approved Signing Path Acquisition And Rehearsal Setup Gate: 12 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -451,8 +452,9 @@ hardening, the post-MVP plan became 165 rounds.
 Including selected P17 limited credential package pilot and signing decision,
 the post-MVP plan became 177 rounds. Including accepted P18 signing and
 distribution readiness gate, the post-MVP plan became 189 rounds. Including
-selected P19 signing rehearsal and signed archive candidate gate, the current
-post-MVP plan is 201 rounds.
+accepted P19 signing rehearsal and signed archive candidate gate, the post-MVP
+plan became 201 rounds. Including selected P20 approved signing path
+acquisition and rehearsal setup gate, the current post-MVP plan is 213 rounds.
 
 ## P16 Credential-Capable Package Production Hardening Completion
 
@@ -491,6 +493,16 @@ candidate readiness without becoming a public release.
 
 The P19 guide is
 `docs/p19_signing_rehearsal_signed_archive_candidate_gate_goal_guide.md`.
+
+## P20 Approved Signing Path Acquisition And Rehearsal Setup Gate
+
+P20 decides whether explicit approval exists for a safe throwaway/test signing
+path. It either prepares an isolated local rehearsal with ignored artifacts and
+non-secret evidence, or records signing as BLOCKED/SKIPPED without running
+signing commands.
+
+The P20 guide is
+`docs/p20_approved_signing_path_acquisition_rehearsal_setup_gate_goal_guide.md`.
 
 ## Validation Plan
 

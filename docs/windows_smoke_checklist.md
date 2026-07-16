@@ -124,6 +124,9 @@ P19 signing rehearsal and signed archive candidate planning is recorded in
 `docs/p19_signed_archive_stop_conditions.md`,
 `docs/p19_signed_archive_candidate_decision.md`, and
 `docs/p19_boundary_scan_evidence.md`.
+P20 approved signing path acquisition and rehearsal setup planning is recorded
+in `docs/p20_approved_signing_path_acquisition_rehearsal_setup_gate_goal_guide.md`
+and `docs/p20_todo.md`.
 
 ## Automated Precheck
 

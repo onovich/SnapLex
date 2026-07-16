@@ -1,12 +1,15 @@
 # P19 To P20 Handoff
 
 Date: 2026-07-17
-Status: P19 executor-complete; ready for planner check
+Status: P19 planner-accepted; ready for P20 execution
 
 Recommended P20: approved signing path acquisition and isolated signing
 rehearsal setup gate.
 
-P20 guide: to be created by planner after P19 acceptance.
+P20 guide:
+`docs/p20_approved_signing_path_acquisition_rehearsal_setup_gate_goal_guide.md`
+
+P20 TODO: `docs/p20_todo.md`
 
 ## P19 Outcome
 

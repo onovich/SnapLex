@@ -92,8 +92,7 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p18_package_validation_evidence.md`.
 - Latest accepted P18 report: `docs/p18_final_validation_report.md`.
 - P18 to P19 handoff: `docs/p18_to_p19_handoff.md`.
-- Latest P19 guide: `docs/p19_signing_rehearsal_signed_archive_candidate_gate_goal_guide.md`.
-- Latest P19 TODO: `docs/p19_todo.md`.
+- Latest accepted P19 guide: `docs/p19_signing_rehearsal_signed_archive_candidate_gate_goal_guide.md`.
 - P19 signing rehearsal evidence:
   `docs/p19_signing_path_decision.md`,
   `docs/p19_base_package_control_evidence.md`,
@@ -103,5 +102,9 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p19_signed_archive_stop_conditions.md`,
   `docs/p19_signed_archive_candidate_decision.md`,
   `docs/p19_boundary_scan_evidence.md`.
-- Latest P19 report: `docs/p19_final_validation_report.md`.
+- Latest accepted P19 report: `docs/p19_final_validation_report.md`.
 - P19 to P20 handoff: `docs/p19_to_p20_handoff.md`.
+- Latest P20 guide: `docs/p20_approved_signing_path_acquisition_rehearsal_setup_gate_goal_guide.md`.
+- Latest P20 TODO: `docs/p20_todo.md`.
+- Latest P20 report: `docs/p20_final_validation_report.md`.
+- P20 to P21 handoff: `docs/p20_to_p21_handoff.md`.
