@@ -96,6 +96,24 @@ silent base-package keyring support, cloud accounts, OAuth, billing, token
 broker, browser extension runtime, AI summary runtime, global hotkeys, provider
 rewrites, OCR/capture rewrites, or full localization.
 
+## Round 11 Final Base Restore
+
+After the credential candidate rehearsal, P17 restored the local package output
+to the deterministic base lane.
+
+Commands and results:
+
+- `python scripts\package_windows.py --variant base`: PASS.
+- `dist\SnapLex\SnapLex.exe --version`: PASS, `SnapLex 0.1.0`.
+- `dist\SnapLex\SnapLex.exe --no-gui`: PASS.
+- `cmd /c StartPackagedFakeTrial.cmd --no-gui`: PASS.
+- `cmd /c StartPackagedTrial.cmd --no-gui`: expected rejection PASS.
+- `dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode import`:
+  expected rejection PASS with `keyring is not available in this runtime`.
+
+Result: local `dist\SnapLex` ended the round in the base package lane. The base
+package remains deterministic and keyring-free.
+
 ## Round 2 Self-Checks
 
 Debug self-check:
@@ -115,3 +133,22 @@ Architecture self-check:
 - Provider behavior remains behind provider registry and `TranslationPipeline`;
   no provider or HTTP code moved into UI or packaging scripts.
 - Generated outputs and local smoke data remain ignored local artifacts.
+
+## Round 11 Self-Checks
+
+Debug self-check:
+
+- The final base restore is explained by the smallest control workflow: base
+  build, packaged version/no-gui, packaged fake trial, packaged real-trial
+  expected rejection, and base credential-smoke expected rejection.
+- Success, expected rejection, cleanup-safe, keyring-free, and no-secret states
+  are covered.
+
+Architecture self-check:
+
+- The base package remains deterministic and keyring-free after credential
+  candidate rehearsal.
+- The credential-capable path remains explicit as `--variant credentials`.
+- Package validation did not move provider, credential, settings, history, UI,
+  OCR, or capture rules into scripts.
+- Generated package outputs and smoke data remain ignored local artifacts.

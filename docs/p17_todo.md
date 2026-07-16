@@ -17,7 +17,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Define artifact transfer, retention, and support escalation policy.
 - [x] Decide signing, installer, and updater requirements.
 - [x] Decide whether credentials stay as a separate package variant.
-- [ ] Preserve deterministic base package validation.
+- [x] Preserve deterministic base package validation.
 - [x] Produce P17 boundary scan evidence.
 - [ ] Produce P17 final validation report.
 - [ ] Produce P17 to P18 handoff.
