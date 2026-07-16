@@ -15,7 +15,7 @@ Round budget: 12 conversation rounds
   exists.
 - [x] Revalidate deterministic base package behavior.
 - [x] Revalidate explicit credentials package behavior.
-- [ ] Run approved local signing rehearsal, or record SKIPPED/BLOCKED with a
+- [x] Run approved local signing rehearsal, or record SKIPPED/BLOCKED with a
   precise reason.
 - [ ] Record signature verification, trust, timestamp, and evidence policy.
 - [ ] Define signed archive stop conditions, cleanup, rollback, and support
