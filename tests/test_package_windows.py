@@ -11,6 +11,7 @@ from scripts.package_windows import (
     ENTRY_SCRIPT,
     PROJECT_ROOT,
     TRACKED_SPEC_PATH,
+    PACKAGE_VARIANTS,
     PackageWindowsOptions,
     build_pyinstaller_command,
     main,
@@ -80,6 +81,15 @@ def test_package_windows_dry_run_prints_command(capsys) -> None:
     assert subprocess.list2cmdline([str(TRACKED_SPEC_PATH)]) in output
 
 
+def test_package_windows_supports_explicit_credentials_variant(capsys) -> None:
+    exit_code = main(["--dry-run", "--variant", "credentials"])
+
+    output = capsys.readouterr().out
+    assert exit_code == 0
+    assert "SNAPLEX_PACKAGE_VARIANT=credentials" in output
+    assert "PyInstaller" in output
+
+
 def test_package_windows_passes_variant_to_pyinstaller(monkeypatch) -> None:
     calls = []
 
@@ -95,9 +105,16 @@ def test_package_windows_passes_variant_to_pyinstaller(monkeypatch) -> None:
     assert calls[0][3]["SNAPLEX_PACKAGE_VARIANT"] == "capture"
 
 
+def test_package_variant_choices_keep_credentials_explicit() -> None:
+    assert PACKAGE_VARIANTS == ("base", "capture", "ocr", "full", "credentials")
+
+
 def test_tracked_spec_documents_optional_dependency_variants() -> None:
     spec_text = TRACKED_SPEC_PATH.read_text(encoding="utf-8")
 
     assert "SNAPLEX_PACKAGE_VARIANT" in spec_text
     assert "mss.tools" in spec_text
     assert "paddleocr" in spec_text
+    assert 'package_variant == "credentials"' in spec_text
+    assert "keyring.backends.Windows" in spec_text
+    assert 'excluded_modules.extend(["keyring", "keyring.backends"])' in spec_text

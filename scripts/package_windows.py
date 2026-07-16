@@ -23,6 +23,7 @@ DEFAULT_WORK_DIR = PROJECT_ROOT / "build" / "pyinstaller"
 DEFAULT_SPEC_DIR = PROJECT_ROOT / "build" / "pyinstaller" / "spec"
 TRACKED_SPEC_PATH = PROJECT_ROOT / "packaging" / "snaplex.spec"
 ENTRY_SCRIPT = PROJECT_ROOT / "snaplex" / "__main__.py"
+PACKAGE_VARIANTS = ("base", "capture", "ocr", "full", "credentials")
 
 
 @dataclass(frozen=True)
@@ -117,7 +118,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--variant",
-        choices=("base", "capture", "ocr", "full"),
+        choices=PACKAGE_VARIANTS,
         default="base",
         help="Optional dependency inclusion strategy for the tracked spec.",
     )

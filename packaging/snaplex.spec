@@ -34,6 +34,23 @@ if package_variant in {"ocr", "full"}:
 else:
     excluded_modules.extend(["paddle", "paddleocr"])
 
+if package_variant == "credentials":
+    hidden_imports.extend(
+        [
+            "keyring",
+            "keyring.backends.Windows",
+            "keyring.backends.chainer",
+            "keyring.backends.fail",
+            "keyring.backends.null",
+            "jaraco.classes",
+            "jaraco.context",
+            "jaraco.functools",
+            "jaraco.text",
+        ]
+    )
+else:
+    excluded_modules.extend(["keyring", "keyring.backends"])
+
 block_cipher = None
 
 a = Analysis(

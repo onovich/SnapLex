@@ -88,6 +88,45 @@ P15 evidence may end in PASS, FAIL, BLOCKED, or DEFER:
 
 Any outcome must preserve the base package path.
 
+## Round 2 Optional Dependency Audit
+
+Current package variants before P15 were:
+
+- `base`: GUI package with deterministic fake smoke only;
+- `capture`: base plus optional `mss`;
+- `ocr`: base plus optional `paddleocr`;
+- `full`: capture plus OCR optional module families.
+
+P15 adds `credentials` as an explicit spike variant. It is not selected by
+default and does not alter the base dry-run command. The variant includes
+`keyring`, `keyring.backends.Windows`, and the small `jaraco.*` helper modules
+needed for Windows backend discovery. The base path explicitly excludes
+`keyring` and `keyring.backends` to make accidental inclusion visible in tests.
+
+Source environment audit:
+
+```text
+keyring=25.7.0
+backend=keyring.backends.Windows.WinVaultKeyring
+windows_module=keyring.backends.Windows
+```
+
+Dry-run evidence before code changes:
+
+```text
+SNAPLEX_PACKAGE_VARIANT=base
+SNAPLEX_PACKAGE_VARIANT=full
+```
+
+Round 2 validation should prove:
+
+- `python scripts\package_windows.py --dry-run --variant base` remains
+  unchanged;
+- `python scripts\package_windows.py --dry-run --variant credentials` is
+  accepted and explicit;
+- package tests confirm `credentials` is a named variant and keyring is excluded
+  from non-credential variants.
+
 ## Round 1 Self-Checks
 
 Debug self-check:
@@ -103,3 +142,21 @@ Architecture self-check:
 - Credential behavior remains behind `CredentialService` and credential stores.
 - Packaging remains a thin variant/hidden-import wrapper and does not own
   provider, credential, settings, history, OCR, capture, or UI business rules.
+
+## Round 2 Self-Checks
+
+Debug self-check:
+
+- The current change is explained by optional dependency and package variant
+  audit.
+- Variant selection, optional dependency discovery, keyring backend naming,
+  base exclusion, and credentials inclusion states are covered.
+- No package outputs, keyring exports, logs, screenshots, local app data, or
+  secrets are staged.
+
+Architecture self-check:
+
+- The base package path remains explicit and deterministic.
+- Credential/keyring behavior remains in services; packaging only chooses
+  hidden imports for an explicit variant.
+- P15 still does not promise a production credential-capable package release.
