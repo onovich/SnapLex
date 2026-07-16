@@ -68,11 +68,46 @@ Reason:
 - Implementing provider, keyring package, OCR/capture, global hotkey, cloud, or
   account features would exceed P13 scope without architect expansion.
 
+## Round 3 Closure Evidence
+
+Round 3 did not change runtime code because there is no accepted S0/S1 item to
+repair. The closure decision is validated by deterministic source checks that
+exercise the relevant trial-readiness, release-smoke, and credential boundaries.
+
+Validation:
+
+- `python -m pytest tests\test_trial_readiness.py tests\test_release_smoke.py tests\test_credentials.py --basetemp tmp\pytest-p13-round3`
+  PASS with 22 tests. Pytest emitted a non-blocking local cache warning for
+  `.pytest_cache`; no test failed.
+- `python -m snaplex --check-real-provider` expected rejection PASS with
+  `Real translation provider is not configured.`
+- `cmd /c StartTrial.cmd --no-gui` expected rejection PASS. The source real
+  trial path rejected missing provider setup and pointed users to real provider
+  environment variables or fake smoke commands.
+- `cmd /c StartFakeTrial.cmd --no-gui` PASS. Source fake smoke mode bootstrapped
+  with provider label `fake smoke mode; this is not real translation.`
+
+Debug self-check:
+
+- The current change is documentation-only and directly tied to P13 S0/S1
+  blocker closure.
+- Fake smoke remains available, and real-provider paths remain fail-closed.
+- No screenshots, logs, package outputs, app data, keyring exports, `.env`
+  files, tester data, or provider secrets are added to git.
+
+Architecture self-check:
+
+- No provider, credential, trial-readiness, UI, OCR, capture, or packaging rules
+  moved into docs or widgets.
+- The decision does not promise packaged keyring support, SnapLex Cloud,
+  account OAuth, hosted token brokering, or real network validation.
+- Future S0/S1 feedback still requires privacy-safe evidence and deterministic
+  reproduction before code changes.
+
 ## Required Follow-Up
 
 P13 should continue with documentation, manual-evidence, and feasibility work:
 
-- Round 3: close the no-code-fix decision with deterministic evidence.
 - Round 4: record assistive-technology, DPI, and multi-monitor manual results
   or blockers.
 - Round 5: record optional real-provider smoke run/skip evidence.
