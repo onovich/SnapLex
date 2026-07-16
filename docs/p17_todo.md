@@ -11,7 +11,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Revalidate the accepted P16 baseline.
 - [x] Define controlled private tester lane.
 - [x] Run or rehearse package candidate pre-share gates.
-- [ ] Prepare no-secret tester instructions and feedback intake.
+- [x] Prepare no-secret tester instructions and feedback intake.
 - [ ] Collect tester feedback or record honest blockers/absence.
 - [ ] Record optional real-provider smoke run/skip decision.
 - [ ] Define artifact transfer, retention, and support escalation policy.
