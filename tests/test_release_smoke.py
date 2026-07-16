@@ -35,6 +35,11 @@ class FailingSetPasswordKeyring(FakeCredentialSmokeKeyring):
         raise RuntimeError("secret backend detail")
 
 
+class FailingBackendDiscoveryKeyring(FakeCredentialSmokeKeyring):
+    def get_keyring(self) -> FakeCredentialSmokeBackend:
+        raise RuntimeError("secret backend detail")
+
+
 def test_packaged_workflow_smoke_requires_app_data_override(monkeypatch) -> None:
     monkeypatch.delenv(APP_DATA_DIR_ENV_VAR, raising=False)
 
@@ -137,6 +142,22 @@ def test_packaged_credential_smoke_wraps_store_errors_without_secret_leak() -> N
         raise AssertionError("Expected PackagedSmokeError")
 
     assert message == "credential save failed: credential source unavailable."
+    assert "secret backend detail" not in message
+    assert "credential value" not in message.lower()
+
+
+def test_packaged_credential_smoke_wraps_backend_discovery_without_detail_leak() -> None:
+    try:
+        run_packaged_credential_smoke(
+            mode="import",
+            keyring_module=FailingBackendDiscoveryKeyring(),
+        )
+    except PackagedSmokeError as exc:
+        message = str(exc)
+    else:
+        raise AssertionError("Expected PackagedSmokeError")
+
+    assert message == "keyring backend discovery failed."
     assert "secret backend detail" not in message
     assert "credential value" not in message.lower()
 

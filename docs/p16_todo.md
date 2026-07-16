@@ -14,7 +14,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Harden `--smoke-credentials` modes, output, exit codes, and no-secret
       guarantees.
 - [x] Produce tester-facing credential package setup and cleanup guide.
-- [ ] Document or harden keyring failure modes.
+- [x] Document or harden keyring failure modes.
 - [ ] Define release gate and package artifact policy.
 - [ ] Decide whether credential-capable packaging is ready for limited private
       tester distribution, needs another phase, or remains deferred.
