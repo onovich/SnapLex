@@ -1,23 +1,27 @@
 # P12 To P13 Handoff
 
 Date: 2026-07-16
-Status: P12 executor-complete; planner check requested
+Status: P12 planner-accepted; P13 ready for execution
 
-Recommended next phase: P13 Private Trial Feedback Response And Credential
+Selected next phase: P13 Private Trial Feedback Response And Credential
 Package Feasibility.
 
 P12 final validation report: `docs/p12_final_validation_report.md`
 P12 private trial release notes: `docs/p12_private_trial_release_notes.md`
 P12 feedback intake template: `docs/p12_feedback_intake_template.md`
 P12 triage workflow: `docs/p12_trial_triage_workflow.md`
+P13 execution guide:
+`docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
+P13 TODO: `docs/p13_todo.md`
 
 ## Accepted Input And Executor Baseline
 
 P12 started from planner-accepted P11 at
 `66d3cef11db492b6c6170c26b69e483528186767`.
 
-P12 implementation commits through `09da90d` are pushed to `origin/main`. The
-final closure commit is recorded in the READY_FOR_CHECK message after push.
+P12 implementation and closure commits through
+`1b5c690b4c974c254b9d45d63a78ec4b11a4d583` are pushed to `origin/main`.
+Planner recheck accepted P12 on 2026-07-16.
 
 ## What P12 Leaves Stable
 
@@ -114,9 +118,9 @@ P12 defers a credential-capable package variant. Keep the first pilot paths as:
   localization, cloud accounts, OAuth, billing, hosted token broker, provider
   rewrites, and OCR/capture rewrites remain out of scope.
 
-## Recommended P13 Scope
+## Selected P13 Scope
 
-Recommended P13: run the first private-trial feedback response loop and decide
+Selected P13: run the first private-trial feedback response loop and decide
 credential-package feasibility.
 
 Suggested P13 deliverables:

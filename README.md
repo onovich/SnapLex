@@ -90,6 +90,8 @@ The current project source of truth lives in:
 - `docs/p12_boundary_scan_evidence.md`
 - `docs/p12_final_validation_report.md`
 - `docs/p12_to_p13_handoff.md`
+- `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
+- `docs/p13_todo.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -116,8 +118,9 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P11. P12 is executor-complete and ready for
-planner check. The P0-P7 track is complete with a Windows
+SnapLex has accepted P0 through P12. P13 Private Trial Feedback Response And
+Credential Package Feasibility is selected and ready for execution. The P0-P7
+track is complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
 optional lazy real capture/OCR adapters, real provider adapters for
@@ -125,7 +128,8 @@ LibreTranslate/OpenAI/DeepL, mocked HTTP tests, fake offline defaults, persisted
 settings, optional recent translation history, shared result states, a
 PyInstaller spec, packaged release smoke commands, post-MVP expansion plans,
 provider setup UX, Apple-inspired UI polish, accepted P10 credential/account
-work, and accepted P11 trial release hardening.
+work, accepted P11 trial release hardening, and accepted P12 private-trial
+pilot materials.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -137,8 +141,11 @@ P9 closure package. P10 Secure Credential And Account Strategy is
 planner-accepted; use `docs/p10_final_validation_report.md` and
 `docs/p10_to_p11_handoff.md`. P11 Trial Release Hardening is planner-accepted;
 use `docs/p11_final_validation_report.md` and `docs/p11_to_p12_handoff.md`.
-P12 Private Trial Pilot And Feedback Triage is ready for planner check; use
-`docs/p12_final_validation_report.md` and `docs/p12_to_p13_handoff.md`.
+P12 Private Trial Pilot And Feedback Triage is planner-accepted; use
+`docs/p12_final_validation_report.md` and `docs/p12_to_p13_handoff.md`. P13 is
+the active selected guide; use
+`docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
+and `docs/p13_todo.md`.
 
 ## Setup
 
@@ -483,7 +490,7 @@ See `docs/p11_trial_release_hardening_goal_guide.md`,
 
 ## P12 Private Trial Pilot And Feedback Triage
 
-P12 executor work prepares the first controlled private-trial pilot by producing
+P12 planner-accepted work prepares the first controlled private-trial pilot by producing
 tester-facing release notes, feedback intake templates, pass/fail criteria,
 manual environment-check instructions, optional real-provider smoke policy,
 credential package variant decision notes, a triage workflow, and boundary
@@ -505,6 +512,23 @@ See `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
 `docs/p12_trial_triage_workflow.md`. Boundary evidence is recorded in
 `docs/p12_boundary_scan_evidence.md`. The closure package is
 `docs/p12_final_validation_report.md` and `docs/p12_to_p13_handoff.md`.
+
+## P13 Private Trial Feedback Response And Credential Package Feasibility
+
+P13 is the selected next execution phase. It should run the first
+private-trial feedback response loop, close any accepted S0/S1 pilot blockers
+inside existing boundaries, capture assistive-technology/DPI/multi-monitor
+manual results or blockers, record optional real-provider and keyring smoke
+evidence only when allowed, and decide whether a credential-capable package
+variant should be implemented in a later explicit phase.
+
+P13 must preserve P10/P11/P12 boundaries: deterministic fake smoke, no-network
+automated tests, no-secret repository hygiene, credential service boundaries,
+fail-closed real trial paths, and no broad feature expansion.
+
+See
+`docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
+and `docs/p13_todo.md`.
 
 ## Current Boundaries
 

@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 Phase: P12 Private Trial Pilot And Feedback Triage
-Status: READY_FOR_CHECK
+Status: PASS - planner-accepted
 
 Accepted input baseline: P11 at
 `66d3cef11db492b6c6170c26b69e483528186767`.
@@ -162,21 +162,48 @@ P12 was delivered through incremental pushed commits:
 - `bc52085` - defer credential package variant.
 - `2a59c51` - add trial triage workflow.
 - `09da90d` - record boundary scan evidence.
+- `1b5c690b4c974c254b9d45d63a78ec4b11a4d583` - finalize private
+  trial pilot.
 
-The final closure commit containing this report and the P12-to-P13 handoff is
-recorded in the executor READY_FOR_CHECK message after commit and push.
+Planner acceptance was recorded after re-running the validation matrix against
+`1b5c690b4c974c254b9d45d63a78ec4b11a4d583`.
 
 ## Push Result
 
-P12 implementation commits through `09da90d` are already pushed to
-`origin/main`. The closure commit must be pushed before planner acceptance.
+P12 implementation and closure commits are pushed to `origin/main`.
+
+## Planner Acceptance
+
+Planner recheck on 2026-07-16: PASS.
+
+Re-run validation evidence:
+
+- `C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\Validate.cmd`:
+  PASS with 255 tests.
+- `git diff --check`: PASS.
+- `python -m snaplex --version`: PASS, prints `SnapLex 0.1.0`.
+- `python -m snaplex --no-gui`: PASS, PySide6 bootstrap OK.
+- `python -m snaplex --check-real-provider`: expected rejection PASS when no
+  real provider is configured.
+- `python scripts\package_windows.py --dry-run --variant base`: PASS.
+- `cmd /c StartTrial.cmd --no-gui`: expected rejection PASS.
+- `cmd /c StartFakeTrial.cmd --no-gui`: PASS.
+- `cmd /c SmokeTrial.cmd`: PASS.
+- `cmd /c StartPackagedFakeTrial.cmd --no-gui`: PASS.
+- `cmd /c StartPackagedTrial.cmd --no-gui`: expected rejection PASS.
+- `python scripts\p9_gui_smoke.py`: PASS with ignored local screenshots.
+- `python scripts\p11_visible_gui_smoke.py`: PASS with ignored local
+  screenshots.
+- P12 docs link/index check: PASS.
+- Artifact boundary scan: PASS.
+- Secret pattern scan: PASS.
 
 ## Request For Acceptance
 
-P12 is ready for architect/PM check against
+P12 is accepted by architect/PM check against
 `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`.
 
-Recommended next goal: P13 Private Trial Feedback Response And Credential
-Package Feasibility, focused on running the first tester feedback loop, closing
-any S0/S1 pilot blockers, and deciding whether a credential-capable package
-variant should be implemented after manual keyring validation.
+Selected next goal: P13 Private Trial Feedback Response And Credential Package
+Feasibility, focused on running the first tester feedback loop, closing any
+S0/S1 pilot blockers, and deciding whether a credential-capable package variant
+should be implemented after manual keyring validation.

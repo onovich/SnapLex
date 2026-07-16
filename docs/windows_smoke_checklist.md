@@ -45,6 +45,9 @@ P12 private trial pilot planning is recorded in
 `docs/p12_boundary_scan_evidence.md`,
 `docs/p12_final_validation_report.md`, `docs/p12_to_p13_handoff.md`, and
 `docs/p12_todo.md`.
+P13 private trial feedback response planning is recorded in
+`docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
+and `docs/p13_todo.md`.
 
 ## Automated Precheck
 
@@ -488,6 +491,27 @@ trial materials and smoke evidence privacy-safe:
 - Route tester reports through `docs/p12_trial_triage_workflow.md`.
 - Confirm boundary evidence in `docs/p12_boundary_scan_evidence.md`.
 - Re-run artifact and secret scans before committing any trial docs.
+
+## P13 Private Trial Feedback Response Smoke
+
+P13 responds to the first private-trial feedback loop while preserving the P12
+privacy and no-secret rules:
+
+- Confirm `docs/p13_feedback_response_log.md` clearly states whether external
+  tester feedback was supplied.
+- Confirm feedback is classified with the P12 severity/disposition taxonomy.
+- Confirm accepted S0/S1 blockers have deterministic reproduction and closure
+  evidence, or a clear blocker.
+- Confirm assistive-technology, DPI scaling, and multi-monitor checks have
+  manual results or blockers.
+- Run optional real-provider smoke only when local credentials already exist and
+  a human intentionally approves network use.
+- Run source keyring smoke only with optional credentials support and a
+  throwaway fake value.
+- Confirm credential-capable package feasibility is a decision artifact, not a
+  shipped promise, unless a later phase explicitly expands scope.
+- Re-run artifact and secret scans before committing any P13 docs or accepted
+  fixes.
 
 ## P7 Expansion Planning Validation
 

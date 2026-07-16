@@ -5,7 +5,7 @@ tester-facing release notes, feedback intake templates, pass/fail criteria,
 manual environment checks, optional real-provider smoke policy, and credential
 package variant decision notes while preserving P11/P10 boundaries.
 
-Status: executor-complete; ready for planner check.
+Status: complete; planner-accepted.
 
 Executable guide: `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`
 

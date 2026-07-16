@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P12 executor-complete planning document with P13 recommendation
+Status: P12 planner-accepted planning document with selected P13 guide
 
 ## 0. Round Estimate Rules
 
@@ -26,6 +26,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P10 | Secure Credential And Account Strategy | Add credential service boundaries, preserve env-var users, evaluate optional OS keyring storage, and document account/cloud strategy without production OAuth. | 16 rounds |
 | P11 | Trial Release Hardening | Validate visible Windows behavior, manual keyring smoke, packaged credential behavior, onboarding copy, and release notes before broader private trial. | 12 rounds |
 | P12 | Private Trial Pilot And Feedback Triage | Prepare tester-facing release notes, feedback intake, pass/fail criteria, manual environment checks, optional real-provider smoke policy, and triage rules. | 12 rounds |
+| P13 | Private Trial Feedback Response And Credential Package Feasibility | Respond to the first private-trial feedback loop, close accepted S0/S1 blockers, capture manual environment results, and decide credential-capable package feasibility. | 12 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -34,6 +35,7 @@ Total including selected P9 post-MVP implementation: 77 rounds.
 Total including selected P10 post-MVP implementation: 93 rounds.
 Total including selected P11 post-MVP implementation: 105 rounds.
 Total including selected P12 post-MVP implementation: 117 rounds.
+Total including selected P13 post-MVP implementation: 129 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -365,15 +367,16 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P11 - Trial Release Hardening.
+Current accepted phase: P12 - Private Trial Pilot And Feedback Triage.
 
-Current executor-complete phase: P12 - Private Trial Pilot And Feedback
-Triage, ready for planner check.
+Current selected phase: P13 - Private Trial Feedback Response And Credential
+Package Feasibility, ready for execution.
 
 P0-P7 status: complete.
 
-Selected next step: planner check for P12 using
-`docs/p12_final_validation_report.md` and `docs/p12_to_p13_handoff.md`.
+Selected next step: execute P13 using
+`docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
+and `docs/p13_todo.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -733,8 +736,70 @@ Executor completion artifacts:
 - `docs/p12_final_validation_report.md`
 - `docs/p12_to_p13_handoff.md`
 
-Executor completion:
+Planner acceptance:
 
-- P12 ready for planner check on 2026-07-16.
-- Recommended P13: Private Trial Feedback Response And Credential Package
-  Feasibility.
+- P12 accepted on 2026-07-16 at
+  `1b5c690b4c974c254b9d45d63a78ec4b11a4d583`.
+- Selected next phase: P13 Private Trial Feedback Response And Credential
+  Package Feasibility.
+
+## 16. P13 - Private Trial Feedback Response And Credential Package Feasibility
+
+Estimated rounds: 12
+
+Execution guide:
+`docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
+
+Goal: respond to the first private-trial feedback loop, close accepted S0/S1
+pilot blockers when they are safe and deterministic, capture remaining manual
+environment results or blockers, and decide whether a credential-capable
+package variant is feasible for a later explicit phase.
+
+Scope:
+
+- Revalidate the accepted P12 baseline.
+- Create a private-trial feedback response log.
+- Triage supplied tester feedback, or explicitly record that no external
+  feedback was supplied and process P12 known gaps as internal pilot blockers.
+- Close accepted S0/S1 pilot blockers with deterministic validation, or record
+  blockers.
+- Capture assistive-technology, DPI, and multi-monitor manual results or
+  blockers.
+- Record optional real-provider smoke run/skip evidence.
+- Record source keyring smoke pass/blocker evidence with only a throwaway fake
+  value when optional credentials support is available.
+- Decide credential-capable package feasibility for a later explicit phase.
+
+Deliverables:
+
+- `docs/p13_feedback_response_log.md`
+- `docs/p13_s0_s1_blocker_resolution.md`
+- `docs/p13_manual_environment_results.md`
+- `docs/p13_real_provider_smoke_record.md`
+- `docs/p13_keyring_source_smoke_record.md`
+- `docs/p13_credential_package_feasibility.md`
+- `docs/p13_boundary_scan_evidence.md`
+- P13 final validation report and P13 to P14 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Package dry-run remains green.
+- Fake/real trial command smoke remains green.
+- P9 and P11 GUI smoke remain green.
+- Docs link/index and artifact/secret scans remain green.
+
+Round split:
+
+- Round 1: rebaseline and feedback source inventory.
+- Round 2: triage and S0/S1 decision.
+- Round 3: first accepted blocker fix or closure.
+- Round 4: manual AT/DPI/multi-monitor evidence.
+- Round 5: optional real-provider smoke record.
+- Round 6: source keyring smoke record.
+- Round 7: credential package feasibility.
+- Round 8: feedback response closure.
+- Rounds 9-11: buffer hardening.
+- Round 12: final validation, report, and P14 handoff.
