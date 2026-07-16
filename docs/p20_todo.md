@@ -20,7 +20,7 @@ Round budget: 12 conversation rounds
   running signing commands.
 - [x] Define signature verification, trust, timestamp, and revocation evidence
   handling.
-- [ ] Revalidate deterministic base package lane.
+- [x] Revalidate deterministic base package lane.
 - [ ] Revalidate explicit credentials package lane.
 - [ ] Run boundary, secret, private-key, certificate, package-output,
   screenshot, log, and signing-material scans.
