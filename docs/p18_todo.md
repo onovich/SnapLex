@@ -16,7 +16,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Define rollback and update policy without implementing updater runtime.
 - [x] Define artifact naming, transfer, retention, revocation, and support
       escalation policy.
-- [ ] Decide distribution readiness.
+- [x] Decide distribution readiness.
 - [ ] Preserve deterministic base package validation.
 - [ ] Preserve explicit credentials package validation.
 - [ ] Produce P18 boundary scan evidence.
