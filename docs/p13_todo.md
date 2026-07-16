@@ -11,7 +11,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Revalidate the accepted P12 baseline.
 - [x] Create a private-trial feedback response log.
 - [x] Record whether external tester feedback exists; do not fabricate reports.
-- [ ] Triage supplied feedback or P12 known gaps using P12 severity rules.
+- [x] Triage supplied feedback or P12 known gaps using P12 severity rules.
 - [ ] Close any accepted S0/S1 pilot blockers with deterministic validation, or
       document blockers.
 - [ ] Capture assistive-technology, DPI, and multi-monitor manual results or
