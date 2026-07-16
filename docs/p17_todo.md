@@ -18,7 +18,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Decide signing, installer, and updater requirements.
 - [x] Decide whether credentials stay as a separate package variant.
 - [ ] Preserve deterministic base package validation.
-- [ ] Produce P17 boundary scan evidence.
+- [x] Produce P17 boundary scan evidence.
 - [ ] Produce P17 final validation report.
 - [ ] Produce P17 to P18 handoff.
 
