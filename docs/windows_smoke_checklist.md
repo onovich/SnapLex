@@ -53,7 +53,9 @@ and `docs/p13_todo.md`. P13 feedback closure evidence is recorded in
 `docs/p13_manual_environment_results.md`,
 `docs/p13_real_provider_smoke_record.md`,
 `docs/p13_keyring_source_smoke_record.md`, and
-`docs/p13_credential_package_feasibility.md`.
+`docs/p13_credential_package_feasibility.md`. P13 final evidence is recorded in
+`docs/p13_boundary_scan_evidence.md`,
+`docs/p13_final_validation_report.md`, and `docs/p13_to_p14_handoff.md`.
 
 ## Automated Precheck
 
@@ -523,6 +525,8 @@ privacy and no-secret rules:
   evidence, `docs/p13_keyring_source_smoke_record.md` for source keyring
   blocker evidence, and `docs/p13_credential_package_feasibility.md` for the
   deferred credential-package decision.
+- Use `docs/p13_final_validation_report.md` and `docs/p13_to_p14_handoff.md`
+  for P13 closure and the recommended P14 direction.
 - Re-run artifact and secret scans before committing any P13 docs or accepted
   fixes.
 

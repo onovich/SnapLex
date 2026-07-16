@@ -65,3 +65,5 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P12 to P13 handoff: `docs/p12_to_p13_handoff.md`.
 - Latest P13 guide: `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`.
 - Latest P13 TODO: `docs/p13_todo.md`.
+- P13 executor final report: `docs/p13_final_validation_report.md`.
+- P13 to P14 handoff: `docs/p13_to_p14_handoff.md`.

@@ -98,6 +98,9 @@ The current project source of truth lives in:
 - `docs/p13_real_provider_smoke_record.md`
 - `docs/p13_keyring_source_smoke_record.md`
 - `docs/p13_credential_package_feasibility.md`
+- `docs/p13_boundary_scan_evidence.md`
+- `docs/p13_final_validation_report.md`
+- `docs/p13_to_p14_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -125,7 +128,8 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has accepted P0 through P12. P13 Private Trial Feedback Response And
-Credential Package Feasibility is in execution. The P0-P7 track is complete with a Windows
+Credential Package Feasibility is executor-complete and ready for planner
+check. The P0-P7 track is complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
 optional lazy real capture/OCR adapters, real provider adapters for
@@ -148,7 +152,7 @@ planner-accepted; use `docs/p10_final_validation_report.md` and
 use `docs/p11_final_validation_report.md` and `docs/p11_to_p12_handoff.md`.
 P12 Private Trial Pilot And Feedback Triage is planner-accepted; use
 `docs/p12_final_validation_report.md` and `docs/p12_to_p13_handoff.md`. P13 is
-the active execution phase; use
+executor-complete and ready for planner check; use
 `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
 and `docs/p13_todo.md`. P13 feedback response artifacts are recorded in
 `docs/p13_feedback_response_log.md`,
@@ -156,7 +160,9 @@ and `docs/p13_todo.md`. P13 feedback response artifacts are recorded in
 `docs/p13_manual_environment_results.md`,
 `docs/p13_real_provider_smoke_record.md`,
 `docs/p13_keyring_source_smoke_record.md`, and
-`docs/p13_credential_package_feasibility.md`.
+`docs/p13_credential_package_feasibility.md`. P13 closure evidence is
+`docs/p13_boundary_scan_evidence.md`, `docs/p13_final_validation_report.md`,
+and `docs/p13_to_p14_handoff.md`.
 
 ## Setup
 
@@ -526,11 +532,11 @@ See `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
 
 ## P13 Private Trial Feedback Response And Credential Package Feasibility
 
-P13 is in execution. It runs the first private-trial feedback response loop,
-closes accepted S0/S1 pilot blockers inside existing boundaries, captures
-assistive-technology/DPI/multi-monitor manual results or blockers, records
-optional real-provider and keyring smoke evidence only when allowed, and decides
-whether a credential-capable package variant should be implemented in a later
+P13 executor work ran the first private-trial feedback response loop, closed
+accepted S0/S1 pilot blockers inside existing boundaries, captured
+assistive-technology/DPI/multi-monitor manual results or blockers, recorded
+optional real-provider and keyring smoke evidence only when allowed, and decided
+that credential-capable package implementation should be deferred to a later
 explicit phase.
 
 P13 must preserve P10/P11/P12 boundaries: deterministic fake smoke, no-network
@@ -545,7 +551,9 @@ and `docs/p13_todo.md`. The Round 8 feedback closure package is
 `docs/p13_manual_environment_results.md`,
 `docs/p13_real_provider_smoke_record.md`,
 `docs/p13_keyring_source_smoke_record.md`, and
-`docs/p13_credential_package_feasibility.md`.
+`docs/p13_credential_package_feasibility.md`. The final P13 executor package is
+`docs/p13_boundary_scan_evidence.md`, `docs/p13_final_validation_report.md`,
+and `docs/p13_to_p14_handoff.md`.
 
 ## Current Boundaries
 

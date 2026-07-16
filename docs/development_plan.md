@@ -293,13 +293,13 @@ The closure package is `docs/p12_final_validation_report.md` and
 
 ## Selected P13 Private Trial Feedback Response And Credential Package Feasibility
 
-P13 is the selected next execution phase after P12 acceptance. It should run the
-first private-trial feedback response loop, honestly record whether external
-tester feedback exists, close accepted S0/S1 pilot blockers when they are safe
-and deterministic, capture assistive-technology/DPI/multi-monitor manual
-results or blockers, record optional real-provider and source keyring smoke
-evidence only when allowed, and decide whether a credential-capable package
-variant should be implemented in a later explicit phase.
+P13 is executor-complete and ready for planner check after P12 acceptance. It
+ran the first private-trial feedback response loop, honestly recorded whether
+external tester feedback exists, closed accepted S0/S1 pilot blockers when they
+were safe and deterministic, captured assistive-technology/DPI/multi-monitor
+manual results or blockers, recorded optional real-provider and source keyring
+smoke evidence only when allowed, and decided whether a credential-capable
+package variant should be implemented in a later explicit phase.
 
 The executable guide is
 `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`;
@@ -318,6 +318,9 @@ be deferred to a later isolated spike. The current response artifacts are
 `docs/p13_real_provider_smoke_record.md`,
 `docs/p13_keyring_source_smoke_record.md`, and
 `docs/p13_credential_package_feasibility.md`.
+
+The P13 closure package is `docs/p13_boundary_scan_evidence.md`,
+`docs/p13_final_validation_report.md`, and `docs/p13_to_p14_handoff.md`.
 
 ## MVP Goals
 

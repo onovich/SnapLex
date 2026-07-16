@@ -3,7 +3,7 @@
 Date: 2026-07-16
 Phase: P13 Private Trial Feedback Response And Credential Package Feasibility
 Guide: `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
-Status: in progress; feedback response closure recorded through Round 8.
+Status: executor complete; ready for planner check.
 Estimated budget: 12 conversation rounds.
 
 ## Tasks
@@ -24,8 +24,8 @@ Estimated budget: 12 conversation rounds.
       credential boundaries, fail-closed real trial paths, and no-secret
       repository hygiene.
 - [x] Produce P13 boundary scan evidence.
-- [ ] Produce P13 final validation report.
-- [ ] Produce P13 to P14 handoff.
+- [x] Produce P13 final validation report.
+- [x] Produce P13 to P14 handoff.
 
 ## Deferred Outside P13
 
