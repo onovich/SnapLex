@@ -17,7 +17,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Run or document blocker for multi-monitor validation.
 - [x] Install optional source credential support when feasible and record
       keyring dependency/backend status.
-- [ ] Run source keyring save/read/delete smoke with only a throwaway fake
+- [x] Run source keyring save/read/delete smoke with only a throwaway fake
       value when feasible, or document the blocker.
 - [ ] Record optional real-provider smoke run/skip evidence.
 - [ ] Decide whether evidence justifies a later isolated credential-capable
