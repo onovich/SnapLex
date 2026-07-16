@@ -17,7 +17,7 @@ Round budget: 10 conversation rounds
 - [x] Refresh feedback triage criteria and pass/fail language.
 - [x] Revalidate deterministic base package lane.
 - [x] Revalidate explicit credentials package lane.
-- [ ] Record artifact transfer, retention, cleanup, and no-secret evidence.
+- [x] Record artifact transfer, retention, cleanup, and no-secret evidence.
 - [ ] Run boundary, secret, private-key, certificate, package-output,
   screenshot, log, and signing-material scans.
 - [ ] Write final validation report and P23 handoff.
