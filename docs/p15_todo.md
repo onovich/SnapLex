@@ -12,7 +12,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Create package spike design notes.
 - [x] Audit optional dependency and packaging variant behavior.
 - [x] Prove or reject packaged keyring import/backend discovery.
-- [ ] Prove or reject packaged credential save/read/delete/cleanup with only a
+- [x] Prove or reject packaged credential save/read/delete/cleanup with only a
       throwaway fake value.
 - [ ] Prove or reject packaged restart readiness without displaying or printing
       the fake value.
