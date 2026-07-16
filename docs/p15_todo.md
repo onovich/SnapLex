@@ -14,7 +14,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Prove or reject packaged keyring import/backend discovery.
 - [x] Prove or reject packaged credential save/read/delete/cleanup with only a
       throwaway fake value.
-- [ ] Prove or reject packaged restart readiness without displaying or printing
+- [x] Prove or reject packaged restart readiness without displaying or printing
       the fake value.
 - [ ] Preserve deterministic base package dry-run and fake package smoke.
 - [ ] Document cleanup guidance for throwaway/manual credentials and local
