@@ -19,7 +19,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Record optional real-provider smoke run/skip evidence.
 - [x] Record source keyring smoke pass/blocker evidence using only a throwaway
       fake value when optional credentials support is available.
-- [ ] Decide credential-capable package feasibility for a later explicit phase.
+- [x] Decide credential-capable package feasibility for a later explicit phase.
 - [ ] Preserve deterministic no-network tests, fake smoke, P10/P11/P12
       credential boundaries, fail-closed real trial paths, and no-secret
       repository hygiene.
