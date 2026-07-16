@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P21 Signing Path Unblock Decision Or Pause Gate
-Status: PASS - ready for planner check
+Status: PASS - accepted by planner
 Final commit: recorded in READY_FOR_CHECK planner notification after final
 report commit
 Push: PASS, `origin/main`
@@ -153,6 +153,9 @@ Evidence:
 - Broader Credential Locker/keyring device matrix evidence remains limited.
 
 ## Recommended Next Phase
+
+Planner acceptance: P21 was accepted on 2026-07-17 at
+`96b193e9c6dfbdae3f89c59d4bea76c500846a30`.
 
 Recommended P22: non-signing private-trial continuity and tester-support gate.
 

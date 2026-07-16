@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P20 planner-accepted; P21 ready for executor
+Status: P21 planner-accepted; P22 ready for executor
 
 ## 0. Round Estimate Rules
 
@@ -35,6 +35,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P19 | Signing Rehearsal And Signed Archive Candidate Gate | Decide whether a safe isolated signing rehearsal can run and gate any signed archive candidate without public release. | 12 rounds |
 | P20 | Approved Signing Path Acquisition And Rehearsal Setup Gate | Decide whether an approved safe signing path exists and set up or block isolated rehearsal work without public release. | 12 rounds |
 | P21 | Signing Path Unblock Decision Or Pause Gate | Decide whether signing is unblocked for a later rehearsal or paused until human approval is supplied. | 8 rounds |
+| P22 | Non-Signing Private Trial Continuity And Tester Support Gate | Continue unsigned/private-trial readiness and tester support while signing remains paused. | 10 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -51,7 +52,8 @@ Total including selected P17 post-MVP implementation: 177 rounds.
 Total including accepted P18 post-MVP implementation: 189 rounds.
 Total including accepted P19 post-MVP implementation: 201 rounds.
 Total including accepted P20 post-MVP implementation: 213 rounds.
-Total including selected P21 post-MVP implementation: 221 rounds.
+Total including accepted P21 post-MVP implementation: 221 rounds.
+Total including selected P22 post-MVP implementation: 231 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -1478,3 +1480,79 @@ Round split:
 - Round 6: boundary and signing-material scans.
 - Round 7: buffer for docs, links, or decision clarity.
 - Round 8: final validation, report, P22 handoff, and planner notification.
+
+Executor completion:
+
+- P21 completed at `96b193e9c6dfbdae3f89c59d4bea76c500846a30`.
+- P21 recorded signing state as PAUSED because no explicit safe
+  throwaway/test signing path approval was supplied after P20.
+- P21 did not run signing commands, create/import/purchase/invent/use
+  certificates, call timestamp services, create signed artifacts, or approve
+  public release.
+- P21 closure is recorded in `docs/p21_final_validation_report.md` and
+  `docs/p21_to_p22_handoff.md`.
+
+Planner acceptance:
+
+- P21 accepted at `96b193e9c6dfbdae3f89c59d4bea76c500846a30`.
+- Selected next phase: P22 Non-Signing Private Trial Continuity And Tester
+  Support Gate.
+
+## 25. P22 - Non-Signing Private Trial Continuity And Tester Support Gate
+
+Estimated rounds: 10
+
+Execution guide:
+`docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`
+
+Goal: continue unsigned/private-trial readiness and tester support while
+signing remains paused.
+
+Scope:
+
+- Revalidate the accepted P21 baseline.
+- Keep signing paused and document unsigned-private-trial trust label.
+- Refresh tester-facing unsigned/private-trial instructions.
+- Refresh support intake, privacy guidance, escalation, and feedback triage.
+- Record artifact transfer, retention, cleanup, and no-secret expectations.
+- Preserve deterministic base package validation.
+- Preserve explicit credentials package validation.
+- Preserve no-secret and no-artifact repository hygiene.
+
+Deliverables:
+
+- `docs/p22_unsigned_private_trial_release_notes.md`
+- `docs/p22_tester_support_intake.md`
+- `docs/p22_feedback_triage_criteria.md`
+- `docs/p22_artifact_transfer_retention.md`
+- `docs/p22_base_package_continuity_evidence.md`
+- `docs/p22_credentials_package_continuity_evidence.md`
+- `docs/p22_boundary_scan_evidence.md`
+- P22 final validation report and P22 to P23 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Base and credentials package dry-runs pass.
+- Base package remains deterministic and rejects credential smoke.
+- Credentials package smoke covers import, cycle, save/check-delete restart
+  readiness, and cleanup when feasible.
+- Fake/real trial command smoke remains green and real trial paths fail closed.
+- No signing command runs.
+- Docs link/index and artifact/secret/private-key/certificate/signing-material
+  scans remain green.
+
+Round split:
+
+- Round 1: rebaseline P21 and signing pause state.
+- Round 2: tester instructions and trust-label language.
+- Round 3: support intake, privacy, and escalation rules.
+- Round 4: feedback triage and pass/fail criteria.
+- Round 5: base package continuity lane.
+- Round 6: credentials package continuity lane.
+- Round 7: artifact transfer, retention, cleanup, and no-secret evidence.
+- Round 8: boundary and signing-material scans.
+- Round 9: buffer for docs, links, package evidence, or support clarity.
+- Round 10: final validation, report, P23 handoff, and planner notification.

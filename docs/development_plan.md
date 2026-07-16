@@ -434,6 +434,7 @@ Summary:
 - P19 Signing Rehearsal And Signed Archive Candidate Gate: 12 conversation rounds.
 - P20 Approved Signing Path Acquisition And Rehearsal Setup Gate: 12 conversation rounds.
 - P21 Signing Path Unblock Decision Or Pause Gate: 8 conversation rounds.
+- P22 Non-Signing Private Trial Continuity And Tester Support Gate: 10 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -457,7 +458,9 @@ accepted P19 signing rehearsal and signed archive candidate gate, the post-MVP
 plan became 201 rounds. Including selected P20 approved signing path
 acquisition and rehearsal setup gate, the post-MVP plan became 213 rounds.
 Including selected P21 signing path unblock decision or pause gate, the current
-post-MVP plan is 221 rounds.
+post-MVP plan became 221 rounds. Including selected P22 non-signing private
+trial continuity and tester support gate, the current post-MVP plan is 231
+rounds.
 
 ## P16 Credential-Capable Package Production Hardening Completion
 
@@ -515,6 +518,15 @@ the missing inputs. It does not run signing commands.
 
 The P21 guide is
 `docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md`.
+
+## P22 Non-Signing Private Trial Continuity And Tester Support Gate
+
+P22 continues unsigned/private-trial readiness while signing remains paused. It
+refreshes tester-facing instructions, support intake, feedback triage, artifact
+transfer/retention, and package-lane evidence without adding runtime features.
+
+The P22 guide is
+`docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`.
 
 ## Validation Plan
 

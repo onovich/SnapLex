@@ -1,9 +1,14 @@
 # P21 To P22 Handoff
 
 Date: 2026-07-17
-Status: P21 executor-complete; ready for planner check
+Status: P21 planner-accepted; ready for P22 execution
 
 Recommended P22: non-signing private-trial continuity and tester-support gate.
+
+P22 guide:
+`docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`
+
+P22 TODO: `docs/p22_todo.md`
 
 P21 final validation report:
 `docs/p21_final_validation_report.md`

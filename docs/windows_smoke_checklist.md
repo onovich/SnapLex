@@ -144,6 +144,10 @@ P21 signing path unblock decision or pause planning is recorded in
 `docs/p21_base_package_control_evidence.md`,
 `docs/p21_credentials_package_control_evidence.md`, and
 `docs/p21_boundary_scan_evidence.md`.
+P22 non-signing private-trial continuity and tester-support planning is
+recorded in
+`docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`
+and `docs/p22_todo.md`.
 
 ## Automated Precheck
 

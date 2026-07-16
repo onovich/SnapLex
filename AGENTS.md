@@ -116,8 +116,7 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p20_boundary_scan_evidence.md`.
 - Latest accepted P20 report: `docs/p20_final_validation_report.md`.
 - P20 to P21 handoff: `docs/p20_to_p21_handoff.md`.
-- Latest P21 guide: `docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md`.
-- Latest P21 TODO: `docs/p21_todo.md`.
+- Latest accepted P21 guide: `docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md`.
 - P21 signing pause/unblock evidence:
   `docs/p21_signing_path_decision.md`,
   `docs/p21_signing_unblock_requirements.md`,
@@ -125,5 +124,9 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p21_base_package_control_evidence.md`,
   `docs/p21_credentials_package_control_evidence.md`,
   `docs/p21_boundary_scan_evidence.md`.
-- Latest P21 report: `docs/p21_final_validation_report.md`.
+- Latest accepted P21 report: `docs/p21_final_validation_report.md`.
 - P21 to P22 handoff: `docs/p21_to_p22_handoff.md`.
+- Latest P22 guide: `docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`.
+- Latest P22 TODO: `docs/p22_todo.md`.
+- Latest P22 report: `docs/p22_final_validation_report.md`.
+- P22 to P23 handoff: `docs/p22_to_p23_handoff.md`.

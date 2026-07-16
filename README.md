@@ -764,8 +764,8 @@ P21 makes an explicit decision after P20: either all safe signing-path approval
 inputs exist and can be handed to a later rehearsal phase, or signing work is
 paused until a human supplies those inputs. P21 does not run signing commands.
 
-See `docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md` and
-`docs/p21_todo.md`. P21 executor evidence is recorded in
+See `docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md`. P21
+executor evidence is recorded in
 `docs/p21_signing_path_decision.md`,
 `docs/p21_signing_unblock_requirements.md`,
 `docs/p21_next_phase_recommendation.md`,
@@ -773,6 +773,16 @@ See `docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md` and
 `docs/p21_credentials_package_control_evidence.md`, and
 `docs/p21_boundary_scan_evidence.md`. The P21 closure package is
 `docs/p21_final_validation_report.md` and `docs/p21_to_p22_handoff.md`.
+
+## P22 Non-Signing Private Trial Continuity And Tester Support Gate
+
+P22 continues unsigned/private-trial readiness while signing is paused. It
+refreshes tester instructions, support intake, privacy guidance, feedback
+triage, artifact transfer/retention, and package-lane evidence without running
+signing commands or adding runtime features.
+
+See `docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`
+and `docs/p22_todo.md`.
 
 ## Current Boundaries
 
