@@ -18,9 +18,9 @@ Estimated budget: 12 conversation rounds.
 - [x] Define release gate and package artifact policy.
 - [x] Decide whether credential-capable packaging is ready for limited private
       tester distribution, needs another phase, or remains deferred.
-- [ ] Preserve no-network automated validation and fail-closed real trial
+- [x] Preserve no-network automated validation and fail-closed real trial
       behavior.
-- [ ] Produce P16 boundary scan evidence.
+- [x] Produce P16 boundary scan evidence.
 - [ ] Produce P16 final validation report.
 - [ ] Produce P16 to P17 handoff.
 
