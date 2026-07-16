@@ -111,6 +111,8 @@ The current project source of truth lives in:
 - `docs/p14_boundary_scan_evidence.md`
 - `docs/p14_final_validation_report.md`
 - `docs/p14_to_p15_handoff.md`
+- `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`
+- `docs/p15_todo.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -137,9 +139,9 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P13. P14 Manual Environment And Source Keyring
-Validation is executor-complete and ready for planner check. The P0-P7 track is complete
-with a Windows
+SnapLex has accepted P0 through P14. P15 Isolated Credential-Capable Package
+Spike Design Gate is selected and ready for execution. The P0-P7 track is
+complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
 optional lazy real capture/OCR adapters, real provider adapters for
@@ -148,8 +150,8 @@ settings, optional recent translation history, shared result states, a
 PyInstaller spec, packaged release smoke commands, post-MVP expansion plans,
 provider setup UX, Apple-inspired UI polish, accepted P10 credential/account
 work, accepted P11 trial release hardening, accepted P12 private-trial pilot
-materials, accepted P13 feedback response evidence, and P14 source keyring
-validation evidence.
+materials, accepted P13 feedback response evidence, and accepted P14 source
+keyring validation evidence.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -180,7 +182,10 @@ and `docs/p13_to_p14_handoff.md`. P14 executor evidence is recorded in
 `docs/p14_real_provider_smoke_record.md`,
 `docs/p14_credential_package_spike_decision.md`,
 `docs/p14_boundary_scan_evidence.md`,
-`docs/p14_final_validation_report.md`, and `docs/p14_to_p15_handoff.md`.
+`docs/p14_final_validation_report.md`, and `docs/p14_to_p15_handoff.md`. P15
+is the active selected guide; use
+`docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md` and
+`docs/p15_todo.md`.
 
 ## Setup
 
@@ -575,7 +580,7 @@ and `docs/p13_to_p14_handoff.md`.
 
 ## P14 Manual Environment And Source Keyring Validation
 
-P14 executor work collected privacy-safe tester feedback status, recorded
+P14 planner-accepted work collected privacy-safe tester feedback status, recorded
 assistive-technology/DPI/multi-monitor blockers honestly, installed optional
 source credential support, ran source keyring save/read/delete smoke with a
 throwaway fake value, kept real-provider network smoke skipped without
@@ -590,6 +595,23 @@ trial paths, and no broad feature expansion.
 See `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`,
 `docs/p14_todo.md`, `docs/p14_final_validation_report.md`, and
 `docs/p14_to_p15_handoff.md`.
+
+## P15 Isolated Credential-Capable Package Spike Design Gate
+
+P15 is the selected next execution phase. It should run a narrow package spike
+for credential-capable packaging while preserving the deterministic base
+package path. The phase should prove, reject, or defer packaged keyring import
+and backend discovery, packaged credential save/read/delete with throwaway fake
+values, packaged restart readiness, cleanup guidance, and no-secret/no-network
+hygiene.
+
+P15 must not silently add keyring to the base package. Any credential-capable
+path must be explicit as a variant, spike script, or documented manual build
+path, and real trial paths must continue to fail closed when no real provider
+is configured.
+
+See `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md` and
+`docs/p15_todo.md`.
 
 ## Current Boundaries
 

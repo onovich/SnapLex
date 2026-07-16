@@ -1,9 +1,13 @@
 # P14 To P15 Handoff
 
 Date: 2026-07-16
-Status: P14 executor-complete; ready for planner acceptance
+Status: P14 planner-accepted; P15 ready for execution
 
-Recommended P15: isolated credential-capable package spike design gate.
+Selected P15: isolated credential-capable package spike design gate.
+
+P15 execution guide:
+`docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`
+P15 TODO: `docs/p15_todo.md`
 
 ## P14 Baseline
 
@@ -64,7 +68,7 @@ Final P14 executor artifacts:
 - Real-provider network smoke remains opt-in and skipped in this environment.
 - Packaged keyring behavior is not implemented, shipped, or promised.
 
-## Suggested P15 Scope
+## Selected P15 Scope
 
 P15 should be a narrow, architect-approved spike if accepted:
 

@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 Phase: P14 Manual Environment And Source Keyring Validation
-Status: PASS - ready for planner acceptance
+Status: PASS - planner-accepted
 
 P14 completed manual-environment and source-keyring validation without
 expanding SnapLex runtime scope. No external tester feedback was supplied to
@@ -161,7 +161,35 @@ services/presenters, provider setup, and trial readiness.
 
 ## Request For Acceptance
 
-P14 is ready for planner/architect review. Recommended P15: an isolated
-credential-capable package spike design gate, limited to proving packaged
-keyring behavior with throwaway fake values while preserving the deterministic
-base package path and all no-secret/no-network boundaries.
+P14 is accepted by planner/architect review.
+
+## Planner Acceptance
+
+Planner recheck on 2026-07-16: PASS.
+
+Re-run validation evidence:
+
+- `C:\Users\Administrator\.codex\skills\project-ops-workflow\scripts\ops\Validate.cmd`:
+  PASS with 255 tests.
+- `git diff --check`: PASS.
+- `python -m snaplex --version`: PASS, prints `SnapLex 0.1.0`.
+- `python -m snaplex --no-gui`: PASS, PySide6 bootstrap OK.
+- `python -m snaplex --check-real-provider`: expected rejection PASS when no
+  real provider is configured.
+- `python scripts\package_windows.py --dry-run --variant base`: PASS.
+- `cmd /c StartTrial.cmd --no-gui`: expected rejection PASS.
+- `cmd /c StartFakeTrial.cmd --no-gui`: PASS.
+- `cmd /c SmokeTrial.cmd`: PASS.
+- `cmd /c StartPackagedFakeTrial.cmd --no-gui`: PASS.
+- `cmd /c StartPackagedTrial.cmd --no-gui`: expected rejection PASS.
+- `python scripts\p9_gui_smoke.py`: PASS with ignored local screenshots.
+- `python scripts\p11_visible_gui_smoke.py`: PASS with ignored local
+  screenshots.
+- P14 docs link/index check: PASS.
+- Artifact boundary scan: PASS.
+- Secret pattern scan: PASS.
+
+Selected P15: an isolated credential-capable package spike design gate, limited
+to proving packaged keyring behavior with throwaway fake values while
+preserving the deterministic base package path and all no-secret/no-network
+boundaries.

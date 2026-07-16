@@ -66,7 +66,8 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest accepted P13 guide: `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`.
 - Latest accepted P13 report: `docs/p13_final_validation_report.md`.
 - P13 to P14 handoff: `docs/p13_to_p14_handoff.md`.
-- Latest P14 guide: `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`.
-- Latest P14 TODO: `docs/p14_todo.md`.
-- Latest P14 report: `docs/p14_final_validation_report.md`.
+- Latest accepted P14 guide: `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`.
+- Latest accepted P14 report: `docs/p14_final_validation_report.md`.
 - P14 to P15 handoff: `docs/p14_to_p15_handoff.md`.
+- Latest P15 guide: `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`.
+- Latest P15 TODO: `docs/p15_todo.md`.

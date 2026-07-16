@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P14 executor-complete planning document pending planner acceptance
+Status: P14 planner-accepted planning document with selected P15 guide
 
 ## 0. Round Estimate Rules
 
@@ -28,6 +28,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P12 | Private Trial Pilot And Feedback Triage | Prepare tester-facing release notes, feedback intake, pass/fail criteria, manual environment checks, optional real-provider smoke policy, and triage rules. | 12 rounds |
 | P13 | Private Trial Feedback Response And Credential Package Feasibility | Respond to the first private-trial feedback loop, close accepted S0/S1 blockers, capture manual environment results, and decide credential-capable package feasibility. | 12 rounds |
 | P14 | Manual Environment And Source Keyring Validation | Run target-device manual checks, source keyring smoke, optional real-provider evidence, and decide whether to authorize a later credential-package spike. | 12 rounds |
+| P15 | Isolated Credential-Capable Package Spike Design Gate | Prove, reject, or defer an explicit credential-capable package path while preserving the deterministic base package. | 12 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -38,6 +39,7 @@ Total including selected P11 post-MVP implementation: 105 rounds.
 Total including selected P12 post-MVP implementation: 117 rounds.
 Total including selected P13 post-MVP implementation: 129 rounds.
 Total including selected P14 post-MVP implementation: 141 rounds.
+Total including selected P15 post-MVP implementation: 153 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -369,16 +371,17 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P13 - Private Trial Feedback Response And Credential
-Package Feasibility.
+Current accepted phase: P14 - Manual Environment And Source Keyring
+Validation.
 
-Current executor-complete phase: P14 - Manual Environment And Source Keyring
-Validation, ready for planner check.
+Current selected phase: P15 - Isolated Credential-Capable Package Spike Design
+Gate, ready for execution.
 
 P0-P7 status: complete.
 
-Selected next step: planner recheck of P14 using
-`docs/p14_final_validation_report.md` and `docs/p14_to_p15_handoff.md`.
+Selected next step: execute P15 using
+`docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md` and
+`docs/p15_todo.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -907,3 +910,71 @@ Executor completion:
   package credential implementation was added or promised.
 - Closure package: `docs/p14_boundary_scan_evidence.md`,
   `docs/p14_final_validation_report.md`, and `docs/p14_to_p15_handoff.md`.
+
+Planner acceptance:
+
+- P14 accepted on 2026-07-16 at
+  `1f7c3e388e01fb4514f8d08b8d3978feb14727e3`.
+- Selected next phase: P15 Isolated Credential-Capable Package Spike Design
+  Gate.
+
+## 18. P15 - Isolated Credential-Capable Package Spike Design Gate
+
+Estimated rounds: 12
+
+Execution guide:
+`docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`
+
+Goal: run an isolated package spike for credential-capable packaging while
+preserving the deterministic base package path.
+
+Scope:
+
+- Revalidate the accepted P14 baseline.
+- Design the explicit credential-capable package spike boundary.
+- Audit optional dependency and package variant behavior.
+- Prove or reject packaged keyring import/backend discovery.
+- Prove or reject packaged credential save/read/delete/cleanup with only a
+  throwaway fake value.
+- Prove or reject packaged restart readiness without displaying or printing the
+  throwaway value.
+- Preserve deterministic base package dry-run and fake package smoke.
+- Document cleanup guidance for local throwaway/manual credentials and smoke
+  data.
+- Decide whether to promote, defer, or reject a later production
+  credential-capable package hardening phase.
+
+Deliverables:
+
+- `docs/p15_packaging_spike_design.md`
+- `docs/p15_packaged_keyring_import_evidence.md`
+- `docs/p15_packaged_credential_smoke_evidence.md`
+- `docs/p15_packaged_restart_readiness.md`
+- `docs/p15_credential_cleanup_guidance.md`
+- `docs/p15_package_spike_decision.md`
+- `docs/p15_boundary_scan_evidence.md`
+- P15 final validation report and P15 to P16 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Base package dry-run remains green.
+- Credential-capable package spike build/dry-run has pass/fail/blocker
+  evidence when feasible.
+- Fake/real trial command smoke remains green.
+- Packaged real trial remains fail-closed without real provider configuration.
+- Docs link/index and artifact/secret scans remain green.
+
+Round split:
+
+- Round 1: rebaseline and package spike boundary.
+- Round 2: packaging optional dependency audit.
+- Round 3: packaged keyring import evidence.
+- Round 4: packaged credential save/read/delete smoke.
+- Round 5: packaged restart readiness.
+- Round 6: base package preservation.
+- Round 7: cleanup guidance.
+- Round 8: spike decision.
+- Rounds 9-11: buffer hardening.
+- Round 12: final validation, report, and P16 handoff.

@@ -563,6 +563,26 @@ P14 collects target-device evidence before any credential-capable package spike:
 - Use `docs/p14_final_validation_report.md` and `docs/p14_to_p15_handoff.md`
   for P14 closure and the recommended P15 direction.
 
+## P15 Isolated Credential-Capable Package Spike Smoke
+
+P15 investigates an explicit credential-capable package path without changing
+the deterministic base package:
+
+- Confirm the spike path is explicit as a variant, spike script, or documented
+  manual build path.
+- Confirm the base package dry-run and fake package smoke remain unchanged.
+- Build or dry-run the credential-capable package path when feasible.
+- Prove or reject packaged `keyring` import and Windows backend discovery.
+- Run packaged credential save/read/delete only with a throwaway fake value.
+- Prove or reject packaged restart readiness without displaying or printing the
+  throwaway value.
+- Confirm real packaged trial still fails closed when no real provider is
+  configured.
+- Confirm cleanup guidance exists for throwaway/manual credentials and local
+  smoke data.
+- Re-run artifact and secret scans before committing P15 docs or package spike
+  changes.
+
 ## P7 Expansion Planning Validation
 
 P7 is design-first from the accepted P6 release baseline. If no runtime code is
