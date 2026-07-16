@@ -8,8 +8,8 @@ Estimated budget: 12 conversation rounds.
 
 ## Tasks
 
-- [ ] Revalidate the accepted P16 baseline.
-- [ ] Define controlled private tester lane.
+- [x] Revalidate the accepted P16 baseline.
+- [x] Define controlled private tester lane.
 - [ ] Run or rehearse package candidate pre-share gates.
 - [ ] Prepare no-secret tester instructions and feedback intake.
 - [ ] Collect tester feedback or record honest blockers/absence.
