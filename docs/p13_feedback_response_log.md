@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 Phase: P13 Private Trial Feedback Response And Credential Package Feasibility
-Status: initial feedback source inventory
+Status: feedback response closure recorded through Round 8
 
 P13 responds to the first private-trial feedback loop while preserving the P12
 privacy and no-secret boundaries. This log records the source of feedback,
@@ -88,9 +88,25 @@ Real translation provider is not configured.
 Generated screenshots and smoke app data remain ignored local artifacts under
 `snaplex-smoke-data\`.
 
-## Next Triage Target
+## Feedback Response Closure Through Round 8
 
-Round 2 should classify the internal blocker candidates with the P12 severity
-and disposition taxonomy, then decide whether any S0/S1 item is safe to fix
-inside P13. If no accepted S0/S1 fix exists, P13 should continue as
-documentation, manual-evidence, and feasibility work.
+P13 has no external tester report to resolve in this executor context. The
+Round 8 closure therefore covers the internal pilot blocker candidates from P12:
+
+- `docs/p13_s0_s1_blocker_resolution.md` classifies all internal candidates
+  and records that no accepted S0/S1 code repair exists for P13.
+- `docs/p13_manual_environment_results.md` records visible GUI smoke PASS and
+  honest NOT RUN blockers for assistive technology, DPI scaling, and
+  multi-monitor review.
+- `docs/p13_real_provider_smoke_record.md` records real-provider network smoke
+  as intentionally skipped and verifies real trial readiness fails closed.
+- `docs/p13_keyring_source_smoke_record.md` records source OS keyring smoke as
+  blocked by missing optional `keyring` support, with mocked credential tests
+  passing.
+- `docs/p13_credential_package_feasibility.md` defers credential-capable package
+  implementation and recommends only a later isolated feasibility spike after
+  source keyring smoke can run.
+
+No S0/S1 blocker remains open with missing closure evidence. Remaining items
+are manual validation blockers, optional smoke skips, or future feasibility
+decisions that do not justify runtime expansion inside P13.

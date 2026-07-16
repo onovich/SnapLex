@@ -370,7 +370,7 @@ Execute P0 through P3 first before broadening provider scope. This gives the pro
 Current accepted phase: P12 - Private Trial Pilot And Feedback Triage.
 
 Current selected phase: P13 - Private Trial Feedback Response And Credential
-Package Feasibility, ready for execution.
+Package Feasibility, in execution.
 
 P0-P7 status: complete.
 
@@ -780,6 +780,21 @@ Deliverables:
 - `docs/p13_credential_package_feasibility.md`
 - `docs/p13_boundary_scan_evidence.md`
 - P13 final validation report and P13 to P14 handoff.
+
+Round 8 executor status:
+
+- No external tester feedback was supplied; P13 processes P12 known gaps as
+  internal pilot blockers instead of fabricating reports.
+- No accepted S0/S1 code repair exists; closure evidence is recorded in
+  `docs/p13_s0_s1_blocker_resolution.md`.
+- Manual AT/DPI/multi-monitor results are recorded as blockers in
+  `docs/p13_manual_environment_results.md`.
+- Real-provider smoke is intentionally skipped without local credentials and
+  explicit network approval; fail-closed evidence is recorded in
+  `docs/p13_real_provider_smoke_record.md`.
+- Source keyring smoke is blocked by missing optional `keyring`; feasibility
+  remains deferred in `docs/p13_keyring_source_smoke_record.md` and
+  `docs/p13_credential_package_feasibility.md`.
 
 Validation:
 

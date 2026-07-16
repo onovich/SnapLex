@@ -47,7 +47,13 @@ P12 private trial pilot planning is recorded in
 `docs/p12_todo.md`.
 P13 private trial feedback response planning is recorded in
 `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
-and `docs/p13_todo.md`.
+and `docs/p13_todo.md`. P13 feedback closure evidence is recorded in
+`docs/p13_feedback_response_log.md`,
+`docs/p13_s0_s1_blocker_resolution.md`,
+`docs/p13_manual_environment_results.md`,
+`docs/p13_real_provider_smoke_record.md`,
+`docs/p13_keyring_source_smoke_record.md`, and
+`docs/p13_credential_package_feasibility.md`.
 
 ## Automated Precheck
 
@@ -510,6 +516,13 @@ privacy and no-secret rules:
   throwaway fake value.
 - Confirm credential-capable package feasibility is a decision artifact, not a
   shipped promise, unless a later phase explicitly expands scope.
+- For the current P13 executor run, use
+  `docs/p13_s0_s1_blocker_resolution.md` for no-code S0/S1 closure,
+  `docs/p13_manual_environment_results.md` for AT/DPI/multi-monitor blockers,
+  `docs/p13_real_provider_smoke_record.md` for real-provider skip/fail-closed
+  evidence, `docs/p13_keyring_source_smoke_record.md` for source keyring
+  blocker evidence, and `docs/p13_credential_package_feasibility.md` for the
+  deferred credential-package decision.
 - Re-run artifact and secret scans before committing any P13 docs or accepted
   fixes.
 

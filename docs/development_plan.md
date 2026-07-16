@@ -305,6 +305,20 @@ The executable guide is
 `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`;
 the TODO is `docs/p13_todo.md`.
 
+P13 executor work through Round 8 records that no external tester feedback was
+supplied, no accepted S0/S1 code repair exists,
+assistive-technology/DPI/multi-monitor checks remain manual blockers,
+real-provider smoke is skipped without
+local credentials and explicit network approval, source keyring smoke is
+blocked by missing optional `keyring`, and credential-capable packaging should
+be deferred to a later isolated spike. The current response artifacts are
+`docs/p13_feedback_response_log.md`,
+`docs/p13_s0_s1_blocker_resolution.md`,
+`docs/p13_manual_environment_results.md`,
+`docs/p13_real_provider_smoke_record.md`,
+`docs/p13_keyring_source_smoke_record.md`, and
+`docs/p13_credential_package_feasibility.md`.
+
 ## MVP Goals
 
 - Floating always-on-top widget with capture and clipboard translation actions.
