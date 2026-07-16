@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P18 Signing And Distribution Readiness Gate
-Status: round 1 baseline recorded; custody policy pending round 2
+Status: signing identity and certificate custody policy recorded
 
 P18 decides whether SnapLex is ready to move from an unsigned private-trial
 credential package lane toward signed distribution. This document starts with
@@ -63,6 +63,69 @@ private-trial lane:
 - What evidence is required before P19 may consider a signed distribution
   readiness gate?
 
+## Signing Identity Policy
+
+P18 does not create, request, require, or invent a production code-signing
+certificate. A later signed distribution gate may proceed only after the
+signing identity is approved outside the build scripts and recorded in release
+planning.
+
+Required identity decisions before signed distribution:
+
+- The signed artifact publisher must be the approved SnapLex release owner,
+  not an executor machine, tester, CI worker name, or informal local alias.
+- The public publisher display name must be recorded before any signed
+  external artifact is shared.
+- The release owner must approve which package lane may be signed:
+  deterministic `base`, explicit `credentials`, or both as separate artifacts.
+- A signing operator may run the signing command only for a clean source commit
+  that has passed the package gate for the same variant.
+- A verifier distinct from the signing action must record verification output
+  before transfer. For a one-person project, this can be a separate manual
+  verification step with command output recorded, but it must not be skipped.
+
+Signed artifacts must keep variant clarity in the file name and release notes.
+Signing does not merge the `credentials` lane into `base`, imply public
+release, or approve installer/updater runtime.
+
+## Certificate Custody Policy
+
+Production certificate custody requirements:
+
+- Private keys must never be committed, copied into package resources, pasted
+  into docs, exported into logs, attached to feedback, or captured in
+  screenshots.
+- The private key must be held by a non-exportable local certificate store,
+  hardware token, or managed signing service approved for release use.
+- Plain `.pfx`, `.p12`, `.pem`, `.key`, `.crt`, `.cer`, `.spc`, `.pvk`, and
+  similar signing material files are forbidden in the repository, build
+  outputs committed to git, issue attachments, and tester feedback.
+- CI signing is not approved in P18. A later phase must define secure runner,
+  secret storage, audit, and revocation behavior before any automated signing.
+- Test certificates are allowed only for an isolated rehearsal when they are
+  locally generated or already available as throwaway material, never shared as
+  production trust evidence, and never committed.
+- Certificate passwords, hardware-token PINs, and account recovery material
+  must not appear in command history, docs, logs, screenshots, package
+  metadata, or chat handoff text.
+
+Release evidence may record certificate subject, issuer, thumbprint, signing
+time, timestamp server result, and verification status, but it must not include
+private-key material or credential secrets.
+
+## Custody Stop Conditions
+
+Stop signing or distribution work immediately if any of these occur:
+
+- private key or certificate password appears in git, package resources, docs,
+  logs, screenshots, tester feedback, or chat;
+- the signing identity cannot be matched to an approved release owner;
+- the signing operator cannot prove the source commit and variant that were
+  signed;
+- verification output is missing, ambiguous, or for a different artifact;
+- the credential-capable package is presented as base, public, installer-ready,
+  or auto-update-ready without a later gate.
+
 ## Round 1 Self-Checks
 
 Debug self-check:
@@ -82,3 +145,23 @@ Architecture self-check:
 - No cloud, OAuth, billing, token broker, browser extension, AI summary,
   global hotkey, provider rewrite, OCR/capture rewrite, full localization,
   signed artifact, installer, updater, certificate, or private key is added.
+
+## Round 2 Self-Checks
+
+Debug self-check:
+
+- The current policy is explained by the smallest custody workflow: approved
+  release owner, explicit signer, separate verifier, non-exportable key
+  storage, and stop conditions.
+- Success, no certificate, skipped signing, revocation precursor, and
+  no-secret states are represented.
+
+Architecture self-check:
+
+- Certificate custody does not move provider, credential, settings, history,
+  capture, OCR, UI, or trial readiness rules into packaging.
+- The base package remains deterministic and keyring-free.
+- The `credentials` package remains explicit and private-trial.
+- No production certificate, signed binary, installer, updater, cloud account
+  system, OAuth, browser extension, AI summary, global hotkey, provider
+  rewrite, OCR/capture rewrite, or full localization is introduced.
