@@ -20,10 +20,10 @@ Estimated budget: 12 conversation rounds.
 - [x] Record source keyring smoke pass/blocker evidence using only a throwaway
       fake value when optional credentials support is available.
 - [x] Decide credential-capable package feasibility for a later explicit phase.
-- [ ] Preserve deterministic no-network tests, fake smoke, P10/P11/P12
+- [x] Preserve deterministic no-network tests, fake smoke, P10/P11/P12
       credential boundaries, fail-closed real trial paths, and no-secret
       repository hygiene.
-- [ ] Produce P13 boundary scan evidence.
+- [x] Produce P13 boundary scan evidence.
 - [ ] Produce P13 final validation report.
 - [ ] Produce P13 to P14 handoff.
 
