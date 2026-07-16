@@ -22,10 +22,10 @@ Estimated budget: 12 conversation rounds.
 - [x] Record optional real-provider smoke run/skip evidence.
 - [x] Decide whether evidence justifies a later isolated credential-capable
       package spike.
-- [ ] Preserve deterministic no-network tests, fake smoke, P10-P13 credential
+- [x] Preserve deterministic no-network tests, fake smoke, P10-P13 credential
       boundaries, fail-closed real trial paths, and no-secret repository
       hygiene.
-- [ ] Produce P14 boundary scan evidence.
+- [x] Produce P14 boundary scan evidence.
 - [ ] Produce P14 final validation report.
 - [ ] Produce P14 to P15 handoff.
 
