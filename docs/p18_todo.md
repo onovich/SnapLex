@@ -8,7 +8,7 @@ Estimated budget: 12 conversation rounds.
 
 ## Tasks
 
-- [ ] Revalidate the accepted P17 baseline.
+- [x] Revalidate the accepted P17 baseline.
 - [ ] Define signing identity and certificate custody policy.
 - [ ] Define signing command, verification, and revocation expectations.
 - [ ] Run or explicitly skip/block a safe signing rehearsal.
