@@ -160,3 +160,98 @@ Architecture self-check:
 - Credential/keyring behavior remains in services; packaging only chooses
   hidden imports for an explicit variant.
 - P15 still does not promise a production credential-capable package release.
+
+## Round 6 Base Package Preservation Evidence
+
+P15 rebuilt the deterministic base package after credential-variant smoke to
+prove the local `dist\` output can return to the accepted base path.
+
+Base dry-run:
+
+```cmd
+python scripts\package_windows.py --dry-run --variant base
+```
+
+Result: PASS.
+
+```text
+SNAPLEX_PACKAGE_VARIANT=base
+```
+
+Credentials dry-run remains explicit:
+
+```cmd
+python scripts\package_windows.py --dry-run --variant credentials
+```
+
+Result: PASS.
+
+```text
+SNAPLEX_PACKAGE_VARIANT=credentials
+```
+
+Base build:
+
+```cmd
+python scripts\package_windows.py --variant base
+```
+
+Result: PASS.
+
+Observed evidence:
+
+```text
+SNAPLEX_PACKAGE_VARIANT=base
+Build complete! The results are available in: D:\ToolProjects\SnapLex\dist
+```
+
+Base fake package smoke:
+
+```cmd
+cmd /c SmokeTrial.cmd
+cmd /c StartPackagedFakeTrial.cmd --no-gui
+```
+
+Result: PASS. `SmokeTrial.cmd` passed version, no-gui, base dry-run, and
+packaged workflow smoke. `StartPackagedFakeTrial.cmd --no-gui` remained visibly
+fake and bootstrapped successfully.
+
+Base real packaged trial:
+
+```cmd
+cmd /c StartPackagedTrial.cmd --no-gui
+```
+
+Result: expected rejection PASS.
+
+```text
+Real translation provider is not configured.
+```
+
+Base credential smoke:
+
+```cmd
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode import
+```
+
+Result: expected rejection PASS for base package.
+
+```text
+SnapLex packaged credential smoke FAIL: keyring is not available in this runtime.
+```
+
+This confirms the base package did not silently gain keyring support.
+
+Round 6 debug self-check:
+
+- The current change is explained by base package preservation.
+- Base dry-run, explicit credentials dry-run, base build, fake smoke,
+  real-trial fail-closed, and expected credential-smoke rejection are covered.
+- Generated `build\`, `dist\`, and smoke data remain ignored and uncommitted.
+
+Round 6 architecture self-check:
+
+- Base package behavior remains deterministic and unchanged.
+- Credential-capable behavior remains opt-in through the explicit
+  `credentials` variant.
+- P15 still does not promote credential-capable packaging to production.
