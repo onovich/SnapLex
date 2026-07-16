@@ -134,6 +134,16 @@ The current project source of truth lives in:
 - `docs/p16_boundary_scan_evidence.md`
 - `docs/p16_final_validation_report.md`
 - `docs/p16_to_p17_handoff.md`
+- `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`
+- `docs/p17_todo.md`
+- `docs/p17_pilot_lane_plan.md`
+- `docs/p17_package_candidate_gate_evidence.md`
+- `docs/p17_tester_feedback_intake.md`
+- `docs/p17_real_provider_smoke_record.md`
+- `docs/p17_artifact_transfer_retention_support.md`
+- `docs/p17_signing_installer_updater_decision.md`
+- `docs/p17_credential_package_lane_decision.md`
+- `docs/p17_boundary_scan_evidence.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -160,8 +170,8 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P15. P16 Credential-Capable Package Production
-Hardening is executor-complete and ready for planner check. The P0-P7 track is
+SnapLex has accepted P0 through P16. P17 Limited Credential Package Pilot And
+Signing Decision is in executor progress. The P0-P7 track is
 complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
@@ -175,7 +185,9 @@ materials, accepted P13 feedback response evidence, and accepted P14 source
 keyring validation evidence. P15 adds explicit credential-capable package spike
 evidence while keeping the base package deterministic. P16 hardens that
 explicit package path into a limited private tester candidate while preserving
-the deterministic base package.
+the deterministic base package. P17 is evaluating the controlled credential
+package pilot lane, pre-share gates, feedback intake, artifact policy, signing
+decision, and lane decision.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -670,7 +682,15 @@ no-secret feedback, optional human-approved real-provider smoke, artifact
 transfer/retention/support policy, and signing/installer/updater decisions.
 
 See `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`
-and `docs/p17_todo.md`.
+and `docs/p17_todo.md`. Current P17 executor evidence is recorded in
+`docs/p17_pilot_lane_plan.md`,
+`docs/p17_package_candidate_gate_evidence.md`,
+`docs/p17_tester_feedback_intake.md`,
+`docs/p17_real_provider_smoke_record.md`,
+`docs/p17_artifact_transfer_retention_support.md`,
+`docs/p17_signing_installer_updater_decision.md`,
+`docs/p17_credential_package_lane_decision.md`, and
+`docs/p17_boundary_scan_evidence.md`.
 
 ## Current Boundaries
 

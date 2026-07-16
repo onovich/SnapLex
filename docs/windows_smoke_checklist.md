@@ -91,7 +91,15 @@ P16 credential-capable package hardening is recorded in
 `docs/p16_final_validation_report.md`, and `docs/p16_to_p17_handoff.md`.
 P17 pilot and signing-decision planning is recorded in
 `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md` and
-`docs/p17_todo.md`.
+`docs/p17_todo.md`. P17 executor evidence is recorded in
+`docs/p17_pilot_lane_plan.md`,
+`docs/p17_package_candidate_gate_evidence.md`,
+`docs/p17_tester_feedback_intake.md`,
+`docs/p17_real_provider_smoke_record.md`,
+`docs/p17_artifact_transfer_retention_support.md`,
+`docs/p17_signing_installer_updater_decision.md`,
+`docs/p17_credential_package_lane_decision.md`, and
+`docs/p17_boundary_scan_evidence.md`.
 
 ## Automated Precheck
 

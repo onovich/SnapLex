@@ -77,5 +77,6 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P16 to P17 handoff: `docs/p16_to_p17_handoff.md`.
 - Latest P17 guide: `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`.
 - Latest P17 TODO: `docs/p17_todo.md`.
+- P17 pilot/gate evidence: `docs/p17_pilot_lane_plan.md`, `docs/p17_package_candidate_gate_evidence.md`, `docs/p17_tester_feedback_intake.md`, `docs/p17_real_provider_smoke_record.md`, `docs/p17_artifact_transfer_retention_support.md`, `docs/p17_signing_installer_updater_decision.md`, `docs/p17_credential_package_lane_decision.md`, `docs/p17_boundary_scan_evidence.md`.
 - Latest P17 report: `docs/p17_final_validation_report.md`.
 - P17 to P18 handoff: `docs/p17_to_p18_handoff.md`.
