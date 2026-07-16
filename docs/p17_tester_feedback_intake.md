@@ -9,6 +9,35 @@ unsigned `credentials` package candidate. This is not a public release channel.
 It is an intake guardrail for package, keyring, cleanup, and optional
 real-provider readiness evidence.
 
+## Round 4 Feedback Collection Status
+
+Status: no external tester feedback supplied in this executor session.
+
+P17 does not fabricate tester reports. The current feedback log is therefore:
+
+| Source | Status | Evidence handling |
+| --- | --- | --- |
+| External private tester report | Not supplied | No report recorded. |
+| Maintainer package gate evidence | Available | Use `docs/p17_package_candidate_gate_evidence.md`. |
+| Real-provider tester smoke | Not approved/not supplied | Record as skipped in `docs/p17_real_provider_smoke_record.md`. |
+| Internal pilot blockers from P16/P17 | Tracked | See blocker list below. |
+
+Internal pilot blockers to carry forward:
+
+- no real external tester device has exercised locked Windows Credential Locker,
+  enterprise-managed keyring policy, unsupported backend, or remote-session
+  behavior in P17;
+- no real-provider network smoke has been approved in P17;
+- no artifact transfer, retention, or support escalation loop has been executed
+  with an external tester yet;
+- signing, installer, and updater decisions still need a P17 decision artifact;
+- the candidate remains unsigned/private-trial only.
+
+If tester feedback arrives later, intake must start with the privacy screen
+below. Reports that include secrets, personal data, keyring exports, screenshots
+of credential fields, package outputs, or logs with sensitive material must be
+discarded or resubmitted safely before triage.
+
 ## Before Sending To A Tester
 
 Maintainer checklist:
@@ -216,3 +245,24 @@ Architecture self-check:
 - The document avoids cloud, OAuth, billing, token broker, browser extension,
   AI summary, global hotkey, broad provider/OCR/capture rewrite, and full
   localization scope.
+
+## Round 4 Self-Checks
+
+Debug self-check:
+
+- The current result is explained by the smallest feedback workflow: external
+  feedback inventory, maintainer gate evidence, no real-provider approval, and
+  internal blocker carry-forward.
+- No tester reports were fabricated.
+- Missing feedback, skipped network, blocker, resubmit, cleanup, and no-secret
+  states are covered.
+
+Architecture self-check:
+
+- Feedback collection remains documentation/triage only and does not change
+  provider, credential, UI, OCR, capture, package, or settings behavior.
+- Credential package handling stays explicit and separate from base.
+- Base package fake smoke remains deterministic.
+- Generated artifacts, screenshots, package outputs, smoke data, keyring
+  exports, local app data, logs, tester personal data, `.env`, and provider
+  secrets remain out of git.
