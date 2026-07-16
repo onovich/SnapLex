@@ -94,5 +94,14 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P18 to P19 handoff: `docs/p18_to_p19_handoff.md`.
 - Latest P19 guide: `docs/p19_signing_rehearsal_signed_archive_candidate_gate_goal_guide.md`.
 - Latest P19 TODO: `docs/p19_todo.md`.
+- P19 signing rehearsal evidence:
+  `docs/p19_signing_path_decision.md`,
+  `docs/p19_base_package_control_evidence.md`,
+  `docs/p19_credentials_package_candidate_evidence.md`,
+  `docs/p19_signing_rehearsal_evidence.md`,
+  `docs/p19_signature_verification_policy.md`,
+  `docs/p19_signed_archive_stop_conditions.md`,
+  `docs/p19_signed_archive_candidate_decision.md`,
+  `docs/p19_boundary_scan_evidence.md`.
 - Latest P19 report: `docs/p19_final_validation_report.md`.
 - P19 to P20 handoff: `docs/p19_to_p20_handoff.md`.

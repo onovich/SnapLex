@@ -728,7 +728,16 @@ records SKIPPED or BLOCKED honestly while preserving deterministic base package
 and explicit credentials package lanes.
 
 See `docs/p19_signing_rehearsal_signed_archive_candidate_gate_goal_guide.md`
-and `docs/p19_todo.md`.
+and `docs/p19_todo.md`. Current P19 executor evidence is recorded in
+`docs/p19_signing_path_decision.md`,
+`docs/p19_base_package_control_evidence.md`,
+`docs/p19_credentials_package_candidate_evidence.md`,
+`docs/p19_signing_rehearsal_evidence.md`,
+`docs/p19_signature_verification_policy.md`,
+`docs/p19_signed_archive_stop_conditions.md`,
+`docs/p19_signed_archive_candidate_decision.md`, and
+`docs/p19_boundary_scan_evidence.md`. The P19 closure package is planned as
+`docs/p19_final_validation_report.md` and `docs/p19_to_p20_handoff.md`.
 
 ## Current Boundaries
 
