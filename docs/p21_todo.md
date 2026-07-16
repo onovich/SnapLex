@@ -13,7 +13,7 @@ Round budget: 8 conversation rounds
 - [x] Rebaseline accepted P20 and current package lanes.
 - [x] Decide whether explicit safe signing-path approval exists.
 - [x] Record APPROVED for later rehearsal or PAUSED with unblock inputs.
-- [ ] Recommend the next phase based on the decision.
+- [x] Recommend the next phase based on the decision.
 - [ ] Revalidate deterministic base package lane.
 - [ ] Revalidate explicit credentials package lane.
 - [ ] Run boundary, secret, private-key, certificate, package-output,
