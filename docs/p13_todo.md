@@ -16,7 +16,7 @@ Estimated budget: 12 conversation rounds.
       document blockers.
 - [x] Capture assistive-technology, DPI, and multi-monitor manual results or
       blockers.
-- [ ] Record optional real-provider smoke run/skip evidence.
+- [x] Record optional real-provider smoke run/skip evidence.
 - [ ] Record source keyring smoke pass/blocker evidence using only a throwaway
       fake value when optional credentials support is available.
 - [ ] Decide credential-capable package feasibility for a later explicit phase.
