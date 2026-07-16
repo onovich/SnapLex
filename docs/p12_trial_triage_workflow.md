@@ -102,6 +102,7 @@ another and stay consistent:
 - `docs/p12_real_provider_smoke_decision.md`
 - `docs/p12_credential_package_variant_decision.md`
 - `docs/p12_trial_triage_workflow.md`
+- `docs/p12_boundary_scan_evidence.md`
 - `docs/p11_private_trial_release_checklist.md`
 - `docs/p11_provider_onboarding_notes.md`
 - `docs/windows_smoke_checklist.md`

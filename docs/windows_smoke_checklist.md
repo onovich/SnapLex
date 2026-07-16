@@ -41,7 +41,8 @@ P12 private trial pilot planning is recorded in
 `docs/p12_manual_environment_checks.md`,
 `docs/p12_real_provider_smoke_decision.md`,
 `docs/p12_credential_package_variant_decision.md`,
-`docs/p12_trial_triage_workflow.md`, and `docs/p12_todo.md`.
+`docs/p12_trial_triage_workflow.md`,
+`docs/p12_boundary_scan_evidence.md`, and `docs/p12_todo.md`.
 
 ## Automated Precheck
 
@@ -483,6 +484,7 @@ trial materials and smoke evidence privacy-safe:
 - Decide whether a credential-capable package variant should be built later,
   deferred, or rejected for the first private pilot.
 - Route tester reports through `docs/p12_trial_triage_workflow.md`.
+- Confirm boundary evidence in `docs/p12_boundary_scan_evidence.md`.
 - Re-run artifact and secret scans before committing any trial docs.
 
 ## P7 Expansion Planning Validation

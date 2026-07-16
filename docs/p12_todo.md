@@ -23,7 +23,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Decide whether credential-capable package variant should be built,
   deferred, or rejected for the private pilot.
 - [x] Update private-trial checklist and onboarding docs.
-- [ ] Preserve deterministic no-network tests, fake smoke, P10 credential
+- [x] Preserve deterministic no-network tests, fake smoke, P10 credential
   boundaries, and no-secret repository hygiene.
 - [ ] Produce P12 final validation report.
 - [ ] Produce P12 to P13 handoff.

@@ -156,6 +156,7 @@ feedback intake, and triage:
 - `docs/p12_real_provider_smoke_decision.md`
 - `docs/p12_credential_package_variant_decision.md`
 - `docs/p12_trial_triage_workflow.md`
+- `docs/p12_boundary_scan_evidence.md`
 
 P12 feedback must not include API keys, `.env` files, keyring exports, private
 documents, sensitive screenshots, tester personal data, local app data, package
