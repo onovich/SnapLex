@@ -13,7 +13,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Run or rehearse package candidate pre-share gates.
 - [x] Prepare no-secret tester instructions and feedback intake.
 - [x] Collect tester feedback or record honest blockers/absence.
-- [ ] Record optional real-provider smoke run/skip decision.
+- [x] Record optional real-provider smoke run/skip decision.
 - [ ] Define artifact transfer, retention, and support escalation policy.
 - [ ] Decide signing, installer, and updater requirements.
 - [ ] Decide whether credentials stay as a separate package variant.
