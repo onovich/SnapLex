@@ -10,7 +10,7 @@ Round budget: 8 conversation rounds
 
 ## Tasks
 
-- [ ] Rebaseline accepted P20 and current package lanes.
+- [x] Rebaseline accepted P20 and current package lanes.
 - [ ] Decide whether explicit safe signing-path approval exists.
 - [ ] Record APPROVED for later rehearsal or PAUSED with unblock inputs.
 - [ ] Recommend the next phase based on the decision.
@@ -35,4 +35,3 @@ Round budget: 8 conversation rounds
 - SnapLex Cloud, OAuth, billing, hosted token broker, browser extension runtime,
   AI summary runtime, global hotkeys, broad provider/OCR/capture rewrites, or
   full localization.
-
