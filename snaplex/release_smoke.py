@@ -10,10 +10,13 @@ from typing import Any
 
 from snaplex.credentials import (
     CredentialReference,
+    CredentialMissingError,
     CredentialService,
     CredentialSource,
     CredentialStatusCode,
     CredentialStoreError,
+    CredentialUnavailableError,
+    CredentialUnsupportedError,
     KeyringCredentialStore,
     keyring_credential_reference,
 )
@@ -42,7 +45,8 @@ class PackagedSmokeError(RuntimeError):
 
 
 CREDENTIAL_SMOKE_MODES = ("import", "cycle", "save", "check-delete")
-CREDENTIAL_SMOKE_IDENTIFIER = "snaplex/p15/package-spike"
+CREDENTIAL_SMOKE_IDENTIFIER = "snaplex/package-credential-smoke"
+CREDENTIAL_SMOKE_SERVICE_NAME = "SnapLexPackageCredentialSmoke"
 
 
 def run_packaged_workflow_smoke() -> tuple[str, ...]:
@@ -147,7 +151,7 @@ def run_packaged_credential_smoke(
     service = CredentialService(
         {
             CredentialSource.KEYRING: KeyringCredentialStore(
-                service_name="SnapLexP15PackageSmoke",
+                service_name=CREDENTIAL_SMOKE_SERVICE_NAME,
                 keyring_module=keyring,
             ),
         },
@@ -163,7 +167,10 @@ def run_packaged_credential_smoke(
 
     if mode == "save":
         _delete_if_present(service, reference)
-        service.save(reference, _throwaway_credential_value())
+        try:
+            service.save(reference, _throwaway_credential_value())
+        except CredentialStoreError as exc:
+            raise _packaged_credential_store_error("save", exc) from exc
         status = service.status(reference)
         if status.code != CredentialStatusCode.READY:
             raise PackagedSmokeError(f"credential save did not become ready: {status.status_text}")
@@ -175,10 +182,16 @@ def run_packaged_credential_smoke(
             raise PackagedSmokeError(
                 f"credential was not ready after restart: {status.status_text}"
             )
-        resolved = service.resolve(reference)
+        try:
+            resolved = service.resolve(reference)
+        except CredentialStoreError as exc:
+            raise _packaged_credential_store_error("restart readiness check", exc) from exc
         if not resolved.strip():
             raise PackagedSmokeError("credential resolved to an empty value after restart.")
-        service.delete(reference)
+        try:
+            service.delete(reference)
+        except CredentialStoreError as exc:
+            raise _packaged_credential_store_error("cleanup", exc) from exc
         missing = service.status(reference)
         if missing.code != CredentialStatusCode.MISSING:
             raise PackagedSmokeError("credential cleanup did not return to missing state.")
@@ -190,11 +203,20 @@ def run_packaged_credential_smoke(
 
     _delete_if_present(service, reference)
     secret = _throwaway_credential_value()
-    service.save(reference, secret)
-    resolved = service.resolve(reference)
+    try:
+        service.save(reference, secret)
+    except CredentialStoreError as exc:
+        raise _packaged_credential_store_error("save", exc) from exc
+    try:
+        resolved = service.resolve(reference)
+    except CredentialStoreError as exc:
+        raise _packaged_credential_store_error("read", exc) from exc
     if resolved != secret:
         raise PackagedSmokeError("credential read did not match the saved throwaway value.")
-    service.delete(reference)
+    try:
+        service.delete(reference)
+    except CredentialStoreError as exc:
+        raise _packaged_credential_store_error("cleanup", exc) from exc
     missing = service.status(reference)
     if missing.code != CredentialStatusCode.MISSING:
         raise PackagedSmokeError("credential cleanup did not return to missing state.")
@@ -233,6 +255,21 @@ def _keyring_backend_label(keyring_module: Any) -> str:
 
 def _throwaway_credential_value() -> str:
     return uuid.uuid4().hex
+
+
+def _packaged_credential_store_error(
+    action: str,
+    exc: CredentialStoreError,
+) -> PackagedSmokeError:
+    if isinstance(exc, CredentialMissingError):
+        reason = "credential missing"
+    elif isinstance(exc, CredentialUnsupportedError):
+        reason = "credential source unsupported"
+    elif isinstance(exc, CredentialUnavailableError):
+        reason = "credential source unavailable"
+    else:
+        reason = "credential store failed"
+    return PackagedSmokeError(f"credential {action} failed: {reason}.")
 
 
 def _delete_if_present(service: CredentialService, reference: CredentialReference) -> None:

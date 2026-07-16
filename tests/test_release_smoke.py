@@ -1,6 +1,7 @@
 from snaplex.app import main
 from snaplex.release_smoke import (
     CREDENTIAL_SMOKE_IDENTIFIER,
+    CREDENTIAL_SMOKE_SERVICE_NAME,
     PackagedSmokeError,
     run_packaged_credential_smoke,
     run_packaged_workflow_smoke,
@@ -27,6 +28,11 @@ class FakeCredentialSmokeKeyring:
 
     def delete_password(self, service_name: str, username: str) -> None:
         self._passwords.pop((service_name, username), None)
+
+
+class FailingSetPasswordKeyring(FakeCredentialSmokeKeyring):
+    def set_password(self, service_name: str, username: str, password: str) -> None:
+        raise RuntimeError("secret backend detail")
 
 
 def test_packaged_workflow_smoke_requires_app_data_override(monkeypatch) -> None:
@@ -72,6 +78,7 @@ def test_packaged_credential_import_smoke_uses_keyring_boundary() -> None:
     output = "\n".join(smoke_lines)
     assert "keyring import/backend discovery: PASS" in output
     assert CREDENTIAL_SMOKE_IDENTIFIER in output
+    assert "p15" not in output.lower()
     assert "credential value" not in output.lower()
 
 
@@ -83,6 +90,8 @@ def test_packaged_credential_cycle_smoke_cleans_up_without_leaking_secret() -> N
     output = "\n".join(smoke_lines)
     assert "credential save/read/delete: PASS" in output
     assert "credential cleanup: PASS" in output
+    assert CREDENTIAL_SMOKE_IDENTIFIER in output
+    assert "p15" not in output.lower()
     assert "credential value" not in output.lower()
     assert keyring_module._passwords == {}
 
@@ -100,8 +109,36 @@ def test_packaged_credential_restart_smoke_modes_share_reference_without_leak() 
     assert "credential save: PASS" in output
     assert "credential restart readiness: PASS" in output
     assert "credential cleanup: PASS" in output
+    assert CREDENTIAL_SMOKE_IDENTIFIER in output
+    assert "p15" not in output.lower()
     assert "credential value" not in output.lower()
     assert keyring_module._passwords == {}
+
+
+def test_packaged_credential_smoke_uses_phase_neutral_service_name() -> None:
+    keyring_module = FakeCredentialSmokeKeyring()
+
+    run_packaged_credential_smoke(mode="save", keyring_module=keyring_module)
+
+    saved_keys = tuple(keyring_module._passwords)
+    assert len(saved_keys) == 1
+    assert saved_keys[0][0] == CREDENTIAL_SMOKE_SERVICE_NAME
+
+
+def test_packaged_credential_smoke_wraps_store_errors_without_secret_leak() -> None:
+    try:
+        run_packaged_credential_smoke(
+            mode="cycle",
+            keyring_module=FailingSetPasswordKeyring(),
+        )
+    except PackagedSmokeError as exc:
+        message = str(exc)
+    else:
+        raise AssertionError("Expected PackagedSmokeError")
+
+    assert message == "credential save failed: credential source unavailable."
+    assert "secret backend detail" not in message
+    assert "credential value" not in message.lower()
 
 
 def test_cli_packaged_credential_import_smoke(capsys) -> None:
@@ -111,4 +148,6 @@ def test_cli_packaged_credential_import_smoke(capsys) -> None:
     assert exit_code == 0
     assert "SnapLex packaged credential smoke PASS" in output
     assert "keyring import/backend discovery: PASS" in output
+    assert CREDENTIAL_SMOKE_IDENTIFIER in output
+    assert "p15" not in output.lower()
     assert "credential value" not in output.lower()
