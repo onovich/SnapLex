@@ -21,9 +21,9 @@ Estimated budget: 12 conversation rounds.
       smoke data.
 - [x] Decide whether to promote, defer, or reject a later production
       credential-capable package hardening phase.
-- [ ] Preserve no-secret, no-network automated validation and fail-closed real
+- [x] Preserve no-secret, no-network automated validation and fail-closed real
       trial behavior.
-- [ ] Produce P15 boundary scan evidence.
+- [x] Produce P15 boundary scan evidence.
 - [ ] Produce P15 final validation report.
 - [ ] Produce P15 to P16 handoff.
 
