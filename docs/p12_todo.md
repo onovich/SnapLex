@@ -20,7 +20,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Run or document manual assistive-technology, DPI, multi-monitor, visible
   GUI, packaged fake smoke, and trial-script checks.
 - [x] Decide optional real-provider smoke policy and record run/skip evidence.
-- [ ] Decide whether credential-capable package variant should be built,
+- [x] Decide whether credential-capable package variant should be built,
   deferred, or rejected for the private pilot.
 - [ ] Update private-trial checklist and onboarding docs.
 - [ ] Preserve deterministic no-network tests, fake smoke, P10 credential
