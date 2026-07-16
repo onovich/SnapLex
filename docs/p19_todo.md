@@ -21,7 +21,7 @@ Round budget: 12 conversation rounds
 - [x] Define signed archive stop conditions, cleanup, rollback, and support
   implications.
 - [x] Decide whether signed archive candidate work may proceed to a later gate.
-- [ ] Run artifact, secret, private-key, certificate, and signing-material scans.
+- [x] Run artifact, secret, private-key, certificate, and signing-material scans.
 - [ ] Write final validation report and P20 handoff.
 - [ ] Commit and push.
 
