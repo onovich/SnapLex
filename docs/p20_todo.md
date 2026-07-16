@@ -16,7 +16,7 @@ Round budget: 12 conversation rounds
 - [x] Define ignored local artifact directories, cleanup, and evidence
   retention policy.
 - [x] Define command discovery and signing rehearsal command shape.
-- [ ] Run approved local-only rehearsal, or record BLOCKED/SKIPPED without
+- [x] Run approved local-only rehearsal, or record BLOCKED/SKIPPED without
   running signing commands.
 - [ ] Define signature verification, trust, timestamp, and revocation evidence
   handling.
