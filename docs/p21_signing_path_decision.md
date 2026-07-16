@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P21 Signing Path Unblock Decision Or Pause Gate
-Status: rebaseline complete; decision pending Round 2
+Status: PAUSED - no explicit safe throwaway/test signing path approval supplied
 
 P21 decides whether signing is unblocked for a later rehearsal phase or paused
 until a human supplies missing safe-path inputs. P21 does not run signing
@@ -83,8 +83,62 @@ Those inputs include:
 - evidence retention rule;
 - cleanup and boundary scan rule.
 
-Current evidence does not include these inputs. Round 2 will record the formal
-P21 decision.
+Current evidence does not include these inputs.
+
+## P21 Decision
+
+Decision: PAUSED.
+
+P21 does not have explicit safe signing-path approval after P20. Signing work
+should stop consuming phase cycles until a human or architect supplies the
+missing safe-path inputs.
+
+P21 does not approve a later signing rehearsal. It records the exact unblock
+requirements separately in `docs/p21_signing_unblock_requirements.md`.
+
+Reasons:
+
+- P20 accepted signing path approval as BLOCKED/SKIPPED because no explicit
+  safe throwaway/test signing path approval was supplied.
+- The P21 planner dispatch did not supply a safe signing path type, approval
+  owner, signer identity, certificate metadata, private-key custody rule,
+  ignored artifact path, timestamp policy, verification policy, cleanup policy,
+  or command plan sufficient to unblock signing.
+- `signtool.exe` was not discoverable on PATH in P20.
+- P21 is explicitly not a signing rehearsal phase.
+- P21 may not run signing commands or create/import/purchase/invent/use
+  certificates.
+- No production certificate, signed archive candidate, installer, updater,
+  public release, or release feed is approved.
+
+P21 may still pass with signing PAUSED as long as the pause decision, unblock
+requirements, package lanes, boundary scans, validation, final report, and
+handoff pass.
+
+## Current Signing State
+
+Current signing state: PAUSED.
+
+Current trust label: `unsigned-private-trial`.
+
+Allowed after P21:
+
+- continue deterministic base package validation;
+- continue explicit credentials package private-trial validation;
+- pursue non-signing private-trial hardening or tester documentation;
+- return to signing only after a later planner-approved phase receives all
+  safe-path inputs.
+
+Not allowed after P21:
+
+- signing command execution;
+- certificate creation/import/purchase/use;
+- timestamp service calls;
+- signed binary or archive creation;
+- production signing;
+- public release;
+- installer/updater runtime or release feed;
+- silent keyring support in the base package.
 
 ## Round 1 Self-Checks
 
@@ -100,6 +154,31 @@ Debug self-check:
 Architecture self-check:
 
 - Rebaseline work does not change provider, credential, settings, history,
+  capture, OCR, UI, package specification, or trial readiness behavior.
+- Providers remain behind provider registry and `TranslationPipeline`.
+- Credentials remain behind credential services, stores, settings, provider
+  setup, and trial readiness.
+- The base package remains deterministic and keyring-free.
+- The `credentials` package remains explicit and private-trial.
+- No public release, production signing, installer, updater, cloud, OAuth,
+  browser extension, AI summary, global hotkey, provider rewrite, OCR/capture
+  rewrite, full localization, certificate, private key, signed artifact,
+  timestamp response, or signing log is introduced.
+
+## Round 2 Self-Checks
+
+Debug self-check:
+
+- The decision is explained by the smallest P21 workflow: P20 had
+  BLOCKED/SKIPPED signing, P21 received no new approval inputs, so signing is
+  PAUSED and package lane validation continues.
+- Success, expected rejection, missing approval, paused signing, no
+  certificate, no signing command, no timestamp, no-artifact, and no-secret
+  states are covered.
+
+Architecture self-check:
+
+- The PAUSED decision does not change provider, credential, settings, history,
   capture, OCR, UI, package specification, or trial readiness behavior.
 - Providers remain behind provider registry and `TranslationPipeline`.
 - Credentials remain behind credential services, stores, settings, provider
