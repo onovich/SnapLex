@@ -60,5 +60,7 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest accepted P11 guide: `docs/p11_trial_release_hardening_goal_guide.md`.
 - Latest accepted P11 report: `docs/p11_final_validation_report.md`.
 - P11 to P12 handoff: `docs/p11_to_p12_handoff.md`.
-- Current post-MVP execution guide: `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`.
-- Current post-MVP TODO: `docs/p12_todo.md`.
+- Latest P12 guide: `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`.
+- Latest P12 report: `docs/p12_final_validation_report.md`.
+- P12 to P13 handoff: `docs/p12_to_p13_handoff.md`.
+- Latest P12 TODO: `docs/p12_todo.md`.

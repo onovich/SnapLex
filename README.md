@@ -88,6 +88,8 @@ The current project source of truth lives in:
 - `docs/p12_credential_package_variant_decision.md`
 - `docs/p12_trial_triage_workflow.md`
 - `docs/p12_boundary_scan_evidence.md`
+- `docs/p12_final_validation_report.md`
+- `docs/p12_to_p13_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -114,7 +116,8 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P11. The P0-P7 track is complete with a Windows
+SnapLex has accepted P0 through P11. P12 is executor-complete and ready for
+planner check. The P0-P7 track is complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
 optional lazy real capture/OCR adapters, real provider adapters for
@@ -134,9 +137,8 @@ P9 closure package. P10 Secure Credential And Account Strategy is
 planner-accepted; use `docs/p10_final_validation_report.md` and
 `docs/p10_to_p11_handoff.md`. P11 Trial Release Hardening is planner-accepted;
 use `docs/p11_final_validation_report.md` and `docs/p11_to_p12_handoff.md`.
-The selected next goal is P12 Private Trial Pilot And Feedback Triage; use
-`docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
-`docs/p12_todo.md`.
+P12 Private Trial Pilot And Feedback Triage is ready for planner check; use
+`docs/p12_final_validation_report.md` and `docs/p12_to_p13_handoff.md`.
 
 ## Setup
 
@@ -481,11 +483,11 @@ See `docs/p11_trial_release_hardening_goal_guide.md`,
 
 ## P12 Private Trial Pilot And Feedback Triage
 
-P12 is the selected next post-MVP implementation goal. It should prepare the
-first controlled private-trial pilot by producing tester-facing release notes,
-feedback intake templates, pass/fail criteria, manual environment-check
-instructions, optional real-provider smoke policy, and credential package
-variant decision notes.
+P12 executor work prepares the first controlled private-trial pilot by producing
+tester-facing release notes, feedback intake templates, pass/fail criteria,
+manual environment-check instructions, optional real-provider smoke policy,
+credential package variant decision notes, a triage workflow, and boundary
+evidence.
 
 P12 must preserve P11/P10 boundaries: deterministic fake smoke, no-network
 automated tests, no-secret repository hygiene, credential service boundaries,
@@ -501,7 +503,8 @@ See `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
 `docs/p12_real_provider_smoke_decision.md`,
 `docs/p12_credential_package_variant_decision.md`, and
 `docs/p12_trial_triage_workflow.md`. Boundary evidence is recorded in
-`docs/p12_boundary_scan_evidence.md`.
+`docs/p12_boundary_scan_evidence.md`. The closure package is
+`docs/p12_final_validation_report.md` and `docs/p12_to_p13_handoff.md`.
 
 ## Current Boundaries
 

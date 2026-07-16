@@ -270,10 +270,10 @@ boundaries.
 The closure package is `docs/p11_final_validation_report.md` and
 `docs/p11_to_p12_handoff.md`.
 
-## Selected P12 Private Trial Pilot And Feedback Triage
+## P12 Private Trial Pilot And Feedback Triage Completion
 
-P12 is the selected next post-MVP implementation goal. It prepares the first
-controlled private-trial pilot without adding runtime product scope:
+P12 executor-complete work prepares the first controlled private-trial pilot
+without adding runtime product scope:
 
 - tester-facing release notes;
 - feedback intake template and triage taxonomy;
@@ -283,12 +283,13 @@ controlled private-trial pilot without adding runtime product scope:
 - optional real-provider smoke policy that requires existing local credentials
   and intentional network approval;
 - credential-capable package variant decision for a later phase;
+- local feedback triage workflow;
+- artifact and secret boundary scan evidence;
 - preservation of deterministic validation, no-secret boundaries, and P10/P11
   credential/release-hardening constraints.
 
-The executable guide is
-`docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`; the TODO is
-`docs/p12_todo.md`.
+The closure package is `docs/p12_final_validation_report.md` and
+`docs/p12_to_p13_handoff.md`.
 
 ## MVP Goals
 
@@ -375,9 +376,9 @@ Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
 Including the selected P8 implementation goal, the post-MVP plan became 61
 rounds. Including the accepted P9 implementation goal, the post-MVP plan became
 77 rounds. Including accepted P10 credential/account strategy, the post-MVP
-plan became 93 rounds. Including executor-complete P11 trial release hardening,
-the post-MVP plan became 105 rounds. Including selected P12 private trial pilot
-and feedback triage, the current post-MVP plan is 117 rounds.
+plan became 93 rounds. Including accepted P11 trial release hardening, the
+post-MVP plan became 105 rounds. Including executor-complete P12 private trial
+pilot and feedback triage, the current post-MVP plan is 117 rounds.
 
 ## Validation Plan
 

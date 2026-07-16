@@ -5,7 +5,7 @@ tester-facing release notes, feedback intake templates, pass/fail criteria,
 manual environment checks, optional real-provider smoke policy, and credential
 package variant decision notes while preserving P11/P10 boundaries.
 
-Status: ready for execution.
+Status: executor-complete; ready for planner check.
 
 Executable guide: `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`
 
@@ -25,8 +25,8 @@ Estimated budget: 12 conversation rounds.
 - [x] Update private-trial checklist and onboarding docs.
 - [x] Preserve deterministic no-network tests, fake smoke, P10 credential
   boundaries, and no-secret repository hygiene.
-- [ ] Produce P12 final validation report.
-- [ ] Produce P12 to P13 handoff.
+- [x] Produce P12 final validation report.
+- [x] Produce P12 to P13 handoff.
 
 ## Deferred Outside P12
 

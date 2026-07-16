@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P11 planner-accepted planning document with selected P12 execution goal
+Status: P12 executor-complete planning document with P13 recommendation
 
 ## 0. Round Estimate Rules
 
@@ -367,11 +367,13 @@ Execute P0 through P3 first before broadening provider scope. This gives the pro
 
 Current accepted phase: P11 - Trial Release Hardening.
 
+Current executor-complete phase: P12 - Private Trial Pilot And Feedback
+Triage, ready for planner check.
+
 P0-P7 status: complete.
 
-Selected next step: execute P12 using
-`docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
-`docs/p12_todo.md`.
+Selected next step: planner check for P12 using
+`docs/p12_final_validation_report.md` and `docs/p12_to_p13_handoff.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -691,6 +693,8 @@ Deliverables:
 - `docs/p12_manual_environment_checks.md`
 - `docs/p12_real_provider_smoke_decision.md`
 - `docs/p12_credential_package_variant_decision.md`
+- `docs/p12_trial_triage_workflow.md`
+- `docs/p12_boundary_scan_evidence.md`
 - P12 final validation report and P12 to P13 handoff.
 
 Validation:
@@ -715,3 +719,22 @@ Round split:
 - Round 8: trial triage workflow.
 - Rounds 9-11: buffer hardening.
 - Round 12: final validation, report, and P13 handoff.
+
+Executor completion artifacts:
+
+- `docs/p12_private_trial_release_notes.md`
+- `docs/p12_feedback_intake_template.md`
+- `docs/p12_trial_pass_fail_criteria.md`
+- `docs/p12_manual_environment_checks.md`
+- `docs/p12_real_provider_smoke_decision.md`
+- `docs/p12_credential_package_variant_decision.md`
+- `docs/p12_trial_triage_workflow.md`
+- `docs/p12_boundary_scan_evidence.md`
+- `docs/p12_final_validation_report.md`
+- `docs/p12_to_p13_handoff.md`
+
+Executor completion:
+
+- P12 ready for planner check on 2026-07-16.
+- Recommended P13: Private Trial Feedback Response And Credential Package
+  Feasibility.

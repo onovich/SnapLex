@@ -42,7 +42,9 @@ P12 private trial pilot planning is recorded in
 `docs/p12_real_provider_smoke_decision.md`,
 `docs/p12_credential_package_variant_decision.md`,
 `docs/p12_trial_triage_workflow.md`,
-`docs/p12_boundary_scan_evidence.md`, and `docs/p12_todo.md`.
+`docs/p12_boundary_scan_evidence.md`,
+`docs/p12_final_validation_report.md`, `docs/p12_to_p13_handoff.md`, and
+`docs/p12_todo.md`.
 
 ## Automated Precheck
 
