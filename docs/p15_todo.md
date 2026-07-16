@@ -8,8 +8,8 @@ Estimated budget: 12 conversation rounds.
 
 ## Tasks
 
-- [ ] Revalidate the accepted P14 baseline.
-- [ ] Create package spike design notes.
+- [x] Revalidate the accepted P14 baseline.
+- [x] Create package spike design notes.
 - [ ] Audit optional dependency and packaging variant behavior.
 - [ ] Prove or reject packaged keyring import/backend discovery.
 - [ ] Prove or reject packaged credential save/read/delete/cleanup with only a
