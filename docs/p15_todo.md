@@ -19,7 +19,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Preserve deterministic base package dry-run and fake package smoke.
 - [x] Document cleanup guidance for throwaway/manual credentials and local
       smoke data.
-- [ ] Decide whether to promote, defer, or reject a later production
+- [x] Decide whether to promote, defer, or reject a later production
       credential-capable package hardening phase.
 - [ ] Preserve no-secret, no-network automated validation and fail-closed real
       trial behavior.
