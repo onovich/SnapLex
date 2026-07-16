@@ -27,6 +27,17 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Check real-provider credential readiness without network calls.",
     )
+    parser.add_argument(
+        "--smoke-credentials",
+        action="store_true",
+        help="Run explicit credential-capable package smoke with a throwaway value.",
+    )
+    parser.add_argument(
+        "--credential-smoke-mode",
+        choices=("import", "cycle", "save", "check-delete"),
+        default="cycle",
+        help="Credential smoke mode for --smoke-credentials.",
+    )
     return parser
 
 
@@ -65,5 +76,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         for line in result.detail_lines:
             print(f"- {line}")
         return 0 if result.ready else 1
+
+    if args.smoke_credentials:
+        from snaplex.release_smoke import PackagedSmokeError, run_packaged_credential_smoke
+
+        try:
+            smoke_lines = run_packaged_credential_smoke(mode=args.credential_smoke_mode)
+        except PackagedSmokeError as exc:
+            print(f"SnapLex packaged credential smoke FAIL: {exc}")
+            return 1
+
+        print("SnapLex packaged credential smoke PASS")
+        for line in smoke_lines:
+            print(f"- {line}")
+        return 0
 
     return launch_gui()

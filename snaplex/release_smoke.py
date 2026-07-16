@@ -2,10 +2,21 @@
 
 from __future__ import annotations
 
-import os
 import asyncio
+import os
+import uuid
 from pathlib import Path
+from typing import Any
 
+from snaplex.credentials import (
+    CredentialReference,
+    CredentialService,
+    CredentialSource,
+    CredentialStatusCode,
+    CredentialStoreError,
+    KeyringCredentialStore,
+    keyring_credential_reference,
+)
 from snaplex.services import (
     FakeCaptureService,
     FakeOcrService,
@@ -28,6 +39,10 @@ from snaplex.storage import (
 
 class PackagedSmokeError(RuntimeError):
     """Raised when deterministic packaged workflow smoke fails."""
+
+
+CREDENTIAL_SMOKE_MODES = ("import", "cycle", "save", "check-delete")
+CREDENTIAL_SMOKE_IDENTIFIER = "snaplex/p15/package-spike"
 
 
 def run_packaged_workflow_smoke() -> tuple[str, ...]:
@@ -116,8 +131,113 @@ def run_packaged_workflow_smoke() -> tuple[str, ...]:
     )
 
 
+def run_packaged_credential_smoke(
+    *,
+    mode: str = "cycle",
+    keyring_module: Any | None = None,
+) -> tuple[str, ...]:
+    """Run explicit credential package smoke without printing credential values."""
+
+    if mode not in CREDENTIAL_SMOKE_MODES:
+        raise PackagedSmokeError(f"unknown credential smoke mode: {mode}")
+
+    keyring = keyring_module or _import_keyring()
+    backend_label = _keyring_backend_label(keyring)
+    reference = keyring_credential_reference("openai", CREDENTIAL_SMOKE_IDENTIFIER)
+    service = CredentialService(
+        {
+            CredentialSource.KEYRING: KeyringCredentialStore(
+                service_name="SnapLexP15PackageSmoke",
+                keyring_module=keyring,
+            ),
+        },
+    )
+    base_lines = [
+        f"credential smoke mode: {mode}",
+        f"keyring backend: {backend_label}",
+        f"credential reference: {reference.identifier}",
+    ]
+
+    if mode == "import":
+        return (*base_lines, "keyring import/backend discovery: PASS")
+
+    if mode == "save":
+        _delete_if_present(service, reference)
+        service.save(reference, _throwaway_credential_value())
+        status = service.status(reference)
+        if status.code != CredentialStatusCode.READY:
+            raise PackagedSmokeError(f"credential save did not become ready: {status.status_text}")
+        return (*base_lines, "credential save: PASS", "credential retained for restart check")
+
+    if mode == "check-delete":
+        status = service.status(reference)
+        if status.code != CredentialStatusCode.READY:
+            raise PackagedSmokeError(
+                f"credential was not ready after restart: {status.status_text}"
+            )
+        resolved = service.resolve(reference)
+        if not resolved.strip():
+            raise PackagedSmokeError("credential resolved to an empty value after restart.")
+        service.delete(reference)
+        missing = service.status(reference)
+        if missing.code != CredentialStatusCode.MISSING:
+            raise PackagedSmokeError("credential cleanup did not return to missing state.")
+        return (
+            *base_lines,
+            "credential restart readiness: PASS",
+            "credential cleanup: PASS",
+        )
+
+    _delete_if_present(service, reference)
+    secret = _throwaway_credential_value()
+    service.save(reference, secret)
+    resolved = service.resolve(reference)
+    if resolved != secret:
+        raise PackagedSmokeError("credential read did not match the saved throwaway value.")
+    service.delete(reference)
+    missing = service.status(reference)
+    if missing.code != CredentialStatusCode.MISSING:
+        raise PackagedSmokeError("credential cleanup did not return to missing state.")
+    return (
+        *base_lines,
+        "credential save/read/delete: PASS",
+        "credential cleanup: PASS",
+    )
+
+
 def _assert_inside_app_data(path: Path, app_data_dir: Path, label: str) -> None:
     try:
         path.resolve().relative_to(app_data_dir.resolve())
     except ValueError as exc:
         raise PackagedSmokeError(f"{label} file escaped the smoke app data directory.") from exc
+
+
+def _import_keyring() -> Any:
+    try:
+        import keyring
+    except Exception as exc:
+        raise PackagedSmokeError("keyring is not available in this runtime.") from exc
+    return keyring
+
+
+def _keyring_backend_label(keyring_module: Any) -> str:
+    get_keyring = getattr(keyring_module, "get_keyring", None)
+    if callable(get_keyring):
+        try:
+            backend = get_keyring()
+        except Exception as exc:
+            raise PackagedSmokeError("keyring backend discovery failed.") from exc
+        return f"{backend.__class__.__module__}.{backend.__class__.__name__}"
+    return f"{keyring_module.__class__.__module__}.{keyring_module.__class__.__name__}"
+
+
+def _throwaway_credential_value() -> str:
+    return uuid.uuid4().hex
+
+
+def _delete_if_present(service: CredentialService, reference: CredentialReference) -> None:
+    try:
+        if service.status(reference).code == CredentialStatusCode.READY:
+            service.delete(reference)
+    except CredentialStoreError:
+        return
