@@ -11,7 +11,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Revalidate the accepted P13 baseline.
 - [x] Create a tester feedback intake log and record whether external tester
       feedback is available.
-- [ ] Run or document blocker for assistive-technology validation on a target
+- [x] Run or document blocker for assistive-technology validation on a target
       Windows device.
 - [ ] Run or document blocker for DPI scaling validation.
 - [ ] Run or document blocker for multi-monitor validation.
