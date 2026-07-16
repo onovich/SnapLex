@@ -12,7 +12,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Define signing identity and certificate custody policy.
 - [x] Define signing command, verification, and revocation expectations.
 - [x] Run or explicitly skip/block a safe signing rehearsal.
-- [ ] Decide archive versus installer readiness.
+- [x] Decide archive versus installer readiness.
 - [ ] Define rollback and update policy without implementing updater runtime.
 - [ ] Define artifact naming, transfer, retention, revocation, and support
       escalation policy.
