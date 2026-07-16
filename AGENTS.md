@@ -81,5 +81,14 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P17 to P18 handoff: `docs/p17_to_p18_handoff.md`.
 - Latest P18 guide: `docs/p18_signing_distribution_readiness_gate_goal_guide.md`.
 - Latest P18 TODO: `docs/p18_todo.md`.
+- P18 signing/distribution evidence:
+  `docs/p18_signing_identity_certificate_custody.md`,
+  `docs/p18_signing_verification_policy.md`,
+  `docs/p18_signing_rehearsal_record.md`,
+  `docs/p18_archive_installer_readiness_decision.md`,
+  `docs/p18_rollback_update_policy.md`,
+  `docs/p18_artifact_retention_revocation_support.md`,
+  `docs/p18_distribution_readiness_decision.md`,
+  `docs/p18_boundary_scan_evidence.md`.
 - Latest P18 report: `docs/p18_final_validation_report.md`.
 - P18 to P19 handoff: `docs/p18_to_p19_handoff.md`.
