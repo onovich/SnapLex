@@ -22,7 +22,7 @@ Round budget: 12 conversation rounds
   handling.
 - [x] Revalidate deterministic base package lane.
 - [x] Revalidate explicit credentials package lane.
-- [ ] Run boundary, secret, private-key, certificate, package-output,
+- [x] Run boundary, secret, private-key, certificate, package-output,
   screenshot, log, and signing-material scans.
 - [ ] Write final validation report and P21 handoff.
 - [ ] Commit and push.
