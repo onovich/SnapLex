@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P21 planner-accepted; P22 executor evidence in progress
+Status: P22 executor-complete; ready for planner check
 
 ## 0. Round Estimate Rules
 
@@ -1528,7 +1528,8 @@ Deliverables:
 - `docs/p22_base_package_continuity_evidence.md`
 - `docs/p22_credentials_package_continuity_evidence.md`
 - `docs/p22_boundary_scan_evidence.md`
-- P22 final validation report and P22 to P23 handoff.
+- `docs/p22_final_validation_report.md`
+- `docs/p22_to_p23_handoff.md`
 
 Validation:
 

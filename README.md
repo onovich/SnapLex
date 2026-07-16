@@ -172,25 +172,26 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P16. P17 Limited Credential Package Pilot And
-Signing Decision is executor-complete and ready for planner check. The P0-P7 track is
-complete with a Windows
-MVP release baseline and a post-MVP expansion roadmap. The app now has manual
-clipboard and screen translation actions, capture/OCR service boundaries,
-optional lazy real capture/OCR adapters, real provider adapters for
-LibreTranslate/OpenAI/DeepL, mocked HTTP tests, fake offline defaults, persisted
-settings, optional recent translation history, shared result states, a
-PyInstaller spec, packaged release smoke commands, post-MVP expansion plans,
-provider setup UX, Apple-inspired UI polish, accepted P10 credential/account
-work, accepted P11 trial release hardening, accepted P12 private-trial pilot
-materials, accepted P13 feedback response evidence, and accepted P14 source
-keyring validation evidence. P15 adds explicit credential-capable package spike
-evidence while keeping the base package deterministic. P16 hardens that
-explicit package path into a limited private tester candidate while preserving
-the deterministic base package. P17 evaluates the controlled credential package
-pilot lane, pre-share gates, feedback intake, artifact policy, signing
-decision, and lane decision while keeping the package unsigned/private-trial
-only.
+SnapLex has accepted P0 through P21. P22 Non-Signing Private Trial Continuity
+And Tester Support Gate is executor-complete and ready for planner check. The
+P0-P7 track is complete with a Windows MVP release baseline and a post-MVP
+expansion roadmap. The app now has manual clipboard and screen translation
+actions, capture/OCR service boundaries, optional lazy real capture/OCR
+adapters, real provider adapters for LibreTranslate/OpenAI/DeepL, mocked HTTP
+tests, fake offline defaults, persisted settings, optional recent translation
+history, shared result states, a PyInstaller spec, packaged release smoke
+commands, post-MVP expansion plans, provider setup UX, Apple-inspired UI
+polish, accepted P10 credential/account work, accepted P11 trial release
+hardening, accepted P12 private-trial pilot materials, accepted P13 feedback
+response evidence, and accepted P14 source keyring validation evidence. P15
+adds explicit credential-capable package spike evidence while keeping the base
+package deterministic. P16 hardens that explicit package path into a limited
+private tester candidate while preserving the deterministic base package. P17
+evaluates the controlled credential package pilot lane. P18 through P21 record
+signing/distribution gates and keep signing PAUSED because no approved safe
+signing path was supplied. P22 refreshes unsigned/private-trial tester
+instructions, support intake, feedback triage, artifact retention, package-lane
+evidence, and boundary scans without adding runtime features.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -789,7 +790,8 @@ and `docs/p22_todo.md`. Current P22 executor evidence is recorded in
 `docs/p22_base_package_continuity_evidence.md`,
 `docs/p22_credentials_package_continuity_evidence.md`,
 `docs/p22_artifact_transfer_retention.md`, and
-`docs/p22_boundary_scan_evidence.md`.
+`docs/p22_boundary_scan_evidence.md`. The P22 closure package is
+`docs/p22_final_validation_report.md` and `docs/p22_to_p23_handoff.md`.
 
 ## Current Boundaries
 

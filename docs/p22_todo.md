@@ -20,8 +20,8 @@ Round budget: 10 conversation rounds
 - [x] Record artifact transfer, retention, cleanup, and no-secret evidence.
 - [x] Run boundary, secret, private-key, certificate, package-output,
   screenshot, log, and signing-material scans.
-- [ ] Write final validation report and P23 handoff.
-- [ ] Commit and push.
+- [x] Write final validation report and P23 handoff.
+- [x] Commit and push.
 
 ## Deferred
 

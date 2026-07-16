@@ -154,7 +154,8 @@ and `docs/p22_todo.md`. P22 executor evidence is recorded in
 `docs/p22_base_package_continuity_evidence.md`,
 `docs/p22_credentials_package_continuity_evidence.md`,
 `docs/p22_artifact_transfer_retention.md`, and
-`docs/p22_boundary_scan_evidence.md`.
+`docs/p22_boundary_scan_evidence.md`. The P22 closure package is
+`docs/p22_final_validation_report.md` and `docs/p22_to_p23_handoff.md`.
 
 ## Automated Precheck
 
