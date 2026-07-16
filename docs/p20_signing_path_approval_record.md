@@ -2,7 +2,8 @@
 
 Date: 2026-07-17
 Phase: P20 Approved Signing Path Acquisition And Rehearsal Setup Gate
-Status: rebaseline complete; approval decision pending Round 2
+Status: BLOCKED/SKIPPED - no explicit safe throwaway/test signing path
+approval supplied
 
 P20 decides whether SnapLex has explicit approval for a safe throwaway/test
 signing path. Round 1 revalidates the accepted P19 baseline and records the
@@ -87,7 +88,60 @@ signing command runs:
 - post-rehearsal cleanup and boundary scan commands.
 
 Current evidence does not include explicit approval for a safe signing path.
-Round 2 will record the formal P20 approval decision.
+
+## P20 Signing Path Approval Decision
+
+Decision: BLOCKED/SKIPPED.
+
+P20 does not have explicit approval for a safe throwaway/test signing path.
+Therefore P20 will not run signing commands, generate a self-signed
+certificate, import certificate material, call a timestamp service, create
+signed artifacts, or verify signatures against signed output.
+
+Reasons:
+
+- P19 was accepted with signing rehearsal SKIPPED because no approved safe
+  throwaway/test signing path was supplied.
+- The P20 planner dispatch asks the executor not to run signing commands unless
+  explicit safe signing path approval and all required safety inputs are
+  recorded first.
+- The P20 dispatch does not supply a safe signing path type, signer identity,
+  certificate source, private-key custody rule, ignored artifact path, command
+  shape, timestamp policy, verification evidence policy, or cleanup policy
+  sufficient to authorize signing.
+- No production certificate is approved, required, or in scope.
+- No explicit approval was supplied to generate a local throwaway certificate.
+- Committing certificates, private keys, signed binaries, timestamp responses,
+  screenshots, logs, package outputs, `.env`, keyring exports, tester data,
+  local app data, smoke data, OCR caches, or provider secrets remains
+  forbidden.
+
+This BLOCKED/SKIPPED decision is acceptable for P20 as long as approval
+requirements, artifact policy, command discovery shape, verification policy,
+package lanes, validation, and hygiene gates pass. P20 is an acquisition/setup
+gate, not a mandate to invent signing material.
+
+## Future Inputs To Change This Decision
+
+A later round or phase may change this decision only with explicit safe-path
+approval that includes:
+
+- approval owner and date;
+- signing path type: local throwaway certificate, hardware token test
+  certificate, managed signing sandbox, or other safe non-production path;
+- signer identity label and proof that it is not a production release
+  certificate unless separately approved;
+- certificate subject, issuer, and non-secret thumbprint or test identifier
+  when present;
+- private-key custody rule and cleanup rule;
+- ignored local artifact directory for unsigned and signed rehearsal files;
+- exact signing and verification commands;
+- timestamp policy, including whether timestamp is skipped for local test
+  rehearsal or uses an approved test-safe endpoint;
+- evidence retention rule that records only non-secret text and hashes;
+- post-rehearsal cleanup and boundary scan commands.
+
+Without these inputs, signing remains BLOCKED/SKIPPED.
 
 ## Round 1 Self-Checks
 
@@ -104,6 +158,32 @@ Architecture self-check:
 
 - Rebaseline work does not change provider, credential, settings, history,
   capture, OCR, UI, package specification, or trial readiness behavior.
+- Providers remain behind provider registry and `TranslationPipeline`.
+- Credentials remain behind credential services, stores, settings, provider
+  setup, and trial readiness.
+- The base package remains deterministic and keyring-free.
+- The `credentials` package remains explicit and private-trial.
+- No public release, production signing, installer, updater, cloud, OAuth,
+  browser extension, AI summary, global hotkey, provider rewrite, OCR/capture
+  rewrite, full localization, certificate, private key, signed artifact,
+  timestamp response, or signing log is introduced.
+
+## Round 2 Self-Checks
+
+Debug self-check:
+
+- The decision is explained by the smallest signing-path workflow: required
+  approval inputs are missing, so signing is blocked/skipped and package lane
+  validation continues.
+- Success, expected rejection, missing approval, no certificate, no signing
+  command, skipped timestamp, skipped network, cleanup requirement, and
+  no-secret states are covered.
+
+Architecture self-check:
+
+- The BLOCKED/SKIPPED decision does not change provider, credential, settings,
+  history, capture, OCR, UI, package specification, or trial readiness
+  behavior.
 - Providers remain behind provider registry and `TranslationPipeline`.
 - Credentials remain behind credential services, stores, settings, provider
   setup, and trial readiness.
