@@ -19,7 +19,7 @@ Estimated budget: 12 conversation rounds.
       keyring dependency/backend status.
 - [x] Run source keyring save/read/delete smoke with only a throwaway fake
       value when feasible, or document the blocker.
-- [ ] Record optional real-provider smoke run/skip evidence.
+- [x] Record optional real-provider smoke run/skip evidence.
 - [ ] Decide whether evidence justifies a later isolated credential-capable
       package spike.
 - [ ] Preserve deterministic no-network tests, fake smoke, P10-P13 credential
