@@ -14,7 +14,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Run or document blocker for assistive-technology validation on a target
       Windows device.
 - [x] Run or document blocker for DPI scaling validation.
-- [ ] Run or document blocker for multi-monitor validation.
+- [x] Run or document blocker for multi-monitor validation.
 - [ ] Install optional source credential support when feasible and record
       keyring dependency/backend status.
 - [ ] Run source keyring save/read/delete smoke with only a throwaway fake
