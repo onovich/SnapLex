@@ -747,7 +747,16 @@ rehearsal in ignored artifact paths with non-secret evidence. If approval is
 missing, it records BLOCKED or SKIPPED and keeps signing commands off.
 
 See `docs/p20_approved_signing_path_acquisition_rehearsal_setup_gate_goal_guide.md`
-and `docs/p20_todo.md`.
+and `docs/p20_todo.md`. Current P20 executor evidence is recorded in
+`docs/p20_signing_path_approval_record.md`,
+`docs/p20_rehearsal_artifact_directory_policy.md`,
+`docs/p20_signing_command_discovery.md`,
+`docs/p20_isolated_rehearsal_evidence.md`,
+`docs/p20_signature_verification_evidence_policy.md`,
+`docs/p20_base_package_control_evidence.md`,
+`docs/p20_credentials_package_control_evidence.md`, and
+`docs/p20_boundary_scan_evidence.md`. The P20 closure package is planned as
+`docs/p20_final_validation_report.md` and `docs/p20_to_p21_handoff.md`.
 
 ## Current Boundaries
 

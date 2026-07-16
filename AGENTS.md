@@ -106,5 +106,14 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P19 to P20 handoff: `docs/p19_to_p20_handoff.md`.
 - Latest P20 guide: `docs/p20_approved_signing_path_acquisition_rehearsal_setup_gate_goal_guide.md`.
 - Latest P20 TODO: `docs/p20_todo.md`.
+- P20 signing path acquisition evidence:
+  `docs/p20_signing_path_approval_record.md`,
+  `docs/p20_rehearsal_artifact_directory_policy.md`,
+  `docs/p20_signing_command_discovery.md`,
+  `docs/p20_isolated_rehearsal_evidence.md`,
+  `docs/p20_signature_verification_evidence_policy.md`,
+  `docs/p20_base_package_control_evidence.md`,
+  `docs/p20_credentials_package_control_evidence.md`,
+  `docs/p20_boundary_scan_evidence.md`.
 - Latest P20 report: `docs/p20_final_validation_report.md`.
 - P20 to P21 handoff: `docs/p20_to_p21_handoff.md`.

@@ -126,7 +126,15 @@ P19 signing rehearsal and signed archive candidate planning is recorded in
 `docs/p19_boundary_scan_evidence.md`.
 P20 approved signing path acquisition and rehearsal setup planning is recorded
 in `docs/p20_approved_signing_path_acquisition_rehearsal_setup_gate_goal_guide.md`
-and `docs/p20_todo.md`.
+and `docs/p20_todo.md`. P20 executor evidence is recorded in
+`docs/p20_signing_path_approval_record.md`,
+`docs/p20_rehearsal_artifact_directory_policy.md`,
+`docs/p20_signing_command_discovery.md`,
+`docs/p20_isolated_rehearsal_evidence.md`,
+`docs/p20_signature_verification_evidence_policy.md`,
+`docs/p20_base_package_control_evidence.md`,
+`docs/p20_credentials_package_control_evidence.md`, and
+`docs/p20_boundary_scan_evidence.md`.
 
 ## Automated Precheck
 
