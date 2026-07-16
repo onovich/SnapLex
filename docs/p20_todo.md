@@ -13,7 +13,7 @@ Round budget: 12 conversation rounds
 - [x] Rebaseline accepted P19 and current package lanes.
 - [x] Decide whether explicit safe signing-path approval exists.
 - [x] Record required approval inputs for any rehearsal.
-- [ ] Define ignored local artifact directories, cleanup, and evidence
+- [x] Define ignored local artifact directories, cleanup, and evidence
   retention policy.
 - [ ] Define command discovery and signing rehearsal command shape.
 - [ ] Run approved local-only rehearsal, or record BLOCKED/SKIPPED without
