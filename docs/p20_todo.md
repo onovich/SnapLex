@@ -18,7 +18,7 @@ Round budget: 12 conversation rounds
 - [x] Define command discovery and signing rehearsal command shape.
 - [x] Run approved local-only rehearsal, or record BLOCKED/SKIPPED without
   running signing commands.
-- [ ] Define signature verification, trust, timestamp, and revocation evidence
+- [x] Define signature verification, trust, timestamp, and revocation evidence
   handling.
 - [ ] Revalidate deterministic base package lane.
 - [ ] Revalidate explicit credentials package lane.
