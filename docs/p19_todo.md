@@ -10,7 +10,7 @@ Round budget: 12 conversation rounds
 
 ## Tasks
 
-- [ ] Rebaseline P18 signing/distribution reports and current package lanes.
+- [x] Rebaseline P18 signing/distribution reports and current package lanes.
 - [ ] Decide whether an approved safe throwaway/test signing rehearsal path
   exists.
 - [ ] Revalidate deterministic base package behavior.
@@ -40,4 +40,3 @@ Round budget: 12 conversation rounds
   full localization.
 - Real-provider network smoke without existing local credentials and explicit
   human approval.
-
