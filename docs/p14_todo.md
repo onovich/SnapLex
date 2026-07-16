@@ -8,8 +8,8 @@ Estimated budget: 12 conversation rounds.
 
 ## Tasks
 
-- [ ] Revalidate the accepted P13 baseline.
-- [ ] Create a tester feedback intake log and record whether external tester
+- [x] Revalidate the accepted P13 baseline.
+- [x] Create a tester feedback intake log and record whether external tester
       feedback is available.
 - [ ] Run or document blocker for assistive-technology validation on a target
       Windows device.
