@@ -1,9 +1,14 @@
 # P15 To P16 Handoff
 
 Date: 2026-07-16
-Status: P15 executor-complete; ready for planner acceptance
+Status: P15 planner-accepted; ready for P16 execution
 
 Recommended P16: Credential-Capable Package Production Hardening.
+
+P16 execution guide:
+`docs/p16_credential_capable_package_production_hardening_goal_guide.md`
+
+P16 TODO: `docs/p16_todo.md`
 
 ## P15 Baseline
 

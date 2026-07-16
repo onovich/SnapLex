@@ -69,7 +69,10 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest accepted P14 guide: `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`.
 - Latest accepted P14 report: `docs/p14_final_validation_report.md`.
 - P14 to P15 handoff: `docs/p14_to_p15_handoff.md`.
-- Latest P15 guide: `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`.
-- Latest P15 TODO: `docs/p15_todo.md`.
-- Latest P15 report: `docs/p15_final_validation_report.md`.
+- Latest accepted P15 guide: `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`.
+- Latest accepted P15 report: `docs/p15_final_validation_report.md`.
 - P15 to P16 handoff: `docs/p15_to_p16_handoff.md`.
+- Latest P16 guide: `docs/p16_credential_capable_package_production_hardening_goal_guide.md`.
+- Latest P16 TODO: `docs/p16_todo.md`.
+- Latest P16 report: `docs/p16_final_validation_report.md`.
+- P16 to P17 handoff: `docs/p16_to_p17_handoff.md`.

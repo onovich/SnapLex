@@ -148,8 +148,8 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P14. P15 Isolated Credential-Capable Package
-Spike Design Gate is executor-complete and ready for planner check. The P0-P7 track is
+SnapLex has accepted P0 through P15. P16 Credential-Capable Package Production
+Hardening is ready for executor work. The P0-P7 track is
 complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
@@ -626,6 +626,16 @@ fail-closed when no real provider is configured.
 See `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`,
 `docs/p15_todo.md`, `docs/p15_final_validation_report.md`, and
 `docs/p15_to_p16_handoff.md`.
+
+## P16 Credential-Capable Package Production Hardening
+
+P16 hardens the explicit credential-capable package path for a production
+decision while preserving the deterministic base package. It focuses on the
+`credentials` variant, package smoke behavior, tester-facing setup and cleanup
+docs, keyring failure modes, release gates, and no-secret/no-network hygiene.
+
+See `docs/p16_credential_capable_package_production_hardening_goal_guide.md`
+and `docs/p16_todo.md`.
 
 ## Current Boundaries
 

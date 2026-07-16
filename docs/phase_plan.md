@@ -980,7 +980,8 @@ Round split:
 
 Executor completion:
 
-- P15 completed on 2026-07-16 and is ready for planner acceptance.
+- P15 completed on 2026-07-16 and was accepted by planner review on
+  2026-07-17.
 - Explicit `credentials` package variant added and validated.
 - Packaged keyring import/backend discovery passed.
 - Packaged credential save/read/delete/cleanup passed with runtime-generated
@@ -992,3 +993,73 @@ Executor completion:
   release promise.
 - Closure package: `docs/p15_boundary_scan_evidence.md`,
   `docs/p15_final_validation_report.md`, and `docs/p15_to_p16_handoff.md`.
+
+Planner acceptance:
+
+- P15 accepted at `8e920c7c70155095cee92df86867535c98993220`.
+- Selected next phase: P16 Credential-Capable Package Production Hardening.
+
+## 19. P16 - Credential-Capable Package Production Hardening
+
+Estimated rounds: 12
+
+Execution guide:
+`docs/p16_credential_capable_package_production_hardening_goal_guide.md`
+
+Goal: harden the explicit credential-capable package path for a production
+decision while preserving the deterministic base package.
+
+Scope:
+
+- Revalidate the accepted P15 baseline.
+- Preserve deterministic base package behavior and prove keyring remains
+  excluded from base.
+- Harden the explicit `credentials` package variant.
+- Harden `--smoke-credentials` modes, output, exit codes, restart readiness,
+  and no-secret guarantees.
+- Produce tester-facing setup, failure, and cleanup documentation.
+- Document or harden missing, unavailable, locked, unsupported, and cleanup
+  failure states for keyring backends.
+- Define signed/unsigned build gates, artifact handling, manual smoke evidence,
+  and support boundaries.
+- Decide whether the credential-capable package path is ready for limited
+  private tester distribution, needs another hardening phase, or remains
+  deferred.
+
+Deliverables:
+
+- `docs/p16_base_package_preservation_evidence.md`
+- `docs/p16_credentials_variant_hardening.md`
+- `docs/p16_credential_smoke_hardening.md`
+- `docs/p16_tester_setup_cleanup_guide.md`
+- `docs/p16_keyring_failure_modes.md`
+- `docs/p16_release_gate_artifact_policy.md`
+- `docs/p16_production_hardening_decision.md`
+- `docs/p16_boundary_scan_evidence.md`
+- P16 final validation report and P16 to P17 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Base and credentials package dry-runs pass.
+- Base package remains deterministic and rejects credential smoke.
+- Credentials package smoke covers import, cycle, save/check-delete restart
+  readiness, and cleanup when feasible.
+- Fake/real trial command smoke remains green and real trial paths fail closed.
+- P9 and P11 GUI smoke remain green.
+- Docs link/index and artifact/secret scans remain green.
+
+Round split:
+
+- Round 1: rebaseline and hardening acceptance.
+- Round 2: base package preservation gate.
+- Round 3: credentials variant build/dependency gate.
+- Round 4: credential smoke command hardening.
+- Round 5: tester setup and cleanup docs.
+- Round 6: keyring failure modes and support policy.
+- Round 7: release gate and artifact policy.
+- Round 8: production hardening decision.
+- Rounds 9-11: buffer hardening.
+- Round 12: final validation, report, and P17 handoff.

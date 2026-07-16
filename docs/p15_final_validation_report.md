@@ -2,7 +2,7 @@
 
 Date: 2026-07-16
 Phase: P15 Isolated Credential-Capable Package Spike Design Gate
-Status: PASS - ready for planner acceptance
+Status: PASS - accepted by planner
 
 P15 completed the isolated credential-capable package spike design gate without
 turning credential support into the deterministic base package. The spike added
@@ -244,7 +244,9 @@ business rules.
 - `1117607` p15: document credential package smoke
 - `3a34955` p15: harden smoke checklist
 
-## Request For Acceptance
+## Planner Acceptance
 
-P15 is ready for planner/architect review. Recommended P16:
-Credential-Capable Package Production Hardening.
+P15 was accepted by planner review on 2026-07-17 at
+`8e920c7c70155095cee92df86867535c98993220`.
+
+Selected P16: Credential-Capable Package Production Hardening.

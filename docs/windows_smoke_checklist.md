@@ -77,6 +77,9 @@ P15 isolated credential-capable package spike planning is recorded in
 `docs/p15_package_spike_decision.md`, and
 `docs/p15_boundary_scan_evidence.md`,
 `docs/p15_final_validation_report.md`, and `docs/p15_to_p16_handoff.md`.
+P16 credential-capable package hardening is recorded in
+`docs/p16_credential_capable_package_production_hardening_goal_guide.md` and
+`docs/p16_todo.md`.
 
 ## Automated Precheck
 

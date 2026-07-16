@@ -428,6 +428,7 @@ Summary:
 - P13 Private Trial Feedback Response And Credential Package Feasibility: 12 conversation rounds.
 - P14 Manual Environment And Source Keyring Validation: 12 conversation rounds.
 - P15 Isolated Credential-Capable Package Spike Design Gate: 12 conversation rounds.
+- P16 Credential-Capable Package Production Hardening: 12 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -440,8 +441,9 @@ feedback triage, the post-MVP plan became 117 rounds. Including selected P13
 feedback response and credential package feasibility, the post-MVP plan became
 129 rounds. Including selected P14 manual environment and source keyring
 validation, the post-MVP plan became 141 rounds. Including selected P15
-isolated credential-capable package spike design gate, the current post-MVP
-plan is 153 rounds.
+isolated credential-capable package spike design gate, the post-MVP plan became
+153 rounds. Including selected P16 credential-capable package production
+hardening, the current post-MVP plan is 165 rounds.
 
 ## Validation Plan
 
