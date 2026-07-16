@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P20 Approved Signing Path Acquisition And Rehearsal Setup Gate
-Status: PASS - ready for planner check
+Status: PASS - accepted by planner
 Final commit: recorded in READY_FOR_CHECK planner notification after final
 report commit
 Push: PASS, `origin/main`
@@ -171,6 +171,9 @@ Evidence:
 - Broader Credential Locker/keyring device matrix evidence remains limited.
 
 ## Recommended Next Phase
+
+Planner acceptance: P20 was accepted on 2026-07-17 at
+`0821a109c683e763997ca116c74ffbe2fddfbde9`.
 
 Recommended P21: signing path unblock decision or pause signing work.
 

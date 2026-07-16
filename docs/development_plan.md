@@ -433,6 +433,7 @@ Summary:
 - P18 Signing And Distribution Readiness Gate: 12 conversation rounds.
 - P19 Signing Rehearsal And Signed Archive Candidate Gate: 12 conversation rounds.
 - P20 Approved Signing Path Acquisition And Rehearsal Setup Gate: 12 conversation rounds.
+- P21 Signing Path Unblock Decision Or Pause Gate: 8 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -454,7 +455,9 @@ the post-MVP plan became 177 rounds. Including accepted P18 signing and
 distribution readiness gate, the post-MVP plan became 189 rounds. Including
 accepted P19 signing rehearsal and signed archive candidate gate, the post-MVP
 plan became 201 rounds. Including selected P20 approved signing path
-acquisition and rehearsal setup gate, the current post-MVP plan is 213 rounds.
+acquisition and rehearsal setup gate, the post-MVP plan became 213 rounds.
+Including selected P21 signing path unblock decision or pause gate, the current
+post-MVP plan is 221 rounds.
 
 ## P16 Credential-Capable Package Production Hardening Completion
 
@@ -503,6 +506,15 @@ signing commands.
 
 The P20 guide is
 `docs/p20_approved_signing_path_acquisition_rehearsal_setup_gate_goal_guide.md`.
+
+## P21 Signing Path Unblock Decision Or Pause Gate
+
+P21 decides whether signing has enough explicit safe-path approval to move to a
+future rehearsal, or whether signing should be paused until a human supplies
+the missing inputs. It does not run signing commands.
+
+The P21 guide is
+`docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md`.
 
 ## Validation Plan
 

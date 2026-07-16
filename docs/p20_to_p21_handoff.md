@@ -1,11 +1,14 @@
 # P20 To P21 Handoff
 
 Date: 2026-07-17
-Status: P20 executor-complete; ready for planner check
+Status: P20 planner-accepted; ready for P21 execution
 
 Recommended P21: signing path unblock decision or pause signing work.
 
-P21 guide: to be created by planner after P20 acceptance.
+P21 guide:
+`docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md`
+
+P21 TODO: `docs/p21_todo.md`
 
 ## P20 Outcome
 

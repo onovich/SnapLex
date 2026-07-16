@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P19 planner-accepted; P20 ready for executor
+Status: P20 planner-accepted; P21 ready for executor
 
 ## 0. Round Estimate Rules
 
@@ -34,6 +34,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P18 | Signing And Distribution Readiness Gate | Decide signing identity, custody, verification, distribution, rollback, retention, and support policy before broader credential package distribution. | 12 rounds |
 | P19 | Signing Rehearsal And Signed Archive Candidate Gate | Decide whether a safe isolated signing rehearsal can run and gate any signed archive candidate without public release. | 12 rounds |
 | P20 | Approved Signing Path Acquisition And Rehearsal Setup Gate | Decide whether an approved safe signing path exists and set up or block isolated rehearsal work without public release. | 12 rounds |
+| P21 | Signing Path Unblock Decision Or Pause Gate | Decide whether signing is unblocked for a later rehearsal or paused until human approval is supplied. | 8 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -49,7 +50,8 @@ Total including selected P16 post-MVP implementation: 165 rounds.
 Total including selected P17 post-MVP implementation: 177 rounds.
 Total including accepted P18 post-MVP implementation: 189 rounds.
 Total including accepted P19 post-MVP implementation: 201 rounds.
-Total including selected P20 post-MVP implementation: 213 rounds.
+Total including accepted P20 post-MVP implementation: 213 rounds.
+Total including selected P21 post-MVP implementation: 221 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -1404,3 +1406,75 @@ Round split:
 - Round 8: credentials package control lane.
 - Rounds 9-11: buffer hardening.
 - Round 12: final validation, report, and P21 handoff.
+
+Executor completion:
+
+- P20 completed at `0821a109c683e763997ca116c74ffbe2fddfbde9`.
+- P20 preserved base and credentials package separation.
+- P20 recorded signing path approval as BLOCKED/SKIPPED because no explicit
+  safe throwaway/test signing path approval was supplied.
+- P20 did not run signing commands, create/import/purchase/invent/use
+  certificates, call timestamp services, create signed artifacts, or approve
+  public release.
+- P20 closure is recorded in `docs/p20_final_validation_report.md` and
+  `docs/p20_to_p21_handoff.md`.
+
+Planner acceptance:
+
+- P20 accepted at `0821a109c683e763997ca116c74ffbe2fddfbde9`.
+- Selected next phase: P21 Signing Path Unblock Decision Or Pause Gate.
+
+## 24. P21 - Signing Path Unblock Decision Or Pause Gate
+
+Estimated rounds: 8
+
+Execution guide:
+`docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md`
+
+Goal: decide whether signing is unblocked for a later rehearsal or paused until
+human approval and tooling inputs are supplied.
+
+Scope:
+
+- Revalidate the accepted P20 baseline.
+- Decide whether safe signing-path approval exists.
+- Record APPROVED for later rehearsal or PAUSED with exact unblock inputs.
+- Recommend the next phase based on the decision.
+- Preserve deterministic base package validation.
+- Preserve explicit credentials package validation.
+- Preserve no-secret and no-artifact repository hygiene.
+
+Deliverables:
+
+- `docs/p21_signing_path_decision.md`
+- `docs/p21_signing_unblock_requirements.md`
+- `docs/p21_next_phase_recommendation.md`
+- `docs/p21_base_package_control_evidence.md`
+- `docs/p21_credentials_package_control_evidence.md`
+- `docs/p21_boundary_scan_evidence.md`
+- P21 final validation report and P21 to P22 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Base and credentials package dry-runs pass.
+- Base package remains deterministic and rejects credential smoke.
+- Credentials package smoke covers import, cycle, save/check-delete restart
+  readiness, and cleanup when feasible.
+- Fake/real trial command smoke remains green and real trial paths fail closed.
+- No signing command runs.
+- Docs link/index and artifact/secret/private-key/certificate/signing-material
+  scans remain green.
+
+Round split:
+
+- Round 1: rebaseline P20 and package lanes.
+- Round 2: signing-path approval decision.
+- Round 3: pause/unblock requirements and next-phase recommendation.
+- Round 4: base package control lane.
+- Round 5: credentials package control lane.
+- Round 6: boundary and signing-material scans.
+- Round 7: buffer for docs, links, or decision clarity.
+- Round 8: final validation, report, and P22 handoff.
