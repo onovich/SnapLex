@@ -713,8 +713,10 @@ See `docs/p18_signing_distribution_readiness_gate_goal_guide.md` and
 `docs/p18_rollback_update_policy.md`,
 `docs/p18_artifact_retention_revocation_support.md`,
 `docs/p18_distribution_readiness_decision.md`, and
-`docs/p18_boundary_scan_evidence.md`. The P18 closure package is planned as
-`docs/p18_final_validation_report.md` and `docs/p18_to_p19_handoff.md`.
+`docs/p18_boundary_scan_evidence.md`. Package validation evidence is recorded
+in `docs/p18_package_validation_evidence.md`. The P18 closure package is
+planned as `docs/p18_final_validation_report.md` and
+`docs/p18_to_p19_handoff.md`.
 
 ## Current Boundaries
 

@@ -17,8 +17,8 @@ Estimated budget: 12 conversation rounds.
 - [x] Define artifact naming, transfer, retention, revocation, and support
       escalation policy.
 - [x] Decide distribution readiness.
-- [ ] Preserve deterministic base package validation.
-- [ ] Preserve explicit credentials package validation.
+- [x] Preserve deterministic base package validation.
+- [x] Preserve explicit credentials package validation.
 - [x] Produce P18 boundary scan evidence.
 - [ ] Produce P18 final validation report.
 - [ ] Produce P18 to P19 handoff.

@@ -111,7 +111,8 @@ P18 signing and distribution readiness planning is recorded in
 `docs/p18_rollback_update_policy.md`,
 `docs/p18_artifact_retention_revocation_support.md`,
 `docs/p18_distribution_readiness_decision.md`, and
-`docs/p18_boundary_scan_evidence.md`.
+`docs/p18_boundary_scan_evidence.md`. P18 package validation evidence is
+recorded in `docs/p18_package_validation_evidence.md`.
 
 ## Automated Precheck
 
