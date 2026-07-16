@@ -17,7 +17,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Capture assistive-technology, DPI, and multi-monitor manual results or
       blockers.
 - [x] Record optional real-provider smoke run/skip evidence.
-- [ ] Record source keyring smoke pass/blocker evidence using only a throwaway
+- [x] Record source keyring smoke pass/blocker evidence using only a throwaway
       fake value when optional credentials support is available.
 - [ ] Decide credential-capable package feasibility for a later explicit phase.
 - [ ] Preserve deterministic no-network tests, fake smoke, P10/P11/P12
