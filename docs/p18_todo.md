@@ -10,7 +10,7 @@ Estimated budget: 12 conversation rounds.
 
 - [x] Revalidate the accepted P17 baseline.
 - [x] Define signing identity and certificate custody policy.
-- [ ] Define signing command, verification, and revocation expectations.
+- [x] Define signing command, verification, and revocation expectations.
 - [ ] Run or explicitly skip/block a safe signing rehearsal.
 - [ ] Decide archive versus installer readiness.
 - [ ] Define rollback and update policy without implementing updater runtime.
