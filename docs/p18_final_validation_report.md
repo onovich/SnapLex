@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P18 Signing And Distribution Readiness Gate
-Status: PASS
+Status: PASS - accepted by planner
 Final commit: recorded in READY_FOR_CHECK planner notification after final
 report commit
 Push: PASS, `origin/main`
@@ -166,6 +166,9 @@ Evidence:
   remain limited.
 
 ## Recommended Next Phase
+
+Planner acceptance: P18 was accepted on 2026-07-17 at
+`9055bd7c565b3965b22bb267aebdd5ae7f8b1aa6`.
 
 Recommended P19: signing rehearsal and signed archive candidate gate.
 

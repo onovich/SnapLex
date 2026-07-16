@@ -1,9 +1,14 @@
 # P18 To P19 Handoff
 
 Date: 2026-07-17
-Status: P18 executor-complete; ready for planner review
+Status: P18 planner-accepted; ready for P19 execution
 
 Recommended P19: signing rehearsal and signed archive candidate gate.
+
+P19 guide:
+`docs/p19_signing_rehearsal_signed_archive_candidate_gate_goal_guide.md`
+
+P19 TODO: `docs/p19_todo.md`
 
 ## P18 Outcome
 

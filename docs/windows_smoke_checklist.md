@@ -113,6 +113,9 @@ P18 signing and distribution readiness planning is recorded in
 `docs/p18_distribution_readiness_decision.md`, and
 `docs/p18_boundary_scan_evidence.md`. P18 package validation evidence is
 recorded in `docs/p18_package_validation_evidence.md`.
+P19 signing rehearsal and signed archive candidate planning is recorded in
+`docs/p19_signing_rehearsal_signed_archive_candidate_gate_goal_guide.md` and
+`docs/p19_todo.md`.
 
 ## Automated Precheck
 

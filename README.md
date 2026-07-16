@@ -704,8 +704,8 @@ certificate custody, signing verification, archive-versus-installer policy,
 rollback/update expectations, artifact retention/revocation, and support
 escalation.
 
-See `docs/p18_signing_distribution_readiness_gate_goal_guide.md` and
-`docs/p18_todo.md`. Current P18 executor evidence is recorded in
+See `docs/p18_signing_distribution_readiness_gate_goal_guide.md`. P18 executor
+evidence is recorded in
 `docs/p18_signing_identity_certificate_custody.md`,
 `docs/p18_signing_verification_policy.md`,
 `docs/p18_signing_rehearsal_record.md`,
@@ -715,8 +715,20 @@ See `docs/p18_signing_distribution_readiness_gate_goal_guide.md` and
 `docs/p18_distribution_readiness_decision.md`, and
 `docs/p18_boundary_scan_evidence.md`. Package validation evidence is recorded
 in `docs/p18_package_validation_evidence.md`. The P18 closure package is
-planned as `docs/p18_final_validation_report.md` and
-`docs/p18_to_p19_handoff.md`.
+`docs/p18_final_validation_report.md` and `docs/p18_to_p19_handoff.md`.
+
+## P19 Signing Rehearsal And Signed Archive Candidate Gate
+
+P19 decides whether SnapLex has an approved safe throwaway/test signing path for
+an isolated signing rehearsal. If approved, the rehearsal stays in ignored local
+artifact paths and records verification evidence without committing
+certificates, private keys, signed binaries, package outputs, timestamp
+responses, screenshots, logs, or secrets. If no safe path is supplied, P19
+records SKIPPED or BLOCKED honestly while preserving deterministic base package
+and explicit credentials package lanes.
+
+See `docs/p19_signing_rehearsal_signed_archive_candidate_gate_goal_guide.md`
+and `docs/p19_todo.md`.
 
 ## Current Boundaries
 

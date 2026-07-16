@@ -79,8 +79,7 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P17 pilot/gate evidence: `docs/p17_pilot_lane_plan.md`, `docs/p17_package_candidate_gate_evidence.md`, `docs/p17_tester_feedback_intake.md`, `docs/p17_real_provider_smoke_record.md`, `docs/p17_artifact_transfer_retention_support.md`, `docs/p17_signing_installer_updater_decision.md`, `docs/p17_credential_package_lane_decision.md`, `docs/p17_boundary_scan_evidence.md`.
 - Latest P17 report: `docs/p17_final_validation_report.md`.
 - P17 to P18 handoff: `docs/p17_to_p18_handoff.md`.
-- Latest P18 guide: `docs/p18_signing_distribution_readiness_gate_goal_guide.md`.
-- Latest P18 TODO: `docs/p18_todo.md`.
+- Latest accepted P18 guide: `docs/p18_signing_distribution_readiness_gate_goal_guide.md`.
 - P18 signing/distribution evidence:
   `docs/p18_signing_identity_certificate_custody.md`,
   `docs/p18_signing_verification_policy.md`,
@@ -91,5 +90,9 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p18_distribution_readiness_decision.md`,
   `docs/p18_boundary_scan_evidence.md`,
   `docs/p18_package_validation_evidence.md`.
-- Latest P18 report: `docs/p18_final_validation_report.md`.
+- Latest accepted P18 report: `docs/p18_final_validation_report.md`.
 - P18 to P19 handoff: `docs/p18_to_p19_handoff.md`.
+- Latest P19 guide: `docs/p19_signing_rehearsal_signed_archive_candidate_gate_goal_guide.md`.
+- Latest P19 TODO: `docs/p19_todo.md`.
+- Latest P19 report: `docs/p19_final_validation_report.md`.
+- P19 to P20 handoff: `docs/p19_to_p20_handoff.md`.
