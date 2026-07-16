@@ -15,7 +15,7 @@ Round budget: 10 conversation rounds
 - [x] Refresh tester-facing unsigned/private-trial instructions.
 - [x] Refresh support intake, privacy guidance, and escalation rules.
 - [x] Refresh feedback triage criteria and pass/fail language.
-- [ ] Revalidate deterministic base package lane.
+- [x] Revalidate deterministic base package lane.
 - [ ] Revalidate explicit credentials package lane.
 - [ ] Record artifact transfer, retention, cleanup, and no-secret evidence.
 - [ ] Run boundary, secret, private-key, certificate, package-output,
