@@ -137,7 +137,13 @@ and `docs/p20_todo.md`. P20 executor evidence is recorded in
 `docs/p20_boundary_scan_evidence.md`.
 P21 signing path unblock decision or pause planning is recorded in
 `docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md` and
-`docs/p21_todo.md`.
+`docs/p21_todo.md`. P21 executor evidence is recorded in
+`docs/p21_signing_path_decision.md`,
+`docs/p21_signing_unblock_requirements.md`,
+`docs/p21_next_phase_recommendation.md`,
+`docs/p21_base_package_control_evidence.md`,
+`docs/p21_credentials_package_control_evidence.md`, and
+`docs/p21_boundary_scan_evidence.md`.
 
 ## Automated Precheck
 

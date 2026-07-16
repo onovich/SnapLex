@@ -1477,4 +1477,4 @@ Round split:
 - Round 5: credentials package control lane.
 - Round 6: boundary and signing-material scans.
 - Round 7: buffer for docs, links, or decision clarity.
-- Round 8: final validation, report, and P22 handoff.
+- Round 8: final validation, report, P22 handoff, and planner notification.
