@@ -1,7 +1,7 @@
 # Role Routing
 
 workspace: D:\ToolProjects\SnapLex
-updated_at: 2026-07-17T07:04:06.3008747+08:00
+updated_at: 2026-07-17T07:42:06.4780810+08:00
 
 planner:
   thread_id: 019ee9e8-6d07-7902-9694-a3b6410b158b
@@ -13,22 +13,22 @@ executor:
   role: executor / implementation programmer / $donextgoal runner
   evidence: Current thread metadata matches executor thread handling P0 and P1 execution.
 
-active_goal_phase: P22 Non-Signing Private Trial Continuity And Tester Support Gate
-active_goal_guide: docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md
+active_goal_phase: P23 Private Trial Feedback Intake And Support Loop Gate
+active_goal_guide: docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md
 
 last_check_status: PASS
-last_planner_dispatch: 2026-07-17T07:04:06.3008747+08:00
+last_planner_dispatch: 2026-07-17T07:42:06.4780810+08:00
 last_planner_dispatch_status: sent
-last_planner_dispatch_guide: docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md
-last_planner_dispatch_commit: b85bda0918da4d6fc6e30ce239871f95b6e1eb8d
+last_planner_dispatch_guide: docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md
+last_planner_dispatch_commit: a76540768fc30925c53746e688ccc4ea07085961
 
-last_executor_report_commit: 96b193e9c6dfbdae3f89c59d4bea76c500846a30
-last_executor_report_status: ACCEPTED_P21
-last_executor_report_at: 2026-07-17T07:04:06.3008747+08:00
-last_executor_report_guide: docs/p21_signing_path_unblock_decision_pause_gate_goal_guide.md
+last_executor_report_commit: fb99ad3e1f563e03b79ce426506bb297d4c42197
+last_executor_report_status: ACCEPTED_P22
+last_executor_report_at: 2026-07-17T07:42:06.4780810+08:00
+last_executor_report_guide: docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md
 
 routing_notes:
-  completion: P21 accepted by planner; P0-P21 complete.
+  completion: P22 accepted by planner; P0-P22 complete.
   p8_acceptance: P8 accepted by planner at d8d451a0c2efc140032737ec2afbbbdb2a4f704c.
   p9_acceptance: P9 accepted by planner at a2ebc99a47bc810fe3f6245f61a26a16fc6650b3.
   p10_acceptance: P10 accepted by planner at 5a37564993c67dcf9c5bfe5da2ed06a44327874c.
@@ -43,4 +43,5 @@ routing_notes:
   p19_acceptance: P19 accepted by planner at 11001b64a4b5e093c7ee57615e7e5dbbb288749f.
   p20_acceptance: P20 accepted by planner at 0821a109c683e763997ca116c74ffbe2fddfbde9.
   p21_acceptance: P21 accepted by planner at 96b193e9c6dfbdae3f89c59d4bea76c500846a30.
-  active_dispatch: P22 dispatched to executor thread 019eed4c-8721-7a11-aa13-81bee36cd56d.
+  p22_acceptance: P22 accepted by planner at fb99ad3e1f563e03b79ce426506bb297d4c42197.
+  active_dispatch: P23 dispatched to executor thread 019eed4c-8721-7a11-aa13-81bee36cd56d.
