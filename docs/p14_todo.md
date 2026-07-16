@@ -15,7 +15,7 @@ Estimated budget: 12 conversation rounds.
       Windows device.
 - [x] Run or document blocker for DPI scaling validation.
 - [x] Run or document blocker for multi-monitor validation.
-- [ ] Install optional source credential support when feasible and record
+- [x] Install optional source credential support when feasible and record
       keyring dependency/backend status.
 - [ ] Run source keyring save/read/delete smoke with only a throwaway fake
       value when feasible, or document the blocker.
