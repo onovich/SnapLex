@@ -10,7 +10,7 @@ Round budget: 12 conversation rounds
 
 ## Tasks
 
-- [ ] Rebaseline accepted P19 and current package lanes.
+- [x] Rebaseline accepted P19 and current package lanes.
 - [ ] Decide whether explicit safe signing-path approval exists.
 - [ ] Record required approval inputs for any rehearsal.
 - [ ] Define ignored local artifact directories, cleanup, and evidence
@@ -41,4 +41,3 @@ Round budget: 12 conversation rounds
 - SnapLex Cloud, OAuth, billing, hosted token broker, browser extension runtime,
   AI summary runtime, global hotkeys, broad provider/OCR/capture rewrites, or
   full localization.
-
