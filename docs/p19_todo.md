@@ -17,7 +17,7 @@ Round budget: 12 conversation rounds
 - [x] Revalidate explicit credentials package behavior.
 - [x] Run approved local signing rehearsal, or record SKIPPED/BLOCKED with a
   precise reason.
-- [ ] Record signature verification, trust, timestamp, and evidence policy.
+- [x] Record signature verification, trust, timestamp, and evidence policy.
 - [ ] Define signed archive stop conditions, cleanup, rollback, and support
   implications.
 - [ ] Decide whether signed archive candidate work may proceed to a later gate.
