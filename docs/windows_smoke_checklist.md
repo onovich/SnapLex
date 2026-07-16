@@ -147,7 +147,14 @@ P21 signing path unblock decision or pause planning is recorded in
 P22 non-signing private-trial continuity and tester-support planning is
 recorded in
 `docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`
-and `docs/p22_todo.md`.
+and `docs/p22_todo.md`. P22 executor evidence is recorded in
+`docs/p22_unsigned_private_trial_release_notes.md`,
+`docs/p22_tester_support_intake.md`,
+`docs/p22_feedback_triage_criteria.md`,
+`docs/p22_base_package_continuity_evidence.md`,
+`docs/p22_credentials_package_continuity_evidence.md`,
+`docs/p22_artifact_transfer_retention.md`, and
+`docs/p22_boundary_scan_evidence.md`.
 
 ## Automated Precheck
 
