@@ -79,7 +79,15 @@ P15 isolated credential-capable package spike planning is recorded in
 `docs/p15_final_validation_report.md`, and `docs/p15_to_p16_handoff.md`.
 P16 credential-capable package hardening is recorded in
 `docs/p16_credential_capable_package_production_hardening_goal_guide.md` and
-`docs/p16_todo.md`.
+`docs/p16_todo.md`. P16 executor evidence is recorded in
+`docs/p16_base_package_preservation_evidence.md`,
+`docs/p16_credentials_variant_hardening.md`,
+`docs/p16_credential_smoke_hardening.md`,
+`docs/p16_tester_setup_cleanup_guide.md`,
+`docs/p16_keyring_failure_modes.md`,
+`docs/p16_release_gate_artifact_policy.md`,
+`docs/p16_production_hardening_decision.md`, and
+`docs/p16_boundary_scan_evidence.md`.
 
 ## Automated Precheck
 
@@ -635,6 +643,56 @@ Expected result:
 - Use `docs/p15_boundary_scan_evidence.md`,
   `docs/p15_package_spike_decision.md`, and the P15 final report for closure
   evidence.
+
+## P16 Credential-Capable Package Candidate Smoke
+
+P16 hardens the explicit credential package path for a limited private tester
+candidate while preserving the deterministic base package:
+
+- Confirm the base package still rejects credential smoke with
+  `keyring is not available in this runtime`.
+- Confirm the `credentials` variant is built explicitly and reports
+  `SNAPLEX_PACKAGE_VARIANT=credentials`.
+- Run import, cycle, save, and check-delete credential smoke in order.
+- Confirm output includes `snaplex/package-credential-smoke`.
+- Confirm output never includes raw credential values.
+- Confirm cleanup status returns to `missing`.
+- Confirm release gate, tester setup/cleanup, and keyring failure-mode docs are
+  linked before sharing with a private tester.
+
+Credential candidate commands:
+
+```powershell
+python scripts\package_windows.py --variant credentials
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode import
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode cycle
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode save
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode check-delete
+```
+
+Base lane control:
+
+```powershell
+python scripts\package_windows.py --variant base
+cmd /c SmokeTrial.cmd
+cmd /c StartPackagedFakeTrial.cmd --no-gui
+cmd /c StartPackagedTrial.cmd --no-gui
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode import
+```
+
+Expected result:
+
+- The credential candidate package reports WinVault keyring backend discovery,
+  save/read/delete PASS, restart readiness PASS, and cleanup PASS.
+- The base package remains deterministic, fake-smoke capable, real-trial
+  fail-closed, and keyring-free.
+- Real-provider network smoke remains optional and requires existing local
+  credentials plus explicit human approval.
+
+Use `docs/p16_release_gate_artifact_policy.md`,
+`docs/p16_tester_setup_cleanup_guide.md`,
+`docs/p16_keyring_failure_modes.md`, and
+`docs/p16_production_hardening_decision.md` for the P16 candidate gate.
 
 ## P7 Expansion Planning Validation
 

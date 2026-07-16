@@ -122,6 +122,16 @@ The current project source of truth lives in:
 - `docs/p15_boundary_scan_evidence.md`
 - `docs/p15_final_validation_report.md`
 - `docs/p15_to_p16_handoff.md`
+- `docs/p16_credential_capable_package_production_hardening_goal_guide.md`
+- `docs/p16_todo.md`
+- `docs/p16_base_package_preservation_evidence.md`
+- `docs/p16_credentials_variant_hardening.md`
+- `docs/p16_credential_smoke_hardening.md`
+- `docs/p16_tester_setup_cleanup_guide.md`
+- `docs/p16_keyring_failure_modes.md`
+- `docs/p16_release_gate_artifact_policy.md`
+- `docs/p16_production_hardening_decision.md`
+- `docs/p16_boundary_scan_evidence.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -635,7 +645,15 @@ decision while preserving the deterministic base package. It focuses on the
 docs, keyring failure modes, release gates, and no-secret/no-network hygiene.
 
 See `docs/p16_credential_capable_package_production_hardening_goal_guide.md`
-and `docs/p16_todo.md`.
+and `docs/p16_todo.md`. Current P16 hardening evidence is recorded in
+`docs/p16_base_package_preservation_evidence.md`,
+`docs/p16_credentials_variant_hardening.md`,
+`docs/p16_credential_smoke_hardening.md`,
+`docs/p16_tester_setup_cleanup_guide.md`,
+`docs/p16_keyring_failure_modes.md`,
+`docs/p16_release_gate_artifact_policy.md`,
+`docs/p16_production_hardening_decision.md`, and
+`docs/p16_boundary_scan_evidence.md`.
 
 ## Current Boundaries
 

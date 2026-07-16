@@ -22,9 +22,9 @@ The tracked spec supports dependency variants:
 - `capture`: additionally includes optional `mss` modules when installed.
 - `ocr`: additionally includes optional `paddleocr` modules when installed.
 - `full`: includes both optional capture and OCR module families when installed.
-- `credentials`: explicit P15 spike variant that includes optional local
-  keyring modules for credential smoke. This is not the default release smoke
-  path.
+- `credentials`: explicit credential-capable candidate variant that includes
+  optional local keyring modules for credential smoke. This is not the default
+  release smoke path.
 
 Use variants explicitly:
 
@@ -43,8 +43,9 @@ python scripts\package_windows.py --dry-run
 The `base` variant is the deterministic release-smoke path. It does not package
 PaddleOCR model caches, does not require real provider credentials, and does
 not require the optional `keyring` dependency. The `credentials` variant is an
-explicit spike/manual validation path for packaged keyring behavior. Generated
-output stays under `build\` and `dist\`. Do not commit those folders, packaged
+explicit manual validation path for packaged keyring behavior and limited
+private tester candidates after the P16 release gate passes. Generated output
+stays under `build\` and `dist\`. Do not commit those folders, packaged
 executables, local smoke data, provider secrets, OCR model caches, or
 screenshots.
 
@@ -88,10 +89,11 @@ Expected result:
 
 See `docs\p11_private_trial_release_checklist.md` for the full P11 gate.
 
-## Credential Package Spike Smoke
+## Credential Package Candidate Smoke
 
-P15 adds an explicit credential-capable spike path. Build it only when you are
-validating packaged keyring behavior:
+P16 hardens the explicit credential-capable package path. Build it only when
+you are validating packaged keyring behavior or preparing a controlled private
+tester credential package candidate:
 
 ```powershell
 python scripts\package_windows.py --variant credentials
@@ -119,14 +121,15 @@ Run restart readiness as two separate packaged processes:
 Expected result:
 
 - The `credentials` variant reports Windows keyring backend discovery.
+- Smoke output includes `snaplex/package-credential-smoke`.
 - Smoke output never prints the throwaway credential value.
 - `cycle` and `check-delete` clean up the smoke credential before exit.
 - The base package remains the default deterministic fake smoke path.
 
-See `docs\p15_packaging_spike_design.md`,
-`docs\p15_packaged_keyring_import_evidence.md`,
-`docs\p15_packaged_credential_smoke_evidence.md`, and
-`docs\p15_packaged_restart_readiness.md`.
+See `docs\p16_credentials_variant_hardening.md`,
+`docs\p16_credential_smoke_hardening.md`,
+`docs\p16_tester_setup_cleanup_guide.md`, and
+`docs\p16_release_gate_artifact_policy.md`.
 
 ## Troubleshooting
 
@@ -137,7 +140,7 @@ See `docs\p15_packaging_spike_design.md`,
   `.[ocr]`, or both before using `--variant capture`, `--variant ocr`, or
   `--variant full`.
 - Missing keyring support: install `.[credentials]` for source trials, or build
-  the explicit `credentials` variant for P15 packaged keyring smoke. The
+  the explicit `credentials` variant for P16 packaged keyring smoke. The
   deterministic base package smoke path does not depend on keyring.
 - Provider credential errors: use fake provider smoke first. Real provider
   smoke depends on local environment variables, local OS keyring state, or a

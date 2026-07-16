@@ -142,10 +142,10 @@ For maintainers collecting reports, use
 `docs\p12_trial_pass_fail_criteria.md`, and
 `docs\p12_trial_triage_workflow.md`.
 
-## 6. Optional Credential Package Spike
+## 6. Optional Credential Package Candidate
 
-P15 introduces an explicit credential-capable package spike. This is for
-maintainer validation only and is not the default trial package:
+P16 hardens an explicit credential-capable package candidate. This is for
+controlled private-trial validation only and is not the default trial package:
 
 ```cmd
 python scripts\package_windows.py --variant credentials
@@ -164,5 +164,9 @@ These commands use only runtime-generated throwaway values and must not print,
 log, screenshot, export, or commit credential values. The deterministic base
 package remains the normal fake smoke path.
 
-See `docs\p15_credential_cleanup_guidance.md` before and after running package
+Expected credential smoke output includes
+`snaplex/package-credential-smoke` and never includes a raw credential value.
+See `docs\p16_tester_setup_cleanup_guide.md`,
+`docs\p16_keyring_failure_modes.md`, and
+`docs\p16_release_gate_artifact_policy.md` before and after running package
 credential smoke.
