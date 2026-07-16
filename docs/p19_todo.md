@@ -14,7 +14,7 @@ Round budget: 12 conversation rounds
 - [x] Decide whether an approved safe throwaway/test signing rehearsal path
   exists.
 - [x] Revalidate deterministic base package behavior.
-- [ ] Revalidate explicit credentials package behavior.
+- [x] Revalidate explicit credentials package behavior.
 - [ ] Run approved local signing rehearsal, or record SKIPPED/BLOCKED with a
   precise reason.
 - [ ] Record signature verification, trust, timestamp, and evidence policy.
