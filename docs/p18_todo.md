@@ -13,7 +13,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Define signing command, verification, and revocation expectations.
 - [x] Run or explicitly skip/block a safe signing rehearsal.
 - [x] Decide archive versus installer readiness.
-- [ ] Define rollback and update policy without implementing updater runtime.
+- [x] Define rollback and update policy without implementing updater runtime.
 - [ ] Define artifact naming, transfer, retention, revocation, and support
       escalation policy.
 - [ ] Decide distribution readiness.
