@@ -138,6 +138,33 @@ post_p16_smoke_status=missing
   `snaplex/package-credential-smoke` missing after cleanup.
 - Generated package outputs and smoke data remain ignored local artifacts.
 
+## Round 11 Package Lane Rehearsal
+
+Round 11 reran the credential candidate gate after docs hardening:
+
+```cmd
+python scripts\package_windows.py --variant credentials
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode import
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode cycle
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode save
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode check-delete
+```
+
+Result: PASS.
+
+Observed output included:
+
+```text
+credential reference: snaplex/package-credential-smoke
+keyring backend: keyring.backends.Windows.WinVaultKeyring
+credential save/read/delete: PASS
+credential restart readiness: PASS
+credential cleanup: PASS
+```
+
+The rehearsal used runtime-generated throwaway values only and did not print
+raw values.
+
 ## Round 4 Self-Checks
 
 Debug self-check:

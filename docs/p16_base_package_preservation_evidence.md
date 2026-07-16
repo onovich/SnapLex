@@ -112,6 +112,33 @@ git ls-files -- build dist snaplex-smoke-data tmp .pytest_cache .env logs .mypy_
 
 Result: PASS, no tracked generated artifacts.
 
+## Round 11 Base Restore Rehearsal
+
+After rerunning the credential candidate gate in Round 11, P16 rebuilt the base
+package to return local `dist\SnapLex` to the deterministic default lane.
+
+Commands:
+
+```cmd
+python scripts\package_windows.py --variant base
+cmd /c SmokeTrial.cmd
+cmd /c StartPackagedFakeTrial.cmd --no-gui
+cmd /c StartPackagedTrial.cmd --no-gui
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode import
+```
+
+Result: PASS.
+
+Observed outcomes:
+
+- base build printed `SNAPLEX_PACKAGE_VARIANT=base`;
+- packaged workflow smoke passed;
+- packaged fake trial no-gui passed;
+- packaged real trial rejected missing real-provider setup;
+- base credential smoke rejected keyring with
+  `keyring is not available in this runtime`;
+- generated package and smoke folders remained ignored and untracked.
+
 ## Round 2 Self-Checks
 
 Debug self-check:
