@@ -335,18 +335,16 @@ spike.
 The P14 closure package is `docs/p14_boundary_scan_evidence.md`,
 `docs/p14_final_validation_report.md`, and `docs/p14_to_p15_handoff.md`.
 
-## Selected P15 Isolated Credential-Capable Package Spike Design Gate
+## P15 Isolated Credential-Capable Package Spike Design Gate Completion
 
-P15 is the selected next execution phase after P14 acceptance. It should run a
-narrow package spike for credential-capable packaging while preserving the
-deterministic base package path. The phase should prove, reject, or defer
-packaged keyring import/backend discovery, packaged credential
-save/read/delete with throwaway fake values, packaged restart readiness,
-cleanup guidance, and no-secret/no-network hygiene.
+P15 executor work after P14 acceptance ran a narrow package spike for
+credential-capable packaging while preserving the deterministic base package
+path. It added an explicit `credentials` variant, proved packaged keyring
+import/backend discovery, packaged credential save/read/delete, packaged
+restart readiness, cleanup guidance, and no-secret/no-network hygiene.
 
-The executable guide is
-`docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`; the
-TODO is `docs/p15_todo.md`.
+The P15 closure package is `docs/p15_boundary_scan_evidence.md`,
+`docs/p15_final_validation_report.md`, and `docs/p15_to_p16_handoff.md`.
 
 ## MVP Goals
 

@@ -113,6 +113,15 @@ The current project source of truth lives in:
 - `docs/p14_to_p15_handoff.md`
 - `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`
 - `docs/p15_todo.md`
+- `docs/p15_packaging_spike_design.md`
+- `docs/p15_packaged_keyring_import_evidence.md`
+- `docs/p15_packaged_credential_smoke_evidence.md`
+- `docs/p15_packaged_restart_readiness.md`
+- `docs/p15_credential_cleanup_guidance.md`
+- `docs/p15_package_spike_decision.md`
+- `docs/p15_boundary_scan_evidence.md`
+- `docs/p15_final_validation_report.md`
+- `docs/p15_to_p16_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -140,7 +149,7 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has accepted P0 through P14. P15 Isolated Credential-Capable Package
-Spike Design Gate is selected and ready for execution. The P0-P7 track is
+Spike Design Gate is executor-complete and ready for planner check. The P0-P7 track is
 complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
@@ -151,7 +160,8 @@ PyInstaller spec, packaged release smoke commands, post-MVP expansion plans,
 provider setup UX, Apple-inspired UI polish, accepted P10 credential/account
 work, accepted P11 trial release hardening, accepted P12 private-trial pilot
 materials, accepted P13 feedback response evidence, and accepted P14 source
-keyring validation evidence.
+keyring validation evidence. P15 adds explicit credential-capable package spike
+evidence while keeping the base package deterministic.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -183,9 +193,14 @@ and `docs/p13_to_p14_handoff.md`. P14 executor evidence is recorded in
 `docs/p14_credential_package_spike_decision.md`,
 `docs/p14_boundary_scan_evidence.md`,
 `docs/p14_final_validation_report.md`, and `docs/p14_to_p15_handoff.md`. P15
-is the active selected guide; use
-`docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md` and
-`docs/p15_todo.md`.
+executor evidence is recorded in `docs/p15_packaging_spike_design.md`,
+`docs/p15_packaged_keyring_import_evidence.md`,
+`docs/p15_packaged_credential_smoke_evidence.md`,
+`docs/p15_packaged_restart_readiness.md`,
+`docs/p15_credential_cleanup_guidance.md`,
+`docs/p15_package_spike_decision.md`,
+`docs/p15_boundary_scan_evidence.md`,
+`docs/p15_final_validation_report.md`, and `docs/p15_to_p16_handoff.md`.
 
 ## Setup
 
@@ -598,20 +613,19 @@ See `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`,
 
 ## P15 Isolated Credential-Capable Package Spike Design Gate
 
-P15 is the selected next execution phase. It should run a narrow package spike
-for credential-capable packaging while preserving the deterministic base
-package path. The phase should prove, reject, or defer packaged keyring import
-and backend discovery, packaged credential save/read/delete with throwaway fake
-values, packaged restart readiness, cleanup guidance, and no-secret/no-network
-hygiene.
+P15 executor work ran a narrow package spike for credential-capable packaging
+while preserving the deterministic base package path. It added an explicit
+`credentials` variant, proved packaged keyring import/backend discovery,
+packaged credential save/read/delete, packaged restart readiness, cleanup
+guidance, and no-secret/no-network hygiene.
 
-P15 must not silently add keyring to the base package. Any credential-capable
-path must be explicit as a variant, spike script, or documented manual build
-path, and real trial paths must continue to fail closed when no real provider
-is configured.
+P15 does not ship a production credential-capable package. It promotes the
+evidence to a later production hardening phase while keeping real trial paths
+fail-closed when no real provider is configured.
 
-See `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md` and
-`docs/p15_todo.md`.
+See `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`,
+`docs/p15_todo.md`, `docs/p15_final_validation_report.md`, and
+`docs/p15_to_p16_handoff.md`.
 
 ## Current Boundaries
 

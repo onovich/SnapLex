@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P14 planner-accepted planning document with selected P15 guide
+Status: P15 executor-complete planning document pending planner acceptance
 
 ## 0. Round Estimate Rules
 
@@ -374,14 +374,13 @@ Execute P0 through P3 first before broadening provider scope. This gives the pro
 Current accepted phase: P14 - Manual Environment And Source Keyring
 Validation.
 
-Current selected phase: P15 - Isolated Credential-Capable Package Spike Design
-Gate, ready for execution.
+Current executor-complete phase: P15 - Isolated Credential-Capable Package
+Spike Design Gate, ready for planner check.
 
 P0-P7 status: complete.
 
-Selected next step: execute P15 using
-`docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md` and
-`docs/p15_todo.md`.
+Selected next step: planner recheck of P15 using
+`docs/p15_final_validation_report.md` and `docs/p15_to_p16_handoff.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -978,3 +977,18 @@ Round split:
 - Round 8: spike decision.
 - Rounds 9-11: buffer hardening.
 - Round 12: final validation, report, and P16 handoff.
+
+Executor completion:
+
+- P15 completed on 2026-07-16 and is ready for planner acceptance.
+- Explicit `credentials` package variant added and validated.
+- Packaged keyring import/backend discovery passed.
+- Packaged credential save/read/delete/cleanup passed with runtime-generated
+  throwaway values.
+- Packaged restart readiness passed across two packaged processes.
+- Base package remained deterministic and rejects credential smoke because
+  keyring is unavailable in that runtime.
+- Decision: promote to later production hardening phase, not a production
+  release promise.
+- Closure package: `docs/p15_boundary_scan_evidence.md`,
+  `docs/p15_final_validation_report.md`, and `docs/p15_to_p16_handoff.md`.

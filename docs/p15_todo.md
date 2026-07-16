@@ -3,7 +3,7 @@
 Date: 2026-07-16
 Phase: P15 Isolated Credential-Capable Package Spike Design Gate
 Guide: `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`
-Status: ready for executor.
+Status: complete; ready for planner check.
 Estimated budget: 12 conversation rounds.
 
 ## Tasks
@@ -24,8 +24,8 @@ Estimated budget: 12 conversation rounds.
 - [x] Preserve no-secret, no-network automated validation and fail-closed real
       trial behavior.
 - [x] Produce P15 boundary scan evidence.
-- [ ] Produce P15 final validation report.
-- [ ] Produce P15 to P16 handoff.
+- [x] Produce P15 final validation report.
+- [x] Produce P15 to P16 handoff.
 
 ## Deferred Outside P15
 

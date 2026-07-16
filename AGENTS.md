@@ -71,3 +71,5 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P14 to P15 handoff: `docs/p14_to_p15_handoff.md`.
 - Latest P15 guide: `docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md`.
 - Latest P15 TODO: `docs/p15_todo.md`.
+- Latest P15 report: `docs/p15_final_validation_report.md`.
+- P15 to P16 handoff: `docs/p15_to_p16_handoff.md`.

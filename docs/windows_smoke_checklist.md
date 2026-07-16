@@ -75,7 +75,8 @@ P15 isolated credential-capable package spike planning is recorded in
 `docs/p15_packaged_restart_readiness.md`,
 `docs/p15_credential_cleanup_guidance.md`,
 `docs/p15_package_spike_decision.md`, and
-`docs/p15_boundary_scan_evidence.md`.
+`docs/p15_boundary_scan_evidence.md`,
+`docs/p15_final_validation_report.md`, and `docs/p15_to_p16_handoff.md`.
 
 ## Automated Precheck
 
