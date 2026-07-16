@@ -144,6 +144,8 @@ The current project source of truth lives in:
 - `docs/p17_signing_installer_updater_decision.md`
 - `docs/p17_credential_package_lane_decision.md`
 - `docs/p17_boundary_scan_evidence.md`
+- `docs/p17_final_validation_report.md`
+- `docs/p17_to_p18_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -171,7 +173,7 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has accepted P0 through P16. P17 Limited Credential Package Pilot And
-Signing Decision is in executor progress. The P0-P7 track is
+Signing Decision is executor-complete and ready for planner check. The P0-P7 track is
 complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
@@ -185,9 +187,10 @@ materials, accepted P13 feedback response evidence, and accepted P14 source
 keyring validation evidence. P15 adds explicit credential-capable package spike
 evidence while keeping the base package deterministic. P16 hardens that
 explicit package path into a limited private tester candidate while preserving
-the deterministic base package. P17 is evaluating the controlled credential
-package pilot lane, pre-share gates, feedback intake, artifact policy, signing
-decision, and lane decision.
+the deterministic base package. P17 evaluates the controlled credential package
+pilot lane, pre-share gates, feedback intake, artifact policy, signing
+decision, and lane decision while keeping the package unsigned/private-trial
+only.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -690,7 +693,8 @@ and `docs/p17_todo.md`. Current P17 executor evidence is recorded in
 `docs/p17_artifact_transfer_retention_support.md`,
 `docs/p17_signing_installer_updater_decision.md`,
 `docs/p17_credential_package_lane_decision.md`, and
-`docs/p17_boundary_scan_evidence.md`.
+`docs/p17_boundary_scan_evidence.md`. The P17 closure package is
+`docs/p17_final_validation_report.md` and `docs/p17_to_p18_handoff.md`.
 
 ## Current Boundaries
 

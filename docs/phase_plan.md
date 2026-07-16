@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P16 executor-complete planning document pending planner acceptance
+Status: P17 executor-complete planning document pending planner acceptance
 
 ## 0. Round Estimate Rules
 
@@ -29,6 +29,8 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P13 | Private Trial Feedback Response And Credential Package Feasibility | Respond to the first private-trial feedback loop, close accepted S0/S1 blockers, capture manual environment results, and decide credential-capable package feasibility. | 12 rounds |
 | P14 | Manual Environment And Source Keyring Validation | Run target-device manual checks, source keyring smoke, optional real-provider evidence, and decide whether to authorize a later credential-package spike. | 12 rounds |
 | P15 | Isolated Credential-Capable Package Spike Design Gate | Prove, reject, or defer an explicit credential-capable package path while preserving the deterministic base package. | 12 rounds |
+| P16 | Credential-Capable Package Production Hardening | Harden the explicit credential package path into a limited private tester candidate while preserving base package determinism. | 12 rounds |
+| P17 | Limited Credential Package Pilot And Signing Decision | Run a controlled private tester lane and decide signing, installer, updater, artifact, support, and credential package variant policy. | 12 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -40,6 +42,8 @@ Total including selected P12 post-MVP implementation: 117 rounds.
 Total including selected P13 post-MVP implementation: 129 rounds.
 Total including selected P14 post-MVP implementation: 141 rounds.
 Total including selected P15 post-MVP implementation: 153 rounds.
+Total including selected P16 post-MVP implementation: 165 rounds.
+Total including selected P17 post-MVP implementation: 177 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -371,16 +375,15 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P15 - Isolated Credential-Capable Package Spike Design
-Gate.
+Current accepted phase: P16 - Credential-Capable Package Production Hardening.
 
-Current executor-complete phase: P16 - Credential-Capable Package Production
-Hardening, ready for planner check.
+Current executor-complete phase: P17 - Limited Credential Package Pilot And
+Signing Decision, ready for planner check.
 
 P0-P7 status: complete.
 
-Selected next step: planner recheck of P16 using
-`docs/p16_final_validation_report.md` and `docs/p16_to_p17_handoff.md`.
+Selected next step: planner recheck of P17 using
+`docs/p17_final_validation_report.md` and `docs/p17_to_p18_handoff.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -1150,3 +1153,21 @@ Round split:
 - Round 8: credential package lane decision.
 - Rounds 9-11: buffer hardening.
 - Round 12: final validation, report, and P18 handoff.
+
+Executor completion:
+
+- P17 completed on 2026-07-17 and is ready for planner acceptance.
+- Controlled credential package pilot lane, pre-share gate evidence,
+  no-secret tester intake, real-provider smoke skip record, artifact
+  transfer/retention/support policy, signing/installer/updater decision, and
+  credential package lane decision are documented.
+- Credentials package build/import/cycle/save/check-delete passed.
+- Final base package restore passed, and base credential smoke still rejects
+  keyring as unavailable.
+- External tester feedback and real-provider network smoke were not supplied.
+- Decision: keep credentials as a separate explicit unsigned private-trial
+  variant; defer signing, installer, updater, and broader distribution.
+- Closure package: `docs/p17_boundary_scan_evidence.md`,
+  `docs/p17_final_validation_report.md`, and `docs/p17_to_p18_handoff.md`.
+
+Recommended next phase: P18 Signing And Distribution Readiness Gate.

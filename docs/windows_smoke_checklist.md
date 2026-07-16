@@ -98,8 +98,9 @@ P17 pilot and signing-decision planning is recorded in
 `docs/p17_real_provider_smoke_record.md`,
 `docs/p17_artifact_transfer_retention_support.md`,
 `docs/p17_signing_installer_updater_decision.md`,
-`docs/p17_credential_package_lane_decision.md`, and
-`docs/p17_boundary_scan_evidence.md`.
+`docs/p17_credential_package_lane_decision.md`,
+`docs/p17_boundary_scan_evidence.md`,
+`docs/p17_final_validation_report.md`, and `docs/p17_to_p18_handoff.md`.
 
 ## Automated Precheck
 

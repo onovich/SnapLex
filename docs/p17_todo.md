@@ -3,7 +3,7 @@
 Date: 2026-07-17
 Phase: P17 Limited Credential Package Pilot And Signing Decision
 Guide: `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`
-Status: ready for executor.
+Status: executor-complete; ready for planner check.
 Estimated budget: 12 conversation rounds.
 
 ## Tasks
@@ -19,8 +19,8 @@ Estimated budget: 12 conversation rounds.
 - [x] Decide whether credentials stay as a separate package variant.
 - [x] Preserve deterministic base package validation.
 - [x] Produce P17 boundary scan evidence.
-- [ ] Produce P17 final validation report.
-- [ ] Produce P17 to P18 handoff.
+- [x] Produce P17 final validation report.
+- [x] Produce P17 to P18 handoff.
 
 ## Deferred Outside P17
 
