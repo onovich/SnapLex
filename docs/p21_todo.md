@@ -16,7 +16,7 @@ Round budget: 8 conversation rounds
 - [x] Recommend the next phase based on the decision.
 - [x] Revalidate deterministic base package lane.
 - [x] Revalidate explicit credentials package lane.
-- [ ] Run boundary, secret, private-key, certificate, package-output,
+- [x] Run boundary, secret, private-key, certificate, package-output,
   screenshot, log, and signing-material scans.
 - [ ] Write final validation report and P22 handoff.
 - [ ] Commit and push.
