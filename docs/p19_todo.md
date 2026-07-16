@@ -11,7 +11,7 @@ Round budget: 12 conversation rounds
 ## Tasks
 
 - [x] Rebaseline P18 signing/distribution reports and current package lanes.
-- [ ] Decide whether an approved safe throwaway/test signing rehearsal path
+- [x] Decide whether an approved safe throwaway/test signing rehearsal path
   exists.
 - [ ] Revalidate deterministic base package behavior.
 - [ ] Revalidate explicit credentials package behavior.
