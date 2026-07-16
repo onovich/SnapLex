@@ -15,7 +15,7 @@ Round budget: 8 conversation rounds
 - [x] Record APPROVED for later rehearsal or PAUSED with unblock inputs.
 - [x] Recommend the next phase based on the decision.
 - [x] Revalidate deterministic base package lane.
-- [ ] Revalidate explicit credentials package lane.
+- [x] Revalidate explicit credentials package lane.
 - [ ] Run boundary, secret, private-key, certificate, package-output,
   screenshot, log, and signing-material scans.
 - [ ] Write final validation report and P22 handoff.
