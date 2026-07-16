@@ -19,7 +19,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Define first private-trial pass/fail criteria.
 - [x] Run or document manual assistive-technology, DPI, multi-monitor, visible
   GUI, packaged fake smoke, and trial-script checks.
-- [ ] Decide optional real-provider smoke policy and record run/skip evidence.
+- [x] Decide optional real-provider smoke policy and record run/skip evidence.
 - [ ] Decide whether credential-capable package variant should be built,
   deferred, or rejected for the private pilot.
 - [ ] Update private-trial checklist and onboarding docs.
