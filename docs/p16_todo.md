@@ -15,7 +15,7 @@ Estimated budget: 12 conversation rounds.
       guarantees.
 - [x] Produce tester-facing credential package setup and cleanup guide.
 - [x] Document or harden keyring failure modes.
-- [ ] Define release gate and package artifact policy.
+- [x] Define release gate and package artifact policy.
 - [ ] Decide whether credential-capable packaging is ready for limited private
       tester distribution, needs another phase, or remains deferred.
 - [ ] Preserve no-network automated validation and fail-closed real trial
