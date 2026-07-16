@@ -13,7 +13,7 @@ Round budget: 12 conversation rounds
 - [x] Rebaseline P18 signing/distribution reports and current package lanes.
 - [x] Decide whether an approved safe throwaway/test signing rehearsal path
   exists.
-- [ ] Revalidate deterministic base package behavior.
+- [x] Revalidate deterministic base package behavior.
 - [ ] Revalidate explicit credentials package behavior.
 - [ ] Run approved local signing rehearsal, or record SKIPPED/BLOCKED with a
   precise reason.
