@@ -66,6 +66,16 @@ P14 manual environment and source keyring validation planning is recorded in
 `docs/p14_credential_package_spike_decision.md`,
 `docs/p14_boundary_scan_evidence.md`,
 `docs/p14_final_validation_report.md`, and `docs/p14_to_p15_handoff.md`.
+P15 isolated credential-capable package spike planning is recorded in
+`docs/p15_isolated_credential_package_spike_design_gate_goal_guide.md` and
+`docs/p15_todo.md`. P15 package spike evidence is recorded in
+`docs/p15_packaging_spike_design.md`,
+`docs/p15_packaged_keyring_import_evidence.md`,
+`docs/p15_packaged_credential_smoke_evidence.md`,
+`docs/p15_packaged_restart_readiness.md`,
+`docs/p15_credential_cleanup_guidance.md`,
+`docs/p15_package_spike_decision.md`, and
+`docs/p15_boundary_scan_evidence.md`.
 
 ## Automated Precheck
 
@@ -582,6 +592,45 @@ the deterministic base package:
   smoke data.
 - Re-run artifact and secret scans before committing P15 docs or package spike
   changes.
+
+Credential variant smoke commands:
+
+```powershell
+python scripts\package_windows.py --variant credentials
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode import
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode cycle
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode save
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode check-delete
+```
+
+Expected result:
+
+- The `credentials` variant reports `keyring.backends.Windows.WinVaultKeyring`.
+- `cycle` reports save/read/delete and cleanup PASS.
+- The two-process save then check-delete flow reports restart readiness and
+  cleanup PASS.
+- Smoke output records only the non-secret reference identifier and never prints
+  the runtime-generated throwaway value.
+
+Base package preservation commands:
+
+```powershell
+python scripts\package_windows.py --variant base
+cmd /c SmokeTrial.cmd
+cmd /c StartPackagedFakeTrial.cmd --no-gui
+cmd /c StartPackagedTrial.cmd --no-gui
+.\dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode import
+```
+
+Expected result:
+
+- Base fake smoke passes.
+- Packaged real trial rejects missing real provider setup.
+- Base credential smoke fails with `keyring is not available in this runtime`,
+  proving keyring was not silently added to the base package.
+- Use `docs/p15_boundary_scan_evidence.md`,
+  `docs/p15_package_spike_decision.md`, and the P15 final report for closure
+  evidence.
 
 ## P7 Expansion Planning Validation
 
