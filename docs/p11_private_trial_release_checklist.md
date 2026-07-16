@@ -142,3 +142,21 @@ Evidence references:
 - `docs/p11_packaged_trial_evidence.md`
 - `docs/p11_provider_onboarding_notes.md`
 - `docs/p11_key_rotation_least_privilege.md`
+
+## P12 Private Pilot Addendum
+
+For the first controlled private-trial pilot, keep this P11 release gate as the
+runtime baseline and use the P12 operations documents for tester-facing copy,
+feedback intake, and triage:
+
+- `docs/p12_private_trial_release_notes.md`
+- `docs/p12_feedback_intake_template.md`
+- `docs/p12_trial_pass_fail_criteria.md`
+- `docs/p12_manual_environment_checks.md`
+- `docs/p12_real_provider_smoke_decision.md`
+- `docs/p12_credential_package_variant_decision.md`
+- `docs/p12_trial_triage_workflow.md`
+
+P12 feedback must not include API keys, `.env` files, keyring exports, private
+documents, sensitive screenshots, tester personal data, local app data, package
+outputs, logs that may contain secrets, OCR caches, or provider secrets.

@@ -34,8 +34,14 @@ P11 trial release hardening planning is recorded in
 `docs/p11_provider_onboarding_notes.md`,
 `docs/p11_key_rotation_least_privilege.md`, and `docs/p11_todo.md`.
 P12 private trial pilot planning is recorded in
-`docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
-`docs/p12_todo.md`.
+`docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`,
+`docs/p12_private_trial_release_notes.md`,
+`docs/p12_feedback_intake_template.md`,
+`docs/p12_trial_pass_fail_criteria.md`,
+`docs/p12_manual_environment_checks.md`,
+`docs/p12_real_provider_smoke_decision.md`,
+`docs/p12_credential_package_variant_decision.md`,
+`docs/p12_trial_triage_workflow.md`, and `docs/p12_todo.md`.
 
 ## Automated Precheck
 
@@ -476,6 +482,7 @@ trial materials and smoke evidence privacy-safe:
   a human intentionally approves network use.
 - Decide whether a credential-capable package variant should be built later,
   deferred, or rejected for the first private pilot.
+- Route tester reports through `docs/p12_trial_triage_workflow.md`.
 - Re-run artifact and secret scans before committing any trial docs.
 
 ## P7 Expansion Planning Validation

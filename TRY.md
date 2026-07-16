@@ -135,3 +135,9 @@ See `docs\p11_provider_onboarding_notes.md` for the private-trial provider
 setup paths and current packaging decision. See
 `docs\p11_key_rotation_least_privilege.md` for key rotation, cleanup, and
 least-privilege guidance.
+
+For P12 private pilot testers, see `docs\p12_private_trial_release_notes.md`.
+For maintainers collecting reports, use
+`docs\p12_feedback_intake_template.md`,
+`docs\p12_trial_pass_fail_criteria.md`, and
+`docs\p12_trial_triage_workflow.md`.

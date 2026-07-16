@@ -80,6 +80,13 @@ The current project source of truth lives in:
 - `docs/p11_to_p12_handoff.md`
 - `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`
 - `docs/p12_todo.md`
+- `docs/p12_private_trial_release_notes.md`
+- `docs/p12_feedback_intake_template.md`
+- `docs/p12_trial_pass_fail_criteria.md`
+- `docs/p12_manual_environment_checks.md`
+- `docs/p12_real_provider_smoke_decision.md`
+- `docs/p12_credential_package_variant_decision.md`
+- `docs/p12_trial_triage_workflow.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -485,7 +492,14 @@ and fail-closed real trial paths. It is private-trial operations and feedback
 triage, not feature expansion.
 
 See `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
-`docs/p12_todo.md`.
+`docs/p12_todo.md`. Pilot operations are captured in
+`docs/p12_private_trial_release_notes.md`,
+`docs/p12_feedback_intake_template.md`,
+`docs/p12_trial_pass_fail_criteria.md`,
+`docs/p12_manual_environment_checks.md`,
+`docs/p12_real_provider_smoke_decision.md`,
+`docs/p12_credential_package_variant_decision.md`, and
+`docs/p12_trial_triage_workflow.md`.
 
 ## Current Boundaries
 

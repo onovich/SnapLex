@@ -102,3 +102,11 @@ translation.
 The `Connect account (future)` affordance remains disabled. Enabling it requires
 a later backend/security decision covering account identity, token handling,
 provider contracts, billing, privacy policy, and revocation.
+
+## P12 Private Pilot Feedback
+
+For the first controlled private pilot, use
+`docs/p12_private_trial_release_notes.md` for tester-facing instructions,
+`docs/p12_feedback_intake_template.md` for sanitized reports, and
+`docs/p12_trial_triage_workflow.md` for maintainer triage. Real-provider smoke
+remains optional/manual; see `docs/p12_real_provider_smoke_decision.md`.
