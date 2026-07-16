@@ -435,6 +435,7 @@ Summary:
 - P20 Approved Signing Path Acquisition And Rehearsal Setup Gate: 12 conversation rounds.
 - P21 Signing Path Unblock Decision Or Pause Gate: 8 conversation rounds.
 - P22 Non-Signing Private Trial Continuity And Tester Support Gate: 10 conversation rounds.
+- P23 Private Trial Feedback Intake And Support Loop Gate: 10 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -457,10 +458,11 @@ distribution readiness gate, the post-MVP plan became 189 rounds. Including
 accepted P19 signing rehearsal and signed archive candidate gate, the post-MVP
 plan became 201 rounds. Including selected P20 approved signing path
 acquisition and rehearsal setup gate, the post-MVP plan became 213 rounds.
-Including selected P21 signing path unblock decision or pause gate, the current
-post-MVP plan became 221 rounds. Including selected P22 non-signing private
-trial continuity and tester support gate, the current post-MVP plan is 231
-rounds.
+Including selected P21 signing path unblock decision or pause gate, the
+post-MVP plan became 221 rounds. Including accepted P22 non-signing private
+trial continuity and tester support gate, the post-MVP plan became 231 rounds.
+Including selected P23 private trial feedback intake and support loop gate, the
+current post-MVP plan is 241 rounds.
 
 ## P16 Credential-Capable Package Production Hardening Completion
 
@@ -527,6 +529,16 @@ transfer/retention, and package-lane evidence without adding runtime features.
 
 The P22 guide is
 `docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`.
+
+## P23 Private Trial Feedback Intake And Support Loop Gate
+
+P23 runs one privacy-safe feedback/support loop for the unsigned private-trial
+lane. It records no-feedback honestly when no external tester feedback is
+supplied, or screens and classifies supplied feedback without committing
+sensitive data.
+
+The P23 guide is
+`docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`.
 
 ## Validation Plan
 

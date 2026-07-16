@@ -782,8 +782,8 @@ refreshes tester instructions, support intake, privacy guidance, feedback
 triage, artifact transfer/retention, and package-lane evidence without running
 signing commands or adding runtime features.
 
-See `docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`
-and `docs/p22_todo.md`. Current P22 executor evidence is recorded in
+See `docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`.
+P22 executor evidence is recorded in
 `docs/p22_unsigned_private_trial_release_notes.md`,
 `docs/p22_tester_support_intake.md`,
 `docs/p22_feedback_triage_criteria.md`,
@@ -792,6 +792,17 @@ and `docs/p22_todo.md`. Current P22 executor evidence is recorded in
 `docs/p22_artifact_transfer_retention.md`, and
 `docs/p22_boundary_scan_evidence.md`. The P22 closure package is
 `docs/p22_final_validation_report.md` and `docs/p22_to_p23_handoff.md`.
+
+## P23 Private Trial Feedback Intake And Support Loop Gate
+
+P23 runs one privacy-safe private-trial feedback/support loop using the P22
+support and triage docs. If no external tester feedback is supplied, it records
+that honestly; if feedback is supplied, it screens, classifies, and responds
+without committing personal data, logs, screenshots, package outputs, or
+secrets.
+
+See `docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`
+and `docs/p23_todo.md`.
 
 ## Current Boundaries
 

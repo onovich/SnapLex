@@ -1,11 +1,16 @@
 # P22 To P23 Handoff
 
 Date: 2026-07-17
-Status: P22 executor-complete; ready for planner check
+Status: P22 planner-accepted; ready for P23 execution
 
 Recommended P23: continue non-signing private-trial support and feedback intake
 unless a later planner-approved guide receives every signing unblock input from
 `docs/p21_signing_unblock_requirements.md`.
+
+P23 guide:
+`docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`
+
+P23 TODO: `docs/p23_todo.md`
 
 P22 guide:
 `docs/p22_non_signing_private_trial_continuity_tester_support_gate_goal_guide.md`

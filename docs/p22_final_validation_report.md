@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P22 Non-Signing Private Trial Continuity And Tester Support Gate
-Status: PASS - ready for planner check
+Status: PASS - accepted by planner
 Final commit: recorded in READY_FOR_CHECK planner notification after final
 report commit
 Push: PASS, `origin/main`
@@ -145,6 +145,9 @@ OCR cache, provider secret, or package output was committed.
   support, package-lane evidence, and no-secret boundaries.
 
 ## Recommended Next Phase
+
+Planner acceptance: P22 was accepted on 2026-07-17 at
+`fb99ad3e1f563e03b79ce426506bb297d4c42197`.
 
 Recommended P23: continue non-signing private-trial support and feedback intake
 unless a human or architect supplies every signing unblock input from
