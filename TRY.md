@@ -141,3 +141,28 @@ For maintainers collecting reports, use
 `docs\p12_feedback_intake_template.md`,
 `docs\p12_trial_pass_fail_criteria.md`, and
 `docs\p12_trial_triage_workflow.md`.
+
+## 6. Optional Credential Package Spike
+
+P15 introduces an explicit credential-capable package spike. This is for
+maintainer validation only and is not the default trial package:
+
+```cmd
+python scripts\package_windows.py --variant credentials
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode import
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode cycle
+```
+
+For packaged restart readiness, run two separate processes:
+
+```cmd
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode save
+dist\SnapLex\SnapLex.exe --smoke-credentials --credential-smoke-mode check-delete
+```
+
+These commands use only runtime-generated throwaway values and must not print,
+log, screenshot, export, or commit credential values. The deterministic base
+package remains the normal fake smoke path.
+
+See `docs\p15_credential_cleanup_guidance.md` before and after running package
+credential smoke.
