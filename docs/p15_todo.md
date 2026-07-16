@@ -17,7 +17,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Prove or reject packaged restart readiness without displaying or printing
       the fake value.
 - [x] Preserve deterministic base package dry-run and fake package smoke.
-- [ ] Document cleanup guidance for throwaway/manual credentials and local
+- [x] Document cleanup guidance for throwaway/manual credentials and local
       smoke data.
 - [ ] Decide whether to promote, defer, or reject a later production
       credential-capable package hardening phase.
