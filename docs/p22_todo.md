@@ -14,7 +14,7 @@ Round budget: 10 conversation rounds
 - [x] Keep signing paused and document unsigned-private-trial trust label.
 - [x] Refresh tester-facing unsigned/private-trial instructions.
 - [x] Refresh support intake, privacy guidance, and escalation rules.
-- [ ] Refresh feedback triage criteria and pass/fail language.
+- [x] Refresh feedback triage criteria and pass/fail language.
 - [ ] Revalidate deterministic base package lane.
 - [ ] Revalidate explicit credentials package lane.
 - [ ] Record artifact transfer, retention, cleanup, and no-secret evidence.
