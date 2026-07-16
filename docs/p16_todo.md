@@ -9,7 +9,7 @@ Estimated budget: 12 conversation rounds.
 ## Tasks
 
 - [x] Revalidate the accepted P15 baseline.
-- [ ] Preserve and document deterministic base package behavior.
+- [x] Preserve and document deterministic base package behavior.
 - [ ] Harden explicit `credentials` package variant behavior.
 - [ ] Harden `--smoke-credentials` modes, output, exit codes, and no-secret
       guarantees.
