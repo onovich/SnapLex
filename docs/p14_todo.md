@@ -3,7 +3,7 @@
 Date: 2026-07-16
 Phase: P14 Manual Environment And Source Keyring Validation
 Guide: `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`
-Status: ready for executor.
+Status: complete; ready for planner check.
 Estimated budget: 12 conversation rounds.
 
 ## Tasks
@@ -26,8 +26,8 @@ Estimated budget: 12 conversation rounds.
       boundaries, fail-closed real trial paths, and no-secret repository
       hygiene.
 - [x] Produce P14 boundary scan evidence.
-- [ ] Produce P14 final validation report.
-- [ ] Produce P14 to P15 handoff.
+- [x] Produce P14 final validation report.
+- [x] Produce P14 to P15 handoff.
 
 ## Deferred Outside P14
 

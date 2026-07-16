@@ -58,7 +58,14 @@ and `docs/p13_todo.md`. P13 feedback closure evidence is recorded in
 `docs/p13_final_validation_report.md`, and `docs/p13_to_p14_handoff.md`.
 P14 manual environment and source keyring validation planning is recorded in
 `docs/p14_manual_environment_source_keyring_validation_goal_guide.md` and
-`docs/p14_todo.md`.
+`docs/p14_todo.md`. P14 executor evidence is recorded in
+`docs/p14_tester_feedback_intake_log.md`,
+`docs/p14_manual_at_dpi_multimonitor_results.md`,
+`docs/p14_source_keyring_smoke_evidence.md`,
+`docs/p14_real_provider_smoke_record.md`,
+`docs/p14_credential_package_spike_decision.md`,
+`docs/p14_boundary_scan_evidence.md`,
+`docs/p14_final_validation_report.md`, and `docs/p14_to_p15_handoff.md`.
 
 ## Automated Precheck
 
@@ -553,6 +560,8 @@ P14 collects target-device evidence before any credential-capable package spike:
   P14.
 - Re-run artifact and secret scans before committing P14 docs or accepted
   validation fixes.
+- Use `docs/p14_final_validation_report.md` and `docs/p14_to_p15_handoff.md`
+  for P14 closure and the recommended P15 direction.
 
 ## P7 Expansion Planning Validation
 

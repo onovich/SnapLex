@@ -322,20 +322,18 @@ be deferred to a later isolated spike. The current response artifacts are
 The P13 closure package is `docs/p13_boundary_scan_evidence.md`,
 `docs/p13_final_validation_report.md`, and `docs/p13_to_p14_handoff.md`.
 
-## Selected P14 Manual Environment And Source Keyring Validation
+## P14 Manual Environment And Source Keyring Validation Completion
 
-P14 is the selected next execution phase after P13 acceptance. It should
-collect privacy-safe tester feedback if available, run assistive-technology,
-DPI scaling, and multi-monitor checks on target Windows devices when available,
-install optional source credential support and run source keyring
-save/read/delete smoke with a throwaway fake value when feasible, keep
-real-provider network smoke optional and human-approved only, and decide
-whether the evidence justifies a later isolated credential-capable package
+P14 executor work after P13 acceptance collected privacy-safe tester feedback
+status, recorded assistive-technology/DPI/multi-monitor manual blockers,
+installed optional source credential support, ran source keyring
+save/read/delete smoke with a throwaway fake value, kept real-provider network
+smoke optional and skipped without credentials and explicit human approval, and
+decided that evidence justifies a later isolated credential-capable package
 spike.
 
-The executable guide is
-`docs/p14_manual_environment_source_keyring_validation_goal_guide.md`; the TODO
-is `docs/p14_todo.md`.
+The P14 closure package is `docs/p14_boundary_scan_evidence.md`,
+`docs/p14_final_validation_report.md`, and `docs/p14_to_p15_handoff.md`.
 
 ## MVP Goals
 

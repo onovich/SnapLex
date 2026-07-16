@@ -30,7 +30,7 @@ Commands:
 
 ```cmd
 rg -n "sk-[A-Za-z0-9_-]{20,}|Authorization: Bearer [A-Za-z0-9._-]+" . -g "!docs/p11_boundary_scan_evidence.md" -g "!docs/p12_boundary_scan_evidence.md" -g "!docs/p13_boundary_scan_evidence.md"
-rg -n "snaplex-p14-throwaway|fake-value|P14_THROWAWAY" .
+rg -n "snaplex-p14-throwaway|fake-value|P14_THROWAWAY" . -g "!docs/p14_boundary_scan_evidence.md"
 rg -n "sk-" . -g "!docs/p11_boundary_scan_evidence.md" -g "!docs/p12_boundary_scan_evidence.md" -g "!docs/p13_boundary_scan_evidence.md"
 rg -n "Authorization: Bearer" . -g "!docs/p11_boundary_scan_evidence.md" -g "!docs/p12_boundary_scan_evidence.md" -g "!docs/p13_boundary_scan_evidence.md"
 rg -n "api_key=" . -g "!docs/p11_boundary_scan_evidence.md" -g "!docs/p12_boundary_scan_evidence.md" -g "!docs/p13_boundary_scan_evidence.md"

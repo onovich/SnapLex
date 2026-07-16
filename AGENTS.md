@@ -68,3 +68,5 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P13 to P14 handoff: `docs/p13_to_p14_handoff.md`.
 - Latest P14 guide: `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`.
 - Latest P14 TODO: `docs/p14_todo.md`.
+- Latest P14 report: `docs/p14_final_validation_report.md`.
+- P14 to P15 handoff: `docs/p14_to_p15_handoff.md`.
