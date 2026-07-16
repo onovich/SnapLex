@@ -14,7 +14,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Triage supplied feedback or P12 known gaps using P12 severity rules.
 - [x] Close any accepted S0/S1 pilot blockers with deterministic validation, or
       document blockers.
-- [ ] Capture assistive-technology, DPI, and multi-monitor manual results or
+- [x] Capture assistive-technology, DPI, and multi-monitor manual results or
       blockers.
 - [ ] Record optional real-provider smoke run/skip evidence.
 - [ ] Record source keyring smoke pass/blocker evidence using only a throwaway
