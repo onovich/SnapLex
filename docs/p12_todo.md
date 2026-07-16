@@ -16,7 +16,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Revalidate the accepted P11 baseline.
 - [x] Produce private-trial release notes for testers.
 - [x] Produce feedback intake template and triage taxonomy.
-- [ ] Define first private-trial pass/fail criteria.
+- [x] Define first private-trial pass/fail criteria.
 - [ ] Run or document manual assistive-technology, DPI, multi-monitor, visible
   GUI, packaged fake smoke, and trial-script checks.
 - [ ] Decide optional real-provider smoke policy and record run/skip evidence.
