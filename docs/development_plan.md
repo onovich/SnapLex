@@ -445,6 +445,16 @@ isolated credential-capable package spike design gate, the post-MVP plan became
 153 rounds. Including selected P16 credential-capable package production
 hardening, the current post-MVP plan is 165 rounds.
 
+## P16 Credential-Capable Package Production Hardening Completion
+
+P16 executor work hardened the explicit credential-capable package path while
+preserving the deterministic base package. It approves a limited private tester
+credential package candidate under explicit release gates, not a public release
+or signed installer.
+
+The P16 closure package is `docs/p16_boundary_scan_evidence.md`,
+`docs/p16_final_validation_report.md`, and `docs/p16_to_p17_handoff.md`.
+
 ## Validation Plan
 
 - Unit tests for service boundaries, provider selection, text normalization, cache behavior, and error mapping.

@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P15 executor-complete planning document pending planner acceptance
+Status: P16 executor-complete planning document pending planner acceptance
 
 ## 0. Round Estimate Rules
 
@@ -371,16 +371,16 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P14 - Manual Environment And Source Keyring
-Validation.
+Current accepted phase: P15 - Isolated Credential-Capable Package Spike Design
+Gate.
 
-Current executor-complete phase: P15 - Isolated Credential-Capable Package
-Spike Design Gate, ready for planner check.
+Current executor-complete phase: P16 - Credential-Capable Package Production
+Hardening, ready for planner check.
 
 P0-P7 status: complete.
 
-Selected next step: planner recheck of P15 using
-`docs/p15_final_validation_report.md` and `docs/p15_to_p16_handoff.md`.
+Selected next step: planner recheck of P16 using
+`docs/p16_final_validation_report.md` and `docs/p16_to_p17_handoff.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -1063,3 +1063,20 @@ Round split:
 - Round 8: production hardening decision.
 - Rounds 9-11: buffer hardening.
 - Round 12: final validation, report, and P17 handoff.
+
+Executor completion:
+
+- P16 completed on 2026-07-17 and is ready for planner acceptance.
+- Base package remains deterministic and keyring-free.
+- Explicit `credentials` variant remains the only credential-capable package
+  path.
+- Credential smoke uses phase-neutral reference
+  `snaplex/package-credential-smoke`.
+- Packaged credential import/cycle/save/check-delete passed.
+- Keyring backend/store failures are wrapped without raw value leakage.
+- Tester setup/cleanup, keyring failure modes, release gate/artifact policy,
+  and production hardening decision are documented.
+- Decision: approve limited private tester credential package candidate under
+  P16 gates; public release and signed installer remain out of scope.
+- Closure package: `docs/p16_boundary_scan_evidence.md`,
+  `docs/p16_final_validation_report.md`, and `docs/p16_to_p17_handoff.md`.

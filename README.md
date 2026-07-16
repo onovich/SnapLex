@@ -132,6 +132,8 @@ The current project source of truth lives in:
 - `docs/p16_release_gate_artifact_policy.md`
 - `docs/p16_production_hardening_decision.md`
 - `docs/p16_boundary_scan_evidence.md`
+- `docs/p16_final_validation_report.md`
+- `docs/p16_to_p17_handoff.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -159,7 +161,7 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has accepted P0 through P15. P16 Credential-Capable Package Production
-Hardening is ready for executor work. The P0-P7 track is
+Hardening is executor-complete and ready for planner check. The P0-P7 track is
 complete with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
@@ -171,7 +173,9 @@ provider setup UX, Apple-inspired UI polish, accepted P10 credential/account
 work, accepted P11 trial release hardening, accepted P12 private-trial pilot
 materials, accepted P13 feedback response evidence, and accepted P14 source
 keyring validation evidence. P15 adds explicit credential-capable package spike
-evidence while keeping the base package deterministic.
+evidence while keeping the base package deterministic. P16 hardens that
+explicit package path into a limited private tester candidate while preserving
+the deterministic base package.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -643,6 +647,8 @@ P16 hardens the explicit credential-capable package path for a production
 decision while preserving the deterministic base package. It focuses on the
 `credentials` variant, package smoke behavior, tester-facing setup and cleanup
 docs, keyring failure modes, release gates, and no-secret/no-network hygiene.
+P16 executor work approves a limited private tester credential package
+candidate under explicit gates, not a public release.
 
 See `docs/p16_credential_capable_package_production_hardening_goal_guide.md`
 and `docs/p16_todo.md`. Current P16 hardening evidence is recorded in
@@ -653,7 +659,8 @@ and `docs/p16_todo.md`. Current P16 hardening evidence is recorded in
 `docs/p16_keyring_failure_modes.md`,
 `docs/p16_release_gate_artifact_policy.md`,
 `docs/p16_production_hardening_decision.md`, and
-`docs/p16_boundary_scan_evidence.md`.
+`docs/p16_boundary_scan_evidence.md`. The P16 closure package is
+`docs/p16_final_validation_report.md` and `docs/p16_to_p17_handoff.md`.
 
 ## Current Boundaries
 

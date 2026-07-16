@@ -87,7 +87,8 @@ P16 credential-capable package hardening is recorded in
 `docs/p16_keyring_failure_modes.md`,
 `docs/p16_release_gate_artifact_policy.md`,
 `docs/p16_production_hardening_decision.md`, and
-`docs/p16_boundary_scan_evidence.md`.
+`docs/p16_boundary_scan_evidence.md`,
+`docs/p16_final_validation_report.md`, and `docs/p16_to_p17_handoff.md`.
 
 ## Automated Precheck
 

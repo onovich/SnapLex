@@ -3,7 +3,7 @@
 Date: 2026-07-17
 Phase: P16 Credential-Capable Package Production Hardening
 Guide: `docs/p16_credential_capable_package_production_hardening_goal_guide.md`
-Status: in progress; Round 1 rebaseline complete.
+Status: complete; ready for planner check.
 Estimated budget: 12 conversation rounds.
 
 ## Tasks
@@ -21,8 +21,8 @@ Estimated budget: 12 conversation rounds.
 - [x] Preserve no-network automated validation and fail-closed real trial
       behavior.
 - [x] Produce P16 boundary scan evidence.
-- [ ] Produce P16 final validation report.
-- [ ] Produce P16 to P17 handoff.
+- [x] Produce P16 final validation report.
+- [x] Produce P16 to P17 handoff.
 
 ## Deferred Outside P16
 
