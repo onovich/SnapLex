@@ -10,8 +10,8 @@ Round budget: 10 conversation rounds
 
 ## Tasks
 
-- [ ] Rebaseline accepted P21 and current package lanes.
-- [ ] Keep signing paused and document unsigned-private-trial trust label.
+- [x] Rebaseline accepted P21 and current package lanes.
+- [x] Keep signing paused and document unsigned-private-trial trust label.
 - [ ] Refresh tester-facing unsigned/private-trial instructions.
 - [ ] Refresh support intake, privacy guidance, and escalation rules.
 - [ ] Refresh feedback triage criteria and pass/fail language.
@@ -37,4 +37,3 @@ Round budget: 10 conversation rounds
 - SnapLex Cloud, OAuth, billing, hosted token broker, browser extension runtime,
   AI summary runtime, global hotkeys, broad provider/OCR/capture rewrites, or
   full localization.
-
