@@ -19,7 +19,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Decide distribution readiness.
 - [ ] Preserve deterministic base package validation.
 - [ ] Preserve explicit credentials package validation.
-- [ ] Produce P18 boundary scan evidence.
+- [x] Produce P18 boundary scan evidence.
 - [ ] Produce P18 final validation report.
 - [ ] Produce P18 to P19 handoff.
 
