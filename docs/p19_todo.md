@@ -22,8 +22,8 @@ Round budget: 12 conversation rounds
   implications.
 - [x] Decide whether signed archive candidate work may proceed to a later gate.
 - [x] Run artifact, secret, private-key, certificate, and signing-material scans.
-- [ ] Write final validation report and P20 handoff.
-- [ ] Commit and push.
+- [x] Write final validation report and P20 handoff.
+- [x] Commit and push.
 
 ## Deferred
 
