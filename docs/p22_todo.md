@@ -12,7 +12,7 @@ Round budget: 10 conversation rounds
 
 - [x] Rebaseline accepted P21 and current package lanes.
 - [x] Keep signing paused and document unsigned-private-trial trust label.
-- [ ] Refresh tester-facing unsigned/private-trial instructions.
+- [x] Refresh tester-facing unsigned/private-trial instructions.
 - [ ] Refresh support intake, privacy guidance, and escalation rules.
 - [ ] Refresh feedback triage criteria and pass/fail language.
 - [ ] Revalidate deterministic base package lane.
