@@ -101,6 +101,9 @@ P17 pilot and signing-decision planning is recorded in
 `docs/p17_credential_package_lane_decision.md`,
 `docs/p17_boundary_scan_evidence.md`,
 `docs/p17_final_validation_report.md`, and `docs/p17_to_p18_handoff.md`.
+P18 signing and distribution readiness planning is recorded in
+`docs/p18_signing_distribution_readiness_gate_goal_guide.md` and
+`docs/p18_todo.md`.
 
 ## Automated Precheck
 

@@ -1,9 +1,13 @@
 # P17 To P18 Handoff
 
 Date: 2026-07-17
-Status: P17 executor-complete; ready for planner check
+Status: P17 planner-accepted; ready for P18 execution
 
 Recommended P18: Signing And Distribution Readiness Gate.
+
+P18 execution guide: `docs/p18_signing_distribution_readiness_gate_goal_guide.md`
+
+P18 TODO: `docs/p18_todo.md`
 
 ## P17 Baseline
 

@@ -1156,7 +1156,8 @@ Round split:
 
 Executor completion:
 
-- P17 completed on 2026-07-17 and is ready for planner acceptance.
+- P17 completed on 2026-07-17 and was accepted by planner review on
+  2026-07-17.
 - Controlled credential package pilot lane, pre-share gate evidence,
   no-secret tester intake, real-provider smoke skip record, artifact
   transfer/retention/support policy, signing/installer/updater decision, and
@@ -1171,3 +1172,69 @@ Executor completion:
   `docs/p17_final_validation_report.md`, and `docs/p17_to_p18_handoff.md`.
 
 Recommended next phase: P18 Signing And Distribution Readiness Gate.
+
+Planner acceptance:
+
+- P17 accepted at `6c7061ad21cbd7b384806a3466f7c31adf8399db`.
+- Selected next phase: P18 Signing And Distribution Readiness Gate.
+
+## 21. P18 - Signing And Distribution Readiness Gate
+
+Estimated rounds: 12
+
+Execution guide:
+`docs/p18_signing_distribution_readiness_gate_goal_guide.md`
+
+Goal: decide signing and distribution readiness before broader credential
+package distribution.
+
+Scope:
+
+- Revalidate the accepted P17 baseline.
+- Define signing identity and certificate custody requirements.
+- Define signing command, verification evidence, and revocation expectations.
+- Decide archive versus installer readiness.
+- Define rollback/update expectations without implementing updater runtime.
+- Define signed artifact naming, transfer, retention, and support escalation.
+- Optionally run a safe local signing rehearsal only when no real private keys
+  or signed artifacts enter git.
+- Preserve deterministic base package validation.
+- Preserve explicit credentials package validation.
+
+Deliverables:
+
+- `docs/p18_signing_identity_certificate_custody.md`
+- `docs/p18_signing_verification_policy.md`
+- `docs/p18_signing_rehearsal_record.md`
+- `docs/p18_archive_installer_readiness_decision.md`
+- `docs/p18_rollback_update_policy.md`
+- `docs/p18_artifact_retention_revocation_support.md`
+- `docs/p18_distribution_readiness_decision.md`
+- `docs/p18_boundary_scan_evidence.md`
+- P18 final validation report and P18 to P19 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Base and credentials package dry-runs pass.
+- Base package remains deterministic and rejects credential smoke.
+- Credentials package smoke covers import, cycle, save/check-delete restart
+  readiness, and cleanup when feasible.
+- Fake/real trial command smoke remains green and real trial paths fail closed.
+- P9 and P11 GUI smoke remain green.
+- Docs link/index and artifact/secret/private-key scans remain green.
+
+Round split:
+
+- Round 1: rebaseline and signing readiness questions.
+- Round 2: signing identity and certificate custody policy.
+- Round 3: signing command and verification evidence policy.
+- Round 4: optional signing rehearsal decision and record.
+- Round 5: archive-versus-installer readiness decision.
+- Round 6: rollback/update expectations.
+- Round 7: artifact retention, revocation, and support escalation.
+- Round 8: distribution readiness decision.
+- Rounds 9-11: buffer hardening.
+- Round 12: final validation, report, and P19 handoff.

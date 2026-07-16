@@ -696,6 +696,17 @@ and `docs/p17_todo.md`. Current P17 executor evidence is recorded in
 `docs/p17_boundary_scan_evidence.md`. The P17 closure package is
 `docs/p17_final_validation_report.md` and `docs/p17_to_p18_handoff.md`.
 
+## P18 Signing And Distribution Readiness Gate
+
+P18 decides whether SnapLex is ready to move from an unsigned private-trial
+credential package lane toward signed distribution. It covers signing identity,
+certificate custody, signing verification, archive-versus-installer policy,
+rollback/update expectations, artifact retention/revocation, and support
+escalation.
+
+See `docs/p18_signing_distribution_readiness_gate_goal_guide.md` and
+`docs/p18_todo.md`.
+
 ## Current Boundaries
 
 The current implementation intentionally does not include global hotkeys,

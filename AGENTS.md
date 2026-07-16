@@ -75,8 +75,11 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest accepted P16 guide: `docs/p16_credential_capable_package_production_hardening_goal_guide.md`.
 - Latest accepted P16 report: `docs/p16_final_validation_report.md`.
 - P16 to P17 handoff: `docs/p16_to_p17_handoff.md`.
-- Latest P17 guide: `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`.
-- Latest P17 TODO: `docs/p17_todo.md`.
+- Latest accepted P17 guide: `docs/p17_limited_credential_package_pilot_signing_decision_goal_guide.md`.
 - P17 pilot/gate evidence: `docs/p17_pilot_lane_plan.md`, `docs/p17_package_candidate_gate_evidence.md`, `docs/p17_tester_feedback_intake.md`, `docs/p17_real_provider_smoke_record.md`, `docs/p17_artifact_transfer_retention_support.md`, `docs/p17_signing_installer_updater_decision.md`, `docs/p17_credential_package_lane_decision.md`, `docs/p17_boundary_scan_evidence.md`.
 - Latest P17 report: `docs/p17_final_validation_report.md`.
 - P17 to P18 handoff: `docs/p17_to_p18_handoff.md`.
+- Latest P18 guide: `docs/p18_signing_distribution_readiness_gate_goal_guide.md`.
+- Latest P18 TODO: `docs/p18_todo.md`.
+- Latest P18 report: `docs/p18_final_validation_report.md`.
+- P18 to P19 handoff: `docs/p18_to_p19_handoff.md`.

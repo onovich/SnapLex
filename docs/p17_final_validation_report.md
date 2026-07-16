@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P17 Limited Credential Package Pilot And Signing Decision
-Status: PASS - ready for planner check
+Status: PASS - accepted by planner
 Final commit: final docs commit containing this report; see READY_FOR_CHECK
 planner message for hash
 Push: PASS after final docs commit
@@ -175,6 +175,11 @@ Final scans confirmed:
   remote-session behavior still need a tester device matrix.
 - Package artifacts under `build\` and `dist\` are local ignored outputs and
   are not committed.
+
+## Planner Acceptance
+
+P17 was accepted by planner review on 2026-07-17 at
+`6c7061ad21cbd7b384806a3466f7c31adf8399db`.
 
 ## Recommended Next Phase
 
