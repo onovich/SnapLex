@@ -16,7 +16,7 @@ Estimated budget: 12 conversation rounds.
 - [x] Record optional real-provider smoke run/skip decision.
 - [x] Define artifact transfer, retention, and support escalation policy.
 - [x] Decide signing, installer, and updater requirements.
-- [ ] Decide whether credentials stay as a separate package variant.
+- [x] Decide whether credentials stay as a separate package variant.
 - [ ] Preserve deterministic base package validation.
 - [ ] Produce P17 boundary scan evidence.
 - [ ] Produce P17 final validation report.
