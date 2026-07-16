@@ -1,7 +1,11 @@
 # P13 To P14 Handoff
 
 Date: 2026-07-16
-Status: executor complete; planner acceptance pending
+Status: P13 planner-accepted; P14 ready for execution
+
+P14 execution guide:
+`docs/p14_manual_environment_source_keyring_validation_goal_guide.md`
+P14 TODO: `docs/p14_todo.md`
 
 ## P13 Baseline
 
@@ -64,9 +68,9 @@ Final P13 executor artifacts:
   installed.
 - Credential-capable package behavior is not implemented, shipped, or promised.
 
-## Recommended P14 Scope
+## Selected P14 Scope
 
-Recommended next phase: P14 Manual Environment And Source Keyring Validation.
+Selected next phase: P14 Manual Environment And Source Keyring Validation.
 
 Suggested P14 goals:
 

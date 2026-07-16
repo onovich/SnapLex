@@ -56,6 +56,9 @@ and `docs/p13_todo.md`. P13 feedback closure evidence is recorded in
 `docs/p13_credential_package_feasibility.md`. P13 final evidence is recorded in
 `docs/p13_boundary_scan_evidence.md`,
 `docs/p13_final_validation_report.md`, and `docs/p13_to_p14_handoff.md`.
+P14 manual environment and source keyring validation planning is recorded in
+`docs/p14_manual_environment_source_keyring_validation_goal_guide.md` and
+`docs/p14_todo.md`.
 
 ## Automated Precheck
 
@@ -529,6 +532,27 @@ privacy and no-secret rules:
   for P13 closure and the recommended P14 direction.
 - Re-run artifact and secret scans before committing any P13 docs or accepted
   fixes.
+
+## P14 Manual Environment And Source Keyring Validation Smoke
+
+P14 collects target-device evidence before any credential-capable package spike:
+
+- Confirm `docs/p14_tester_feedback_intake_log.md` clearly states whether
+  external tester feedback was supplied.
+- Run or document blockers for assistive-technology checks on a target Windows
+  device.
+- Run or document blockers for DPI scaling checks at target scaling values.
+- Run or document blockers for multi-monitor checks, including screen
+  translation overlay behavior when feasible.
+- Install optional source credential support only as a local environment step.
+- Run source keyring save/read/delete smoke only with a throwaway fake value.
+- Run optional real-provider smoke only when local credentials already exist and
+  a human intentionally approves network use.
+- Confirm `docs/p14_credential_package_spike_decision.md` decides whether a
+  later isolated package spike is justified, without shipping the package in
+  P14.
+- Re-run artifact and secret scans before committing P14 docs or accepted
+  validation fixes.
 
 ## P7 Expansion Planning Validation
 

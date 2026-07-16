@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P13 executor-complete planning document, planner check pending
+Status: P13 planner-accepted planning document with selected P14 guide
 
 ## 0. Round Estimate Rules
 
@@ -27,6 +27,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P11 | Trial Release Hardening | Validate visible Windows behavior, manual keyring smoke, packaged credential behavior, onboarding copy, and release notes before broader private trial. | 12 rounds |
 | P12 | Private Trial Pilot And Feedback Triage | Prepare tester-facing release notes, feedback intake, pass/fail criteria, manual environment checks, optional real-provider smoke policy, and triage rules. | 12 rounds |
 | P13 | Private Trial Feedback Response And Credential Package Feasibility | Respond to the first private-trial feedback loop, close accepted S0/S1 blockers, capture manual environment results, and decide credential-capable package feasibility. | 12 rounds |
+| P14 | Manual Environment And Source Keyring Validation | Run target-device manual checks, source keyring smoke, optional real-provider evidence, and decide whether to authorize a later credential-package spike. | 12 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -36,6 +37,7 @@ Total including selected P10 post-MVP implementation: 93 rounds.
 Total including selected P11 post-MVP implementation: 105 rounds.
 Total including selected P12 post-MVP implementation: 117 rounds.
 Total including selected P13 post-MVP implementation: 129 rounds.
+Total including selected P14 post-MVP implementation: 141 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -367,15 +369,17 @@ P7 stayed documentation/design-first. No optional prototype was introduced.
 
 Execute P0 through P3 first before broadening provider scope. This gives the project a working vertical slice: fake provider, clipboard path, capture path, OCR boundary, and popup rendering. After that, P4 through P6 turn the MVP into a usable release candidate.
 
-Current accepted phase: P12 - Private Trial Pilot And Feedback Triage.
+Current accepted phase: P13 - Private Trial Feedback Response And Credential
+Package Feasibility.
 
-Current submitted phase: P13 - Private Trial Feedback Response And Credential
-Package Feasibility, executor-complete and ready for planner check.
+Current selected phase: P14 - Manual Environment And Source Keyring
+Validation, ready for execution.
 
 P0-P7 status: complete.
 
-Selected next step: planner/architect check of
-`docs/p13_final_validation_report.md` and `docs/p13_to_p14_handoff.md`.
+Selected next step: execute P14 using
+`docs/p14_manual_environment_source_keyring_validation_goal_guide.md` and
+`docs/p14_todo.md`.
 
 For a dedicated implementation programmer taking P0-P7 as one continuous goal, use `docs/p0_p7_goal_mode_execution_guide.md`.
 The direct execution guide for the first phase is `docs/p0_repository_baseline_goal_guide.md`.
@@ -825,3 +829,69 @@ Round split:
 - Round 8: feedback response closure.
 - Rounds 9-11: buffer hardening.
 - Round 12: final validation, report, and P14 handoff.
+
+Planner acceptance:
+
+- P13 accepted on 2026-07-16 at
+  `9ec029c9d72354fac768a558ddb70881622475ca`.
+- Selected next phase: P14 Manual Environment And Source Keyring Validation.
+
+## 17. P14 - Manual Environment And Source Keyring Validation
+
+Estimated rounds: 12
+
+Execution guide: `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`
+
+Goal: collect target-device manual environment evidence, run source keyring
+smoke when optional credential support is available, keep real-provider smoke
+optional and human-approved, and decide whether to authorize a later isolated
+credential-capable package spike.
+
+Scope:
+
+- Revalidate the accepted P13 baseline.
+- Create a tester feedback intake log and record whether external tester
+  feedback is available.
+- Run or document blockers for assistive-technology checks.
+- Run or document blockers for DPI scaling checks.
+- Run or document blockers for multi-monitor checks.
+- Install optional source credential support when feasible and record keyring
+  dependency/backend status.
+- Run source keyring save/read/delete smoke with only a throwaway fake value
+  when feasible, or document the blocker.
+- Record optional real-provider smoke run/skip evidence.
+- Decide whether evidence justifies a later isolated credential-capable package
+  spike.
+
+Deliverables:
+
+- `docs/p14_tester_feedback_intake_log.md`
+- `docs/p14_manual_at_dpi_multimonitor_results.md`
+- `docs/p14_source_keyring_smoke_evidence.md`
+- `docs/p14_real_provider_smoke_record.md`
+- `docs/p14_credential_package_spike_decision.md`
+- `docs/p14_boundary_scan_evidence.md`
+- P14 final validation report and P14 to P15 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Package dry-run remains green.
+- Fake/real trial command smoke remains green.
+- P9 and P11 GUI smoke remain green.
+- Docs link/index and artifact/secret scans remain green.
+
+Round split:
+
+- Round 1: rebaseline and tester feedback inventory.
+- Round 2: assistive-technology validation.
+- Round 3: DPI scaling validation.
+- Round 4: multi-monitor validation.
+- Round 5: optional credential dependency setup.
+- Round 6: source keyring smoke.
+- Round 7: optional real-provider smoke record.
+- Round 8: credential package spike decision.
+- Rounds 9-11: buffer hardening.
+- Round 12: final validation, report, and P15 handoff.

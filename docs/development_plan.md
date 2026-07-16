@@ -291,9 +291,9 @@ without adding runtime product scope:
 The closure package is `docs/p12_final_validation_report.md` and
 `docs/p12_to_p13_handoff.md`.
 
-## Selected P13 Private Trial Feedback Response And Credential Package Feasibility
+## P13 Private Trial Feedback Response And Credential Package Feasibility Completion
 
-P13 is executor-complete and ready for planner check after P12 acceptance. It
+P13 planner-accepted work follows P12 acceptance. It
 ran the first private-trial feedback response loop, honestly recorded whether
 external tester feedback exists, closed accepted S0/S1 pilot blockers when they
 were safe and deterministic, captured assistive-technology/DPI/multi-monitor
@@ -321,6 +321,21 @@ be deferred to a later isolated spike. The current response artifacts are
 
 The P13 closure package is `docs/p13_boundary_scan_evidence.md`,
 `docs/p13_final_validation_report.md`, and `docs/p13_to_p14_handoff.md`.
+
+## Selected P14 Manual Environment And Source Keyring Validation
+
+P14 is the selected next execution phase after P13 acceptance. It should
+collect privacy-safe tester feedback if available, run assistive-technology,
+DPI scaling, and multi-monitor checks on target Windows devices when available,
+install optional source credential support and run source keyring
+save/read/delete smoke with a throwaway fake value when feasible, keep
+real-provider network smoke optional and human-approved only, and decide
+whether the evidence justifies a later isolated credential-capable package
+spike.
+
+The executable guide is
+`docs/p14_manual_environment_source_keyring_validation_goal_guide.md`; the TODO
+is `docs/p14_todo.md`.
 
 ## MVP Goals
 
@@ -402,6 +417,7 @@ Summary:
 - P11 Trial Release Hardening: 12 conversation rounds.
 - P12 Private Trial Pilot And Feedback Triage: 12 conversation rounds.
 - P13 Private Trial Feedback Response And Credential Package Feasibility: 12 conversation rounds.
+- P14 Manual Environment And Source Keyring Validation: 12 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -411,8 +427,9 @@ rounds. Including the accepted P9 implementation goal, the post-MVP plan became
 plan became 93 rounds. Including accepted P11 trial release hardening, the
 post-MVP plan became 105 rounds. Including accepted P12 private trial pilot and
 feedback triage, the post-MVP plan became 117 rounds. Including selected P13
-feedback response and credential package feasibility, the current post-MVP plan
-is 129 rounds.
+feedback response and credential package feasibility, the post-MVP plan became
+129 rounds. Including selected P14 manual environment and source keyring
+validation, the current post-MVP plan is 141 rounds.
 
 ## Validation Plan
 

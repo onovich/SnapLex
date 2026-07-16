@@ -101,6 +101,8 @@ The current project source of truth lives in:
 - `docs/p13_boundary_scan_evidence.md`
 - `docs/p13_final_validation_report.md`
 - `docs/p13_to_p14_handoff.md`
+- `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`
+- `docs/p14_todo.md`
 - `docs/p3_windows_smoke_evidence.md`
 - `docs/p3_capture_notes.md`
 - `docs/p3_ocr_notes.md`
@@ -127,9 +129,9 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P12. P13 Private Trial Feedback Response And
-Credential Package Feasibility is executor-complete and ready for planner
-check. The P0-P7 track is complete with a Windows
+SnapLex has accepted P0 through P13. P14 Manual Environment And Source Keyring
+Validation is selected and ready for execution. The P0-P7 track is complete
+with a Windows
 MVP release baseline and a post-MVP expansion roadmap. The app now has manual
 clipboard and screen translation actions, capture/OCR service boundaries,
 optional lazy real capture/OCR adapters, real provider adapters for
@@ -137,8 +139,8 @@ LibreTranslate/OpenAI/DeepL, mocked HTTP tests, fake offline defaults, persisted
 settings, optional recent translation history, shared result states, a
 PyInstaller spec, packaged release smoke commands, post-MVP expansion plans,
 provider setup UX, Apple-inspired UI polish, accepted P10 credential/account
-work, accepted P11 trial release hardening, and accepted P12 private-trial
-pilot materials.
+work, accepted P11 trial release hardening, accepted P12 private-trial pilot
+materials, and accepted P13 feedback response evidence.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -152,7 +154,7 @@ planner-accepted; use `docs/p10_final_validation_report.md` and
 use `docs/p11_final_validation_report.md` and `docs/p11_to_p12_handoff.md`.
 P12 Private Trial Pilot And Feedback Triage is planner-accepted; use
 `docs/p12_final_validation_report.md` and `docs/p12_to_p13_handoff.md`. P13 is
-executor-complete and ready for planner check; use
+planner-accepted; use
 `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`
 and `docs/p13_todo.md`. P13 feedback response artifacts are recorded in
 `docs/p13_feedback_response_log.md`,
@@ -162,7 +164,9 @@ and `docs/p13_todo.md`. P13 feedback response artifacts are recorded in
 `docs/p13_keyring_source_smoke_record.md`, and
 `docs/p13_credential_package_feasibility.md`. P13 closure evidence is
 `docs/p13_boundary_scan_evidence.md`, `docs/p13_final_validation_report.md`,
-and `docs/p13_to_p14_handoff.md`.
+and `docs/p13_to_p14_handoff.md`. P14 is the active selected guide; use
+`docs/p14_manual_environment_source_keyring_validation_goal_guide.md` and
+`docs/p14_todo.md`.
 
 ## Setup
 
@@ -532,7 +536,7 @@ See `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md` and
 
 ## P13 Private Trial Feedback Response And Credential Package Feasibility
 
-P13 executor work ran the first private-trial feedback response loop, closed
+P13 planner-accepted work ran the first private-trial feedback response loop, closed
 accepted S0/S1 pilot blockers inside existing boundaries, captured
 assistive-technology/DPI/multi-monitor manual results or blockers, recorded
 optional real-provider and keyring smoke evidence only when allowed, and decided
@@ -554,6 +558,24 @@ and `docs/p13_todo.md`. The Round 8 feedback closure package is
 `docs/p13_credential_package_feasibility.md`. The final P13 executor package is
 `docs/p13_boundary_scan_evidence.md`, `docs/p13_final_validation_report.md`,
 and `docs/p13_to_p14_handoff.md`.
+
+## P14 Manual Environment And Source Keyring Validation
+
+P14 is the selected next execution phase. It should collect privacy-safe tester
+feedback if available, run assistive-technology/DPI/multi-monitor checks on
+target Windows devices when available, install optional source credential
+support and run keyring save/read/delete smoke with a throwaway fake value when
+feasible, keep real-provider network smoke optional and human-approved only,
+and decide whether the evidence justifies a later isolated
+credential-capable package spike.
+
+P14 must not implement the credential-capable package variant. It must preserve
+P10-P13 boundaries: deterministic fake smoke, no-network automated tests,
+no-secret repository hygiene, credential service boundaries, fail-closed real
+trial paths, and no broad feature expansion.
+
+See `docs/p14_manual_environment_source_keyring_validation_goal_guide.md` and
+`docs/p14_todo.md`.
 
 ## Current Boundaries
 

@@ -63,7 +63,8 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest accepted P12 guide: `docs/p12_private_trial_pilot_feedback_triage_goal_guide.md`.
 - Latest accepted P12 report: `docs/p12_final_validation_report.md`.
 - P12 to P13 handoff: `docs/p12_to_p13_handoff.md`.
-- Latest P13 guide: `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`.
-- Latest P13 TODO: `docs/p13_todo.md`.
-- P13 executor final report: `docs/p13_final_validation_report.md`.
+- Latest accepted P13 guide: `docs/p13_private_trial_feedback_response_credential_package_feasibility_goal_guide.md`.
+- Latest accepted P13 report: `docs/p13_final_validation_report.md`.
 - P13 to P14 handoff: `docs/p13_to_p14_handoff.md`.
+- Latest P14 guide: `docs/p14_manual_environment_source_keyring_validation_goal_guide.md`.
+- Latest P14 TODO: `docs/p14_todo.md`.
