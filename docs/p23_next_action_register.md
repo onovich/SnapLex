@@ -14,7 +14,7 @@ planner for review.
 | --- | --- | --- | --- | --- | --- |
 | P23-A01 | P23 guide | Revalidate deterministic base package lane. | executor | done | Base dry-run, source/package fake smoke, real-provider expected rejections, and base credential-smoke expected rejection are recorded in `docs/p23_base_package_continuity_evidence.md`. |
 | P23-A02 | P23 guide | Revalidate explicit credentials package lane. | executor | done | Credentials dry-run/build and import/cycle/save/check-delete smoke passed with throwaway generated values, then base package behavior was restored in `docs/p23_credentials_package_continuity_evidence.md`. |
-| P23-A03 | P23 guide | Record artifact retention and support-loop evidence. | executor | open | P23 documents that no external artifacts were accepted and generated local outputs remain ignored. |
+| P23-A03 | P23 guide | Record artifact retention and support-loop evidence. | executor | done | `docs/p23_artifact_retention_support_evidence.md` documents that no external artifacts were accepted and generated local outputs remain ignored. |
 | P23-A04 | P23 guide | Run boundary, secret, certificate, private-key, package-output, screenshot, log, and signing-material scans. | executor | open | Scans are recorded with no forbidden nonignored artifacts or raw secrets. |
 | P23-A05 | P23 guide | Write final validation report and P24 handoff. | executor | open | Final report and handoff include validation evidence, known limitations, and next recommendation. |
 | P23-A06 | P23 guide | Notify planner thread with READY_FOR_CHECK after final commit and push. | executor | open | Planner thread receives final commit, report paths, validation evidence, boundaries, limitations, and recommendation. |
