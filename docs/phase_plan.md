@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P24 planner-accepted; P25 ready for executor
+Status: P24 planner-accepted; P25 executor evidence in progress
 
 ## 0. Round Estimate Rules
 
@@ -1770,6 +1770,7 @@ Scope:
 
 Deliverables:
 
+- `docs/p25_rebaseline_signing_pause.md`
 - `docs/p25_feedback_watch_disposition.md`
 - `docs/p25_private_trial_pause_continue_decision.md`
 - `docs/p25_support_readiness_closeout.md`
@@ -1801,3 +1802,20 @@ Round split:
 - Round 7: buffer for docs, links, package evidence, or support clarity.
 - Round 8: final validation, report, P26 handoff or closeout recommendation,
   and planner notification.
+
+Executor progress:
+
+- P25 rebaselined accepted P24 and kept signing PAUSED in
+  `docs/p25_rebaseline_signing_pause.md`.
+- P25 recorded no external feedback supplied and privacy-safe late-feedback
+  handling in `docs/p25_feedback_watch_disposition.md`.
+- P25 paused active feedback watch while preserving passive intake in
+  `docs/p25_private_trial_pause_continue_decision.md`.
+- P25 recorded support/readiness closeout in
+  `docs/p25_support_readiness_closeout.md`.
+- P25 ran lightweight package/source revalidation in
+  `docs/p25_package_revalidation_evidence.md`.
+- P25 recorded boundary, artifact, secret, certificate, private-key, and
+  signing-material scan evidence in `docs/p25_boundary_scan_evidence.md`.
+- P25 final validation report and P25 to P26 handoff remain pending for Round
+  8.

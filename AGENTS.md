@@ -163,6 +163,7 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - Latest P25 guide: `docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`.
 - Latest P25 TODO: `docs/p25_todo.md`.
 - P25 non-signing feedback-watch pause/closeout evidence:
+  `docs/p25_rebaseline_signing_pause.md`,
   `docs/p25_feedback_watch_disposition.md`,
   `docs/p25_private_trial_pause_continue_decision.md`,
   `docs/p25_support_readiness_closeout.md`,

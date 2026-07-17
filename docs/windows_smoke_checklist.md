@@ -182,9 +182,16 @@ and `docs/p24_todo.md`, plus
 `docs/p24_boundary_scan_evidence.md`,
 `docs/p24_final_validation_report.md`, and `docs/p24_to_p25_handoff.md`.
 
-P25 non-signing feedback-watch pause/closeout checks are planned in
+P25 non-signing feedback-watch pause/closeout evidence is recorded through
+boundary scans in
 `docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`
-and `docs/p25_todo.md`.
+and `docs/p25_todo.md`, plus
+`docs/p25_rebaseline_signing_pause.md`,
+`docs/p25_feedback_watch_disposition.md`,
+`docs/p25_private_trial_pause_continue_decision.md`,
+`docs/p25_support_readiness_closeout.md`,
+`docs/p25_package_revalidation_evidence.md`, and
+`docs/p25_boundary_scan_evidence.md`.
 
 ## Automated Precheck
 

@@ -576,6 +576,15 @@ deterministic validation before producing a closeout or P26 handoff.
 The P25 guide is
 `docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`.
 
+P25 executor evidence through boundary scans is recorded in
+`docs/p25_rebaseline_signing_pause.md`,
+`docs/p25_feedback_watch_disposition.md`,
+`docs/p25_private_trial_pause_continue_decision.md`,
+`docs/p25_support_readiness_closeout.md`,
+`docs/p25_package_revalidation_evidence.md`, and
+`docs/p25_boundary_scan_evidence.md`. Final validation and the P25 to P26
+handoff remain pending for the final P25 round.
+
 ## Validation Plan
 
 - Unit tests for service boundaries, provider selection, text normalization, cache behavior, and error mapping.
