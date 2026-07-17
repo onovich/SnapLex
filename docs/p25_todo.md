@@ -11,7 +11,7 @@ Guide:
       pauses, or needs a later planner decision.
 - [x] Refresh support/readiness closeout status.
 - [x] Run lightweight deterministic package/source revalidation.
-- [ ] Run boundary, artifact, secret, certificate, private-key, package-output,
+- [x] Run boundary, artifact, secret, certificate, private-key, package-output,
       screenshot, log, and signing-material scans.
 - [ ] Write P25 final validation report.
 - [ ] Write P25 to P26 handoff or closeout recommendation.
