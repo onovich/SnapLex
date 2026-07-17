@@ -581,9 +581,9 @@ P25 executor evidence through boundary scans is recorded in
 `docs/p25_feedback_watch_disposition.md`,
 `docs/p25_private_trial_pause_continue_decision.md`,
 `docs/p25_support_readiness_closeout.md`,
-`docs/p25_package_revalidation_evidence.md`, and
-`docs/p25_boundary_scan_evidence.md`. Final validation and the P25 to P26
-handoff remain pending for the final P25 round.
+`docs/p25_package_revalidation_evidence.md`,
+`docs/p25_boundary_scan_evidence.md`,
+`docs/p25_final_validation_report.md`, and `docs/p25_to_p26_handoff.md`.
 
 ## Validation Plan
 

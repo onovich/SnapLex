@@ -190,8 +190,9 @@ and `docs/p25_todo.md`, plus
 `docs/p25_feedback_watch_disposition.md`,
 `docs/p25_private_trial_pause_continue_decision.md`,
 `docs/p25_support_readiness_closeout.md`,
-`docs/p25_package_revalidation_evidence.md`, and
-`docs/p25_boundary_scan_evidence.md`.
+`docs/p25_package_revalidation_evidence.md`,
+`docs/p25_boundary_scan_evidence.md`,
+`docs/p25_final_validation_report.md`, and `docs/p25_to_p26_handoff.md`.
 
 ## Automated Precheck
 

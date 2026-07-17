@@ -173,9 +173,10 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has accepted P0 through P24. P25 Non-Signing Private Trial Feedback
-Watch Pause Closeout Gate executor evidence is in progress, with rebaseline,
-feedback disposition, pause decision, support/readiness closeout, package
-revalidation, and boundary scans recorded.
+Watch Pause Closeout Gate executor work is complete and ready for planner
+check, with rebaseline, feedback disposition, pause decision,
+support/readiness closeout, package revalidation, boundary scans, final
+validation, and P26 handoff recorded.
 The
 P0-P7 track is complete with a Windows MVP release baseline and a post-MVP
 expansion roadmap. The app now has manual clipboard and screen translation
@@ -859,9 +860,8 @@ P25 executor evidence through boundary scans is recorded in
 `docs/p25_private_trial_pause_continue_decision.md`,
 `docs/p25_support_readiness_closeout.md`,
 `docs/p25_package_revalidation_evidence.md`, and
-`docs/p25_boundary_scan_evidence.md`. The P25 closure package remains pending
-until final validation writes `docs/p25_final_validation_report.md` and
-`docs/p25_to_p26_handoff.md`.
+`docs/p25_boundary_scan_evidence.md`. The P25 closure package is
+`docs/p25_final_validation_report.md` and `docs/p25_to_p26_handoff.md`.
 
 ## Current Boundaries
 

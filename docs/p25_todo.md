@@ -13,8 +13,8 @@ Guide:
 - [x] Run lightweight deterministic package/source revalidation.
 - [x] Run boundary, artifact, secret, certificate, private-key, package-output,
       screenshot, log, and signing-material scans.
-- [ ] Write P25 final validation report.
-- [ ] Write P25 to P26 handoff or closeout recommendation.
+- [x] Write P25 final validation report.
+- [x] Write P25 to P26 handoff or closeout recommendation.
 
 Deferred unless a later planner-approved phase supplies explicit inputs:
 
