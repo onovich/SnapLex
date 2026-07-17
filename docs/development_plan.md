@@ -466,7 +466,7 @@ trial continuity and tester support gate, the post-MVP plan became 231 rounds.
 Including accepted P23 private trial feedback intake and support loop gate, the
 post-MVP plan became 241 rounds. Including accepted P24 non-signing private
 trial candidate readiness and feedback watch gate, the post-MVP plan became
-251 rounds. Including selected P25 non-signing private trial feedback watch
+251 rounds. Including accepted P25 non-signing private trial feedback watch
 pause closeout gate, the current post-MVP plan is 259 rounds.
 
 ## P16 Credential-Capable Package Production Hardening Completion
@@ -584,6 +584,11 @@ P25 executor evidence through boundary scans is recorded in
 `docs/p25_package_revalidation_evidence.md`,
 `docs/p25_boundary_scan_evidence.md`,
 `docs/p25_final_validation_report.md`, and `docs/p25_to_p26_handoff.md`.
+
+P25 accepted result: active feedback watch is paused, passive privacy-safe
+intake remains available, and no P26 guide is selected until new feedback,
+validation drift, a planner-approved circulation objective, or complete safe
+signing-path inputs arrive.
 
 ## Validation Plan
 

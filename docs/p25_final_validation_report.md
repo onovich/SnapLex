@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P25 Non-Signing Private Trial Feedback Watch Pause Closeout Gate
-Status: PASS - ready for planner check
+Status: PASS - accepted by planner
 Final commit: recorded in READY_FOR_CHECK planner notification after final report commit
 Round budget consumed: 8 of 8 planned rounds
 Buffer consumed: 1 round for docs/index clarity; no code repair or runtime change
@@ -110,6 +110,9 @@ Final validation commands and outcomes:
   release feeds, or broader support-channel launch.
 
 ## Recommendation
+
+Planner acceptance: P25 was accepted on 2026-07-17 at
+`30c4d94ad3d2be3dbb159d6b633950a114b75d4e`.
 
 Planner should review P25 with the current validation evidence. If accepted,
 the recommended next state is pause/closeout rather than another no-feedback

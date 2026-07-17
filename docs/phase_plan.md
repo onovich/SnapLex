@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P24 planner-accepted; P25 executor-complete and ready for planner check
+Status: P25 planner-accepted; non-signing private-trial watch lane paused
 
 ## 0. Round Estimate Rules
 
@@ -59,7 +59,7 @@ Total including accepted P21 post-MVP implementation: 221 rounds.
 Total including accepted P22 post-MVP implementation: 231 rounds.
 Total including accepted P23 post-MVP implementation: 241 rounds.
 Total including accepted P24 post-MVP implementation: 251 rounds.
-Total including selected P25 post-MVP implementation: 259 rounds.
+Total including accepted P25 post-MVP implementation: 259 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -1819,3 +1819,11 @@ Executor progress:
   signing-material scan evidence in `docs/p25_boundary_scan_evidence.md`.
 - P25 final validation report and P25 to P26 handoff are recorded in
   `docs/p25_final_validation_report.md` and `docs/p25_to_p26_handoff.md`.
+
+Planner acceptance:
+
+- P25 accepted at `30c4d94ad3d2be3dbb159d6b633950a114b75d4e`.
+- Active non-signing private-trial feedback watch is paused.
+- No P26 guide is selected now. A future P26 should be created only when real
+  privacy-screened feedback, validation drift, a planner-approved circulation
+  objective, or complete safe signing-path inputs are supplied.

@@ -160,8 +160,7 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p24_boundary_scan_evidence.md`.
 - Latest P24 report: `docs/p24_final_validation_report.md`.
 - P24 to P25 handoff: `docs/p24_to_p25_handoff.md`.
-- Latest P25 guide: `docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`.
-- Latest P25 TODO: `docs/p25_todo.md`.
+- Latest accepted P25 guide: `docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`.
 - P25 non-signing feedback-watch pause/closeout evidence:
   `docs/p25_rebaseline_signing_pause.md`,
   `docs/p25_feedback_watch_disposition.md`,
@@ -171,3 +170,6 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p25_boundary_scan_evidence.md`.
 - Latest P25 report: `docs/p25_final_validation_report.md`.
 - P25 to P26 handoff: `docs/p25_to_p26_handoff.md`.
+- Current planning state: non-signing private-trial feedback watch lane paused;
+  no P26 guide is selected unless new feedback, validation drift, a
+  planner-approved circulation objective, or safe signing-path inputs arrive.

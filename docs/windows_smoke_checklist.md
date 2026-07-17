@@ -194,6 +194,10 @@ and `docs/p25_todo.md`, plus
 `docs/p25_boundary_scan_evidence.md`,
 `docs/p25_final_validation_report.md`, and `docs/p25_to_p26_handoff.md`.
 
+After planner acceptance, active feedback watch is paused. Re-run smoke for a
+new phase only when a planner objective, validation drift, real privacy-screened
+feedback, or complete signing unblock inputs justify it.
+
 ## Automated Precheck
 
 ```powershell

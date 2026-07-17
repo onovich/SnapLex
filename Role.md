@@ -1,7 +1,7 @@
 # Role Routing
 
 workspace: D:\ToolProjects\SnapLex
-updated_at: 2026-07-17T19:45:02.3743164+08:00
+updated_at: 2026-07-17T20:00:00.0000000+08:00
 
 planner:
   thread_id: 019ee9e8-6d07-7902-9694-a3b6410b158b
@@ -13,22 +13,22 @@ executor:
   role: executor / implementation programmer / $donextgoal runner
   evidence: Current thread metadata matches executor thread handling P0 and P1 execution.
 
-active_goal_phase: P25 Non-Signing Private Trial Feedback Watch Pause Closeout Gate
-active_goal_guide: docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md
+active_goal_phase: PAUSED - Non-Signing Private Trial Feedback Watch
+active_goal_guide: none
 
 last_check_status: PASS
 last_planner_dispatch: 2026-07-17T19:45:02.3743164+08:00
-last_planner_dispatch_status: sent
-last_planner_dispatch_guide: docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md
-last_planner_dispatch_commit: ba8d17b435f007e4df01597dba11af06920f7a45
+last_planner_dispatch_status: paused_after_p25_acceptance
+last_planner_dispatch_guide: none
+last_planner_dispatch_commit: none
 
-last_executor_report_commit: bd4f1da0af33ece2350c3a820d799a094fdff0d9
-last_executor_report_status: ACCEPTED_P24
-last_executor_report_at: 2026-07-17T19:45:02.3743164+08:00
-last_executor_report_guide: docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md
+last_executor_report_commit: 30c4d94ad3d2be3dbb159d6b633950a114b75d4e
+last_executor_report_status: ACCEPTED_P25
+last_executor_report_at: 2026-07-17T20:00:00.0000000+08:00
+last_executor_report_guide: docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md
 
 routing_notes:
-  completion: P24 accepted by planner; P0-P24 complete.
+  completion: P25 accepted by planner; P0-P25 complete; active watch paused.
   p8_acceptance: P8 accepted by planner at d8d451a0c2efc140032737ec2afbbbdb2a4f704c.
   p9_acceptance: P9 accepted by planner at a2ebc99a47bc810fe3f6245f61a26a16fc6650b3.
   p10_acceptance: P10 accepted by planner at 5a37564993c67dcf9c5bfe5da2ed06a44327874c.
@@ -46,4 +46,5 @@ routing_notes:
   p22_acceptance: P22 accepted by planner at fb99ad3e1f563e03b79ce426506bb297d4c42197.
   p23_acceptance: P23 accepted by planner at b2b0979b2dc2d2cf23eaea255620ef3e1ab23b60.
   p24_acceptance: P24 accepted by planner at bd4f1da0af33ece2350c3a820d799a094fdff0d9.
-  active_dispatch: P25 dispatched to executor thread 019eed4c-8721-7a11-aa13-81bee36cd56d.
+  p25_acceptance: P25 accepted by planner at 30c4d94ad3d2be3dbb159d6b633950a114b75d4e.
+  active_dispatch: none; lane paused pending new feedback/objective/signing inputs.

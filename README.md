@@ -172,11 +172,9 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P24. P25 Non-Signing Private Trial Feedback
-Watch Pause Closeout Gate executor work is complete and ready for planner
-check, with rebaseline, feedback disposition, pause decision,
-support/readiness closeout, package revalidation, boundary scans, final
-validation, and P26 handoff recorded.
+SnapLex has accepted P0 through P25. The non-signing private-trial feedback
+watch lane is paused pending real privacy-screened feedback, validation drift,
+a planner-approved circulation objective, or complete safe signing-path inputs.
 The
 P0-P7 track is complete with a Windows MVP release baseline and a post-MVP
 expansion roadmap. The app now has manual clipboard and screen translation
@@ -202,7 +200,8 @@ continues the non-signing private-trial lane with candidate-readiness, feedback
 watch, support runbook, package-lane, release-hold, boundary validation, final
 report, and P25 handoff evidence. P25 pauses the active non-signing
 private-trial watch after repeated no-feedback evidence, preserves passive
-privacy-safe intake, and keeps release/signing held.
+privacy-safe intake, and keeps release/signing held. No P26 guide is selected
+now.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup

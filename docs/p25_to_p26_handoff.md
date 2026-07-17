@@ -1,7 +1,7 @@
 # P25 To P26 Handoff
 
 Date: 2026-07-17
-Status: P25 executor-complete; ready for planner check
+Status: P25 planner-accepted; lane paused pending new input
 
 ## Summary
 
@@ -75,6 +75,10 @@ confirmed generated outputs remain ignored, and kept signing PAUSED.
   validation.
 
 ## Recommended P26 Direction
+
+Planner decision: no P26 guide is selected now. The active non-signing
+private-trial feedback watch lane is paused. Passive privacy-safe intake remains
+available.
 
 If the planner accepts P25, the safest next direction is pause/closeout:
 
