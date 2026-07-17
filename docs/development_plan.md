@@ -437,6 +437,7 @@ Summary:
 - P22 Non-Signing Private Trial Continuity And Tester Support Gate: 10 conversation rounds.
 - P23 Private Trial Feedback Intake And Support Loop Gate: 10 conversation rounds.
 - P24 Non-Signing Private Trial Candidate Readiness And Feedback Watch Gate: 10 conversation rounds.
+- P25 Non-Signing Private Trial Feedback Watch Pause Closeout Gate: 8 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -463,9 +464,10 @@ Including selected P21 signing path unblock decision or pause gate, the
 post-MVP plan became 221 rounds. Including accepted P22 non-signing private
 trial continuity and tester support gate, the post-MVP plan became 231 rounds.
 Including accepted P23 private trial feedback intake and support loop gate, the
-post-MVP plan became 241 rounds. Including selected P24 non-signing private
-trial candidate readiness and feedback watch gate, the current post-MVP plan is
-251 rounds.
+post-MVP plan became 241 rounds. Including accepted P24 non-signing private
+trial candidate readiness and feedback watch gate, the post-MVP plan became
+251 rounds. Including selected P25 non-signing private trial feedback watch
+pause closeout gate, the current post-MVP plan is 259 rounds.
 
 ## P16 Credential-Capable Package Production Hardening Completion
 
@@ -563,6 +565,16 @@ P24 executor evidence through boundary scans is recorded in
 `docs/p24_release_hold_decision.md`,
 `docs/p24_boundary_scan_evidence.md`,
 `docs/p24_final_validation_report.md`, and `docs/p24_to_p25_handoff.md`.
+
+## P25 Non-Signing Private Trial Feedback Watch Pause Closeout Gate
+
+P25 decides whether the unsigned/private-trial lane continues watching, pauses,
+or needs later planner action, without resuming signing or public release. It
+keeps feedback privacy-safe, preserves release hold, and runs lightweight
+deterministic validation before producing a closeout or P26 handoff.
+
+The P25 guide is
+`docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`.
 
 ## Validation Plan
 

@@ -1,7 +1,7 @@
 # P24 To P25 Handoff
 
 Date: 2026-07-17
-Status: P24 executor-complete; ready for planner check
+Status: P24 planner-accepted; ready for P25 execution
 
 ## Summary
 
@@ -77,6 +77,11 @@ remain ignored, and kept signing PAUSED.
   distribution.
 
 ## Recommended P25 Direction
+
+Planner-selected P25 guide:
+`docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`
+
+P25 TODO: `docs/p25_todo.md`
 
 If the planner accepts P24, choose one of these next directions:
 

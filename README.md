@@ -172,11 +172,9 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P23. P24 Non-Signing Private Trial Candidate
-Readiness And Feedback Watch Gate executor work is complete and ready for
-planner check, with candidate readiness, feedback watch, support watch,
-package-lane validation, release-hold, boundary scans, final validation, and
-P25 handoff recorded.
+SnapLex has accepted P0 through P24. P25 Non-Signing Private Trial Feedback
+Watch Pause Closeout Gate is ready for executor use, with the guide and TODO
+recorded.
 The
 P0-P7 track is complete with a Windows MVP release baseline and a post-MVP
 expansion roadmap. The app now has manual clipboard and screen translation
@@ -200,7 +198,9 @@ no external tester feedback was supplied, keeps support intake privacy-safe,
 revalidates base and credentials package lanes, and keeps signing paused. P24
 continues the non-signing private-trial lane with candidate-readiness, feedback
 watch, support runbook, package-lane, release-hold, boundary validation, final
-report, and P25 handoff evidence.
+report, and P25 handoff evidence. P25 decides whether the non-signing
+private-trial lane should keep watching, pause, or wait for later planner
+action without resuming signing.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -842,6 +842,15 @@ P24 executor evidence through boundary scans is recorded in
 `docs/p24_release_hold_decision.md`, and
 `docs/p24_boundary_scan_evidence.md`. The P24 closure package is
 `docs/p24_final_validation_report.md` and `docs/p24_to_p25_handoff.md`.
+
+## P25 Non-Signing Private Trial Feedback Watch Pause Closeout Gate
+
+P25 decides whether the unsigned/private-trial lane continues watching, pauses,
+or needs later planner action, without resuming signing or public release.
+
+See
+`docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`
+and `docs/p25_todo.md`.
 
 ## Current Boundaries
 

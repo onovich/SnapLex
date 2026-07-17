@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P24 Non-Signing Private Trial Candidate Readiness And Feedback Watch Gate
-Status: PASS - ready for planner check
+Status: PASS - accepted by planner
 Final commit: recorded in READY_FOR_CHECK planner notification after final report commit
 Round budget consumed: 10 of 10 planned rounds
 Buffer consumed: 1 round for docs/index clarity; no code repair or runtime change
@@ -117,6 +117,9 @@ values.
   release feeds, or broader support-channel launch.
 
 ## Recommendation
+
+Planner acceptance: P24 was accepted on 2026-07-17 at
+`bd4f1da0af33ece2350c3a820d799a094fdff0d9`.
 
 Planner should review P24 with the current validation evidence. If accepted,
 the next phase should keep the lane non-signing unless safe signing inputs are

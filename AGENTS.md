@@ -149,8 +149,7 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p23_boundary_scan_evidence.md`.
 - Latest P23 report: `docs/p23_final_validation_report.md`.
 - P23 to P24 handoff: `docs/p23_to_p24_handoff.md`.
-- Latest P24 guide: `docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`.
-- Latest P24 TODO: `docs/p24_todo.md`.
+- Latest accepted P24 guide: `docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`.
 - P24 non-signing candidate readiness evidence:
   `docs/p24_unsigned_candidate_readiness.md`,
   `docs/p24_feedback_watch_register.md`,
@@ -161,3 +160,13 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p24_boundary_scan_evidence.md`.
 - Latest P24 report: `docs/p24_final_validation_report.md`.
 - P24 to P25 handoff: `docs/p24_to_p25_handoff.md`.
+- Latest P25 guide: `docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`.
+- Latest P25 TODO: `docs/p25_todo.md`.
+- P25 non-signing feedback-watch pause/closeout evidence:
+  `docs/p25_feedback_watch_disposition.md`,
+  `docs/p25_private_trial_pause_continue_decision.md`,
+  `docs/p25_support_readiness_closeout.md`,
+  `docs/p25_package_revalidation_evidence.md`,
+  `docs/p25_boundary_scan_evidence.md`.
+- Latest P25 report: `docs/p25_final_validation_report.md`.
+- P25 to P26 handoff: `docs/p25_to_p26_handoff.md`.

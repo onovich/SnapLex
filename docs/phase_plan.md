@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P23 planner-accepted; P24 executor-complete and ready for planner check
+Status: P24 planner-accepted; P25 ready for executor
 
 ## 0. Round Estimate Rules
 
@@ -38,6 +38,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P22 | Non-Signing Private Trial Continuity And Tester Support Gate | Continue unsigned/private-trial readiness and tester support while signing remains paused. | 10 rounds |
 | P23 | Private Trial Feedback Intake And Support Loop Gate | Run one privacy-safe feedback/support loop for the unsigned private-trial lane. | 10 rounds |
 | P24 | Non-Signing Private Trial Candidate Readiness And Feedback Watch Gate | Prepare a non-signing private-trial candidate readiness package and feedback watch gate while signing remains paused. | 10 rounds |
+| P25 | Non-Signing Private Trial Feedback Watch Pause Closeout Gate | Decide whether the unsigned private-trial lane continues watching, pauses, or needs later planner action. | 8 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -57,7 +58,8 @@ Total including accepted P20 post-MVP implementation: 213 rounds.
 Total including accepted P21 post-MVP implementation: 221 rounds.
 Total including accepted P22 post-MVP implementation: 231 rounds.
 Total including accepted P23 post-MVP implementation: 241 rounds.
-Total including selected P24 post-MVP implementation: 251 rounds.
+Total including accepted P24 post-MVP implementation: 251 rounds.
+Total including selected P25 post-MVP implementation: 259 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -1738,3 +1740,64 @@ Executor progress:
   signing-material scan evidence in `docs/p24_boundary_scan_evidence.md`.
 - P24 final validation report and P24 to P25 handoff are recorded in
   `docs/p24_final_validation_report.md` and `docs/p24_to_p25_handoff.md`.
+
+Planner acceptance:
+
+- P24 accepted at `bd4f1da0af33ece2350c3a820d799a094fdff0d9`.
+- Selected next phase: P25 Non-Signing Private Trial Feedback Watch Pause
+  Closeout Gate.
+
+## 28. P25 - Non-Signing Private Trial Feedback Watch Pause Closeout Gate
+
+Estimated rounds: 8
+
+Execution guide:
+`docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`
+
+Goal: decide whether the unsigned/private-trial lane continues watching,
+pauses, or needs later planner action, without resuming signing or public
+release.
+
+Scope:
+
+- Revalidate the accepted P24 baseline.
+- Keep signing paused and preserve the unsigned/private-trial trust label.
+- Record feedback watch disposition with privacy screening.
+- Decide whether the lane continues, pauses, or needs planner action.
+- Refresh support/readiness closeout status.
+- Run lightweight deterministic package/source validation.
+- Preserve no-secret and no-artifact repository hygiene.
+
+Deliverables:
+
+- `docs/p25_feedback_watch_disposition.md`
+- `docs/p25_private_trial_pause_continue_decision.md`
+- `docs/p25_support_readiness_closeout.md`
+- `docs/p25_package_revalidation_evidence.md`
+- `docs/p25_boundary_scan_evidence.md`
+- P25 final validation report and P25 to P26 handoff or closeout
+  recommendation.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Base and credentials package dry-runs pass.
+- Fake/real trial command smoke remains green and real trial paths fail closed.
+- Base package remains deterministic and rejects credential smoke.
+- No signing command runs.
+- Docs link/index and artifact/secret/private-key/certificate/signing-material
+  scans remain green.
+
+Round split:
+
+- Round 1: rebaseline P24 and signing pause state.
+- Round 2: feedback watch disposition.
+- Round 3: pause/continue decision.
+- Round 4: support/readiness closeout refresh.
+- Round 5: lightweight package/source revalidation.
+- Round 6: boundary scans.
+- Round 7: buffer for docs, links, package evidence, or support clarity.
+- Round 8: final validation, report, P26 handoff or closeout recommendation,
+  and planner notification.

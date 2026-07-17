@@ -182,6 +182,10 @@ and `docs/p24_todo.md`, plus
 `docs/p24_boundary_scan_evidence.md`,
 `docs/p24_final_validation_report.md`, and `docs/p24_to_p25_handoff.md`.
 
+P25 non-signing feedback-watch pause/closeout checks are planned in
+`docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`
+and `docs/p25_todo.md`.
+
 ## Automated Precheck
 
 ```powershell
