@@ -173,9 +173,10 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has accepted P0 through P22. P23 Private Trial Feedback Intake And
-Support Loop Gate is in executor validation with feedback intake, no-feedback
-disposition, support decisions, package-lane, artifact-retention, and boundary
-evidence recorded. The
+Support Loop Gate is executor-complete and ready for planner check, with
+feedback intake, no-feedback disposition, support decisions, package-lane,
+artifact-retention, boundary evidence, final report, and P24 handoff recorded.
+The
 P0-P7 track is complete with a Windows MVP release baseline and a post-MVP
 expansion roadmap. The app now has manual clipboard and screen translation
 actions, capture/OCR service boundaries, optional lazy real capture/OCR
@@ -816,7 +817,7 @@ P23 executor evidence is recorded in
 `docs/p23_base_package_continuity_evidence.md`,
 `docs/p23_credentials_package_continuity_evidence.md`,
 `docs/p23_artifact_retention_support_evidence.md`, and
-`docs/p23_boundary_scan_evidence.md`. The P23 closure package will be
+`docs/p23_boundary_scan_evidence.md`. The P23 closure package is
 `docs/p23_final_validation_report.md` and `docs/p23_to_p24_handoff.md`.
 
 ## Current Boundaries
