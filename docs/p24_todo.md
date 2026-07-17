@@ -9,7 +9,7 @@ Guide:
 - [x] Create unsigned/private-trial candidate readiness record.
 - [x] Create feedback watch register and privacy-safe late-feedback handling.
 - [x] Refresh support watch runbook.
-- [ ] Revalidate deterministic base package candidate lane.
+- [x] Revalidate deterministic base package candidate lane.
 - [ ] Revalidate explicit credentials package candidate lane with throwaway values.
 - [ ] Record release-hold/support decision without approving signing or public release.
 - [ ] Run boundary, artifact, secret, certificate, private-key, package-output,
