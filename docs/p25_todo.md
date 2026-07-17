@@ -9,7 +9,7 @@ Guide:
 - [x] Record feedback watch disposition with privacy screen.
 - [x] Decide whether the non-signing private-trial lane continues watching,
       pauses, or needs a later planner decision.
-- [ ] Refresh support/readiness closeout status.
+- [x] Refresh support/readiness closeout status.
 - [ ] Run lightweight deterministic package/source revalidation.
 - [ ] Run boundary, artifact, secret, certificate, private-key, package-output,
       screenshot, log, and signing-material scans.
