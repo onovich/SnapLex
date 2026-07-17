@@ -8,7 +8,7 @@ Guide:
 - [x] Rebaseline accepted P23 and signing pause state.
 - [x] Create unsigned/private-trial candidate readiness record.
 - [x] Create feedback watch register and privacy-safe late-feedback handling.
-- [ ] Refresh support watch runbook.
+- [x] Refresh support watch runbook.
 - [ ] Revalidate deterministic base package candidate lane.
 - [ ] Revalidate explicit credentials package candidate lane with throwaway values.
 - [ ] Record release-hold/support decision without approving signing or public release.
