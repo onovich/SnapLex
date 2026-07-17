@@ -159,3 +159,5 @@ Do not silently fall back to generic git/build/test behavior when those configs 
   `docs/p24_credentials_package_candidate_evidence.md`,
   `docs/p24_release_hold_decision.md`,
   `docs/p24_boundary_scan_evidence.md`.
+- Latest P24 report: `docs/p24_final_validation_report.md`.
+- P24 to P25 handoff: `docs/p24_to_p25_handoff.md`.

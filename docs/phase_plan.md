@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P23 planner-accepted; P24 executor evidence in progress
+Status: P23 planner-accepted; P24 executor-complete and ready for planner check
 
 ## 0. Round Estimate Rules
 
@@ -1736,5 +1736,5 @@ Executor progress:
   `docs/p24_release_hold_decision.md`.
 - P24 recorded boundary, artifact, secret, certificate, private-key, and
   signing-material scan evidence in `docs/p24_boundary_scan_evidence.md`.
-- P24 final validation report and P24 to P25 handoff remain pending for Round
-  10.
+- P24 final validation report and P24 to P25 handoff are recorded in
+  `docs/p24_final_validation_report.md` and `docs/p24_to_p25_handoff.md`.

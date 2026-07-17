@@ -560,9 +560,9 @@ P24 executor evidence through boundary scans is recorded in
 `docs/p24_support_watch_runbook.md`,
 `docs/p24_base_package_candidate_evidence.md`,
 `docs/p24_credentials_package_candidate_evidence.md`,
-`docs/p24_release_hold_decision.md`, and
-`docs/p24_boundary_scan_evidence.md`. Final validation and the P24 to P25
-handoff remain pending for the final P24 round.
+`docs/p24_release_hold_decision.md`,
+`docs/p24_boundary_scan_evidence.md`,
+`docs/p24_final_validation_report.md`, and `docs/p24_to_p25_handoff.md`.
 
 ## Validation Plan
 

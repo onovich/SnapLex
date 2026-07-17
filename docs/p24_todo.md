@@ -14,8 +14,8 @@ Guide:
 - [x] Record release-hold/support decision without approving signing or public release.
 - [x] Run boundary, artifact, secret, certificate, private-key, package-output,
       screenshot, log, and signing-material scans.
-- [ ] Write P24 final validation report.
-- [ ] Write P24 to P25 handoff.
+- [x] Write P24 final validation report.
+- [x] Write P24 to P25 handoff.
 
 Deferred unless a later planner-approved phase supplies explicit inputs:
 
