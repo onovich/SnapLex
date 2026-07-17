@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P24 Non-Signing Private Trial Candidate Readiness And Feedback Watch Gate
-Status: baseline revalidated; candidate readiness details pending
+Status: unsigned private-trial candidate readiness recorded
 
 P24 starts from the accepted P23 private-trial feedback/support loop baseline.
 This document records the accepted baseline, current signing pause state, and
@@ -95,8 +95,142 @@ true:
 - no real-provider network smoke runs without existing local credentials and
   explicit human approval.
 
-Round 2 will expand this baseline into the full unsigned candidate readiness
-record.
+Round 2 expands this baseline into the full unsigned candidate readiness record.
+
+## Candidate Trust Label
+
+Current trust label: `unsigned-private-trial`.
+
+This label means:
+
+- the candidate is private-trial material only;
+- artifacts are unsigned;
+- artifacts are not public release, signed archive, installer, updater, release
+  feed, or broadly supported production material;
+- Windows trust prompts are expected and must be reported with sanitized text,
+  not sensitive screenshots;
+- signing remains PAUSED until a later planner-approved signing phase receives
+  every input listed in `docs/p21_signing_unblock_requirements.md`.
+
+Every candidate artifact or tester-facing instruction must include:
+
+- `SnapLex`;
+- source commit prefix;
+- package lane: `source`, `base`, or `credentials`;
+- date;
+- `unsigned-private-trial`.
+
+## Supported Candidate Lanes
+
+| Lane | Candidate use | Required state | Not allowed |
+| --- | --- | --- | --- |
+| Source checkout | Maintainer/tester source smoke, fake workflow checks, docs/support review. | Local dependencies installed through project instructions; no real provider unless credentials and network approval already exist. | Treating source smoke as signed/public release evidence. |
+| Base package | Deterministic fake smoke, no-GUI bootstrap, packaged workflow smoke. | `SNAPLEX_PACKAGE_VARIANT=base`; fake smoke passes; real-provider paths fail closed; credential smoke rejects keyring. | Keyring support, raw credentials, real-provider fallback to fake, public release claims. |
+| Credentials package | Controlled private-trial credential smoke with throwaway generated values. | Explicit `SNAPLEX_PACKAGE_VARIANT=credentials`; import/cycle/save/check-delete pass; cleanup passes; output contains no raw credential value. | Silent merge into base, provider secrets, keyring exports, broad distribution, signed/public release claims. |
+
+## Setup Expectations
+
+Default safe path:
+
+- no credentials;
+- no network;
+- fake smoke mode only;
+- synthetic sample text;
+- ignored local app data and smoke directories.
+
+Before source or package validation:
+
+- run deterministic validation or use the latest accepted validation evidence;
+- keep generated `build/`, `dist/`, `snaplex-smoke-data/`, screenshots, logs,
+  `.env`, OCR caches, package archives, keyring exports, and local app data out
+  of git;
+- use `StartFakeTrial.cmd`, `SmokeTrial.cmd`, and
+  `StartPackagedFakeTrial.cmd` for fake package confidence;
+- use `StartTrial.cmd` and `StartPackagedTrial.cmd` only to confirm fail-closed
+  behavior when no real provider is configured.
+
+Before credentials package smoke:
+
+- build only the explicit `credentials` variant;
+- use only runtime-generated throwaway values;
+- run `import`, `cycle`, `save`, and `check-delete` in order;
+- confirm output reports only backend, reference, mode, and PASS/FAIL status;
+- restore the base package afterward and confirm base credential smoke rejects
+  keyring.
+
+## Candidate Blockers
+
+Hold the affected candidate lane if any of these occur:
+
+- `Validate.cmd`, no-GUI bootstrap, fake source smoke, or packaged fake smoke
+  fails;
+- a real-provider path silently falls back to fake as if it were real
+  translation;
+- the base package imports keyring support or accepts credential smoke;
+- the credentials package cannot complete throwaway import/cycle/save/
+  check-delete when that lane is being considered;
+- feedback intake asks testers to provide secrets, raw logs, sensitive
+  screenshots, package outputs, keyring exports, certificates, private keys,
+  signed binaries, timestamp responses, or personal data;
+- generated package outputs, screenshots, logs, smoke data, local app data,
+  OCR caches, `.env`, keyring exports, certificates, private keys, signed
+  binaries, timestamp responses, or provider secrets are staged or committed;
+- unsigned/private-trial wording suggests the candidate is signed, installer
+  ready, updater ready, public release, or production-approved.
+
+## Release-Hold Boundaries
+
+P24 readiness does not approve:
+
+- signing commands;
+- certificate creation, import, purchase, invention, or use;
+- timestamp service calls;
+- signed binaries or signed archives;
+- installers, updaters, release feeds, auto-update behavior, or public release;
+- SnapLex Cloud, OAuth, billing, hosted token broker, browser extension
+  runtime, AI summary runtime, global hotkeys, broad provider/OCR/capture
+  rewrites, or full localization.
+
+## Candidate Readiness Decision
+
+Current Round 2 decision: CONDITIONALLY READY FOR NON-SIGNING PRIVATE-TRIAL
+WATCH.
+
+Conditions:
+
+- Round 5 must refresh the deterministic base package candidate evidence.
+- Round 6 must refresh explicit credentials package candidate evidence.
+- Round 7 must record the release-hold/support decision.
+- Round 8 must pass boundary, artifact, secret, certificate, private-key,
+  package-output, screenshot, log, and signing-material scans.
+- Round 10 must pass final validation and produce the P24 final report and P25
+  handoff.
+
+This decision does not authorize public release, signing, installer/updater
+work, or broader runtime feature expansion.
+
+## Round 2 Self-Checks
+
+Debug self-check:
+
+- The candidate readiness record is explained by the smallest private-trial
+  workflow: label the unsigned candidate, define source/base/credentials lanes,
+  require expected fail-closed behavior, define blockers, and keep release on
+  hold.
+- Success, expected rejection, no-feedback, late-feedback, cleanup,
+  unsupported, no-network, no-signing, no-artifact, and no-secret states are
+  covered.
+
+Architecture self-check:
+
+- Candidate readiness remains documentation/support evidence.
+- Provider, credential, settings, packaging, and trial-readiness boundaries stay
+  separated.
+- The base package remains deterministic and keyring-free.
+- The credentials package remains explicit/private-trial.
+- No signing, public release, installer, updater, release feed, cloud/account,
+  browser, AI summary, hotkey, broad runtime feature, certificate, private key,
+  signed artifact, timestamp response, or signing log is introduced.
 
 ## Round 1 Self-Checks
 

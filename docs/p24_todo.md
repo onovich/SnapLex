@@ -6,7 +6,7 @@ Guide:
 `docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`
 
 - [x] Rebaseline accepted P23 and signing pause state.
-- [ ] Create unsigned/private-trial candidate readiness record.
+- [x] Create unsigned/private-trial candidate readiness record.
 - [ ] Create feedback watch register and privacy-safe late-feedback handling.
 - [ ] Refresh support watch runbook.
 - [ ] Revalidate deterministic base package candidate lane.
