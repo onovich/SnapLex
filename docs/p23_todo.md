@@ -4,7 +4,7 @@ Phase: P23 Private Trial Feedback Intake And Support Loop Gate
 
 Guide: `docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`
 
-Status: artifact retention evidence recorded
+Status: boundary scans recorded
 
 Round budget: 10 conversation rounds
 
@@ -18,7 +18,7 @@ Round budget: 10 conversation rounds
 - [x] Revalidate deterministic base package lane.
 - [x] Revalidate explicit credentials package lane.
 - [x] Record artifact retention/support loop evidence.
-- [ ] Run boundary, secret, private-key, certificate, package-output,
+- [x] Run boundary, secret, private-key, certificate, package-output,
   screenshot, log, and signing-material scans.
 - [ ] Write final validation report and P24 handoff.
 - [ ] Commit and push.
