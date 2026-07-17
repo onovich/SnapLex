@@ -554,6 +554,16 @@ release-hold and no-secret/no-artifact boundaries.
 The P24 guide is
 `docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`.
 
+P24 executor evidence through boundary scans is recorded in
+`docs/p24_unsigned_candidate_readiness.md`,
+`docs/p24_feedback_watch_register.md`,
+`docs/p24_support_watch_runbook.md`,
+`docs/p24_base_package_candidate_evidence.md`,
+`docs/p24_credentials_package_candidate_evidence.md`,
+`docs/p24_release_hold_decision.md`, and
+`docs/p24_boundary_scan_evidence.md`. Final validation and the P24 to P25
+handoff remain pending for the final P24 round.
+
 ## Validation Plan
 
 - Unit tests for service boundaries, provider selection, text normalization, cache behavior, and error mapping.

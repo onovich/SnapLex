@@ -173,8 +173,9 @@ The current project source of truth lives in:
 ## Current Status
 
 SnapLex has accepted P0 through P23. P24 Non-Signing Private Trial Candidate
-Readiness And Feedback Watch Gate is ready for executor use, with the guide and
-TODO recorded.
+Readiness And Feedback Watch Gate executor evidence is in progress, with
+candidate readiness, feedback watch, support watch, package-lane validation,
+release-hold, and boundary scans recorded.
 The
 P0-P7 track is complete with a Windows MVP release baseline and a post-MVP
 expansion roadmap. The app now has manual clipboard and screen translation
@@ -198,7 +199,7 @@ no external tester feedback was supplied, keeps support intake privacy-safe,
 revalidates base and credentials package lanes, and keeps signing paused. P24
 continues the non-signing private-trial lane with candidate-readiness, feedback
 watch, support runbook, package-lane, release-hold, and boundary validation
-planning.
+evidence while final validation remains pending.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -830,6 +831,17 @@ feedback watch gate while signing remains paused.
 See
 `docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`
 and `docs/p24_todo.md`.
+
+P24 executor evidence through boundary scans is recorded in
+`docs/p24_unsigned_candidate_readiness.md`,
+`docs/p24_feedback_watch_register.md`,
+`docs/p24_support_watch_runbook.md`,
+`docs/p24_base_package_candidate_evidence.md`,
+`docs/p24_credentials_package_candidate_evidence.md`,
+`docs/p24_release_hold_decision.md`, and
+`docs/p24_boundary_scan_evidence.md`. The P24 closure package remains pending
+until final validation writes `docs/p24_final_validation_report.md` and
+`docs/p24_to_p25_handoff.md`.
 
 ## Current Boundaries
 

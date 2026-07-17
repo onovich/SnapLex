@@ -151,3 +151,11 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P23 to P24 handoff: `docs/p23_to_p24_handoff.md`.
 - Latest P24 guide: `docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`.
 - Latest P24 TODO: `docs/p24_todo.md`.
+- P24 non-signing candidate readiness evidence:
+  `docs/p24_unsigned_candidate_readiness.md`,
+  `docs/p24_feedback_watch_register.md`,
+  `docs/p24_support_watch_runbook.md`,
+  `docs/p24_base_package_candidate_evidence.md`,
+  `docs/p24_credentials_package_candidate_evidence.md`,
+  `docs/p24_release_hold_decision.md`,
+  `docs/p24_boundary_scan_evidence.md`.

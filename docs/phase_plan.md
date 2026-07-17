@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P23 planner-accepted; P24 ready for executor
+Status: P23 planner-accepted; P24 executor evidence in progress
 
 ## 0. Round Estimate Rules
 
@@ -1721,3 +1721,20 @@ Round split:
 - Round 8: boundary scans.
 - Round 9: buffer for docs, links, package evidence, or support clarity.
 - Round 10: final validation, report, P25 handoff, and planner notification.
+
+Executor progress:
+
+- P24 rebaselined P23 and kept signing PAUSED in
+  `docs/p24_unsigned_candidate_readiness.md`.
+- P24 recorded no external feedback supplied and privacy-safe late-feedback
+  handling in `docs/p24_feedback_watch_register.md`.
+- P24 refreshed support watch routing in `docs/p24_support_watch_runbook.md`.
+- P24 revalidated base and credentials package candidate lanes in
+  `docs/p24_base_package_candidate_evidence.md` and
+  `docs/p24_credentials_package_candidate_evidence.md`.
+- P24 recorded the support-ready/release-held decision in
+  `docs/p24_release_hold_decision.md`.
+- P24 recorded boundary, artifact, secret, certificate, private-key, and
+  signing-material scan evidence in `docs/p24_boundary_scan_evidence.md`.
+- P24 final validation report and P24 to P25 handoff remain pending for Round
+  10.
