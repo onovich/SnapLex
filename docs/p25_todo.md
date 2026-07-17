@@ -6,7 +6,7 @@ Guide:
 `docs/p25_non_signing_private_trial_feedback_watch_pause_closeout_goal_guide.md`
 
 - [x] Rebaseline accepted P24 and signing pause state.
-- [ ] Record feedback watch disposition with privacy screen.
+- [x] Record feedback watch disposition with privacy screen.
 - [ ] Decide whether the non-signing private-trial lane continues watching,
       pauses, or needs a later planner decision.
 - [ ] Refresh support/readiness closeout status.
