@@ -169,6 +169,10 @@ P23 private-trial feedback intake and support-loop planning is recorded in
 `docs/p23_boundary_scan_evidence.md`. The P23 closure package is
 `docs/p23_final_validation_report.md` and `docs/p23_to_p24_handoff.md`.
 
+P24 non-signing private-trial candidate readiness checks are planned in
+`docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`
+and `docs/p24_todo.md`.
+
 ## Automated Precheck
 
 ```powershell

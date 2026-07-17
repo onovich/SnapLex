@@ -2,7 +2,7 @@
 
 Date: 2026-07-17
 Phase: P23 Private Trial Feedback Intake And Support Loop Gate
-Status: READY_FOR_CHECK
+Status: PASS - accepted by planner
 
 P23 completed one privacy-safe feedback/support loop for the unsigned
 private-trial lane. No external tester feedback was supplied, so the phase
@@ -111,6 +111,9 @@ values.
   acceptance.
 
 ## Recommendation
+
+Planner acceptance: P23 was accepted on 2026-07-17 at
+`b2b0979b2dc2d2cf23eaea255620ef3e1ab23b60`.
 
 Planner should review P23 with the current validation evidence. If accepted,
 the next phase should continue private-trial support from this no-feedback

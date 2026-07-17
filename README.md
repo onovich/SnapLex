@@ -172,10 +172,9 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P22. P23 Private Trial Feedback Intake And
-Support Loop Gate is executor-complete and ready for planner check, with
-feedback intake, no-feedback disposition, support decisions, package-lane,
-artifact-retention, boundary evidence, final report, and P24 handoff recorded.
+SnapLex has accepted P0 through P23. P24 Non-Signing Private Trial Candidate
+Readiness And Feedback Watch Gate is ready for executor use, with the guide and
+TODO recorded.
 The
 P0-P7 track is complete with a Windows MVP release baseline and a post-MVP
 expansion roadmap. The app now has manual clipboard and screen translation
@@ -196,7 +195,10 @@ signing path was supplied. P22 refreshes unsigned/private-trial tester
 instructions, support intake, feedback triage, artifact retention, package-lane
 evidence, and boundary scans without adding runtime features. P23 records that
 no external tester feedback was supplied, keeps support intake privacy-safe,
-revalidates base and credentials package lanes, and keeps signing paused.
+revalidates base and credentials package lanes, and keeps signing paused. P24
+continues the non-signing private-trial lane with candidate-readiness, feedback
+watch, support runbook, package-lane, release-hold, and boundary validation
+planning.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -819,6 +821,15 @@ P23 executor evidence is recorded in
 `docs/p23_artifact_retention_support_evidence.md`, and
 `docs/p23_boundary_scan_evidence.md`. The P23 closure package is
 `docs/p23_final_validation_report.md` and `docs/p23_to_p24_handoff.md`.
+
+## P24 Non-Signing Private Trial Candidate Readiness And Feedback Watch Gate
+
+P24 prepares a non-signing private-trial candidate readiness package and
+feedback watch gate while signing remains paused.
+
+See
+`docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`
+and `docs/p24_todo.md`.
 
 ## Current Boundaries
 

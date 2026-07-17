@@ -436,6 +436,7 @@ Summary:
 - P21 Signing Path Unblock Decision Or Pause Gate: 8 conversation rounds.
 - P22 Non-Signing Private Trial Continuity And Tester Support Gate: 10 conversation rounds.
 - P23 Private Trial Feedback Intake And Support Loop Gate: 10 conversation rounds.
+- P24 Non-Signing Private Trial Candidate Readiness And Feedback Watch Gate: 10 conversation rounds.
 
 Estimated total through the Windows MVP release candidate is 48 rounds.
 Including the P7 post-MVP expansion track, the accepted plan was 53 rounds.
@@ -461,8 +462,10 @@ acquisition and rehearsal setup gate, the post-MVP plan became 213 rounds.
 Including selected P21 signing path unblock decision or pause gate, the
 post-MVP plan became 221 rounds. Including accepted P22 non-signing private
 trial continuity and tester support gate, the post-MVP plan became 231 rounds.
-Including selected P23 private trial feedback intake and support loop gate, the
-current post-MVP plan is 241 rounds.
+Including accepted P23 private trial feedback intake and support loop gate, the
+post-MVP plan became 241 rounds. Including selected P24 non-signing private
+trial candidate readiness and feedback watch gate, the current post-MVP plan is
+251 rounds.
 
 ## P16 Credential-Capable Package Production Hardening Completion
 
@@ -539,6 +542,17 @@ sensitive data.
 
 The P23 guide is
 `docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`.
+
+## P24 Non-Signing Private Trial Candidate Readiness And Feedback Watch Gate
+
+P24 prepares a non-signing private-trial candidate readiness package and
+feedback watch gate while signing remains paused. It keeps the base package
+deterministic, keeps the credentials package explicit/private-trial, records
+late-feedback handling, refreshes support watch guidance, and preserves
+release-hold and no-secret/no-artifact boundaries.
+
+The P24 guide is
+`docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`.
 
 ## Validation Plan
 

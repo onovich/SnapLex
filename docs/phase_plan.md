@@ -1,7 +1,7 @@
 # SnapLex Phase Development Plan
 
 Date: 2026-06-22
-Status: P22 planner-accepted; P23 executor-complete and ready for planner check
+Status: P23 planner-accepted; P24 ready for executor
 
 ## 0. Round Estimate Rules
 
@@ -37,6 +37,7 @@ Round estimates assume one primary developer agent, Windows as the MVP target, a
 | P21 | Signing Path Unblock Decision Or Pause Gate | Decide whether signing is unblocked for a later rehearsal or paused until human approval is supplied. | 8 rounds |
 | P22 | Non-Signing Private Trial Continuity And Tester Support Gate | Continue unsigned/private-trial readiness and tester support while signing remains paused. | 10 rounds |
 | P23 | Private Trial Feedback Intake And Support Loop Gate | Run one privacy-safe feedback/support loop for the unsigned private-trial lane. | 10 rounds |
+| P24 | Non-Signing Private Trial Candidate Readiness And Feedback Watch Gate | Prepare a non-signing private-trial candidate readiness package and feedback watch gate while signing remains paused. | 10 rounds |
 
 Total MVP estimate through P6: 48 rounds.
 Total including P7 expansion planning: 53 rounds.
@@ -55,7 +56,8 @@ Total including accepted P19 post-MVP implementation: 201 rounds.
 Total including accepted P20 post-MVP implementation: 213 rounds.
 Total including accepted P21 post-MVP implementation: 221 rounds.
 Total including accepted P22 post-MVP implementation: 231 rounds.
-Total including selected P23 post-MVP implementation: 241 rounds.
+Total including accepted P23 post-MVP implementation: 241 rounds.
+Total including selected P24 post-MVP implementation: 251 rounds.
 
 The whole-goal execution guide for delegated implementation is `docs/p0_p7_goal_mode_execution_guide.md`.
 
@@ -1654,3 +1656,68 @@ Executor completion:
   `docs/p23_boundary_scan_evidence.md`.
 - P23 closure is recorded in `docs/p23_final_validation_report.md` and
   `docs/p23_to_p24_handoff.md`.
+
+Planner acceptance:
+
+- P23 accepted at `b2b0979b2dc2d2cf23eaea255620ef3e1ab23b60`.
+- Selected next phase: P24 Non-Signing Private Trial Candidate Readiness And
+  Feedback Watch Gate.
+
+## 27. P24 - Non-Signing Private Trial Candidate Readiness And Feedback Watch Gate
+
+Estimated rounds: 10
+
+Execution guide:
+`docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`
+
+Goal: prepare a non-signing private-trial candidate readiness package and
+feedback watch gate while signing remains paused.
+
+Scope:
+
+- Revalidate the accepted P23 baseline.
+- Keep signing paused and preserve the unsigned/private-trial trust label.
+- Record non-signing candidate readiness and release-hold state.
+- Maintain a privacy-safe feedback watch register.
+- Refresh support watch runbook language.
+- Preserve deterministic base package validation.
+- Preserve explicit credentials package validation.
+- Preserve no-secret and no-artifact repository hygiene.
+
+Deliverables:
+
+- `docs/p24_unsigned_candidate_readiness.md`
+- `docs/p24_feedback_watch_register.md`
+- `docs/p24_support_watch_runbook.md`
+- `docs/p24_base_package_candidate_evidence.md`
+- `docs/p24_credentials_package_candidate_evidence.md`
+- `docs/p24_release_hold_decision.md`
+- `docs/p24_boundary_scan_evidence.md`
+- P24 final validation report and P24 to P25 handoff.
+
+Validation:
+
+- Full project validation wrapper passes.
+- Version/no-GUI bootstrap passes.
+- Real-provider readiness rejects missing real setup clearly.
+- Base and credentials package dry-runs pass.
+- Base package remains deterministic and rejects credential smoke.
+- Credentials package smoke covers import, cycle, save/check-delete restart
+  readiness, and cleanup when feasible.
+- Fake/real trial command smoke remains green and real trial paths fail closed.
+- No signing command runs.
+- Docs link/index and artifact/secret/private-key/certificate/signing-material
+  scans remain green.
+
+Round split:
+
+- Round 1: rebaseline P23 and signing pause state.
+- Round 2: candidate readiness record.
+- Round 3: feedback watch register.
+- Round 4: tester support runbook refresh.
+- Round 5: base package candidate lane.
+- Round 6: credentials package candidate lane.
+- Round 7: release-hold and support decision.
+- Round 8: boundary scans.
+- Round 9: buffer for docs, links, package evidence, or support clarity.
+- Round 10: final validation, report, P25 handoff, and planner notification.

@@ -1,7 +1,7 @@
 # P23 To P24 Handoff
 
 Date: 2026-07-17
-Status: READY_FOR_CHECK
+Status: P23 planner-accepted; ready for P24 execution
 
 ## Summary
 
@@ -75,6 +75,11 @@ and kept signing PAUSED.
   validation.
 
 ## Recommended P24 Direction
+
+Planner-selected P24 guide:
+`docs/p24_non_signing_private_trial_candidate_readiness_feedback_watch_goal_guide.md`
+
+P24 TODO: `docs/p24_todo.md`
 
 If the planner accepts P23, choose one of these next directions:
 
