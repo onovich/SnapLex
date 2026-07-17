@@ -11,7 +11,7 @@ Guide:
 - [x] Refresh support watch runbook.
 - [x] Revalidate deterministic base package candidate lane.
 - [x] Revalidate explicit credentials package candidate lane with throwaway values.
-- [ ] Record release-hold/support decision without approving signing or public release.
+- [x] Record release-hold/support decision without approving signing or public release.
 - [ ] Run boundary, artifact, secret, certificate, private-key, package-output,
       screenshot, log, and signing-material scans.
 - [ ] Write P24 final validation report.
