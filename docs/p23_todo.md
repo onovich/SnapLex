@@ -4,7 +4,7 @@ Phase: P23 Private Trial Feedback Intake And Support Loop Gate
 
 Guide: `docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`
 
-Status: boundary scans recorded
+Status: docs indexes refreshed
 
 Round budget: 10 conversation rounds
 

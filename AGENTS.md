@@ -139,5 +139,14 @@ Do not silently fall back to generic git/build/test behavior when those configs 
 - P22 to P23 handoff: `docs/p22_to_p23_handoff.md`.
 - Latest P23 guide: `docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`.
 - Latest P23 TODO: `docs/p23_todo.md`.
+- P23 private-trial feedback/support evidence:
+  `docs/p23_feedback_intake_log.md`,
+  `docs/p23_privacy_screen_and_triage.md`,
+  `docs/p23_support_response_decisions.md`,
+  `docs/p23_next_action_register.md`,
+  `docs/p23_base_package_continuity_evidence.md`,
+  `docs/p23_credentials_package_continuity_evidence.md`,
+  `docs/p23_artifact_retention_support_evidence.md`,
+  `docs/p23_boundary_scan_evidence.md`.
 - Latest P23 report: `docs/p23_final_validation_report.md`.
 - P23 to P24 handoff: `docs/p23_to_p24_handoff.md`.

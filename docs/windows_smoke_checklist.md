@@ -158,7 +158,15 @@ and `docs/p22_todo.md`. P22 executor evidence is recorded in
 `docs/p22_final_validation_report.md` and `docs/p22_to_p23_handoff.md`.
 P23 private-trial feedback intake and support-loop planning is recorded in
 `docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md` and
-`docs/p23_todo.md`.
+`docs/p23_todo.md`. P23 executor evidence is recorded in
+`docs/p23_feedback_intake_log.md`,
+`docs/p23_privacy_screen_and_triage.md`,
+`docs/p23_support_response_decisions.md`,
+`docs/p23_next_action_register.md`,
+`docs/p23_base_package_continuity_evidence.md`,
+`docs/p23_credentials_package_continuity_evidence.md`,
+`docs/p23_artifact_retention_support_evidence.md`, and
+`docs/p23_boundary_scan_evidence.md`.
 
 ## Automated Precheck
 

@@ -172,8 +172,10 @@ The current project source of truth lives in:
 
 ## Current Status
 
-SnapLex has accepted P0 through P21. P22 Non-Signing Private Trial Continuity
-And Tester Support Gate is executor-complete and ready for planner check. The
+SnapLex has accepted P0 through P22. P23 Private Trial Feedback Intake And
+Support Loop Gate is in executor validation with feedback intake, no-feedback
+disposition, support decisions, package-lane, artifact-retention, and boundary
+evidence recorded. The
 P0-P7 track is complete with a Windows MVP release baseline and a post-MVP
 expansion roadmap. The app now has manual clipboard and screen translation
 actions, capture/OCR service boundaries, optional lazy real capture/OCR
@@ -191,7 +193,9 @@ evaluates the controlled credential package pilot lane. P18 through P21 record
 signing/distribution gates and keep signing PAUSED because no approved safe
 signing path was supplied. P22 refreshes unsigned/private-trial tester
 instructions, support intake, feedback triage, artifact retention, package-lane
-evidence, and boundary scans without adding runtime features.
+evidence, and boundary scans without adding runtime features. P23 records that
+no external tester feedback was supplied, keeps support intake privacy-safe,
+revalidates base and credentials package lanes, and keeps signing paused.
 
 Use `docs/p7_final_validation_report.md`, `docs/p0_p7_final_report.md`, and
 `docs/p7_expansion_roadmap.md` for the P7 closure package. P8 Provider Setup
@@ -803,6 +807,17 @@ secrets.
 
 See `docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`
 and `docs/p23_todo.md`.
+
+P23 executor evidence is recorded in
+`docs/p23_feedback_intake_log.md`,
+`docs/p23_privacy_screen_and_triage.md`,
+`docs/p23_support_response_decisions.md`,
+`docs/p23_next_action_register.md`,
+`docs/p23_base_package_continuity_evidence.md`,
+`docs/p23_credentials_package_continuity_evidence.md`,
+`docs/p23_artifact_retention_support_evidence.md`, and
+`docs/p23_boundary_scan_evidence.md`. The P23 closure package will be
+`docs/p23_final_validation_report.md` and `docs/p23_to_p24_handoff.md`.
 
 ## Current Boundaries
 
