@@ -10,7 +10,7 @@ Guide:
 - [x] Create feedback watch register and privacy-safe late-feedback handling.
 - [x] Refresh support watch runbook.
 - [x] Revalidate deterministic base package candidate lane.
-- [ ] Revalidate explicit credentials package candidate lane with throwaway values.
+- [x] Revalidate explicit credentials package candidate lane with throwaway values.
 - [ ] Record release-hold/support decision without approving signing or public release.
 - [ ] Run boundary, artifact, secret, certificate, private-key, package-output,
       screenshot, log, and signing-material scans.
