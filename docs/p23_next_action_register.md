@@ -12,7 +12,7 @@ planner for review.
 
 | ID | Source | Action | Owner | Status | Exit condition |
 | --- | --- | --- | --- | --- | --- |
-| P23-A01 | P23 guide | Revalidate deterministic base package lane. | executor | open | Base dry-run, source/package fake smoke, real-provider expected rejections, and base credential-smoke expected rejection are recorded. |
+| P23-A01 | P23 guide | Revalidate deterministic base package lane. | executor | done | Base dry-run, source/package fake smoke, real-provider expected rejections, and base credential-smoke expected rejection are recorded in `docs/p23_base_package_continuity_evidence.md`. |
 | P23-A02 | P23 guide | Revalidate explicit credentials package lane. | executor | open | Credentials dry-run/build and import/cycle/save/check-delete smoke pass with throwaway generated values, then base package behavior is restored. |
 | P23-A03 | P23 guide | Record artifact retention and support-loop evidence. | executor | open | P23 documents that no external artifacts were accepted and generated local outputs remain ignored. |
 | P23-A04 | P23 guide | Run boundary, secret, certificate, private-key, package-output, screenshot, log, and signing-material scans. | executor | open | Scans are recorded with no forbidden nonignored artifacts or raw secrets. |

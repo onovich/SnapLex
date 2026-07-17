@@ -4,7 +4,7 @@ Phase: P23 Private Trial Feedback Intake And Support Loop Gate
 
 Guide: `docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`
 
-Status: support decisions recorded
+Status: base package lane revalidated
 
 Round budget: 10 conversation rounds
 
@@ -15,7 +15,7 @@ Round budget: 10 conversation rounds
 - [x] Run feedback intake inventory and privacy screen.
 - [x] Record no external feedback honestly, or triage supplied feedback.
 - [x] Record support response decisions and next-action register.
-- [ ] Revalidate deterministic base package lane.
+- [x] Revalidate deterministic base package lane.
 - [ ] Revalidate explicit credentials package lane.
 - [ ] Record artifact retention/support loop evidence.
 - [ ] Run boundary, secret, private-key, certificate, package-output,
