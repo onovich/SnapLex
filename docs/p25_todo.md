@@ -7,7 +7,7 @@ Guide:
 
 - [x] Rebaseline accepted P24 and signing pause state.
 - [x] Record feedback watch disposition with privacy screen.
-- [ ] Decide whether the non-signing private-trial lane continues watching,
+- [x] Decide whether the non-signing private-trial lane continues watching,
       pauses, or needs a later planner decision.
 - [ ] Refresh support/readiness closeout status.
 - [ ] Run lightweight deterministic package/source revalidation.
