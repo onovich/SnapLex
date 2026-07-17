@@ -10,8 +10,8 @@ Round budget: 10 conversation rounds
 
 ## Tasks
 
-- [ ] Rebaseline accepted P22 and current package lanes.
-- [ ] Keep signing paused and preserve `unsigned-private-trial` trust label.
+- [x] Rebaseline accepted P22 and current package lanes.
+- [x] Keep signing paused and preserve `unsigned-private-trial` trust label.
 - [ ] Run feedback intake inventory and privacy screen.
 - [ ] Record no external feedback honestly, or triage supplied feedback.
 - [ ] Record support response decisions and next-action register.
@@ -38,4 +38,3 @@ Round budget: 10 conversation rounds
   AI summary runtime, global hotkeys, broad provider/OCR/capture rewrites, or
   full localization.
 - Fabricated tester feedback.
-
