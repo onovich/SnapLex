@@ -10,7 +10,7 @@ Guide:
 - [x] Decide whether the non-signing private-trial lane continues watching,
       pauses, or needs a later planner decision.
 - [x] Refresh support/readiness closeout status.
-- [ ] Run lightweight deterministic package/source revalidation.
+- [x] Run lightweight deterministic package/source revalidation.
 - [ ] Run boundary, artifact, secret, certificate, private-key, package-output,
       screenshot, log, and signing-material scans.
 - [ ] Write P25 final validation report.
