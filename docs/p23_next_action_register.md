@@ -17,7 +17,7 @@ planner for review.
 | P23-A03 | P23 guide | Record artifact retention and support-loop evidence. | executor | done | `docs/p23_artifact_retention_support_evidence.md` documents that no external artifacts were accepted and generated local outputs remain ignored. |
 | P23-A04 | P23 guide | Run boundary, secret, certificate, private-key, package-output, screenshot, log, and signing-material scans. | executor | done | `docs/p23_boundary_scan_evidence.md` records scans with no forbidden nonignored artifacts or raw secrets. |
 | P23-A05 | P23 guide | Write final validation report and P24 handoff. | executor | done | `docs/p23_final_validation_report.md` and `docs/p23_to_p24_handoff.md` include validation evidence, known limitations, and next recommendation. |
-| P23-A06 | P23 guide | Notify planner thread with READY_FOR_CHECK after final commit and push. | executor | open | Planner thread receives final commit, report paths, validation evidence, boundaries, limitations, and recommendation. |
+| P23-A06 | P23 guide | Notify planner thread with READY_FOR_CHECK after final commit and push. | executor | done | Planner thread received final commit, report paths, validation evidence, boundaries, limitations, and recommendation. |
 | P23-A07 | Future support loop | Route any late external feedback to the next privacy-safe intake. | planner/support | monitoring | Feedback is screened before storage and never includes secrets or sensitive artifacts. |
 
 ## Deferred Or Rejected Actions
