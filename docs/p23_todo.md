@@ -4,7 +4,7 @@ Phase: P23 Private Trial Feedback Intake And Support Loop Gate
 
 Guide: `docs/p23_private_trial_feedback_intake_support_loop_gate_goal_guide.md`
 
-Status: intake inventory in progress
+Status: no external feedback recorded
 
 Round budget: 10 conversation rounds
 
@@ -13,7 +13,7 @@ Round budget: 10 conversation rounds
 - [x] Rebaseline accepted P22 and current package lanes.
 - [x] Keep signing paused and preserve `unsigned-private-trial` trust label.
 - [x] Run feedback intake inventory and privacy screen.
-- [ ] Record no external feedback honestly, or triage supplied feedback.
+- [x] Record no external feedback honestly, or triage supplied feedback.
 - [ ] Record support response decisions and next-action register.
 - [ ] Revalidate deterministic base package lane.
 - [ ] Revalidate explicit credentials package lane.
